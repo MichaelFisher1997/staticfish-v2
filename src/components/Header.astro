@@ -1,0 +1,54 @@
+---
+import { Button } from "./ui/button";
+import MobileMenu from "./MobileMenu";
+
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-background/95 shadow-lg border-b border-border/50">
+  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-primary-foreground font-bold text-lg">
+              S
+            </span>
+          </div>
+          <span class="text-xl font-bold text-foreground">
+            Staticfish
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        {navigation.map((item) => (
+          <a
+            href={item.href}
+            class={`text-sm font-medium transition-colors hover:text-primary ${
+              currentPath === item.href
+                ? "text-primary"
+                : "text-muted-foreground"
+            }`}
+          >
+            {item.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile menu button -->
+      <MobileMenu navigation={navigation} currentPath={currentPath} client:load />
+    </div>
+  </div>
+</header>

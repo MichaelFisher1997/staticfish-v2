@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { ArrowRight, Zap, Shield, DollarSign } from 'lucide-react';
+import HeroCarousel from '../components/HeroCarousel';
+
+const heroImages = [
+  "/hero-1.png",
+  "/hero-2.png",
+  "/hero-3.png",
+  "/hero-4.png",
+  "/hero-5.png",
+];
+---
+
+<Layout title="Staticfish - Fast, static sites for small businesses">
+  <div class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1">
+      <div class="min-h-screen bg-background">
+        <!-- Hero Section -->
+        <section class="relative h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center text-center overflow-hidden">
+          <div class="absolute inset-0 w-full h-full">
+            <HeroCarousel images={heroImages} client:load />
+            <div class="absolute inset-0 bg-black opacity-60 z-20"></div>
+          </div>
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-30">
+            <div class="mx-auto max-w-4xl">
+              <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+                Fast, static sites for{" "}
+                <span class="text-primary">small businesses</span>
+              </h1>
+              <p class="mt-6 text-lg leading-8 text-gray-300 sm:text-xl">
+                We build blazing-fast, secure, and reliable websites that just
+                work. No bloat, no hassle—just performance that drives results.
+              </p>
+              <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button size="lg" class="text-base px-8 py-3">
+                  <a href="/pricing" class="flex items-center">
+                    View Pricing
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  class="text-base px-8 py-3 border-gray-400 text-white hover:bg-white hover:text-black"
+                >
+                  <a href="/contact">Contact Us</a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services Overview Section -->
+        <section class="py-24 sm:py-32 bg-muted/50">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+              <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                Our Packages
+              </h2>
+              <p class="mt-4 text-lg text-muted-foreground">
+                Choose the perfect package for your business needs. All plans
+                include fast hosting and ongoing support.
+              </p>
+            </div>
+
+            <div class="mx-auto mt-16 grid max-w-lg grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
+              <!-- Starter Package -->
+              <Card className="relative bg-background border-primary shadow-lg ring-1 ring-primary/20">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span class="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
+                    Most Popular
+                  </span>
+                </div>
+                <CardHeader>
+                  <div class="flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-primary" />
+                    <CardTitle>Static Site</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Perfect for small businesses just getting started online.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="mb-6">
+                    <div class="flex items-baseline gap-1">
+                      <span class="text-3xl font-bold text-foreground">
+                        £149
+                      </span>
+                      <span class="text-sm text-muted-foreground">
+                        one-off
+                      </span>
+                    </div>
+                    <div class="mt-1">
+                      <span class="text-sm text-muted-foreground">
+                        + £50/month hosting
+                      </span>
+                    </div>
+                  </div>
+                  <ul class="space-y-3 text-sm text-muted-foreground mb-6">
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Up to 4 pages (£10 per additional page)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Responsive design (Mobile and Desktop)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Contact form integration (1000 requests per month)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      CSP & SSL (Content Security Policy & Secure Sockets Layer)
+                    </li>
+                  </ul>
+                  <Button className="w-full">
+                    <a href="/pricing">Learn More</a>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <!-- Growth Package -->
+              <Card className="relative bg-background border-border hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div class="flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-primary" />
+                    <CardTitle>CMS Site</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Ideal for small businesses that need a content management
+                    system.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="mb-6">
+                    <div class="flex items-baseline gap-1">
+                      <span class="text-3xl font-bold text-foreground">
+                        £249
+                      </span>
+                      <span class="text-sm text-muted-foreground">
+                        one-off
+                      </span>
+                    </div>
+                    <div class="mt-1">
+                      <span class="text-sm text-muted-foreground">
+                        + £50/month hosting
+                      </span>
+                    </div>
+                  </div>
+                  <ul class="space-y-3 text-sm text-muted-foreground mb-6">
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Everything in Static Site (No page limit)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Blog & CMS ( Admin Login )
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      2 Login Admin Users ( Publish and Update content )
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Manage your website content via sanity cms ( easy to use )
+                    </li>
+                  </ul>
+                  <Button variant="outline" className="w-full">
+                    <a href="/pricing">Learn More</a>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <!-- Scale Package -->
+              <Card className="relative bg-background border-border hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div class="flex items-center gap-2">
+                    <DollarSign className="h-5 w-5 text-primary" />
+                    <CardTitle>E Commerce Site</CardTitle>
+                  </div>
+                  <CardDescription>
+                    For established businesses ready to take their store online.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="mb-6">
+                    <div class="flex items-baseline gap-1">
+                      <span class="text-3xl font-bold text-foreground">
+                        £399
+                      </span>
+                      <span class="text-sm text-muted-foreground">
+                        one-off
+                      </span>
+                    </div>
+                    <div class="mt-1">
+                      <span class="text-sm text-muted-foreground">
+                        + £50/month hosting
+                      </span>
+                    </div>
+                  </div>
+                  <ul class="space-y-3 text-sm text-muted-foreground mb-6">
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Everything in CMS Site ( excluding CMS )
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      CMS (optional +£80 )
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      E-commerce integration (Shopify, WooCommerce, etc.)
+                    </li>
+                    <li class="flex items-center gap-2">
+                      <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
+                      Multiple payment options (Stripe, PayPal, etc.)
+                    </li>
+                  </ul>
+                  <Button variant="outline" className="w-full">
+                    <a href="/pricing">Learn More</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</Layout>
