@@ -23,28 +23,22 @@ import {
 export default function Services() {
   const features = {
     starter: [
-      { icon: Globe, text: "Up to 5 static pages" },
-      { icon: CheckCircle, text: "Fully responsive design" },
+      { icon: Globe, text: "Up to 4 pages" },
+      { icon: CheckCircle, text: "Responsive design" },
       { icon: MessageSquare, text: "Contact form integration" },
-      { icon: Search, text: "Basic SEO optimization" },
-      { icon: Zap, text: "Lightning-fast loading speeds" },
-      { icon: Shield, text: "SSL certificate included" },
+      { icon: Shield, text: "CSP & SSL" },
     ],
     growth: [
-      { icon: Globe, text: "Everything in Starter" },
-      { icon: BarChart3, text: "Blog & Content Management System" },
-      { icon: Search, text: "Advanced SEO & meta optimization" },
-      { icon: BarChart3, text: "Google Analytics integration" },
-      { icon: Shield, text: "Enhanced security features" },
-      { icon: MessageSquare, text: "Newsletter signup forms" },
+      { icon: Globe, text: "Everything in Static Site" },
+      { icon: BarChart3, text: "Blog & CMS" },
+      { icon: CheckCircle, text: "2 Login Admin Users" },
+      { icon: CheckCircle, text: "Manage content via Sanity CMS" },
     ],
     scale: [
-      { icon: Globe, text: "Everything in Growth" },
+      { icon: Globe, text: "Everything in CMS Site (excluding CMS)" },
       { icon: ShoppingCart, text: "E-commerce integration" },
-      { icon: Workflow, text: "Custom API integrations" },
-      { icon: BarChart3, text: "Advanced analytics & tracking" },
-      { icon: Shield, text: "Priority support & maintenance" },
-      { icon: Zap, text: "Custom performance optimizations" },
+      { icon: CheckCircle, text: "CMS (optional +£80)" },
+      { icon: DollarSign, text: "Multiple payment options" },
     ],
   };
 
@@ -66,7 +60,7 @@ export default function Services() {
 
         {/* Services Overview */}
         <div className="grid gap-16 lg:gap-24">
-          {/* Starter Package */}
+          {/* Static Site Package */}
           <div className="relative">
             <Card className="overflow-hidden border-border bg-card">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
@@ -77,7 +71,7 @@ export default function Services() {
                   </div>
                   <div>
                     <CardTitle className="text-3xl font-bold">
-                      Starter Package
+                      Static Site
                     </CardTitle>
                     <CardDescription className="text-lg mt-2">
                       Perfect for small businesses just getting started online
@@ -85,16 +79,16 @@ export default function Services() {
                   </div>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-primary">$999</span>
+                  <span className="text-4xl font-bold text-primary">£149</span>
                   <span className="text-muted-foreground">one-off</span>
                   <span className="text-sm text-muted-foreground ml-4">
-                    + $29/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-8">
                 <p className="text-muted-foreground leading-7">
-                  Our Starter package is ideal for small businesses,
+                  Our Static Site package is ideal for small businesses,
                   freelancers, and entrepreneurs who need a professional online
                   presence without the complexity. Get a beautiful, fast website
                   that showcases your business and converts visitors into
@@ -121,14 +115,14 @@ export default function Services() {
 
                 <div className="pt-4">
                   <Button asChild size="lg" className="w-full sm:w-auto">
-                    <Link to="/contact">Get Started with Starter</Link>
+                    <Link to="/contact">Get Started with Static Site</Link>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Growth Package */}
+          {/* CMS Site Package */}
           <div className="relative">
             <Card className="overflow-hidden border-primary/50 bg-card ring-1 ring-primary/20">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
@@ -144,30 +138,29 @@ export default function Services() {
                   </div>
                   <div>
                     <CardTitle className="text-3xl font-bold">
-                      Growth Package
+                      CMS Site
                     </CardTitle>
                     <CardDescription className="text-lg mt-2">
-                      Ideal for growing businesses that need content management
-                      and advanced SEO
+                      Ideal for small businesses that need a content management
+                      system
                     </CardDescription>
                   </div>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-primary">
-                    $1,999
-                  </span>
+                  <span className="text-4xl font-bold text-primary">£249</span>
                   <span className="text-muted-foreground">one-off</span>
                   <span className="text-sm text-muted-foreground ml-4">
-                    + $49/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-8">
                 <p className="text-muted-foreground leading-7">
-                  The Growth package is perfect for established businesses ready
-                  to scale their online presence. With advanced SEO, content
-                  management capabilities, and enhanced analytics, you'll have
-                  everything needed to grow your audience and drive conversions.
+                  The CMS Site package is perfect for established businesses
+                  ready to scale their online presence. With advanced SEO,
+                  content management capabilities, and enhanced analytics,
+                  you'll have everything needed to grow your audience and drive
+                  conversions.
                 </p>
 
                 <div>
@@ -190,14 +183,14 @@ export default function Services() {
 
                 <div className="pt-4">
                   <Button asChild size="lg" className="w-full sm:w-auto">
-                    <Link to="/contact">Get Started with Growth</Link>
+                    <Link to="/contact">Get Started with CMS Site</Link>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Scale Package */}
+          {/* E Commerce Site Package */}
           <div className="relative">
             <Card className="overflow-hidden border-border bg-card">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
@@ -208,30 +201,29 @@ export default function Services() {
                   </div>
                   <div>
                     <CardTitle className="text-3xl font-bold">
-                      Scale Package
+                      E Commerce Site
                     </CardTitle>
                     <CardDescription className="text-lg mt-2">
-                      For established businesses ready to take their online
-                      presence to the next level
+                      For established businesses ready to take their store
+                      online
                     </CardDescription>
                   </div>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-primary">
-                    $3,999
-                  </span>
+                  <span className="text-4xl font-bold text-primary">£399</span>
                   <span className="text-muted-foreground">one-off</span>
                   <span className="text-sm text-muted-foreground ml-4">
-                    + $99/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-8">
                 <p className="text-muted-foreground leading-7">
-                  Our Scale package is designed for businesses that need
-                  enterprise-level features and custom integrations. Perfect for
-                  e-commerce, complex business processes, and organizations
-                  requiring specialized functionality with priority support.
+                  Our E Commerce Site package is designed for businesses that
+                  need enterprise-level features and custom integrations.
+                  Perfect for e-commerce, complex business processes, and
+                  organizations requiring specialized functionality with
+                  priority support.
                 </p>
 
                 <div>
@@ -254,7 +246,7 @@ export default function Services() {
 
                 <div className="pt-4">
                   <Button asChild size="lg" className="w-full sm:w-auto">
-                    <Link to="/contact">Get Started with Scale</Link>
+                    <Link to="/contact">Get Started with E Commerce Site</Link>
                   </Button>
                 </div>
               </CardContent>

@@ -1,0 +1,27 @@
+
+> build
+> npm run build:client && npm run build:server
+
+
+> build:client
+> vite build
+
+vite v6.3.5 building for production...
+transforming...
+✓ 1679 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/spa/index.html                   0.41 kB │ gzip:   0.27 kB
+dist/spa/assets/index-CVx1I9D0.css   67.83 kB │ gzip:  11.74 kB
+dist/spa/assets/index-DgFmzUT8.js   386.75 kB │ gzip: 116.98 kB
+✓ built in 3.31s
+
+> build:server
+> vite build --config vite.config.server.ts
+
+vite v6.3.5 building SSR bundle for production...
+transforming...
+✓ 3 modules transformed.
+rendering chunks...
+dist/server/node-build.mjs  1.51 kB │ map: 3.28 kB
+✓ built in 295ms

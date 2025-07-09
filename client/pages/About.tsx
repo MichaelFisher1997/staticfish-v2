@@ -46,7 +46,7 @@ export default function About() {
       name: "Jane Doe",
       role: "Founder & Lead Developer",
       bio: "With over 8 years of experience in web development and a passion for static site architecture, Jane founded Staticfish to help small businesses compete online with fast, secure websites.",
-      avatar: "/placeholder.svg",
+      avatar: "/jane-doe.png",
       expertise: ["React", "Next.js", "Performance Optimization", "JAMstack"],
       social: {
         github: "#",
@@ -59,7 +59,7 @@ export default function About() {
       name: "John Smith",
       role: "UI/UX Designer",
       bio: "John brings creative vision and user-centered design thinking to every project. His designs are not just beautiful—they're strategically crafted to convert visitors into customers.",
-      avatar: "/placeholder.svg",
+      avatar: "/john-smith.png",
       expertise: [
         "UI/UX Design",
         "Figma",
@@ -154,23 +154,11 @@ export default function About() {
               </div>
             </div>
             <div className="relative">
-              <Card className="border-border bg-gradient-to-br from-primary/10 to-accent/10">
-                <CardContent className="p-8">
-                  <div className="text-center space-y-6">
-                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                      <Globe className="h-8 w-8 text-primary" />
-                    </div>
-                    <blockquote className="text-lg font-medium text-foreground">
-                      "Fast websites shouldn't be a luxury reserved for big
-                      corporations. Every business deserves to compete online
-                      with confidence."
-                    </blockquote>
-                    <div className="text-sm text-muted-foreground">
-                      — Jane Doe, Founder
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <img
+                src="/our-story.png"
+                alt="Our Story"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </section>
@@ -243,9 +231,13 @@ export default function About() {
               <Card key={index} className="border-border overflow-hidden">
                 <div className="flex flex-col sm:flex-row">
                   <div
-                    className={`w-full sm:w-32 h-32 bg-gradient-to-br ${member.gradient} flex items-center justify-center`}
+                    className={`w-full sm:w-48 h-48 bg-gradient-to-br ${member.gradient} flex items-center justify-center`}
                   >
-                    <Users className="h-12 w-12 text-primary/60" />
+                    <img
+                      src={member.avatar}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="flex-1 p-6">
                     <div className="mb-4">

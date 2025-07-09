@@ -29,9 +29,9 @@ export default function Portfolio() {
       title: "Artisan Coffee Co.",
       description:
         "A modern e-commerce website for a local coffee roastery, featuring online ordering, subscription services, and a blog about coffee culture.",
-      image: "/placeholder.svg",
+      image: "/portfolio-artisan-coffee.png",
       category: "E-commerce",
-      package: "Scale",
+      package: "E Commerce Site",
       impact: "50% increase in online orders",
       timeline: "4 weeks",
       features: ["E-commerce", "Subscription System", "Blog", "Mobile App"],
@@ -42,9 +42,9 @@ export default function Portfolio() {
       title: "TechFix Solutions",
       description:
         "Professional services website for an IT repair company, with appointment booking, service catalog, and customer testimonials.",
-      image: "/placeholder.svg",
+      image: "/portfolio-techfix.png",
       category: "Professional Services",
-      package: "Growth",
+      package: "CMS Site",
       impact: "200% increase in bookings",
       timeline: "3 weeks",
       features: ["Booking System", "Service Catalog", "Testimonials", "SEO"],
@@ -55,9 +55,9 @@ export default function Portfolio() {
       title: "Bloom & Co. Florist",
       description:
         "Beautiful showcase website for a premium florist, featuring a portfolio gallery, custom arrangement quotes, and seasonal collections.",
-      image: "/placeholder.svg",
+      image: "/portfolio-bloom.png",
       category: "Creative/Retail",
-      package: "Growth",
+      package: "CMS Site",
       impact: "75% increase in inquiries",
       timeline: "2 weeks",
       features: ["Gallery", "Quote System", "Seasonal Updates", "Social Media"],
@@ -68,9 +68,9 @@ export default function Portfolio() {
       title: "Metro Design Studio",
       description:
         "Portfolio website for an architecture firm, showcasing projects with interactive galleries, team profiles, and a modern design aesthetic.",
-      image: "/placeholder.svg",
+      image: "/portfolio-metro-design.png",
       category: "Professional Portfolio",
-      package: "Growth",
+      package: "CMS Site",
       impact: "90% increase in project inquiries",
       timeline: "3 weeks",
       features: [
@@ -86,9 +86,9 @@ export default function Portfolio() {
       title: "Wellness Haven Spa",
       description:
         "Serene and calming website for a luxury spa, featuring service menus, online booking, membership programs, and wellness blog.",
-      image: "/placeholder.svg",
+      image: "/portfolio-wellness-haven.png",
       category: "Health & Wellness",
-      package: "Scale",
+      package: "E Commerce Site",
       impact: "150% increase in bookings",
       timeline: "5 weeks",
       features: ["Online Booking", "Membership Portal", "Blog", "Gift Cards"],
@@ -99,9 +99,9 @@ export default function Portfolio() {
       title: "Lightning Electric",
       description:
         "Professional website for an electrical contractor, featuring emergency services, project galleries, and easy contact options.",
-      image: "/placeholder.svg",
+      image: "/portfolio-lightning-electric.png",
       category: "Contractor Services",
-      package: "Starter",
+      package: "Static Site",
       impact: "120% increase in calls",
       timeline: "1 week",
       features: [
@@ -163,7 +163,11 @@ export default function Portfolio() {
               <div
                 className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
               >
-                <project.icon className="h-16 w-16 text-primary/60" />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute top-4 right-4">
                   <Badge variant="secondary" className="text-xs">
                     {project.package}

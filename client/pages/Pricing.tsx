@@ -18,9 +18,9 @@ import { CheckCircle, X, Star } from "lucide-react";
 export default function Pricing() {
   const features = [
     {
-      name: "Static Pages",
-      starter: "Up to 5",
-      growth: "Up to 15",
+      name: "Pages",
+      starter: "Up to 4",
+      growth: "Unlimited",
       scale: "Unlimited",
     },
     {
@@ -31,21 +31,27 @@ export default function Pricing() {
     },
     {
       name: "Contact Forms",
-      starter: "Basic",
-      growth: "Advanced",
-      scale: "Custom",
+      starter: true,
+      growth: true,
+      scale: true,
     },
     {
-      name: "SEO Optimization",
-      starter: "Basic",
-      growth: "Advanced",
-      scale: "Enterprise",
+      name: "CSP & SSL",
+      starter: true,
+      growth: true,
+      scale: true,
     },
     {
       name: "Blog & CMS",
       starter: false,
       growth: true,
-      scale: true,
+      scale: "Optional (+£80)",
+    },
+    {
+      name: "Admin Users",
+      starter: false,
+      growth: 2,
+      scale: "Unlimited",
     },
     {
       name: "E-commerce",
@@ -54,40 +60,10 @@ export default function Pricing() {
       scale: true,
     },
     {
-      name: "Custom Integrations",
+      name: "Payment Integrations",
       starter: false,
-      growth: "Limited",
-      scale: "Unlimited",
-    },
-    {
-      name: "Analytics",
-      starter: "Basic",
-      growth: "Advanced",
-      scale: "Enterprise",
-    },
-    {
-      name: "Support Level",
-      starter: "Email",
-      growth: "Priority Email",
-      scale: "24/7 Priority",
-    },
-    {
-      name: "SSL Certificate",
-      starter: true,
-      growth: true,
+      growth: false,
       scale: true,
-    },
-    {
-      name: "CDN & Hosting",
-      starter: true,
-      growth: true,
-      scale: true,
-    },
-    {
-      name: "Monthly Backups",
-      starter: true,
-      growth: "Weekly",
-      scale: "Daily",
     },
   ];
 
@@ -154,20 +130,20 @@ export default function Pricing() {
           {/* Starter */}
           <Card className="relative border-border">
             <CardHeader className="text-center pb-8">
-              <CardTitle className="text-2xl font-bold">Starter</CardTitle>
+              <CardTitle className="text-2xl font-bold">Static Site</CardTitle>
               <CardDescription className="text-base">
-                Perfect for small businesses
+                Perfect for small businesses just getting started online.
               </CardDescription>
               <div className="mt-6">
                 <div className="flex items-baseline justify-center gap-1">
                   <span className="text-4xl font-bold text-foreground">
-                    $999
+                    £149
                   </span>
                   <span className="text-sm text-muted-foreground">one-off</span>
                 </div>
                 <div className="mt-2">
                   <span className="text-sm text-muted-foreground">
-                    + $29/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </div>
@@ -176,7 +152,7 @@ export default function Pricing() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Up to 5 pages</span>
+                  <span className="text-sm">Up to 4 pages</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -184,19 +160,11 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Contact form</span>
+                  <span className="text-sm">Contact form integration</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Basic SEO</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">SSL certificate</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Email support</span>
+                  <span className="text-sm">CSP & SSL</span>
                 </li>
               </ul>
               <Button asChild className="w-full" variant="outline">
@@ -214,20 +182,21 @@ export default function Pricing() {
               </div>
             </div>
             <CardHeader className="text-center pb-8 pt-8">
-              <CardTitle className="text-2xl font-bold">Growth</CardTitle>
+              <CardTitle className="text-2xl font-bold">CMS Site</CardTitle>
               <CardDescription className="text-base">
-                Ideal for growing businesses
+                Ideal for small businesses that need a content management
+                system.
               </CardDescription>
               <div className="mt-6">
                 <div className="flex items-baseline justify-center gap-1">
                   <span className="text-4xl font-bold text-foreground">
-                    $1,999
+                    £249
                   </span>
                   <span className="text-sm text-muted-foreground">one-off</span>
                 </div>
                 <div className="mt-2">
                   <span className="text-sm text-muted-foreground">
-                    + $49/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </div>
@@ -236,11 +205,11 @@ export default function Pricing() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Everything in Starter</span>
+                  <span className="text-sm">Everything in Static Site</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Up to 15 pages</span>
+                  <span className="text-sm">No page limit</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -248,15 +217,7 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Advanced SEO</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Analytics integration</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Priority support</span>
+                  <span className="text-sm">2 Login Admin Users</span>
                 </li>
               </ul>
               <Button asChild className="w-full">
@@ -268,20 +229,22 @@ export default function Pricing() {
           {/* Scale */}
           <Card className="relative border-border">
             <CardHeader className="text-center pb-8">
-              <CardTitle className="text-2xl font-bold">Scale</CardTitle>
+              <CardTitle className="text-2xl font-bold">
+                E Commerce Site
+              </CardTitle>
               <CardDescription className="text-base">
-                For enterprise needs
+                For established businesses ready to take their store online.
               </CardDescription>
               <div className="mt-6">
                 <div className="flex items-baseline justify-center gap-1">
                   <span className="text-4xl font-bold text-foreground">
-                    $3,999
+                    £399
                   </span>
                   <span className="text-sm text-muted-foreground">one-off</span>
                 </div>
                 <div className="mt-2">
                   <span className="text-sm text-muted-foreground">
-                    + $99/month hosting
+                    + £50/month hosting
                   </span>
                 </div>
               </div>
@@ -290,11 +253,13 @@ export default function Pricing() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Everything in Growth</span>
+                  <span className="text-sm">
+                    Everything in CMS Site (excluding CMS)
+                  </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Unlimited pages</span>
+                  <span className="text-sm">CMS (optional +£80)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
@@ -302,15 +267,7 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Custom integrations</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Enterprise analytics</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">24/7 priority support</span>
+                  <span className="text-sm">Multiple payment options</span>
                 </li>
               </ul>
               <Button asChild className="w-full" variant="outline">
@@ -340,13 +297,13 @@ export default function Pricing() {
                       Features
                     </th>
                     <th className="text-center p-6 font-semibold text-foreground">
-                      Starter
+                      Static Site
                     </th>
                     <th className="text-center p-6 font-semibold text-foreground bg-primary/5">
-                      Growth
+                      CMS Site
                     </th>
                     <th className="text-center p-6 font-semibold text-foreground">
-                      Scale
+                      E Commerce Site
                     </th>
                   </tr>
                 </thead>
