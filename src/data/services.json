@@ -1,5 +1,6 @@
 [
   {
+    "id": "static",
     "title": "Static Site",
     "description": "Perfect for small businesses just getting started online.",
     "price": "£149",
@@ -16,6 +17,7 @@
     "icon": "Zap"
   },
   {
+    "id": "cms",
     "title": "Static Site with CMS",
     "description": "Ideal for small businesses that need a content management system.",
     "price": "£249",
@@ -31,6 +33,7 @@
     "icon": "Shield"
   },
   {
+    "id": "ecom",
     "title": "E Commerce Site",
     "description": "For established businesses ready to take their store online.",
     "price": "£399",

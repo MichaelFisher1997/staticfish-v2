@@ -4,8 +4,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { CheckCircle, X, Star } from 'lucide-react';
+import { CheckCircle, X, Star, Check, Minus } from 'lucide-react';
 import services from '../data/services.json';
+import features from '../data/features.json';
+
 ---
 
 <Layout title="Pricing - Staticfish">
@@ -72,6 +74,60 @@ import services from '../data/services.json';
               </Card>
             ))}
           </div>
+
+          <!-- Call to Action -->
+          <!-- Feature Comparison Table -->
+          <section class="mt-24">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl font-bold text-foreground mb-4">
+                Compare Our Plans
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Find the perfect plan for your business by comparing features side-by-side.
+              </p>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[640px] text-sm text-left">
+                <thead class="border-b border-border">
+                  <tr>
+                    <th class="p-4 font-semibold text-foreground w-1/3">Features</th>
+                    {services.map(service => (
+                      <th class="p-4 font-semibold text-foreground text-center w-1/4">{service.title}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {features.map((category) => (
+                    <>
+                      <tr class="border-b border-border">
+                        <td colspan="4" class="p-4 font-semibold text-foreground bg-muted/30">
+                          {category.category}
+                        </td>
+                      </tr>
+                                            {category.features.map((feature: { name: string; static: boolean; cms: boolean; ecom: boolean; }) => (
+                        <tr class="border-b border-border">
+                          <td class="p-4 text-muted-foreground">{feature.name}</td>
+                          {services.map((service) => {
+                            const value = feature[service.id as keyof typeof feature];
+                            return (
+                              <td class="p-4 text-center text-muted-foreground">
+                                {typeof value === 'boolean' ? (
+                                  value ? <Check className="h-5 w-5 text-green-500 mx-auto" /> : <Minus className="h-5 w-5 text-muted-foreground/50 mx-auto" />
+                                ) : (
+                                  <span>{value}</span>
+                                )}
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      ))}
+                    </>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
           <!-- Call to Action -->
           <div class="mt-24 text-center">

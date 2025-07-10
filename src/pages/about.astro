@@ -14,9 +14,42 @@ import {
   Github,
   Linkedin,
   Mail,
+  type LucideIcon,
 } from 'lucide-react';
 
-const values = [
+// Type Definitions
+interface Value {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  avatar: string;
+  expertise: string[];
+  social: {
+    github: string;
+    linkedin: string;
+    email: string;
+  };
+  gradient: string;
+}
+
+interface Stat {
+  number: string;
+  label: string;
+}
+
+interface Milestone {
+  year: string;
+  title: string;
+  description: string;
+}
+
+const values: Value[] = [
   {
     icon: Zap,
     title: "Speed First",
@@ -37,7 +70,7 @@ const values = [
   },
 ];
 
-const teamMembers = [
+const teamMembers: TeamMember[] = [
   {
     name: "Jane Doe",
     role: "Founder & Lead Developer",
@@ -71,14 +104,14 @@ const teamMembers = [
   },
 ];
 
-const stats = [
+const stats: Stat[] = [
   { number: "50+", label: "Websites Launched" },
   { number: "98%", label: "Client Satisfaction" },
   { number: "2.5s", label: "Average Load Time" },
   { number: "3 Years", label: "In Business" },
 ];
 
-const milestones = [
+const milestones: Milestone[] = [
   {
     year: "2022",
     title: "Staticfish Founded",
@@ -177,7 +210,7 @@ const milestones = [
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               {values.map((value, index) => (
-                <Card key={index} className="border-border text-center">
+                <Card data-astro-key={index} className="border-border text-center">
                   <CardHeader className="pb-4">
                     <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                       <value.icon className="h-6 w-6 text-primary" />
@@ -200,7 +233,7 @@ const milestones = [
               <CardContent className="p-12">
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
                   {stats.map((stat, index) => (
-                    <div key={index} class="text-center">
+                    <div data-astro-key={index} class="text-center">
                       <div class="text-4xl font-bold text-primary mb-2">
                         {stat.number}
                       </div>
@@ -228,7 +261,7 @@ const milestones = [
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {teamMembers.map((member, index) => (
-                <Card key={index} className="border-border overflow-hidden">
+                <Card data-astro-key={index} className="border-border overflow-hidden">
                   <div class="flex flex-col sm:flex-row">
                     <div class={`w-full sm:w-48 h-48 bg-gradient-to-br ${member.gradient} flex items-center justify-center`}>
                       <img
@@ -254,7 +287,7 @@ const milestones = [
                         <div class="flex flex-wrap gap-1">
                           {member.expertise.map((skill, skillIndex) => (
                             <span
-                              key={skillIndex}
+                              data-astro-key={skillIndex}
                               class="text-xs bg-muted text-muted-foreground px-2 py-1 rounded"
                             >
                               {skill}
@@ -297,7 +330,7 @@ const milestones = [
 
               <div class="space-y-8">
                 {milestones.map((milestone, index) => (
-                  <div key={index} class="relative flex items-start gap-6">
+                  <div data-astro-key={index} class="relative flex items-start gap-6">
                     <div class="w-16 h-16 bg-primary/10 border-4 border-background rounded-full flex items-center justify-center relative z-10">
                       <Award className="h-6 w-6 text-primary" />
                     </div>
