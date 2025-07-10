@@ -1,0 +1,49 @@
+[
+  {
+    "title": "Static Site",
+    "description": "Perfect for small businesses just getting started online.",
+    "price": "£149",
+    "price_suffix": "one-off",
+    "hosting_fee": "+ £50/month hosting",
+    "features": [
+      "Up to 5 pages (e.g., Home, About, Services, Contact)",
+      "Custom design tailored to your brand",
+      "Mobile-responsive layout",
+      "Contact form integration",
+      "Basic SEO setup"
+    ],
+    "popular": true,
+    "icon": "Zap"
+  },
+  {
+    "title": "Static Site with CMS",
+    "description": "Ideal for small businesses that need a content management system.",
+    "price": "£249",
+    "price_suffix": "one-off",
+    "hosting_fee": "+ £50/month hosting",
+    "features": [
+      "Everything in Static Site (No page limit)",
+      "Blog & CMS ( Admin Login )",
+      "2 Login Admin Users ( Publish and Update content )",
+      "Manage your website content via sanity cms ( easy to use )"
+    ],
+    "popular": false,
+    "icon": "Shield"
+  },
+  {
+    "title": "E Commerce Site",
+    "description": "For established businesses ready to take their store online.",
+    "price": "£399",
+    "price_suffix": "one-off",
+    "hosting_fee": "+ £50/month hosting",
+    "features": [
+      "Everything in Static Site (No page limit)",
+      "PayPal Express Checkout",
+      "Multicurrency support",
+      "Multiple payment options",
+      "Unlimited products"
+    ],
+    "popular": false,
+    "icon": "DollarSign"
+  }
+]

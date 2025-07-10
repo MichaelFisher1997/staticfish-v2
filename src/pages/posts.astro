@@ -6,6 +6,7 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { getAllPosts } from '../lib/sanity';
+import type { Post } from '../types/post';
 
 // Fetch all posts from Sanity
 const posts = await getAllPosts().catch(error => {
@@ -33,7 +34,7 @@ const posts = await getAllPosts().catch(error => {
           <!-- Posts Grid -->
           <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {posts.length > 0 ? (
-              posts.map((post) => (
+              posts.map((post: Post) => (
                 <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-border bg-card h-full">
                   {post.mainImage && (
                     <div class="relative h-48 w-full overflow-hidden">
@@ -55,9 +56,11 @@ const posts = await getAllPosts().catch(error => {
                       </time>
                       {post.categories && post.categories.length > 0 && (
                         <div class="flex gap-x-2">
-                          <span class="bg-muted text-muted-foreground rounded-full px-3 py-1.5 font-medium">
-                            {post.categories[0]}
-                          </span>
+                          {post.categories.map(category => (
+                            <span class="bg-muted text-muted-foreground rounded-full px-3 py-1.5 font-medium">
+                              {category}
+                            </span>
+                          ))}
                         </div>
                       )}
                     </div>
@@ -70,7 +73,7 @@ const posts = await getAllPosts().catch(error => {
                       </CardDescription>
                     )}
                   </CardHeader>
-                  <CardContent class="mt-auto pt-0">
+                  <CardContent className="mt-auto pt-0">
                     <div class="flex mt-4 items-center">
                       <Button variant="link" className="flex items-center p-0">
                         <a href={`/posts/${post.slug.current}`} class="flex items-center">
