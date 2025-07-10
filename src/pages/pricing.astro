@@ -4,7 +4,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { CheckCircle, X, Star } from 'lucide-react';
+import { CheckCircle, X, Star, Check, Minus } from 'lucide-react';
+import services from '../data/services.json';
+import features from '../data/features.json';
+
 ---
 
 <Layout title="Pricing - Staticfish">
@@ -26,155 +29,105 @@ import { CheckCircle, X, Star } from 'lucide-react';
 
           <!-- Pricing Tiers -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-            <!-- Starter -->
-            <Card className="relative border-border">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl font-bold">Static Site</CardTitle>
-                <CardDescription className="text-base">
-                  Perfect for small businesses just getting started online.
-                </CardDescription>
-                <div class="mt-6">
-                  <div class="flex items-baseline justify-center gap-1">
-                    <span class="text-4xl font-bold text-foreground">
-                      £149
-                    </span>
-                    <span class="text-sm text-muted-foreground">one-off</span>
+            {services.map(service => (
+              <Card className={`relative border-border ${service.popular ? 'border-primary shadow-lg ring-1 ring-primary/20' : ''}`}>
+                {service.popular && (
+                  <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <div class="flex items-center gap-1 bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full">
+                      <Star className="h-3 w-3" />
+                      Most Popular
+                    </div>
                   </div>
-                  <div class="mt-2">
-                    <span class="text-sm text-muted-foreground">
-                      + £50/month hosting
-                    </span>
+                )}
+                <CardHeader className={`text-center pb-8 ${service.popular ? 'pt-8' : ''}`}>
+                  <CardTitle className="text-2xl font-bold">{service.title}</CardTitle>
+                  <CardDescription className="text-base">
+                    {service.description}
+                  </CardDescription>
+                  <div class="mt-6">
+                    <div class="flex items-baseline justify-center gap-1">
+                      <span class="text-4xl font-bold text-foreground">
+                        {service.price}
+                      </span>
+                      <span class="text-sm text-muted-foreground">{service.price_suffix}</span>
+                    </div>
+                    <div class="mt-2">
+                      <span class="text-sm text-muted-foreground">
+                        {service.hosting_fee}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <ul class="space-y-3">
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Up to 4 pages</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Responsive design</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Contact form integration</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">CSP & SSL</span>
-                  </li>
-                </ul>
-                <Button variant="outline" className="w-full">
-                  <a href="/contact">Get Started</a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <!-- Growth -->
-            <Card className="relative border-primary shadow-lg ring-1 ring-primary/20">
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                <div class="flex items-center gap-1 bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full">
-                  <Star className="h-3 w-3" />
-                  Most Popular
-                </div>
-              </div>
-              <CardHeader className="text-center pb-8 pt-8">
-                <CardTitle className="text-2xl font-bold">CMS Site</CardTitle>
-                <CardDescription className="text-base">
-                  Ideal for small businesses that need a content management
-                  system.
-                </CardDescription>
-                <div class="mt-6">
-                  <div class="flex items-baseline justify-center gap-1">
-                    <span class="text-4xl font-bold text-foreground">
-                      £249
-                    </span>
-                    <span class="text-sm text-muted-foreground">one-off</span>
-                  </div>
-                  <div class="mt-2">
-                    <span class="text-sm text-muted-foreground">
-                      + £50/month hosting
-                    </span>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <ul class="space-y-3">
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Everything in Static Site</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">No page limit</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Blog & CMS</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">2 Login Admin Users</span>
-                  </li>
-                </ul>
-                <Button className="w-full">
-                  <a href="/contact">Get Started</a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <!-- Scale -->
-            <Card className="relative border-border">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl font-bold">
-                  E Commerce Site
-                </CardTitle>
-                <CardDescription className="text-base">
-                  For established businesses ready to take their store online.
-                </CardDescription>
-                <div class="mt-6">
-                  <div class="flex items-baseline justify-center gap-1">
-                    <span class="text-4xl font-bold text-foreground">
-                      £399
-                    </span>
-                    <span class="text-sm text-muted-foreground">one-off</span>
-                  </div>
-                  <div class="mt-2">
-                    <span class="text-sm text-muted-foreground">
-                      + £50/month hosting
-                    </span>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <ul class="space-y-3">
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">
-                      Everything in CMS Site (excluding CMS)
-                    </span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">CMS (optional +£80)</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">E-commerce integration</span>
-                  </li>
-                  <li class="flex items-center gap-3">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span class="text-sm">Multiple payment options</span>
-                  </li>
-                </ul>
-                <Button variant="outline" className="w-full">
-                  <a href="/contact">Get Started</a>
-                </Button>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <ul class="space-y-3">
+                    {service.features.map(feature => (
+                      <li class="flex items-center gap-3">
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span class="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button variant={service.popular ? 'default' : 'outline'} className="w-full">
+                    <a href="/contact">Get Started</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+
+          <!-- Call to Action -->
+          <!-- Feature Comparison Table -->
+          <section class="mt-24">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl font-bold text-foreground mb-4">
+                Compare Our Plans
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Find the perfect plan for your business by comparing features side-by-side.
+              </p>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[640px] text-sm text-left">
+                <thead class="border-b border-border">
+                  <tr>
+                    <th class="p-4 font-semibold text-foreground w-1/3">Features</th>
+                    {services.map(service => (
+                      <th class="p-4 font-semibold text-foreground text-center w-1/4">{service.title}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {features.map((category) => (
+                    <>
+                      <tr class="border-b border-border">
+                        <td colspan="4" class="p-4 font-semibold text-foreground bg-muted/30">
+                          {category.category}
+                        </td>
+                      </tr>
+                                            {category.features.map((feature: { name: string; static: boolean; cms: boolean; ecom: boolean; }) => (
+                        <tr class="border-b border-border">
+                          <td class="p-4 text-muted-foreground">{feature.name}</td>
+                          {services.map((service) => {
+                            const value = feature[service.id as keyof typeof feature];
+                            return (
+                              <td class="p-4 text-center text-muted-foreground">
+                                {typeof value === 'boolean' ? (
+                                  value ? <Check className="h-5 w-5 text-green-500 mx-auto" /> : <Minus className="h-5 w-5 text-muted-foreground/50 mx-auto" />
+                                ) : (
+                                  <span>{value}</span>
+                                )}
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      ))}
+                    </>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
           <!-- Call to Action -->
           <div class="mt-24 text-center">
