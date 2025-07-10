@@ -22,7 +22,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     const token = data['cf-turnstile-response'];
 
     // Validate the Turnstile token, but skip in development
-    if (!import.meta.env.DEV) {
+    // Only verify CAPTCHA if it's explicitly enabled
+  if (import.meta.env.PUBLIC_CAPTCHA_ENABLED === 'true') {
       const turnstileResponse = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
