@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import TurnstileWidget from "./Turnstile";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -9,12 +10,24 @@ export default function ContactForm() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // In development, we bypass the CAPTCHA by providing a dummy token.
+  // In production, it starts as null and requires user interaction.
+  const [captchaToken, setCaptchaToken] = useState<string | null>(
+    import.meta.env.DEV ? "development-bypass-token" : null
+  );
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      setSubmitStatus("error");
+      // In a real app, you'd want a more specific error message here.
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -24,7 +37,7 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, "cf-turnstile-response": captchaToken }),
       });
 
       if (response.ok) {
@@ -119,6 +132,13 @@ export default function ContactForm() {
             try again or contact us directly.
           </span>
         </div>
+      )}
+
+      {/* The TurnstileWidget will automatically hide itself in development mode */}
+      <TurnstileWidget onVerify={setCaptchaToken} />
+
+      {submitStatus === "error" && !captchaToken && (
+        <p className="text-sm text-red-600 text-center">Please complete the CAPTCHA before submitting.</p>
       )}
 
       <Button
