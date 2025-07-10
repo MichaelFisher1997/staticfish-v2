@@ -3,10 +3,10 @@ import { Resend } from 'resend';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
-  const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL } = process.env;
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY } = process.env;
 
-  if (!RESEND_API_KEY || !TO_EMAIL || !FROM_EMAIL) {
+  if (!RESEND_API_KEY || !TO_EMAIL || !FROM_EMAIL || !TURNSTILE_SECRET_KEY) {
     console.error("Email service is not configured. Missing one or more required environment variables.");
     return new Response(
       JSON.stringify({ message: 'Internal Server Error: Email service not configured.' }),
@@ -19,6 +19,32 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const data = await request.json();
     const { name, email, message } = data;
+    const token = data['cf-turnstile-response'];
+
+    // Validate the Turnstile token, but skip in development
+    if (!import.meta.env.DEV) {
+      const turnstileResponse = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          secret: TURNSTILE_SECRET_KEY,
+          response: token,
+          remoteip: clientAddress,
+        }),
+      }
+    );
+
+      const outcome = await turnstileResponse.json();
+      if (!outcome.success) {
+        return new Response(JSON.stringify({ message: 'CAPTCHA verification failed.' }), {
+          status: 400,
+        });
+      }
+    }
 
     if (!name || !email || !message) {
       return new Response(
@@ -36,7 +62,7 @@ export const POST: APIRoute = async ({ request }) => {
              <strong>Email:</strong> ${email}<br>
              <strong>Message:</strong><br>
              <p>${message}</p>`,
-      reply_to: email,
+      replyTo: email,
     });
 
     if (response.error) {

@@ -105,7 +105,7 @@ import features from '../data/features.json';
                           {category.category}
                         </td>
                       </tr>
-                                            {category.features.map((feature: { name: string; static: boolean; cms: boolean; ecom: boolean; }) => (
+                                            {category.features.map((feature: { name: string; static: boolean | string; cms: boolean | string; ecom: boolean | string; }) => (
                         <tr class="border-b border-border">
                           <td class="p-4 text-muted-foreground">{feature.name}</td>
                           {services.map((service) => {
