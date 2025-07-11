@@ -10,7 +10,7 @@ const securityHeaders = {
   'Content-Security-Policy': [
     "default-src 'self'",
     // Allow scripts from self, inline (for Astro), and Cloudflare Turnstile
-    "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
+
     // Allow styles from self and inline
     "style-src 'self' 'unsafe-inline'",
     // Allow images from self, data URIs, and the Sanity CDN
@@ -27,8 +27,26 @@ const securityHeaders = {
 // Astro middleware to apply the headers to every response
 export const onRequest = defineMiddleware(async (context, next) => {
   const response = await next();
+  const nonce = context.locals.cspNonce;
 
-  Object.entries(securityHeaders).forEach(([key, value]) => {
+  // Clone the original headers object to avoid direct mutation
+  const newHeaders = { ...securityHeaders };
+
+  // Update the CSP to use the nonce
+  newHeaders['Content-Security-Policy'] = [
+    "default-src 'self'",
+    // Use the nonce for scripts
+    `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com`,
+    // Style-src can also use a nonce if needed, but 'unsafe-inline' is common for styles
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https://cdn.sanity.io",
+    "font-src 'self'",
+    "frame-src https://challenges.cloudflare.com",
+    "connect-src 'self' https://*.sanity.io https://challenges.cloudflare.com"
+  ].join('; ');
+
+  // Apply all headers
+  Object.entries(newHeaders).forEach(([key, value]) => {
     response.headers.set(key, value);
   });
 
