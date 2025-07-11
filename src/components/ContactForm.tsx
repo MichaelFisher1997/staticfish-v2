@@ -13,7 +13,8 @@ export default function ContactForm() {
   // In development, we bypass the CAPTCHA by providing a dummy token.
   // In production, it starts as null and requires user interaction.
   const [captchaToken, setCaptchaToken] = useState<string | null>(
-    import.meta.env.DEV ? "development-bypass-token" : null
+    // If CAPTCHA is not enabled, use a bypass token. Otherwise, require a real token.
+    import.meta.env.PUBLIC_CAPTCHA_ENABLED !== 'true' ? "captcha-disabled-bypass-token" : null
   );
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
