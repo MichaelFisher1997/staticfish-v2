@@ -4,8 +4,8 @@ import ReactTurnstile from "react-turnstile";
 const Turnstile = (ReactTurnstile as any).default || ReactTurnstile;
 
 const TurnstileWidget = ({ onVerify }: { onVerify: (token: string) => void }) => {
-  // Disable Turnstile in development for easier testing
-  if (import.meta.env.DEV) {
+  // Disable Turnstile if not explicitly enabled in .env
+  if (import.meta.env.PUBLIC_CAPTCHA_ENABLED !== 'true') {
     return (
       <div className="text-center text-xs text-muted-foreground/50 my-4">
         CAPTCHA disabled

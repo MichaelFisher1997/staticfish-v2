@@ -14,14 +14,11 @@ services:
       - FROM_EMAIL=${FROM_EMAIL}
       - SANITY_PROJECT_ID=${SANITY_PROJECT_ID}
       - SANITY_DATASET=${SANITY_DATASET}
+      - PUBLIC_TURNSTILE_SITE_KEY=${PUBLIC_TURNSTILE_SITE_KEY}
+      - TURNSTILE_SECRET_KEY=${TURNSTILE_SECRET_KEY}
+      - PUBLIC_CAPTCHA_ENABLED=${PUBLIC_CAPTCHA_ENABLED}
       - HOST=0.0.0.0
       - PORT=5050
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5050/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.staticfish.rule=Host(`staticfish.local`)"

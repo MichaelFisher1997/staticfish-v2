@@ -1,0 +1,52 @@
+# 1. Builder Stage: Build the Astro application
+FROM oven/bun:1 AS builder
+WORKDIR /app
+
+# Copy dependency manifests
+COPY package.json bun.lock ./
+
+# Install dependencies. This layer is cached if manifests don't change.
+RUN bun install --frozen-lockfile
+
+# Copy the rest of the source code
+COPY . .
+
+# Build the application
+RUN bun run build
+
+# 2. Production Stage: Create a slim final image
+FROM oven/bun:1-slim
+WORKDIR /app
+
+# Install wget for health checks
+RUN apt-get update && apt-get install -y --no-install-recommends wget && rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user for security
+RUN groupadd --system --gid 1001 astro && \
+    useradd --system --uid 1001 --gid astro astro
+
+# Copy production dependencies from the builder stage with correct ownership
+COPY --chown=astro:astro --from=builder /app/package.json /app/bun.lock ./
+
+# Switch to the non-root user before installing dependencies
+USER astro
+
+# Install only production dependencies using bun
+RUN bun install --production
+
+# Copy the built application from the builder stage with correct ownership
+COPY --chown=astro:astro --from=builder /app/dist ./dist
+
+# Expose the port the app will run on
+EXPOSE 5050
+
+# Set environment variables for the server
+ENV HOST=0.0.0.0
+ENV PORT=5050
+
+# Health check to ensure the server is running
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost:5050/ || exit 1
+
+# Command to start the application
+CMD ["bun", "run", "dist/server/entry.mjs"]

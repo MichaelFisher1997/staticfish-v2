@@ -13,7 +13,7 @@ export default defineConfig({
     sanity({
       projectId: process.env.SANITY_PROJECT_ID || '2gr3dh6t',
       dataset: process.env.SANITY_DATASET || 'production',
-      useCdn: true,
+      useCdn: false,
       studioBasePath: '/studio'
     })
   ],
