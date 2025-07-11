@@ -21,5 +21,10 @@ export default defineConfig({
   ],
   server: {
     port: 5050
+  },
+  vite: {
+    ssr: {
+      external: ['node:buffer']
+    }
   }
 });
