@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
-import node from "@astrojs/node";
-import sanity from "@sanity/astro";
+import sanity from '@sanity/astro';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  adapter: cloudflare(),
   integrations: [
     tailwind(),
     react(),
@@ -17,11 +19,17 @@ export default defineConfig({
       studioBasePath: '/studio'
     })
   ],
-  output: "server",
-  adapter: node({
-    mode: 'standalone'
-  }),
   server: {
     port: 5050
+  },
+  vite: {
+    ssr: {
+      external: ['node:buffer']
+    },
+    resolve: {
+      alias: {
+        "react-dom/server": "react-dom/server.edge",
+      },
+    }
   }
 });
