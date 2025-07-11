@@ -25,6 +25,11 @@ export default defineConfig({
   vite: {
     ssr: {
       external: ['node:buffer']
+    },
+    resolve: {
+      alias: {
+        "react-dom/server": "react-dom/server.edge",
+      },
     }
   }
 });
