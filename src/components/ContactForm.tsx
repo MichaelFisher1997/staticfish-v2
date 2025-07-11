@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Button } from "./ui/button";
 import { CheckCircle, AlertCircle } from "lucide-react";
-import TurnstileWidget from "./Turnstile";
+const TurnstileWidget = lazy(() => import("./Turnstile"));
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,9 +13,16 @@ export default function ContactForm() {
   // In development, we bypass the CAPTCHA by providing a dummy token.
   // In production, it starts as null and requires user interaction.
   const [captchaToken, setCaptchaToken] = useState<string | null>(
-    // If CAPTCHA is not enabled, use a bypass token. Otherwise, require a real token.
-    import.meta.env.PUBLIC_CAPTCHA_ENABLED !== 'true' ? "captcha-disabled-bypass-token" : null
+    // Initialize with a bypass token if CAPTCHA is disabled, otherwise require user action
+    import.meta.env.PUBLIC_CAPTCHA_ENABLED === "false" ? "development-bypass-token" : null
   );
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // This effect runs only on the client, after initial render
+    setIsClient(true);
+  }, []);
+
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -136,7 +143,11 @@ export default function ContactForm() {
       )}
 
       {/* The TurnstileWidget will automatically hide itself in development mode */}
-      <TurnstileWidget onVerify={setCaptchaToken} />
+      {isClient && (
+        <Suspense fallback={<div className="h-20" />}>
+          <TurnstileWidget onVerify={setCaptchaToken} />
+        </Suspense>
+      )}
 
       {submitStatus === "error" && !captchaToken && (
         <p className="text-sm text-red-600 text-center">Please complete the CAPTCHA before submitting.</p>
