@@ -3,9 +3,9 @@ import { Resend } from 'resend';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, clientAddress, platform }) => {
-  // Access environment variables from platform context (Cloudflare) or process.env (local/Node.js)
-  const env = platform?.env || process.env;
+export const POST: APIRoute = async ({ request, clientAddress, locals }) => {
+  // Access environment variables from process.env (works in both local and production)
+  const env = process.env;
   const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY, PUBLIC_CAPTCHA_ENABLED } = env;
 
   const missingVars = [];
@@ -67,8 +67,8 @@ export const POST: APIRoute = async ({ request, clientAddress, platform }) => {
     }
 
     const response = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: TO_EMAIL,
+      from: FROM_EMAIL!,
+      to: TO_EMAIL!,
       subject: `New message from ${name} on Staticfish`,
       html: `<p>You have a new contact form submission:</p><br>
              <strong>Name:</strong> ${name}<br>
