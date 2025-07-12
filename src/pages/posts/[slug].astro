@@ -11,6 +11,11 @@ import HeroCarousel from "../../components/HeroCarousel";
 // Get the slug from the URL
 const { slug } = Astro.params;
 
+// Ensure slug exists
+if (!slug || typeof slug !== 'string') {
+  return Astro.redirect("/posts");
+}
+
 // Fetch the post data and categories
 const [post, categories] = await Promise.all([
   getPostBySlug(slug).catch((error) => {
