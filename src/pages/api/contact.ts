@@ -3,9 +3,10 @@ import { Resend } from 'resend';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, clientAddress, locals }) => {
-  // Access environment variables from process.env (works in both local and production)
-  const env = process.env;
+export const POST: APIRoute = async (context) => {
+  const { request, clientAddress } = context;
+  // Access environment variables from runtime context (Cloudflare) or process.env (local)
+  const env = context.locals?.runtime?.env || process.env;
   const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY, PUBLIC_CAPTCHA_ENABLED } = env;
 
   const missingVars = [];
