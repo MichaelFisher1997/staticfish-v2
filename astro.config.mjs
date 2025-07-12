@@ -27,9 +27,7 @@ export default defineConfig({
     resolve: {
       // This alias is only needed for production builds on Cloudflare.
       // It breaks the dev server, so we only apply it during 'build'.
-      alias: process.env.ASTRO_COMMAND === 'build' 
-        ? { 'react-dom/server': 'react-dom/server.edge' } 
-        : {},
+      alias: { 'react-dom/server': 'react-dom/server.edge' },
     },
   },
 });
