@@ -73,13 +73,13 @@ const heroImages = [
                   {formattedDate}
                 </time>
                 {post.author && (
-                  <>
+                  <Fragment>
                     <span>•</span>
                     <span>By {post.author}</span>
-                  </>
+                  </Fragment>
                 )}
                 {post.categories && post.categories.length > 0 && (
-                  <>
+                  <Fragment>
                     <span>•</span>
                     <div class="flex gap-x-2">
                       {post.categories.map((category: string) => (
@@ -88,7 +88,7 @@ const heroImages = [
                         </span>
                       ))}
                     </div>
-                  </>
+                  </Fragment>
                 )}
               </div>
             </div>
