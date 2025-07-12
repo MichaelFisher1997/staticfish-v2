@@ -67,11 +67,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     });
 
     if (response.error) {
-      console.error({ error: response.error });
-      return new Response(
-        JSON.stringify({ message: 'Error sending email.' }),
-        { status: 500 }
-      );
+      console.error('Error sending email:', response.error);
+      return new Response(JSON.stringify({ message: 'Sorry, there was an error sending your message. Please try again or contact us directly.', error: response.error.message }), { status: 500 });
     }
 
     return new Response(
@@ -79,9 +76,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       { status: 200 }
     );
   } catch (error) {
-    console.error(error);
+    console.error('An exception occurred while sending email:', error);
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
     return new Response(
-      JSON.stringify({ message: 'Something went wrong.' }),
+      JSON.stringify({ message: 'Sorry, there was an error sending your message. Please try again or contact us directly.', error: errorMessage }),
       { status: 500 }
     );
   }
