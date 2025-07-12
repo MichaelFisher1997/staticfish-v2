@@ -9,7 +9,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   if (!RESEND_API_KEY || !TO_EMAIL || !FROM_EMAIL || !TURNSTILE_SECRET_KEY) {
     console.error("Email service is not configured. Missing one or more required environment variables.");
     return new Response(
-      JSON.stringify({ message: 'Internal Server Error: Email service not configured.' }),
+      JSON.stringify({ 
+        message: 'Internal Server Error: Email service not configured.',
+        error: 'The email service is not configured on the server. Please contact the site administrator.'
+      }),
       { status: 500 }
     );
   }
