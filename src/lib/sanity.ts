@@ -46,3 +46,41 @@ export async function getPostBySlug(slug: string) {
     { slug }
   );
 }
+
+// Function to fetch all categories
+export async function getAllCategories() {
+  return await client.fetch(`*[_type == "category"]{
+    _id,
+    title,
+    description,
+    "postCount": count(*[_type == "post" && references(^._id)])
+  } | order(title asc)`);
+}
+
+// Function to search posts
+export async function searchPosts(searchTerm: string) {
+  return await client.fetch(`*[_type == "post" && (title match $searchTerm || excerpt match $searchTerm)]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    excerpt,
+    publishedAt,
+    "author": author->name,
+    "categories": categories[]->title
+  } | order(publishedAt desc)`, { searchTerm: `*${searchTerm}*` });
+}
+
+// Function to fetch posts by category
+export async function getPostsByCategory(categoryTitle: string) {
+  return await client.fetch(`*[_type == "post" && references(*[_type == "category" && title == $categoryTitle]._id)]{
+    _id,
+    title,
+    slug,
+    mainImage,
+    excerpt,
+    publishedAt,
+    "author": author->name,
+    "categories": categories[]->title
+  } | order(publishedAt desc)`, { categoryTitle });
+}
