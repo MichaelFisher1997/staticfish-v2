@@ -1,44 +1,22 @@
-FROM oven/bun:latest AS runtime
+# Use the official Bun image as a parent image
+FROM oven/bun:latest
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Install wget for the healthcheck, which is required by the deployment platform
-RUN apt-get update && apt-get install -y --no-install-recommends wget && rm -rf /var/lib/apt/lists/*
+# Copy package files and install dependencies. This is cached by Docker.
+COPY package.json bun.lockb* ./
+RUN bun install
 
+# Copy the rest of the application code
 COPY . .
 
-RUN bun install
-# Define build-time arguments
-ARG RESEND_API_KEY
-ARG TO_EMAIL
-ARG FROM_EMAIL
-ARG PUBLIC_CAPTCHA_ENABLED
-ARG PUBLIC_TURNSTILE_SITE_KEY
-ARG TURNSTILE_SECRET_KEY
-ARG PUBLIC_SANITY_PROJECT_ID
-ARG PUBLIC_SANITY_DATASET
-ARG SANITY_PROJECT_ID
-ARG SANITY_DATASET
-
-# Set environment variables from the build-time arguments
-ENV RESEND_API_KEY=$RESEND_API_KEY
-ENV TO_EMAIL=$TO_EMAIL
-ENV FROM_EMAIL=$FROM_EMAIL
-ENV PUBLIC_CAPTCHA_ENABLED=$PUBLIC_CAPTCHA_ENABLED
-ENV PUBLIC_TURNSTILE_SITE_KEY=$PUBLIC_TURNSTILE_SITE_KEY
-ENV TURNSTILE_SECRET_KEY=$TURNSTILE_SECRET_KEY
-ENV PUBLIC_SANITY_PROJECT_ID=$PUBLIC_SANITY_PROJECT_ID
-ENV PUBLIC_SANITY_DATASET=$PUBLIC_SANITY_DATASET
-ENV SANITY_PROJECT_ID=$SANITY_PROJECT_ID
-ENV SANITY_DATASET=$SANITY_DATASET
-
-RUN bun run build
-
-ENV HOST=0.0.0.0
-ENV PORT=5050
+# Expose the port the app will run on
 EXPOSE 5050
 
-# Healthcheck to allow the deployment platform to verify the app is running
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:5050/ || exit 1
+# Set the host to allow external connections
+ENV HOST=0.0.0.0
 
-CMD ["bun", "run", "dist/server/entry.mjs"]
+# Run the Astro development server
+# This will use the Cloudflare adapter's dev server (wrangler) automatically.
+CMD ["bun", "run", "dev", "--", "--host", "--port", "5050"]
