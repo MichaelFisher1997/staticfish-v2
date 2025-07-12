@@ -3,9 +3,10 @@ import { Resend } from 'resend';
 
 export const prerender = false;
 
-export const POST: APIRoute = async (context) => {
-  const { request, clientAddress, locals, platform } = context;
-  const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY } = platform?.env || {};
+export const POST: APIRoute = async ({ request, clientAddress, platform }) => {
+  // Safely access environment variables from the Cloudflare platform context
+  const env = platform?.env || {};
+  const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY, PUBLIC_CAPTCHA_ENABLED } = env;
 
   const missingVars = [];
   if (!RESEND_API_KEY) missingVars.push('RESEND_API_KEY');
@@ -34,7 +35,7 @@ export const POST: APIRoute = async (context) => {
 
     // Validate the Turnstile token, but skip in development
     // Only verify CAPTCHA if it's explicitly enabled
-  if (platform?.env.PUBLIC_CAPTCHA_ENABLED === 'true') {
+  if (PUBLIC_CAPTCHA_ENABLED === 'true') {
       const turnstileResponse = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
