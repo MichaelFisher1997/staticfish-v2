@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { PostSearch } from './PostSearch';
 import { CategorySidebar } from './CategorySidebar';
+import HeroCarousel from './HeroCarousel';
 import type { Post } from '../types/post';
 
 interface Category {
@@ -17,6 +18,14 @@ interface PostsPageProps {
   initialPosts: Post[];
   categories: Category[];
 }
+
+const heroImages = [
+  "/hero-1.png",
+  "/hero-2.png", 
+  "/hero-3.png",
+  "/hero-4.png",
+  "/hero-5.png",
+];
 
 export function PostsPage({ initialPosts, categories }: PostsPageProps) {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
@@ -80,41 +89,43 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
   };
 
   return (
-    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="relative overflow-hidden mb-16">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-purple-950/20"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.05),transparent_50%)]"></div>
+    <>
+      {/* Hero Section with Image Slider */}
+      <section className="relative h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center text-center overflow-hidden mb-16">
+        <div className="absolute inset-0 w-full h-full">
+          <HeroCarousel images={heroImages} />
+          <div className="absolute inset-0 bg-black opacity-60 z-20"></div>
         </div>
-        
-        <div className="mx-auto max-w-4xl text-center py-12 px-4">
-          {/* Badge */}
-          <div className="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-900/20 dark:text-blue-300 dark:ring-blue-300/20 mb-6">
-            <span>Latest Articles</span>
-          </div>
-          
-          {/* Main Heading */}
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
-            Insights & Stories
-          </h1>
-          
-          {/* Subheading */}
-          <p className="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground mb-10">
-            Discover the latest trends, insights, and stories from our team. From technical deep-dives to industry perspectives.
-          </p>
-          
-          {/* Search */}
-          <div className="max-w-lg mx-auto">
-            <PostSearch 
-              onSearch={handleSearch} 
-              onClear={handleClearSearch}
-              placeholder="Search articles, topics, or keywords..."
-            />
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-30">
+          <div className="mx-auto max-w-4xl">
+            {/* Badge */}
+            <div className="inline-flex items-center rounded-full bg-blue-50/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-blue-200 ring-1 ring-inset ring-blue-300/20 mb-6">
+              <span>Latest Articles</span>
+            </div>
+            
+            {/* Main Heading */}
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl mb-6">
+              Insights & Stories
+            </h1>
+            
+            {/* Subheading */}
+            <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-300 sm:text-xl mb-10">
+              Discover the latest trends, insights, and stories from our team. From technical deep-dives to industry perspectives.
+            </p>
+            
+            {/* Search */}
+            <div className="max-w-lg mx-auto">
+              <PostSearch 
+                onSearch={handleSearch} 
+                onClear={handleClearSearch}
+                placeholder="Search articles, topics, or keywords..."
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
       <div className="flex gap-8">
         {/* Sidebar */}
@@ -252,6 +263,7 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
           </div>
         </main>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
