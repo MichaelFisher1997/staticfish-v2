@@ -26,6 +26,7 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,12 +51,16 @@ export default function ContactForm() {
 
       if (response.ok) {
         setSubmitStatus("success");
+        setErrorMessage(null); // Clear previous errors
         setFormData({ name: "", email: "", message: "" });
       } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.error || 'An unknown server error occurred.');
         setSubmitStatus("error");
       }
     } catch (error) {
       console.error('Form submission error:', error);
+      setErrorMessage(error instanceof Error ? error.message : 'A network error occurred. Please check your connection.');
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -136,8 +141,7 @@ export default function ContactForm() {
         <div className="flex items-center gap-2 p-4 border border-red-200 bg-red-50 text-red-800 rounded-md">
           <AlertCircle className="h-4 w-4 text-red-600" />
           <span className="text-sm">
-            Sorry, there was an error sending your message. Please
-            try again or contact us directly.
+            {errorMessage || 'Sorry, there was an error sending your message. Please try again or contact us directly.'}
           </span>
         </div>
       )}
