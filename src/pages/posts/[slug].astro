@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { getPostBySlug, getAllCategories } from "../../lib/sanity";
 import { CategorySidebar } from "../../components/CategorySidebar";
 import { PostSearch } from "../../components/PostSearch";
+import HeroCarousel from "../../components/HeroCarousel";
 
 // Get the slug from the URL
 const { slug } = Astro.params;
@@ -33,21 +34,75 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
+
+const heroImages = [
+  "/hero-1.png",
+  "/hero-2.png", 
+  "/hero-3.png",
+  "/hero-4.png",
+  "/hero-5.png",
+];
 ---
 
 <Layout title={`${post.title} - Staticfish`}>
   <div class="min-h-screen flex flex-col">
     <Header />
     <main class="flex-1">
-      <div class="bg-background py-16 sm:py-24">
+      <div class="bg-background pb-16">
+        <!-- Hero Section with Image Slider -->
+        <section class="relative h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center text-center overflow-hidden mb-16">
+          <div class="absolute inset-0 w-full h-full">
+            <HeroCarousel images={heroImages} client:load />
+            <div class="absolute inset-0 bg-black opacity-60 z-20"></div>
+          </div>
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-30">
+            <div class="mx-auto max-w-4xl">
+              <!-- Badge -->
+              <div class="inline-flex items-center rounded-full bg-blue-50/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-blue-200 ring-1 ring-inset ring-blue-300/20 mb-6">
+                <span>Blog Post</span>
+              </div>
+              
+              <!-- Post Title -->
+              <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl mb-6">
+                {post.title}
+              </h1>
+              
+              <!-- Post Meta -->
+              <div class="flex items-center justify-center gap-4 text-gray-300 mb-10">
+                <time datetime={post.publishedAt}>
+                  {formattedDate}
+                </time>
+                {post.author && (
+                  <>
+                    <span>•</span>
+                    <span>By {post.author}</span>
+                  </>
+                )}
+                {post.categories && post.categories.length > 0 && (
+                  <>
+                    <span>•</span>
+                    <div class="flex gap-x-2">
+                      {post.categories.map((category: string) => (
+                        <span class="bg-white/10 backdrop-blur-sm text-white rounded-full px-3 py-1 font-medium text-sm">
+                          {category}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <!-- Search Bar -->
-          <div class="mb-8">
-            <div class="max-w-md mx-auto lg:mx-0">
+          <div class="mb-12">
+            <div class="max-w-lg mx-auto">
               <PostSearch 
                 onSearch={() => window.location.href = '/posts'} 
                 onClear={() => {}}
-                placeholder="Search posts..."
+                placeholder="Search articles, topics, or keywords..."
                 client:load
               />
             </div>
@@ -66,39 +121,6 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
 
             <!-- Main Content -->
             <article class="flex-1 max-w-4xl">
-              <!-- Post Header -->
-              <header class="mb-10">
-                <div class="flex items-center gap-x-4 text-xs mb-4">
-                  <time datetime={post.publishedAt} class="text-muted-foreground">
-                    {formattedDate}
-                  </time>
-                  {
-                    post.categories && post.categories.length > 0 && (
-                      <div class="flex gap-x-2">
-                        {post.categories.map((category: string) => (
-                          <a 
-                            href="/posts" 
-                            class="bg-muted text-muted-foreground rounded-full px-3 py-1.5 font-medium hover:bg-muted/80 transition-colors cursor-pointer"
-                          >
-                            {category}
-                          </a>
-                        ))}
-                      </div>
-                    )
-                  }
-                </div>
-                <h1
-                  class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4"
-                >
-                  {post.title}
-                </h1>
-                {
-                  post.author && (
-                    <div class="text-muted-foreground">By {post.author}</div>
-                  )
-                }
-              </header>
-
               <!-- Featured Image -->
               {
                 post.mainImage && (
