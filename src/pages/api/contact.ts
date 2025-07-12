@@ -4,8 +4,8 @@ import { Resend } from 'resend';
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, clientAddress, platform }) => {
-  // Safely access environment variables from the Cloudflare platform context
-  const env = platform?.env || {};
+  // Access environment variables from platform context (Cloudflare) or process.env (local/Node.js)
+  const env = platform?.env || process.env;
   const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY, PUBLIC_CAPTCHA_ENABLED } = env;
 
   const missingVars = [];
