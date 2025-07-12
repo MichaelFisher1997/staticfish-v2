@@ -82,21 +82,37 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
   return (
     <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="mx-auto max-w-2xl text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">
-          Our Blog
-        </h1>
-        <p className="mt-2 text-lg leading-8 text-muted-foreground mb-8">
-          Latest insights, news, and updates from Staticfish.
-        </p>
+      <div className="relative overflow-hidden mb-16">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-purple-950/20"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.05),transparent_50%)]"></div>
+        </div>
         
-        {/* Search */}
-        <div className="max-w-md mx-auto">
-          <PostSearch 
-            onSearch={handleSearch} 
-            onClear={handleClearSearch}
-            placeholder="Search posts..."
-          />
+        <div className="mx-auto max-w-4xl text-center py-12 px-4">
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-900/20 dark:text-blue-300 dark:ring-blue-300/20 mb-6">
+            <span>Latest Articles</span>
+          </div>
+          
+          {/* Main Heading */}
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
+            Insights & Stories
+          </h1>
+          
+          {/* Subheading */}
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground mb-10">
+            Discover the latest trends, insights, and stories from our team. From technical deep-dives to industry perspectives.
+          </p>
+          
+          {/* Search */}
+          <div className="max-w-lg mx-auto">
+            <PostSearch 
+              onSearch={handleSearch} 
+              onClear={handleClearSearch}
+              placeholder="Search articles, topics, or keywords..."
+            />
+          </div>
         </div>
       </div>
 
@@ -143,64 +159,73 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             {filteredPosts.length > 0 ? (
               filteredPosts.map((post: Post) => (
-                <Card key={post._id} className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-border bg-card h-full">
-                  {post.mainImage && (
-                    <div className="relative h-48 w-full overflow-hidden">
-                      <img 
-                        src={getImageUrl(post.mainImage)} 
-                        alt={post.title} 
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                    </div>
-                  )}
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-x-4 text-xs mb-2">
-                      <time dateTime={post.publishedAt} className="text-muted-foreground">
-                        {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
-                      </time>
-                      {post.categories && post.categories.length > 0 && (
-                        <div className="flex gap-x-2 flex-wrap">
-                          {post.categories.map((category, index) => (
-                            <span 
-                              key={index}
-                              className="bg-muted text-muted-foreground rounded-full px-3 py-1.5 font-medium text-xs cursor-pointer hover:bg-muted/80"
-                              onClick={() => handleCategorySelect(category)}
-                            >
-                              {category}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <CardTitle className="text-xl">
-                      {post.title}
-                    </CardTitle>
-                    {post.excerpt && (
-                      <CardDescription className="line-clamp-3 mt-2">
-                        {post.excerpt}
-                      </CardDescription>
+                <a 
+                  key={post._id} 
+                  href={`/posts/${post.slug.current}`}
+                  className="group block"
+                >
+                  <Card className="flex flex-col overflow-hidden hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 border-border bg-card h-full group-hover:scale-[1.02] group-hover:border-blue-200 dark:group-hover:border-blue-800">
+                    {post.mainImage && (
+                      <div className="relative h-48 w-full overflow-hidden">
+                        <img 
+                          src={getImageUrl(post.mainImage)} 
+                          alt={post.title} 
+                          className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
+                      </div>
                     )}
-                  </CardHeader>
-                  <CardContent className="mt-auto pt-0">
-                    <div className="flex mt-4 items-center">
-                      <Button variant="link" className="flex items-center p-0">
-                        <a href={`/posts/${post.slug.current}`} className="flex items-center">
-                          Read post
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
-                      {post.author && (
-                        <div className="ml-auto text-sm text-muted-foreground">
-                          By {post.author}
-                        </div>
+                    <CardHeader>
+                      <div className="flex items-center justify-between gap-x-4 text-xs mb-2">
+                        <time dateTime={post.publishedAt} className="text-muted-foreground">
+                          {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </time>
+                        {post.categories && post.categories.length > 0 && (
+                          <div className="flex gap-x-2 flex-wrap">
+                            {post.categories.map((category, index) => (
+                              <span 
+                                key={index}
+                                className="bg-muted text-muted-foreground rounded-full px-3 py-1.5 font-medium text-xs cursor-pointer hover:bg-muted/80 transition-colors"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleCategorySelect(category);
+                                }}
+                              >
+                                {category}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <CardTitle className="text-xl group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {post.title}
+                      </CardTitle>
+                      {post.excerpt && (
+                        <CardDescription className="line-clamp-3 mt-2">
+                          {post.excerpt}
+                        </CardDescription>
                       )}
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardHeader>
+                    <CardContent className="mt-auto pt-0">
+                      <div className="flex mt-4 items-center justify-between">
+                        <div className="flex items-center text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                          <span className="text-sm font-medium">Read more</span>
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                        {post.author && (
+                          <div className="text-sm text-muted-foreground">
+                            By {post.author}
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
               ))
             ) : (
               <div className="col-span-full text-center py-12">
