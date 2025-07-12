@@ -263,9 +263,6 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
             )}
           </div>
         </main>
-        
-        {/* Bottom Spacing */}
-        <div className="pb-16"></div>
       </div>
       </div>
     </>
