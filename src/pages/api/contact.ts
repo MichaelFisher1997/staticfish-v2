@@ -6,12 +6,19 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   const { RESEND_API_KEY, TO_EMAIL, FROM_EMAIL, TURNSTILE_SECRET_KEY } = import.meta.env;
 
-  if (!RESEND_API_KEY || !TO_EMAIL || !FROM_EMAIL || !TURNSTILE_SECRET_KEY) {
-    console.error("Email service is not configured. Missing one or more required environment variables.");
+  const missingVars = [];
+  if (!RESEND_API_KEY) missingVars.push('RESEND_API_KEY');
+  if (!TO_EMAIL) missingVars.push('TO_EMAIL');
+  if (!FROM_EMAIL) missingVars.push('FROM_EMAIL');
+  if (!TURNSTILE_SECRET_KEY) missingVars.push('TURNSTILE_SECRET_KEY');
+
+  if (missingVars.length > 0) {
+    const errorMsg = `The following required environment variables are missing on the server: ${missingVars.join(', ')}. Please check the Cloudflare Pages production environment settings.`;
+    console.error(errorMsg);
     return new Response(
       JSON.stringify({ 
         message: 'Internal Server Error: Email service not configured.',
-        error: 'The email service is not configured on the server. Please contact the site administrator.'
+        error: errorMsg
       }),
       { status: 500 }
     );
