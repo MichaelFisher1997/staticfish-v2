@@ -109,25 +109,26 @@ export function PostsPage({ initialPosts, categories }: PostsPageProps) {
             </h1>
             
             {/* Subheading */}
-            <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-300 sm:text-xl mb-10">
+            <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-300 sm:text-xl">
               Discover the latest trends, insights, and stories from our team. From technical deep-dives to industry perspectives.
             </p>
-            
-            {/* Search */}
-            <div className="max-w-lg mx-auto">
-              <PostSearch 
-                onSearch={handleSearch} 
-                onClear={handleClearSearch}
-                placeholder="Search articles, topics, or keywords..."
-              />
-            </div>
           </div>
         </div>
       </section>
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Search Bar */}
+        <div className="mb-12">
+          <div className="max-w-lg mx-auto">
+            <PostSearch 
+              onSearch={handleSearch} 
+              onClear={handleClearSearch}
+              placeholder="Search articles, topics, or keywords..."
+            />
+          </div>
+        </div>
 
-      <div className="flex gap-8">
+        <div className="flex gap-8">
         {/* Sidebar */}
         <aside className="hidden lg:block w-64 flex-shrink-0">
           <CategorySidebar
