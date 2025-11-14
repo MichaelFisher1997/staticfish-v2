@@ -29,10 +29,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
       // Use nonce for inline scripts, allow necessary external scripts
       `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://*.googletagmanager.com;`,
       `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;`,
-      `img-src 'self' data: https://cdn.sanity.io;`,
+      `img-src 'self' data:;`,
       `font-src 'self' https://fonts.gstatic.com;`,
       `frame-src https://challenges.cloudflare.com;`,
-      `connect-src 'self' https://*.sanity.io https://challenges.cloudflare.com;`,
+      `connect-src 'self' https://challenges.cloudflare.com;`,
       `object-src 'none';`,
       `base-uri 'self';`
     ].join(' '),
