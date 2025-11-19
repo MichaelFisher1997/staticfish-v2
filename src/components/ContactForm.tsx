@@ -7,6 +7,7 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    serviceType: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,7 +53,7 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitStatus("success");
         setErrorMessage(null); // Clear previous errors
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", serviceType: "", message: "" });
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.error || 'An unknown server error occurred.');
@@ -68,7 +69,7 @@ export default function ContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData({
       ...formData,
@@ -110,6 +111,29 @@ export default function ContactForm() {
           />
         </div>
       </div>
+
+      <div className="space-y-2">
+        <label htmlFor="serviceType" className="text-sm font-medium">
+          Service Interest
+        </label>
+        <select
+          id="serviceType"
+          name="serviceType"
+          value={formData.serviceType}
+          onChange={handleChange}
+          required
+          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <option value="" disabled>Select a service...</option>
+          <option value="static">Static Website</option>
+          <option value="cms">CMS / Blog</option>
+          <option value="ecom">E-commerce</option>
+          <option value="saas">Custom SaaS / Web App</option>
+          <option value="tools">Internal Tools / Automation</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
       <div className="space-y-2">
         <label htmlFor="message" className="text-sm font-medium">
           Message

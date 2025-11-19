@@ -3,310 +3,203 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { CheckCircle, Zap, Shield, DollarSign } from 'lucide-react';
+import { Badge } from '../components/ui/badge';
+import { Globe, LayoutTemplate, Wrench, Database, ArrowRight, CheckCircle } from 'lucide-react';
+
+const services = [
+  {
+    id: "websites",
+    title: "Static & Marketing Websites",
+    description: "Blazing fast, secure, and affordable websites perfect for small businesses.",
+    icon: Globe,
+    features: [
+      "Ultra-fast loading times (95+ Lighthouse scores)",
+      "SEO optimized structure",
+      "Zero maintenance security (no database to hack)",
+      "Responsive mobile-first design",
+      "Contact form integration"
+    ],
+    idealFor: "Small businesses, portfolios, landing pages, restaurants, local services.",
+    tech: ["Astro", "Tailwind CSS", "Cloudflare Pages"]
+  },
+  {
+    id: "cms",
+    title: "CMS & Content Websites",
+    description: "Editable content without the bloat. Manage your blog or team pages easily.",
+    icon: LayoutTemplate,
+    features: [
+      "User-friendly Admin Dashboard",
+      "Headless CMS architecture (Sanity, Strapi)",
+      "Role-based access control",
+      "Scheduled publishing",
+      "Dynamic content pages"
+    ],
+    idealFor: "News sites, corporate blogs, marketing teams, directories.",
+    tech: ["Next.js", "Sanity.io", "React"]
+  },
+  {
+    id: "tools",
+    title: "Web Tools & Automation",
+    description: "Custom browser extensions and internal tools to streamline your workflow.",
+    icon: Wrench,
+    features: [
+      "Chrome & Firefox Extensions",
+      "PDF generation & manipulation tools",
+      "Data scraping & automation scripts",
+      "API integrations (Zapier, Slack, etc.)",
+      "Workflow optimization"
+    ],
+    idealFor: "Agencies, data-heavy businesses, productivity enhancement.",
+    tech: ["JavaScript", "Puppeteer", "Python", "Plasmo"]
+  },
+  {
+    id: "saas",
+    title: "Full SaaS Engineering",
+    description: "End-to-end custom software development for startups and enterprise.",
+    icon: Database,
+    features: [
+      "Complex database architecture",
+      "User authentication & authorization",
+      "Subscription & Payment processing (Stripe)",
+      "Real-time dashboards",
+      "Cloud infrastructure setup"
+    ],
+    idealFor: "Startups, SaaS products, internal enterprise platforms.",
+    tech: ["Golang", "React", "PostgreSQL", "Docker", "AWS/GCP"]
+  }
+];
 ---
 
-<Layout title="Our Services - Staticfish">
+<Layout title="Services - Staticfish">
   <div class="min-h-screen flex flex-col">
     <Header />
     <main class="flex-1">
-      <div class="min-h-screen bg-background py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <!-- Header -->
-          <div class="mx-auto max-w-3xl text-center mb-20">
+      <div class="bg-background">
+        
+        <!-- Hero -->
+        <section class="py-20 sm:py-28 bg-muted/30 border-b border-border">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">
-              Our Services
+              Engineering Digital Growth
             </h1>
-            <p class="text-xl text-muted-foreground leading-8">
-              We specialize in creating high-performance static websites that are
-              fast, secure, and built to scale with your business. Choose from our
-              three carefully crafted packages designed for different business
-              needs.
+            <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-8">
+              From simple brochure sites to complex cloud applications, we provide the technical foundation for your business to succeed.
             </p>
           </div>
+        </section>
 
-          <!-- Services Overview -->
-          <div class="grid gap-16 lg:gap-24">
-            <!-- Static Site Package -->
-            <div class="relative">
-              <Card className="overflow-hidden border-border bg-card">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
-                <CardHeader className="pb-8">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-primary/10 rounded-lg">
-                      <Zap className="h-8 w-8 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-3xl font-bold">
-                        Static Site
-                      </CardTitle>
-                      <CardDescription className="text-lg mt-2">
-                        Perfect for small businesses just getting started online
-                      </CardDescription>
-                    </div>
+        <!-- Service Categories -->
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 space-y-32">
+          {services.map((service, index) => (
+            <div id={service.id} class={`flex flex-col lg:flex-row gap-12 items-start ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              <div class="flex-1">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="p-3 bg-primary/10 rounded-xl">
+                    <service.icon className="h-8 w-8 text-primary" />
                   </div>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-bold text-primary">£149</span>
-                    <span class="text-muted-foreground">one-off</span>
-                    <span class="text-sm text-muted-foreground ml-4">
-                      + £50/month hosting
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  <p class="text-muted-foreground leading-7">
-                    Our Static Site package is ideal for small businesses,
-                    freelancers, and entrepreneurs who need a professional online
-                    presence without the complexity. Get a beautiful, fast website
-                    that showcases your business and converts visitors into
-                    customers.
-                  </p>
-
-                  <div>
-                    <h3 class="text-xl font-semibold text-foreground mb-6">
-                      What's Included
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Up to 4 pages
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Responsive design
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Contact form integration
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          CSP & SSL
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="pt-4">
-                    <Button size="lg" className="w-full sm:w-auto">
-                      <a href="/contact">Get Started with Static Site</a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <!-- CMS Site Package -->
-            <div class="relative">
-              <Card className="overflow-hidden border-primary/50 bg-card ring-1 ring-primary/20">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
-                <div class="absolute -top-3 left-8">
-                  <span class="bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full">
-                    Most Popular
-                  </span>
+                  <h2 class="text-3xl font-bold text-foreground">{service.title}</h2>
                 </div>
-                <CardHeader className="pb-8 pt-8">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-primary/10 rounded-lg">
-                      <Shield className="h-8 w-8 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-3xl font-bold">
-                        CMS Site
-                      </CardTitle>
-                      <CardDescription className="text-lg mt-2">
-                        Ideal for small businesses that need a content management
-                        system
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-bold text-primary">£249</span>
-                    <span class="text-muted-foreground">one-off</span>
-                    <span class="text-sm text-muted-foreground ml-4">
-                      + £50/month hosting
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  <p class="text-muted-foreground leading-7">
-                    The CMS Site package is perfect for established businesses
-                    ready to scale their online presence. With advanced SEO,
-                    content management capabilities, and enhanced analytics,
-                    you'll have everything needed to grow your audience and drive
-                    conversions.
-                  </p>
+                <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+                  {service.description}
+                </p>
+                
+                <div class="mb-8">
+                  <h3 class="text-lg font-semibold text-foreground mb-4">Key Features</h3>
+                  <ul class="grid sm:grid-cols-2 gap-3">
+                    {service.features.map(feature => (
+                      <li class="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                  <div>
-                    <h3 class="text-xl font-semibold text-foreground mb-6">
-                      What's Included
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Everything in Static Site
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Blog & CMS
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          2 Login Admin Users
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Manage content via Sanity CMS
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                <div class="mb-8 bg-card border border-border rounded-lg p-6">
+                  <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider mb-2">Ideal For</h3>
+                  <p class="text-muted-foreground">{service.idealFor}</p>
+                </div>
 
-                  <div class="pt-4">
-                    <Button size="lg" className="w-full sm:w-auto">
-                      <a href="/contact">Get Started with CMS Site</a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                <div class="flex flex-wrap gap-2 mb-8">
+                   {service.tech.map(t => (
+                     <Badge variant="secondary" className="text-sm py-1 px-3">{t}</Badge>
+                   ))}
+                </div>
+
+                <Button size="lg">
+                  <a href={service.id === 'saas' ? '/contact' : '/pricing'} class="flex items-center">
+                    {service.id === 'saas' ? 'Get a Quote' : 'View Pricing'}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+              
+              <!-- Visual/Placeholder -->
+              <div class="flex-1 w-full">
+                 <div class="aspect-square sm:aspect-video lg:aspect-square rounded-2xl bg-gradient-to-br from-muted to-card border border-border p-8 flex items-center justify-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,white,transparent)]"></div>
+                    <!-- Dynamic abstract visual based on index -->
+                    <div class={`transition-transform duration-500 group-hover:scale-105 ${index % 2 === 0 ? 'rotate-3' : '-rotate-3'}`}>
+                        {index === 0 && (
+                           <div class="w-64 h-80 bg-background border border-border rounded-lg shadow-2xl p-4">
+                              <div class="w-full h-4 bg-muted mb-4 rounded"></div>
+                              <div class="space-y-2">
+                                 <div class="w-full h-32 bg-primary/10 rounded"></div>
+                                 <div class="w-3/4 h-3 bg-muted rounded"></div>
+                                 <div class="w-1/2 h-3 bg-muted rounded"></div>
+                              </div>
+                           </div>
+                        )}
+                        {index === 1 && (
+                           <div class="w-80 h-64 bg-background border border-border rounded-lg shadow-2xl p-4 flex gap-4">
+                              <div class="w-16 h-full bg-muted/20 rounded"></div>
+                              <div class="flex-1 space-y-3">
+                                 <div class="w-full h-8 bg-muted rounded"></div>
+                                 <div class="w-full h-24 bg-primary/5 rounded border border-dashed border-primary/30 flex items-center justify-center text-xs text-muted-foreground">Editable Content Block</div>
+                              </div>
+                           </div>
+                        )}
+                        {index === 2 && (
+                           <div class="w-64 h-64 bg-background border border-border rounded-lg shadow-2xl flex flex-col">
+                              <div class="h-8 border-b border-border flex items-center px-3 gap-2">
+                                 <div class="w-3 h-3 rounded-full bg-red-500/20"></div>
+                                 <div class="w-3 h-3 rounded-full bg-yellow-500/20"></div>
+                                 <div class="w-3 h-3 rounded-full bg-green-500/20"></div>
+                              </div>
+                              <div class="flex-1 p-4 font-mono text-xs text-primary/80">
+                                 > analyzing_page...<br/>
+                                 > optimizing_pdf...<br/>
+                                 > task_complete (0.2s)
+                              </div>
+                           </div>
+                        )}
+                        {index === 3 && (
+                           <div class="w-80 h-64 bg-background border border-border rounded-lg shadow-2xl p-4 grid grid-cols-2 gap-4">
+                              <div class="col-span-2 h-20 bg-primary/5 rounded border border-primary/20 p-2">
+                                <div class="w-12 h-12 rounded-full border-4 border-primary/30 border-t-primary animate-spin"></div>
+                              </div>
+                              <div class="h-24 bg-muted/20 rounded"></div>
+                              <div class="h-24 bg-muted/20 rounded"></div>
+                           </div>
+                        )}
+                    </div>
+                 </div>
+              </div>
             </div>
-
-            <!-- E Commerce Site Package -->
-            <div class="relative">
-              <Card className="overflow-hidden border-border bg-card">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
-                <CardHeader className="pb-8">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-primary/10 rounded-lg">
-                      <DollarSign className="h-8 w-8 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-3xl font-bold">
-                        E Commerce Site
-                      </CardTitle>
-                      <CardDescription className="text-lg mt-2">
-                        For established businesses ready to take their store
-                        online
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-bold text-primary">£399</span>
-                    <span class="text-muted-foreground">one-off</span>
-                    <span class="text-sm text-muted-foreground ml-4">
-                      + £50/month hosting
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  <p class="text-muted-foreground leading-7">
-                    Our E Commerce Site package is designed for businesses that
-                    need enterprise-level features and custom integrations.
-                    Perfect for e-commerce, complex business processes, and
-                    organizations requiring specialized functionality with
-                    priority support.
-                  </p>
-
-                  <div>
-                    <h3 class="text-xl font-semibold text-foreground mb-6">
-                      What's Included
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Everything in CMS Site (excluding CMS)
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          CMS (optional +£80)
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          E-commerce integration
-                        </span>
-                      </div>
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-primary/10 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-primary" />
-                        </div>
-                        <span class="text-muted-foreground">
-                          Multiple payment options
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="pt-4">
-                    <Button size="lg" className="w-full sm:w-auto">
-                      <a href="/contact">Get Started with E Commerce Site</a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          <!-- Call to Action -->
-          <div class="mt-24 text-center">
-            <h2 class="text-3xl font-bold text-foreground mb-4">
-              Ready to Get Started?
-            </h2>
-            <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Not sure which package is right for you? Get in touch and we'll help
-              you choose the perfect solution for your business needs.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
-                <a href="/contact">Contact Us</a>
-              </Button>
-              <Button variant="outline" size="lg">
-                <a href="/pricing">View Detailed Pricing</a>
-              </Button>
-            </div>
-          </div>
+          ))}
         </div>
+
+        <!-- CTA -->
+        <section class="py-24 bg-primary text-primary-foreground">
+           <div class="container mx-auto max-w-4xl text-center px-4">
+              <h2 class="text-3xl font-bold mb-6">Not sure what you need?</h2>
+              <p class="text-xl mb-10 opacity-90">We're happy to discuss your project and recommend the best path forward, even if it's not with us.</p>
+              <Button variant="secondary" size="lg" className="text-primary font-bold">
+                 <a href="/contact">Book a Free Consultation</a>
+              </Button>
+           </div>
+        </section>
+
       </div>
     </main>
     <Footer />

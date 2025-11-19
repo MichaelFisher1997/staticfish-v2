@@ -49,6 +49,13 @@ interface Milestone {
   description: string;
 }
 
+const techStack = [
+  { category: "Frontend", tools: ["React", "Next.js", "Astro", "Tailwind CSS", "TypeScript"] },
+  { category: "Backend", tools: ["Node.js", "Golang", "Python"] },
+  { category: "Database & Cloud", tools: ["PostgreSQL (Neon)", "Cloudflare", "AWS", "Sanity CMS"] },
+  { category: "Tools", tools: ["Docker", "Git", "Figma"] }
+];
+
 const values: Value[] = [
   {
     icon: Zap,
@@ -224,6 +231,38 @@ const milestones: Milestone[] = [
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </section>
+
+          <!-- Tech Stack -->
+          <section class="mb-24">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl font-bold text-foreground mb-4">
+                Our Tech Stack
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                We use the best modern tools to ensure your project is fast, secure, and scalable.
+              </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+               {techStack.map(stack => (
+                 <Card className="border-border bg-card/50">
+                   <CardHeader>
+                     <CardTitle className="text-lg text-primary">{stack.category}</CardTitle>
+                   </CardHeader>
+                   <CardContent>
+                     <ul class="space-y-2">
+                       {stack.tools.map(tool => (
+                         <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                           <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                           {tool}
+                         </li>
+                       ))}
+                     </ul>
+                   </CardContent>
+                 </Card>
+               ))}
             </div>
           </section>
 

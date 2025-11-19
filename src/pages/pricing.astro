@@ -8,6 +8,30 @@ import { CheckCircle, X, Star, Check, Minus } from 'lucide-react';
 import services from '../data/services.json';
 import features from '../data/features.json';
 
+const maintenancePlans = [
+  {
+    title: "Basic",
+    price: "£50",
+    period: "/month",
+    description: "Essential security and upkeep.",
+    features: ["Monthly Backups", "Security Updates", "Uptime Monitoring", "Email Support"]
+  },
+  {
+    title: "Growth",
+    price: "£150",
+    period: "/month",
+    description: "Regular updates and small changes.",
+    features: ["Weekly Backups", "2 hrs dev time/mo", "Content Updates", "Priority Email Support"]
+  },
+  {
+    title: "Full Partner",
+    price: "£450",
+    period: "/month",
+    description: "Complete peace of mind and priority access.",
+    features: ["Daily Backups", "5 hrs dev time/mo", "Performance Audits", "Phone & Slack Support"]
+  }
+];
+
 ---
 
 <Layout title="Pricing - Staticfish">
@@ -127,6 +151,56 @@ import features from '../data/features.json';
                 </tbody>
               </table>
             </div>
+          </section>
+
+          <!-- Custom SaaS -->
+          <section class="mt-24">
+             <Card className="bg-gradient-to-r from-slate-900 to-slate-800 border-none text-white">
+                <CardContent className="p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+                   <div>
+                      <h2 class="text-3xl font-bold mb-4">Need a Custom SaaS Solution?</h2>
+                      <p class="text-lg text-gray-300 max-w-2xl">
+                         Building a complex web application, internal tool, or subscription platform? 
+                         We offer custom engineering with a transparent hourly rate or fixed-project quote.
+                      </p>
+                   </div>
+                   <Button size="lg" variant="secondary" className="min-w-[200px]">
+                      <a href="/contact">Get a Custom Quote</a>
+                   </Button>
+                </CardContent>
+             </Card>
+          </section>
+
+          <!-- Maintenance Plans -->
+          <section class="mt-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-foreground mb-4">Maintenance & Support</h2>
+                <p class="text-lg text-muted-foreground">Optional retainer plans to keep your site secure and fresh.</p>
+             </div>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {maintenancePlans.map(plan => (
+                   <Card className="border-border bg-card">
+                      <CardHeader>
+                         <CardTitle>{plan.title}</CardTitle>
+                         <div class="flex items-baseline gap-1 mt-2">
+                            <span class="text-3xl font-bold">{plan.price}</span>
+                            <span class="text-muted-foreground">{plan.period}</span>
+                         </div>
+                         <CardDescription>{plan.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                         <ul class="space-y-3">
+                            {plan.features.map(feature => (
+                               <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                                  <Check className="h-4 w-4 text-primary" />
+                                  {feature}
+                               </li>
+                            ))}
+                         </ul>
+                      </CardContent>
+                   </Card>
+                ))}
+             </div>
           </section>
 
           <!-- Call to Action -->

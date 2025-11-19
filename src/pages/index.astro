@@ -4,133 +4,268 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { ArrowRight, Zap, Shield, DollarSign } from 'lucide-react';
-import services from '../data/services.json';
+import { ArrowRight, Code, Globe, Laptop, Rocket, ShieldCheck, Zap, Terminal, ChevronRight } from 'lucide-react';
 
-const icons: { [key: string]: any } = {
-  Zap,
-  Shield,
-  DollarSign,
-};
-import HeroCarousel from '../components/HeroCarousel';
+const features = [
+  {
+    title: "Blazing Fast",
+    description: "Sub-second load times with Astro and global CDNs.",
+    icon: Zap
+  },
+  {
+    title: "Secure by Default",
+    description: "No databases to hack for static sites. Enterprise-grade auth for SaaS.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Modern Tech",
+    description: "Built with React, TypeScript, Go, and Rust tools.",
+    icon: Code
+  }
+];
 
-const heroImages = [
-  "/hero-1.png",
-  "/hero-2.png",
-  "/hero-3.png",
-  "/hero-4.png",
-  "/hero-5.png",
+const portfolioItems = [
+  {
+    title: "Artisan Coffee",
+    category: "E-Commerce",
+    image: "/portfolio-artisan-coffee.png",
+  },
+  {
+    title: "TechFix",
+    category: "SaaS Platform",
+    image: "/portfolio-techfix.png",
+  },
+  {
+    title: "Metro Design",
+    category: "Portfolio",
+    image: "/portfolio-metro-design.png",
+  }
+];
+
+const testimonials = [
+  {
+    quote: "Staticfish transformed our online presence. Our new site is incredibly fast and our conversion rates have doubled.",
+    author: "Sarah Johnson",
+    role: "CEO, Bloom Florals"
+  },
+  {
+    quote: "The custom internal tool they built saved our team 20 hours a week. Highly professional and technical team.",
+    author: "Mark Davies",
+    role: "CTO, TechStream"
+  }
 ];
 ---
 
-<Layout title="Staticfish - Fast, static sites for small businesses">
-  <div class="min-h-screen flex flex-col">
+<Layout title="Staticfish - Custom SaaS & High-Performance Websites">
+  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white">
     <Header />
     <main class="flex-1">
-      <div class="min-h-screen bg-background">
-        <!-- Hero Section -->
-        <section class="relative h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center text-center overflow-hidden">
-          <div class="absolute inset-0 w-full h-full">
-            <HeroCarousel images={heroImages} client:load />
-            <div class="absolute inset-0 bg-black opacity-60 z-20"></div>
-          </div>
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-30">
-            <div class="mx-auto max-w-4xl">
-              <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-                Fast, static sites for{" "}
-                <span class="text-primary">small businesses</span>
+      <div class="bg-background">
+        <!-- Modern Hero Section with Grid Background -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-border/40">
+          <!-- Grid Background -->
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+          
+          <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
+            <div class="flex flex-col items-center text-center animate-fade-up">
+              
+              <div class="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm text-primary mb-8 backdrop-blur-sm">
+                <span class="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
+                Now accepting new SaaS projects
+              </div>
+
+              <h1 class="max-w-4xl text-5xl font-bold tracking-tight sm:text-7xl mb-8">
+                <span class="text-foreground">Engineering</span> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400"> Digital Growth</span>
               </h1>
-              <p class="mt-6 text-lg leading-8 text-gray-300 sm:text-xl">
-                We build blazing-fast, secure, and reliable websites that just
-                work. No bloat, no hassle—just performance that drives results.
+              
+              <p class="mt-4 max-w-2xl text-lg leading-8 text-muted-foreground mb-10">
+                We build high-performance websites, internal tools, and custom SaaS platforms.
+                From static landing pages to complex cloud architectures.
               </p>
-              <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" className="text-base px-8 py-3">
-                  <a href="/pricing" class="flex items-center">
-                    View Pricing
-                    <ArrowRight className="ml-2 h-4 w-4" />
+
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg">
+                  <a href="/contact" class="flex items-center gap-2">
+                    Book a Consultation <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-base px-8 py-3 border-gray-400 text-white hover:bg-white hover:text-black"
-                >
-                  <a href="/contact">Contact Us</a>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-lg backdrop-blur-sm bg-background/50">
+                  <a href="/portfolio">View Our Work</a>
                 </Button>
+              </div>
+
+              <!-- Tech Stack Strip -->
+              <div class="mt-20 pt-10 border-t border-white/5 w-full max-w-5xl">
+                 <p class="text-sm text-muted-foreground mb-6 uppercase tracking-widest">Powered by modern tech</p>
+                 <div class="flex flex-wrap justify-center gap-8 opacity-50 grayscale transition-all hover:grayscale-0">
+                    <span class="text-xl font-bold flex items-center gap-2"><Code className="h-5 w-5"/> React</span>
+                    <span class="text-xl font-bold flex items-center gap-2"><Terminal className="h-5 w-5"/> Next.js</span>
+                    <span class="text-xl font-bold flex items-center gap-2"><Zap className="h-5 w-5"/> Astro</span>
+                    <span class="text-xl font-bold flex items-center gap-2"><Globe className="h-5 w-5"/> Cloudflare</span>
+                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Services Overview Section -->
-        <section class="py-24 sm:py-32 bg-muted/50">
+        <!-- Services Bento Grid -->
+        <section class="py-32 bg-background relative">
           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-              <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Our Packages
-              </h2>
-              <p class="mt-4 text-lg text-muted-foreground">
-                Choose the perfect package for your business needs. All plans
-                include fast hosting and ongoing support.
-              </p>
+            <div class="mb-16 md:text-center max-w-3xl mx-auto">
+              <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">What We Build</h2>
+              <p class="text-lg text-muted-foreground">Comprehensive digital engineering for businesses of all sizes.</p>
             </div>
 
-            <div class="mx-auto mt-16 grid max-w-lg grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
-              {services.map(service => {
-                const Icon = icons[service.icon];
-                return (
-                  <Card className={`relative bg-background border-border hover:shadow-lg transition-shadow ${service.popular ? 'border-primary shadow-lg ring-1 ring-primary/20' : ''}`}>
-                    {service.popular && (
-                      <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <span class="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
-                          Most Popular
-                        </span>
-                      </div>
-                    )}
-                    <CardHeader>
-                      <div class="flex items-center gap-2">
-                        {Icon && <Icon className="h-5 w-5 text-primary" />}
-                        <CardTitle>{service.title}</CardTitle>
-                      </div>
-                      <CardDescription>
-                        {service.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div class="mb-6">
-                        <div class="flex items-baseline gap-1">
-                          <span class="text-3xl font-bold text-foreground">
-                            {service.price}
-                          </span>
-                          <span class="text-sm text-muted-foreground">
-                            {service.price_suffix}
-                          </span>
-                        </div>
-                        <div class="mt-1">
-                          <span class="text-sm text-muted-foreground">
-                            {service.hosting_fee}
-                          </span>
-                        </div>
-                      </div>
-                      <ul class="space-y-3 text-sm text-muted-foreground mb-6">
-                        {service.features.map(feature => (
-                          <li class="flex items-center gap-2">
-                            <div class="h-1.5 w-1.5 bg-primary rounded-full"></div>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                      <Button className="w-full" variant={service.popular ? 'default' : 'outline'}>
-                        <a href="/pricing">Learn More</a>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Large Card -->
+              <div class="md:col-span-2 group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 hover:bg-white/10 transition-colors">
+                <div class="relative z-10 h-full flex flex-col justify-between min-h-[300px]">
+                  <div>
+                    <div class="mb-4 inline-flex rounded-lg bg-blue-500/10 p-3 text-blue-400">
+                      <Rocket className="h-6 w-6" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Full SaaS Engineering</h3>
+                    <p class="text-gray-400 max-w-md">End-to-end application development. We handle authentication, payments, databases, and deployment.</p>
+                  </div>
+                  <div class="mt-8">
+                     <a href="/services#saas" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium">
+                       Learn more <ArrowRight className="ml-2 h-4 w-4" />
+                     </a>
+                  </div>
+                </div>
+                <!-- Abstract Decorative Element -->
+                <div class="absolute right-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-blue-500/10 to-transparent opacity-50"></div>
+              </div>
+
+              <!-- Tall Card -->
+              <div class="md:row-span-2 group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 hover:bg-white/10 transition-colors">
+                 <div class="relative z-10 h-full flex flex-col">
+                    <div class="mb-4 inline-flex rounded-lg bg-violet-500/10 p-3 text-violet-400">
+                      <Laptop className="h-6 w-6" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Web Tools</h3>
+                    <p class="text-gray-400 mb-8">Browser extensions, PDF generators, and automation scripts to streamline operations.</p>
+                    <div class="mt-auto rounded-xl bg-black/40 p-4 border border-white/5 font-mono text-xs text-green-400">
+                       &gt; npm run build<br/>
+                       &gt; optimizing...<br/>
+                       &gt; done in 40ms
+                    </div>
+                    <div class="mt-8">
+                     <a href="/services#tools" class="inline-flex items-center text-violet-400 hover:text-violet-300 font-medium">
+                       View details <ArrowRight className="ml-2 h-4 w-4" />
+                     </a>
+                    </div>
+                 </div>
+              </div>
+
+              <!-- Medium Card -->
+              <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 hover:bg-white/10 transition-colors">
+                 <div class="relative z-10">
+                    <div class="mb-4 inline-flex rounded-lg bg-pink-500/10 p-3 text-pink-400">
+                      <Globe className="h-6 w-6" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Static Websites</h3>
+                    <p class="text-gray-400">Blazing fast marketing sites. No bloat, just performance.</p>
+                    <div class="mt-8">
+                     <a href="/services#websites" class="inline-flex items-center text-pink-400 hover:text-pink-300 font-medium">
+                       Check pricing <ArrowRight className="ml-2 h-4 w-4" />
+                     </a>
+                    </div>
+                 </div>
+              </div>
+
+               <!-- Medium Card -->
+              <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 hover:bg-white/10 transition-colors">
+                 <div class="relative z-10">
+                    <div class="mb-4 inline-flex rounded-lg bg-orange-500/10 p-3 text-orange-400">
+                      <ShieldCheck className="h-6 w-6" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">CMS & Blog</h3>
+                    <p class="text-gray-400">Headless CMS integration for easy content management.</p>
+                    <div class="mt-8">
+                     <a href="/services#cms" class="inline-flex items-center text-orange-400 hover:text-orange-300 font-medium">
+                       View features <ArrowRight className="ml-2 h-4 w-4" />
+                     </a>
+                    </div>
+                 </div>
+              </div>
             </div>
           </div>
         </section>
+
+        <!-- Value Props -->
+        <section class="py-24 border-y border-white/5 bg-white/[0.02]">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+               {features.map(feature => (
+                 <div class="flex flex-col items-start">
+                    <div class="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary ring-1 ring-primary/20">
+                      <feature.icon className="h-6 w-6" />
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                    <p class="text-muted-foreground leading-relaxed">{feature.description}</p>
+                 </div>
+               ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Section -->
+        <section class="py-32 bg-background">
+           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+             <div class="flex justify-between items-end mb-16">
+                <div>
+                  <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-2">Selected Work</h2>
+                  <p class="text-muted-foreground">Recent digital products we've shipped.</p>
+                </div>
+                <Button variant="ghost" className="hidden sm:flex group">
+                  <a href="/portfolio" class="flex items-center">View All Projects <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" /></a>
+                </Button>
+             </div>
+             
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {portfolioItems.map(item => (
+                  <div class="group cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-muted relative mb-5">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                      />
+                      <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p class="text-sm text-muted-foreground">{item.category}</p>
+                  </div>
+                ))}
+             </div>
+             
+             <div class="mt-12 sm:hidden text-center">
+                <Button variant="outline" className="w-full">
+                  <a href="/portfolio">View All Projects</a>
+                </Button>
+             </div>
+           </div>
+        </section>
+
+        <!-- Simple CTA -->
+        <section class="py-32 relative overflow-hidden">
+           <div class="absolute inset-0 bg-primary/5"></div>
+           <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+             <h2 class="text-4xl font-bold tracking-tight mb-6">
+                Ready to build something great?
+             </h2>
+             <p class="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+                Book a free 20-minute consultation to discuss your project. No sales pressure, just technical advice.
+             </p>
+             <Button size="lg" className="h-14 px-8 text-lg">
+                <a href="/contact">Book a Free Call</a>
+             </Button>
+           </div>
+        </section>
+
       </div>
     </main>
     <Footer />
