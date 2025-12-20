@@ -8,11 +8,12 @@ import {
   Shield,
   DollarSign,
   Mail,
+  type LucideIcon,
 } from 'lucide-react';
 
 // Type Definitions
 interface Value {
-  icon: any;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
@@ -170,14 +171,15 @@ const milestones: Milestone[] = [
 
           <!-- Stats -->
           <section class="mb-24">
-            <div class="bg-white text-black p-12 md:p-20">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-12 md:p-20 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,50,255,0.1),transparent_60%)]"></div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
                   {stats.map((stat) => (
                     <div class="text-center">
-                      <div class="text-4xl font-black mb-2 uppercase tracking-tighter">
+                      <div class="text-4xl font-black mb-2 uppercase tracking-tighter text-white">
                         {stat.number}
                       </div>
-                      <div class="text-xs font-bold uppercase tracking-widest opacity-60">
+                      <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                         {stat.label}
                       </div>
                     </div>
@@ -202,6 +204,13 @@ const milestones: Milestone[] = [
               {teamMembers.map((member) => (
                 <div class="bg-background border border-white/5 overflow-hidden p-8">
                   <div class="flex flex-col sm:flex-row gap-8 items-center">
+                    <div class={`w-32 h-32 rounded-full overflow-hidden border-2 border-white/10`}>
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
                     <div class="flex-1 text-center sm:text-left">
                       <div class="mb-4">
                         <h3 class="text-2xl font-bold text-white uppercase tracking-tighter">
@@ -274,25 +283,28 @@ const milestones: Milestone[] = [
           </section>
 
           <!-- Call to Action -->
-          <div class="text-center">
-            <h2 class="text-4xl font-bold text-foreground mb-4 leading-none uppercase tracking-tighter">
-              Ready to Work Together?
-            </h2>
-            <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
-              We'd love to learn about your technical needs and discuss how we can help
-              you engineer a better digital future.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="/contact">
-                <Button size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold">
-                  Start Your Project
-                </Button>
-              </a>
-              <a href="/portfolio">
-                <Button variant="outline" size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold border-white/20 hover:border-white">
-                  View Our Work
-                </Button>
-              </a>
+          <div class="text-center relative overflow-hidden py-24">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,50,255,0.1),transparent_60%)]"></div>
+            <div class="relative z-10">
+              <h2 class="text-4xl font-bold text-foreground mb-4 leading-none uppercase tracking-tighter">
+                Ready to Work Together?
+              </h2>
+              <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
+                We'd love to learn about your technical needs and discuss how we can help
+                you engineer a better digital future.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="/contact">
+                  <Button size="lg" className="rounded-lg h-16 px-12 uppercase tracking-widest font-bold bg-white text-black hover:bg-white/90 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
+                    Start Your Project
+                  </Button>
+                </a>
+                <a href="/portfolio">
+                  <Button variant="outline" size="lg" className="rounded-lg h-16 px-12 uppercase tracking-widest font-bold border-white/20 hover:border-white transition-all hover:scale-105">
+                    View Our Work
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </div>

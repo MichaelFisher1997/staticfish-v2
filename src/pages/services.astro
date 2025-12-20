@@ -130,7 +130,7 @@ const services = [
               
               <!-- Visual/Placeholder -->
               <div class="flex-1 w-full">
-                 <div class="aspect-square rounded-none bg-[#0a0a0a] border border-white/5 p-12 flex items-center justify-center relative overflow-hidden group">
+                 <div class="aspect-square rounded-none bg-background border border-white/5 p-12 flex items-center justify-center relative overflow-hidden group">
                     <div class="absolute inset-0 bg-grid-white/5 opacity-20"></div>
                     <!-- Dynamic abstract visual based on index -->
                     <div class="transition-all duration-700 group-hover:scale-110 grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0">
@@ -156,8 +156,8 @@ const services = [
                            </div>
                         )}
                         {index === 2 && (
-                           <div class="w-80 h-80 bg-[#111] border border-white/10 flex flex-col shadow-2xl">
-                              <div class="h-10 border-b border-white/10 flex items-center px-4 gap-2 bg-[#050505]">
+                           <div class="w-80 h-80 bg-background border border-white/10 flex flex-col shadow-2xl">
+                              <div class="h-10 border-b border-white/10 flex items-center px-4 gap-2 bg-black/40">
                                  <div class="w-2 h-2 rounded-full bg-white/20"></div>
                                  <div class="w-2 h-2 rounded-full bg-white/20"></div>
                                  <div class="w-2 h-2 rounded-full bg-white/20"></div>
@@ -190,11 +190,12 @@ const services = [
         </div>
 
         <!-- CTA -->
-        <section class="py-32 bg-white text-black">
-           <div class="container mx-auto max-w-5xl text-center px-4">
-              <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8">Tailored Solutions.</h2>
-              <p class="text-xl md:text-2xl font-medium mb-12 opacity-70 italic max-w-2xl mx-auto">We're happy to discuss your project and recommend the best technical path forward.</p>
-              <Button size="lg" className="bg-black text-white hover:bg-black/90 font-black uppercase tracking-widest h-16 px-12 rounded-none">
+        <section class="py-48 bg-background relative overflow-hidden">
+           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,50,255,0.1),transparent_60%)]"></div>
+           <div class="container mx-auto max-w-5xl text-center px-4 relative z-10">
+              <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 text-white">Tailored Solutions.</h2>
+              <p class="text-xl md:text-2xl font-medium mb-12 text-muted-foreground max-w-2xl mx-auto">We're happy to discuss your project and recommend the best technical path forward.</p>
+              <Button size="lg" className="bg-white text-black hover:bg-white/90 font-black uppercase tracking-widest h-16 px-12 rounded-lg shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
                  <a href="/contact">Schedule a Call</a>
               </Button>
            </div>

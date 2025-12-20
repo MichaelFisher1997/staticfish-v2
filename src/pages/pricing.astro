@@ -97,15 +97,16 @@ const maintenancePlans = [
 
           <!-- Custom SaaS -->
           <section class="mb-32">
-             <div class="bg-white text-black p-16 md:p-24 flex flex-col lg:flex-row items-center justify-between gap-12">
-                <div class="max-w-2xl text-center lg:text-left">
-                   <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-8">Custom SaaS Engineering.</h2>
-                   <p class="text-xl font-medium opacity-70 italic leading-relaxed">
+             <div class="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-16 md:p-24 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,50,255,0.1),transparent_60%)]"></div>
+                <div class="max-w-2xl text-center lg:text-left relative z-10">
+                   <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-8 text-white">Custom SaaS Engineering.</h2>
+                   <p class="text-xl font-medium text-muted-foreground leading-relaxed">
                       Building a complex web application, internal tool, or subscription platform? 
                       We offer custom engineering with transparent, fixed-project quotes.
                    </p>
                 </div>
-                <Button size="lg" className="bg-black text-white hover:bg-black/90 h-20 px-12 text-base font-black uppercase tracking-widest rounded-none min-w-[280px]">
+                <Button size="lg" className="bg-white text-black hover:bg-white/90 h-20 px-12 text-base font-black uppercase tracking-widest rounded-lg min-w-[280px] shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105 relative z-10">
                    <a href="/contact">Consultation</a>
                 </Button>
              </div>
@@ -140,16 +141,19 @@ const maintenancePlans = [
           </section>
 
           <!-- Call to Action -->
-          <div class="text-center py-20 border-t border-white/5">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-8">
-              Still have questions?
-            </h2>
-            <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
-              Our team is here to help you choose the right package and answer any technical questions.
-            </p>
-            <Button size="lg" variant="outline" className="rounded-none border-white/20 hover:border-white h-16 px-12 uppercase tracking-widest font-bold">
-              <a href="/contact">Contact Us</a>
-            </Button>
+          <div class="text-center py-20 border-t border-white/5 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,50,255,0.05),transparent_60%)]"></div>
+            <div class="relative z-10">
+              <h2 class="text-4xl font-black uppercase tracking-tighter mb-8 text-white">
+                Still have questions?
+              </h2>
+              <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
+                Our team is here to help you choose the right package and answer any technical questions.
+              </p>
+              <Button size="lg" variant="outline" className="rounded-lg border-white/20 hover:border-white h-16 px-12 uppercase tracking-widest font-bold transition-all hover:scale-105">
+                <a href="/contact">Contact Us</a>
+              </Button>
+            </div>
           </div>
         </div>
         </div>
