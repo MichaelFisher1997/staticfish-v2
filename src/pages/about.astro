@@ -171,8 +171,8 @@ const milestones: Milestone[] = [
 
           <!-- Stats -->
           <section class="mb-24">
-            <div class="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-12 md:p-20 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,50,255,0.1),transparent_60%)]"></div>
+            <div class="bg-white/[0.02] border border-white/10 p-12 md:p-20 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
                   {stats.map((stat) => (
                     <div class="text-center">
@@ -283,8 +283,8 @@ const milestones: Milestone[] = [
           </section>
 
           <!-- Call to Action -->
-          <div class="text-center relative overflow-hidden py-24">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,50,255,0.1),transparent_60%)]"></div>
+          <div class="text-center relative overflow-hidden py-24 border-t border-white/5">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
             <div class="relative z-10">
               <h2 class="text-4xl font-bold text-foreground mb-4 leading-none uppercase tracking-tighter">
                 Ready to Work Together?
@@ -295,12 +295,12 @@ const milestones: Milestone[] = [
               </p>
               <div class="flex flex-col sm:flex-row gap-6 justify-center">
                 <a href="/contact">
-                  <Button size="lg" className="rounded-lg h-16 px-12 uppercase tracking-widest font-bold bg-white text-black hover:bg-white/90 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
+                  <Button size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold bg-white text-black hover:bg-white/90">
                     Start Your Project
                   </Button>
                 </a>
                 <a href="/portfolio">
-                  <Button variant="outline" size="lg" className="rounded-lg h-16 px-12 uppercase tracking-widest font-bold border-white/20 hover:border-white transition-all hover:scale-105">
+                  <Button variant="outline" size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold border-white/20 hover:border-white">
                     View Our Work
                   </Button>
                 </a>

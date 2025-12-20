@@ -11,58 +11,58 @@
    * Inspired by Vercel, Linear, and modern SaaS aesthetics.
   */
   :root {
-    /* Superhuman-inspired Theme */
-    --background: 260 20% 4%; /* Deep Void Purple/Black */
-    --foreground: 210 40% 98%;
+    /* Technical Agency Theme - "Precision Dark" */
+    --background: 240 10% 4%; /* Neutral Dark Carbon */
+    --foreground: 0 0% 98%;
 
-    --card: 260 20% 6%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 260 20% 4%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 270 95% 65%; /* Electric Purple */
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 98%; /* White as primary accent - very agency/editorial */
+    --primary-foreground: 240 10% 4%;
 
-    --secondary: 260 10% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 260 10% 15%;
-    --muted-foreground: 260 10% 65%;
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 60%;
 
-    --accent: 270 95% 65%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 240 5% 15%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 260 20% 12%;
-    --input: 260 20% 12%;
-    --ring: 270 95% 65%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 240 5% 30%;
 
-    --radius: 0.75rem;
+    --radius: 0rem; /* Sharp corners for professional/technical feel */
   }
 
   .dark {
-    --background: 260 20% 4%;
-    --foreground: 210 40% 98%;
-    --card: 260 20% 6%;
-    --card-foreground: 210 40% 98%;
-    --popover: 260 20% 4%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 270 95% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 260 10% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 260 10% 15%;
-    --muted-foreground: 260 10% 65%;
-    --accent: 270 95% 65%;
-    --accent-foreground: 0 0% 100%;
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 4%;
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 60%;
+    --accent: 240 5% 15%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 260 20% 12%;
-    --input: 260 20% 12%;
-    --ring: 270 95% 65%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 240 5% 30%;
   }
 }
 
