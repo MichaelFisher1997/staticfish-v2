@@ -9,27 +9,30 @@ const navigation = [
 ];
 ---
 
-<footer class="bg-muted border-t border-border">
-  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+<footer class="bg-background border-t border-white/5 relative overflow-hidden">
+  <!-- Subtle ambient glow -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
       <!-- Logo and brand -->
-      <div class="flex items-center mb-8 md:mb-0">
-        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
-          <span class="text-primary-foreground font-bold text-lg">
+      <div class="flex items-center">
+        <div class="w-8 h-8 border border-white/20 rounded-lg flex items-center justify-center mr-3 transition-colors hover:border-primary/50 hover:bg-primary/5">
+          <span class="text-foreground font-semibold text-lg tracking-tighter">
             S
           </span>
         </div>
-        <span class="text-xl font-bold text-foreground">
+        <span class="text-lg font-bold text-foreground tracking-tight">
           Staticfish
         </span>
       </div>
 
       <!-- Navigation -->
-      <nav class="flex flex-wrap gap-x-6 gap-y-2 mb-8 md:mb-0">
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4">
         {navigation.map((item) => (
           <a
             href={item.href}
-            class="text-sm text-muted-foreground hover:text-primary transition-colors"
+            class="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors font-medium"
           >
             {item.name}
           </a>
@@ -37,7 +40,7 @@ const navigation = [
       </nav>
 
       <!-- Copyright -->
-      <div class="text-sm text-muted-foreground">
+      <div class="text-[11px] text-muted-foreground uppercase tracking-widest opacity-60">
         © 2025 Staticfish. All rights reserved.
       </div>
     </div>

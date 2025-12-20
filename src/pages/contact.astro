@@ -4,8 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import ContactForm from '../components/ContactForm';
+import { Mail, Phone, MapPin, Calendar } from 'lucide-react';
 ---
 
 <Layout title="Contact Us - Staticfish">
@@ -20,77 +19,29 @@ import ContactForm from '../components/ContactForm';
               Get In Touch
             </h1>
             <p class="mt-4 text-lg text-muted-foreground">
-              Ready to start your project? We'd love to hear from you. Send us a
-              message and we'll respond as soon as possible.
+              Ready to start your project? We'd love to hear from you. Send us an
+              email and we'll respond as soon as possible.
             </p>
           </div>
 
           <div class="mx-auto max-w-4xl">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <!-- Contact Information -->
-              <div class="lg:col-span-1">
-                <div class="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <div class="flex items-center gap-3">
-                        <Mail className="h-5 w-5 text-primary" />
-                        <CardTitle className="text-lg">Email Us</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p class="text-muted-foreground">
-                        hello@staticfish.com
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <div class="flex items-center gap-3">
-                        <Phone className="h-5 w-5 text-primary" />
-                        <CardTitle className="text-lg">Call Us</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p class="text-muted-foreground">+1 (555) 123-4567</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <div class="flex items-center gap-3">
-                        <MapPin className="h-5 w-5 text-primary" />
-                        <CardTitle className="text-lg">Visit Us</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p class="text-muted-foreground">
-                        123 Tech Street
-                        <br />
-                        San Francisco, CA 94105
-                        <br />
-                        United States
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-
-              <!-- Contact Form -->
-              <div class="lg:col-span-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Send us a message</CardTitle>
-                    <CardDescription>
-                      Fill out the form below and we'll get back to you within 24
-                      hours.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ContactForm client:load />
-                  </CardContent>
-                </Card>
-              </div>
+            <div class="flex flex-col items-center">
+              <Card className="w-full max-w-lg border-white/10 bg-white/5 backdrop-blur-md">
+                <CardHeader>
+                  <div class="flex items-center justify-center gap-3 mb-2">
+                    <Mail className="h-6 w-6 text-primary" />
+                    <CardTitle className="text-2xl font-black uppercase tracking-tighter">Email Us</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="text-center pb-12">
+                  <a href="mailto:contact@staticfish.co.uk" class="text-3xl font-bold text-white hover:text-primary transition-colors tracking-tight">
+                    contact@staticfish.co.uk
+                  </a>
+                  <p class="mt-6 text-muted-foreground italic font-medium">
+                    We typically respond within 24 hours.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

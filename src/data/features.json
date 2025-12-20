@@ -6,10 +6,10 @@
       { "name": "Daily Backups", "static": true, "cms": true, "ecom": true },
       { "name": "Email Support", "static": true, "cms": true, "ecom": true },
       { "name": "Staging Environment", "static": true, "cms": true, "ecom": true },
-      { "name": "CDN Integration (Cloudflare CDN)", "static": true, "cms": true, "ecom": true },
+      { "name": "Global CDN Integration", "static": true, "cms": true, "ecom": true },
       { "name": "Uptime Guarantee (SLA)", "static": true, "cms": true, "ecom": true },
-      { "name": "Bot Management (Cloudflare Bot Protection)", "static": true, "cms": true, "ecom": true },
-      { "name": "AI Scraping Protection (Cloudflare Super Bot Fight Mode)", "static": true, "cms": true, "ecom": true },
+      { "name": "Advanced Bot Protection", "static": true, "cms": true, "ecom": true },
+      { "name": "AI Scraping Defense", "static": true, "cms": true, "ecom": true },
       { "name": "Priority Support", "static": false, "cms": true, "ecom": true },
       { "name": "Performance Monitoring & Optimization", "static": false, "cms": true, "ecom": true }
     ]
@@ -17,16 +17,16 @@
   {
     "category": "Site Features & Functionality",
     "features": [
-      { "name": "Static Site (Astro)", "static": true, "cms": true, "ecom": true },
+      { "name": "High-Performance Architecture", "static": true, "cms": true, "ecom": true },
       { "name": "SEO Optimization Tools", "static": true, "cms": true, "ecom": true },
       { "name": "Mobile Responsive Design", "static": true, "cms": true, "ecom": true },
       { "name": "Multi-language Support", "static": true, "cms": true, "ecom": true },
       { "name": "Contact Form Integration", "static": true, "cms": true, "ecom": true },
-      { "name": "CMS Integration (Sanity CMS)", "static": false, "cms": true, "ecom": "Addon" },
+      { "name": "CMS Integration", "static": false, "cms": true, "ecom": "Addon" },
       { "name": "Blog Setup & Management", "static": false, "cms": true, "ecom": "Addon" },
       { "name": "Social Media Integration", "static": false, "cms": true, "ecom": true },
-      { "name": "E-commerce Functionality (Snipcart)", "static": false, "cms": false, "ecom": true },
-      { "name": "Payment Gateway Setup (Snipcart)", "static": false, "cms": false, "ecom": true }
+      { "name": "E-commerce Functionality", "static": false, "cms": false, "ecom": true },
+      { "name": "Payment Gateway Setup", "static": false, "cms": false, "ecom": true }
     ]
   },
   {
@@ -34,8 +34,8 @@
     "features": [
       { "name": "Content Security Policy (CSP) Configuration", "static": true, "cms": true, "ecom": true },
       { "name": "CORS Policy Configuration", "static": true, "cms": true, "ecom": true },
-      { "name": "Security Headers Setup (HSTS, X-Frame-Options, etc.)", "static": true, "cms": true, "ecom": true },
-      { "name": "DDoS Protection (Cloudflare Network)", "static": true, "cms": true, "ecom": true },
+      { "name": "Security Headers Setup", "static": true, "cms": true, "ecom": true },
+      { "name": "DDoS Protection", "static": true, "cms": true, "ecom": true },
       { "name": "Security Monitoring & Vulnerability Scanning", "static": true, "cms": true, "ecom": true },
       { "name": "Full Site Automated Testing", "static": true, "cms": true, "ecom": true },
       { "name": "Automated Security Updates", "static": true, "cms": true, "ecom": true }

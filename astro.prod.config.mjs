@@ -8,7 +8,9 @@ import cloudflare from '@astrojs/cloudflare';
 // It includes the .edge alias needed for Cloudflare deployment.
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
   integrations: [
     react(),
     tailwind(),

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,88 +6,71 @@
 
 @layer base {
   /**
-   * Nordic Dark Theme
-   * Inspired by Nordic design principles with deep blues, muted grays, and soft contrasts
-   * Colors based on Nord color palette with dark-first approach
-   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * Modern Dark Theme (Deep Space Blue / Violet)
+   * High contrast, deep backgrounds, glowing accents.
+   * Inspired by Vercel, Linear, and modern SaaS aesthetics.
   */
   :root {
-    --background: 220 16% 12%;
-    --foreground: 218 27% 94%;
+    /* "High-Voltage" Agency Theme */
+    --background: 224 71% 4%; /* Deepest Navy/Black */
+    --foreground: 210 40% 98%;
 
-    --card: 220 16% 14%;
-    --card-foreground: 218 27% 94%;
+    --card: 224 71% 6%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 220 16% 14%;
-    --popover-foreground: 218 27% 94%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 213 32% 52%;
-    --primary-foreground: 218 27% 94%;
+    --primary: 252 100% 68%; /* Vivid Violet - Punchy, Creative */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 16% 20%;
-    --secondary-foreground: 218 11% 65%;
+    --secondary: 220 14% 15%; /* Dark Metal */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 16% 18%;
-    --muted-foreground: 218 11% 65%;
+    --muted: 220 14% 10%;
+    --muted-foreground: 220 14% 60%;
 
-    --accent: 179 25% 65%;
-    --accent-foreground: 220 16% 12%;
+    --accent: 190 100% 50%; /* Cyan accent for "electricity" */
+    --accent-foreground: 224 71% 4%;
 
-    --destructive: 354 42% 56%;
-    --destructive-foreground: 218 27% 94%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 16% 20%;
-    --input: 220 16% 20%;
-    --ring: 213 32% 52%;
+    --border: 220 14% 12%;
+    --input: 220 14% 12%;
+    --ring: 252 100% 68%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 220 16% 10%;
-    --sidebar-foreground: 218 27% 94%;
-    --sidebar-primary: 213 32% 52%;
-    --sidebar-primary-foreground: 218 27% 94%;
-    --sidebar-accent: 220 16% 18%;
-    --sidebar-accent-foreground: 218 11% 65%;
-    --sidebar-border: 220 16% 16%;
-    --sidebar-ring: 213 32% 52%;
+    --radius: 0.5rem; /* Slight rounding for modern feel, not full pill */
   }
 
   .dark {
-    --background: 220 16% 8%;
-    --foreground: 218 27% 96%;
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
+    --card: 224 71% 6%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 252 100% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 14% 10%;
+    --muted-foreground: 220 14% 60%;
+    --accent: 190 100% 50%;
+    --accent-foreground: 224 71% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 12%;
+    --input: 220 14% 12%;
+    --ring: 252 100% 68%;
+  }
 
-    --card: 220 16% 10%;
-    --card-foreground: 218 27% 96%;
-
-    --popover: 220 16% 10%;
-    --popover-foreground: 218 27% 96%;
-
-    --primary: 213 32% 58%;
-    --primary-foreground: 218 27% 96%;
-
-    --secondary: 220 16% 16%;
-    --secondary-foreground: 218 11% 75%;
-
-    --muted: 220 16% 14%;
-    --muted-foreground: 218 11% 75%;
-
-    --accent: 179 25% 70%;
-    --accent-foreground: 220 16% 8%;
-
-    --destructive: 354 42% 60%;
-    --destructive-foreground: 218 27% 96%;
-
-    --border: 220 16% 16%;
-    --input: 220 16% 16%;
-    --ring: 213 32% 58%;
-    --sidebar-background: 220 16% 6%;
-    --sidebar-foreground: 218 27% 96%;
-    --sidebar-primary: 213 32% 58%;
-    --sidebar-primary-foreground: 218 27% 96%;
-    --sidebar-accent: 220 16% 14%;
-    --sidebar-accent-foreground: 218 11% 75%;
-    --sidebar-border: 220 16% 12%;
-    --sidebar-ring: 213 32% 58%;
+  @layer utilities {
+    .bg-grid-pattern {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
   }
 }
 
@@ -95,8 +78,35 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-400;
+  }
+  
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400;
+  }
+
+  .glass {
+    @apply bg-black/40 backdrop-blur-lg border border-white/10;
+  }
+  
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300;
   }
 }
