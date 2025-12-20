@@ -18,24 +18,24 @@ const currentPath = Astro.url.pathname;
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <a href="/" class="flex items-center group">
-        <div class="flex items-center space-x-2">
-          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_0_15px_rgba(124,58,237,0.5)]">
-            <span class="text-primary-foreground font-bold text-lg">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 border border-white/20 rounded-xl flex items-center justify-center transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
+            <span class="text-foreground font-semibold text-xl tracking-tighter">
               S
             </span>
           </div>
-          <span class="text-xl font-bold text-foreground tracking-tight">
+          <span class="text-lg font-bold text-foreground tracking-tight">
             Staticfish
           </span>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-8">
+      <nav class="hidden md:flex items-center space-x-10">
         {navigation.map((item) => (
           <a
             href={item.href}
-            class={`text-sm font-medium transition-colors hover:text-primary ${
+            class={`text-[13px] uppercase tracking-widest transition-colors hover:text-primary ${
               currentPath === item.href
                 ? "text-primary"
                 : "text-muted-foreground"
@@ -44,9 +44,6 @@ const currentPath = Astro.url.pathname;
             {item.name}
           </a>
         ))}
-        <Button size="sm" className="ml-4 rounded-full px-6 shadow-none hover:shadow-[0_0_15px_rgba(124,58,237,0.3)] transition-all">
-            <a href="/contact">Book a Call</a>
-        </Button>
       </nav>
 
       <!-- Mobile menu button -->

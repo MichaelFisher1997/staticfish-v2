@@ -6,7 +6,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = "Staticfish builds high-performance websites, internal tools, and custom SaaS applications for startups and businesses." } = Astro.props;
+const { title, description = "Staticfish is a premium digital agency specializing in high-performance SaaS engineering, custom web applications, and technical product design for ambitious brands." } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +15,16 @@ const { title, description = "Staticfish builds high-performance websites, inter
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:site_name" content="Staticfish" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
