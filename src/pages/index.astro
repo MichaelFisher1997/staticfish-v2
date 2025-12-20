@@ -20,36 +20,39 @@ const portfolioItems = [
     <Header />
     <main class="flex-1">
       <div class="bg-background">
-        <!-- Modern Hero Section with Grid Background -->
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden border-b border-white/5">
-          <!-- Technical Grid Background -->
-          <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,1)_100%)]"></div>
+        <!-- Modern Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <!-- Background Effects -->
+          <div class="absolute inset-0 bg-background"></div>
+          <div class="absolute inset-0 bg-grid-pattern opacity-[0.15]"></div>
+          
+          <!-- "Beam" Effect -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-[80px] pointer-events-none"></div>
           
           <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
             <div class="flex flex-col items-center text-center animate-fade-up">
               
-              <div class="inline-flex items-center border border-white/20 bg-white/5 px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] text-muted-foreground mb-12 backdrop-blur-md">
-                <span class="w-1 h-1 bg-white mr-3"></span>
-                Digital Agency for the Next Generation
+              <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary mb-12 backdrop-blur-md shadow-[0_0_15px_-3px_rgba(139,92,246,0.3)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent mr-3 animate-pulse"></span>
+                Engineering Digital Excellence
               </div>
 
-              <h1 class="max-w-5xl text-6xl font-black tracking-tighter sm:text-8xl md:text-9xl mb-12 leading-[0.9]">
-                <span class="text-white">WE BUILD</span> <br/>
-                <span class="text-muted-foreground/30">PRODUCTS</span>
+              <h1 class="max-w-5xl text-5xl font-black tracking-tighter sm:text-7xl md:text-9xl mb-8 leading-[0.9]">
+                <span class="text-white drop-shadow-lg">WE BUILD</span> <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-accent animate-gradient-x">PRODUCTS</span>
               </h1>
               
-              <h2 class="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground mb-14 font-medium">
-                A technical partner for ambitious companies. We engineer high-performance solutions that redefine digital standards.
+              <h2 class="mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground mb-12 font-light">
+                A high-voltage technical partner for ambitious brands. We engineer scalable, high-performance digital solutions that define industries.
               </h2>
               
               <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto h-16 px-10 text-base font-bold uppercase tracking-widest rounded-none bg-white text-black hover:bg-white/90">
-                  <a href="/contact" class="flex items-center gap-3">
+                <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base font-bold uppercase tracking-widest rounded-lg bg-white text-black hover:bg-white/90 shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] transition-all hover:scale-105">
+                  <a href="/contact" class="flex items-center gap-2">
                     Start a Project <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto h-16 px-10 text-base font-bold uppercase tracking-widest rounded-none border-white/20 hover:border-white text-white hover:text-white hover:bg-transparent">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base font-bold uppercase tracking-widest rounded-lg border-white/10 hover:border-white/30 hover:bg-white/5 text-white backdrop-blur-sm transition-all">
                   <a href="/portfolio">View Showcase</a>
                 </Button>
               </div>
@@ -209,15 +212,16 @@ const portfolioItems = [
 
         <!-- Simple CTA -->
         <section class="py-48 relative overflow-hidden bg-background border-t border-white/5">
-           <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(252,100,255,0.05),transparent_70%)]"></div>
+           <div class="absolute inset-0 bg-grid-pattern opacity-[0.1]"></div>
            <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
-             <h2 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 text-white">
-                LET'S BUILD<br/>THE FUTURE.
+             <h2 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 text-white drop-shadow-lg">
+                LET'S BUILD<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">THE FUTURE.</span>
              </h2>
-             <p class="text-xl md:text-2xl font-medium mb-16 max-w-2xl mx-auto text-muted-foreground">
+             <p class="text-xl md:text-2xl font-light mb-16 max-w-2xl mx-auto text-muted-foreground">
                 Ready to transform your vision into a high-performance digital reality? Let's talk.
              </p>
-             <Button size="lg" className="h-20 px-12 text-lg font-black uppercase tracking-widest rounded-none bg-white text-black hover:bg-white/90">
+             <Button size="lg" className="h-20 px-12 text-lg font-black uppercase tracking-widest rounded-lg bg-white text-black hover:bg-white/90 shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
                 <a href="/contact">Get in Touch</a>
              </Button>
            </div>
