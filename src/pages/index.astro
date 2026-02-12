@@ -3,231 +3,230 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { ArrowRight, Code, ShieldCheck, Zap, ChevronRight } from 'lucide-react';
+import { ArrowRight, Code, ShieldCheck, Zap, ChevronRight, Layers, Smartphone, Globe } from 'lucide-react';
 
 const portfolioItems = [
   {
     title: "Chattybox AI",
-    category: "AI & SaaS",
+    category: "AI SaaS Platform",
     image: "/portfolio-chattybox.png",
     url: "https://chattybox.ai/",
   }
 ];
 ---
 
-<Layout title="Staticfish | Premium SaaS Engineering & Custom Product Agency" description="A technical partner for ambitious companies. We engineer high-performance SaaS platforms, custom internal tools, and scalable digital products that redefine industry standards.">
-  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white">
+<Layout title="Staticfish | Fast, Secure Websites for Small Businesses" description="Custom web development for small businesses. Fixed pricing, fast loading times, and no hidden fees.">
+  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
+    
     <Header />
-    <main class="flex-1">
-      <div class="bg-background">
-        <!-- Modern Hero Section -->
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <!-- Background Effects -->
-          <div class="absolute inset-0 bg-background"></div>
-          <div class="absolute inset-0 bg-grid-pattern opacity-[0.15]"></div>
+    
+    <main class="flex-1 pt-32">
+      
+      
+      <!-- Hero Section -->
+      <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        
+        <!-- Ambient Background Effects -->
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-300/30 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-blue-300/30 rounded-full blur-[120px] animate-pulse-slow delay-1000"></div>
+        
+        <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           
-          <!-- "Beam" Effect -->
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-[80px] pointer-events-none"></div>
           
-          <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
-            <div class="flex flex-col items-center text-center animate-fade-up">
-              
-              <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-primary mb-12 backdrop-blur-md shadow-[0_0_15px_-3px_rgba(139,92,246,0.3)]">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent mr-3 animate-pulse"></span>
-                Engineering Digital Excellence
-              </div>
-
-              <h1 class="max-w-5xl text-5xl font-black tracking-tighter sm:text-7xl md:text-9xl mb-8 leading-[0.9]">
-                <span class="text-white drop-shadow-lg">WE BUILD</span> <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-accent animate-gradient-x">PRODUCTS</span>
-              </h1>
-              
-              <h2 class="mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground mb-12 font-light">
-                A high-voltage technical partner for ambitious brands. We engineer scalable, high-performance digital solutions that define industries.
-              </h2>
-              
-              <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base font-bold uppercase tracking-widest rounded-lg bg-white text-black hover:bg-white/90 shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] transition-all hover:scale-105">
-                  <a href="/contact" class="flex items-center gap-2">
-                    Start a Project <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base font-bold uppercase tracking-widest rounded-lg border-white/10 hover:border-white/30 hover:bg-white/5 text-white backdrop-blur-sm transition-all">
-                  <a href="/portfolio">View Showcase</a>
-                </Button>
-              </div>
-
-              <!-- Tech Stack Strip -->
-              <div class="mt-32 w-full max-w-4xl opacity-30">
-                 <div class="flex flex-wrap justify-between items-center gap-12 grayscale">
-                    <span class="text-xs font-bold tracking-[0.3em] uppercase">Development</span>
-                    <span class="text-xs font-bold tracking-[0.3em] uppercase">Strategy</span>
-                    <span class="text-xs font-bold tracking-[0.3em] uppercase">Branding</span>
-                    <span class="text-xs font-bold tracking-[0.3em] uppercase">Interface</span>
-                 </div>
-              </div>
-            </div>
+          <div class="glass px-6 py-2 rounded-full mb-8 animate-fade-up backdrop-blur-md border border-white/40 shadow-sm">
+            <span class="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase tracking-widest">
+              Small Business Web Development
+            </span>
           </div>
-        </section>
 
-        <!-- Services Bento Grid -->
-        <section class="py-32 bg-background relative border-t border-white/5">
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mb-24">
-              <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Our Expertise</span>
-              <h2 class="text-4xl font-black tracking-tighter sm:text-6xl mb-6">WHAT WE SHIP.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-px bg-white/10 border border-white/10 overflow-hidden">
-              <!-- SaaS Engineering -->
-              <div class="md:col-span-8 group relative bg-background p-12 hover:bg-white/[0.02] transition-colors">
-                <div class="relative z-10 h-full flex flex-col justify-between min-h-[400px]">
-                  <div>
-                    <span class="text-xs font-mono text-primary mb-6 block">01 / SaaS</span>
-                    <h3 class="text-4xl font-bold text-white mb-6 tracking-tight">Full SaaS<br/>Engineering</h3>
-                    <p class="text-gray-400 max-w-sm text-lg leading-relaxed">End-to-end application development. We handle authentication, payments, databases, and deployment with surgical precision.</p>
-                  </div>
-                  <div class="mt-8">
-                     <a href="/services#saas" class="inline-flex items-center text-white hover:text-primary font-bold uppercase tracking-widest text-xs transition-colors">
-                       View Case Study <ArrowRight className="ml-3 h-4 w-4" />
-                     </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Web Tools -->
-              <div class="md:col-span-4 group relative bg-background p-12 hover:bg-white/[0.02] transition-colors">
-                 <div class="relative z-10 h-full flex flex-col">
-                    <span class="text-xs font-mono text-primary mb-6 block">02 / Tools</span>
-                    <h3 class="text-3xl font-bold text-white mb-6 tracking-tight">Technical<br/>Tools</h3>
-                    <p class="text-gray-400 mb-8 leading-relaxed">Browser extensions, PDF generators, and automation scripts to streamline operations.</p>
-                    <div class="mt-auto">
-                      <a href="/services#tools" class="inline-flex items-center text-white hover:text-primary font-bold uppercase tracking-widest text-xs transition-colors">
-                        Explore <ArrowRight className="ml-3 h-4 w-4" />
-                      </a>
-                    </div>
-                 </div>
-              </div>
-
-              <!-- Static Websites -->
-              <div class="md:col-span-4 group relative bg-background p-12 hover:bg-white/[0.02] transition-colors">
-                  <div class="relative z-10">
-                    <span class="text-xs font-mono text-primary mb-6 block">03 / Web</span>
-                    <h3 class="text-3xl font-bold text-white mb-6 tracking-tight">High-End<br/>Websites</h3>
-                    <p class="text-gray-400 mb-8 leading-relaxed">Blazing fast marketing sites. No bloat, just performance and conversion-driven design.</p>
-                    <a href="/services#websites" class="inline-flex items-center text-white hover:text-primary font-bold uppercase tracking-widest text-xs transition-colors">
-                      Learn more <ArrowRight className="ml-3 h-4 w-4" />
-                    </a>
-                  </div>
-              </div>
-
-               <!-- CMS -->
-              <div class="md:col-span-8 group relative bg-background p-12 hover:bg-white/[0.02] transition-colors">
-                  <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <span class="text-xs font-mono text-primary mb-6 block">04 / Content</span>
-                      <h3 class="text-4xl font-bold text-white mb-6 tracking-tight">Headless CMS Integration</h3>
-                      <p class="text-gray-400 max-w-md leading-relaxed">Empower your team with flexible content management systems that don't compromise on speed or security.</p>
-                    </div>
-                    <div class="mt-12">
-                      <a href="/services#cms" class="inline-flex items-center text-white hover:text-primary font-bold uppercase tracking-widest text-xs transition-colors">
-                        View Details <ArrowRight className="ml-3 h-4 w-4" />
-                      </a>
-                    </div>
-                  </div>
-              </div>
-            </div>
+          <h1 class="max-w-5xl text-6xl font-black tracking-tighter sm:text-7xl md:text-8xl mb-8 leading-[0.95] text-slate-900 animate-fade-up delay-100">
+            Websites That<br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
+              Actually Work
+            </span>
+          </h1>
+          
+          <p class="mt-6 max-w-2xl text-xl md:text-2xl leading-relaxed text-slate-600 mb-12 font-medium animate-fade-up delay-200">
+            Fast, secure websites for small businesses. No WordPress headaches. No hidden costs. Just a site that loads in under a second and helps you win customers.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto animate-fade-up delay-300">
+            
+            <Button size="lg" className="w-full sm:w-auto h-16 px-10 text-lg font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <a href="/contact" class="flex items-center gap-2">
+                Get a Quote <ArrowRight className="h-5 w-5" />
+              </a>
+            </Button>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg font-bold rounded-full border-2 border-slate-200 hover:border-slate-400 bg-white/50 hover:bg-white text-slate-900 backdrop-blur-sm transition-all hover:-translate-y-1">
+              <a href="/portfolio">View Work</a>
+            </Button>
           </div>
-        </section>
 
-        <!-- Value Props -->
-        <section class="py-24 border-y border-white/5 bg-white/[0.02]">
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                 <div class="flex flex-col items-start">
-                    <div class="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary ring-1 ring-primary/20">
-                      <Zap className="h-6 w-6" />
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Blazing Fast</h3>
-                    <p class="text-muted-foreground leading-relaxed">Sub-second load times optimized for global performance and high conversion.</p>
-                 </div>
-                 <div class="flex flex-col items-start">
-                    <div class="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary ring-1 ring-primary/20">
-                      <ShieldCheck className="h-6 w-6" />
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Secure by Default</h3>
-                    <p class="text-muted-foreground leading-relaxed">No databases to hack for static content. Enterprise-grade security for all applications.</p>
-                 </div>
-                 <div class="flex flex-col items-start">
-                    <div class="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary ring-1 ring-primary/20">
-                      <Code className="h-6 w-6" />
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Precision Engineered</h3>
-                    <p class="text-muted-foreground leading-relaxed">Built with advanced methodologies to ensure scalability and maintainability.</p>
-                 </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Work Section -->
-        <section class="py-32 bg-background">
-           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
-                <div>
-                  <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Case Studies</span>
-                  <h2 class="text-4xl font-black tracking-tighter sm:text-7xl mb-6">SELECTED<br/>WORKS.</h2>
-                </div>
-                <div class="max-w-md">
-                   <p class="text-muted-foreground text-lg mb-8">A curated selection of digital products that showcase our commitment to excellence and technical innovation.</p>
-                   <Button variant="outline" className="group rounded-none border-white/20 hover:border-white h-12 px-6">
-                     <a href="/portfolio" class="flex items-center uppercase tracking-widest text-[10px] font-bold">Explore Archive <ChevronRight className="ml-2 h-3 w-3 transition-transform group-hover:translate-x-1" /></a>
-                   </Button>
-                </div>
+          <!-- Value Props Row -->
+          <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
+             <div class="glass-card p-6 flex items-center gap-4 text-left group hover:scale-[1.02] transition-transform duration-300">
+               <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                 <Zap className="h-6 w-6 text-green-600" />
+               </div>
+               <div>
+                 <div class="font-bold text-slate-900">Under 1 Second</div>
+                 <div class="text-sm text-slate-600">Page load time</div>
+               </div>
              </div>
              
-             <div class="grid grid-cols-1 md:grid-cols-1 gap-16">
-                {portfolioItems.map((item) => (
-                  <div class={`group cursor-pointer max-w-4xl mx-auto w-full`}>
-                    <div class="aspect-[16/9] overflow-hidden bg-[#111] relative mb-8 group-hover:bg-[#1a1a1a] transition-colors duration-500">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                      />
-                    </div>
-                    <div class="flex justify-between items-start">
-                       <div>
-                         <h3 class="text-2xl font-bold text-white mb-2 tracking-tight group-hover:text-primary transition-colors">
-                            <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
-                         </h3>
-                         <p class="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">{item.category}</p>
-                       </div>
-                       <div class="h-px w-12 bg-white/20 mt-4 group-hover:w-24 group-hover:bg-primary transition-all duration-500"></div>
+             <div class="glass-card p-6 flex items-center gap-4 text-left group hover:scale-[1.02] transition-transform duration-300">
+               <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                 <ShieldCheck className="h-6 w-6 text-blue-600" />
+               </div>
+               <div>
+                 <div class="font-bold text-slate-900">No Database</div>
+                 <div class="text-sm text-slate-600">Hack-proof security</div>
+               </div>
+             </div>
+             
+             <div class="glass-card p-6 flex items-center gap-4 text-left group hover:scale-[1.02] transition-transform duration-300">
+               <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                 <Code className="h-6 w-6 text-purple-600" />
+               </div>
+               <div>
+                 <div class="font-bold text-slate-900">Fixed Price</div>
+                 <div class="text-sm text-slate-600">No surprises</div>
+               </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="py-32 relative">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          <div class="mb-20 text-center">
+            <span class="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">What I Offer</span>
+            <h2 class="text-5xl md:text-6xl font-black tracking-tighter text-slate-900 mb-6">Services.</h2>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
+              Three straightforward options to get your business online. Each includes hosting, security, and ongoing support.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Static Site -->
+            <a href="/pricing" class="glass-card p-10 relative overflow-hidden group block hover:no-underline">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full opacity-50"></div>
+              <div class="relative z-10">
+                <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-8">
+                  <Globe className="h-7 w-7 text-blue-600" />
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Static Website</h3>
+                <div class="text-3xl font-black text-slate-900 mb-4">£149</div>
+                <p class="text-slate-600 mb-8 font-medium">
+                  Perfect for small businesses. Up to 5 pages, blazing fast, and includes hosting.
+                </p>
+                <div class="flex items-center text-primary font-bold text-sm uppercase tracking-wide">
+                  Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
+
+            <!-- CMS Site -->
+            <a href="/pricing" class="glass-card p-10 relative overflow-hidden group block hover:no-underline">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-100 to-transparent rounded-bl-full opacity-50"></div>
+              <div class="relative z-10">
+                <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-8">
+                  <Layers className="h-7 w-7 text-purple-600" />
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">CMS Website</h3>
+                <div class="text-3xl font-black text-slate-900 mb-4">£249</div>
+                <p class="text-slate-600 mb-8 font-medium">
+                  For businesses that need to update content. Easy editor, no page limits, blog included.
+                </p>
+                <div class="flex items-center text-primary font-bold text-sm uppercase tracking-wide">
+                  Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
+
+            <!-- E-commerce -->
+            <a href="/pricing" class="glass-card p-10 relative overflow-hidden group block hover:no-underline">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-green-100 to-transparent rounded-bl-full opacity-50"></div>
+              <div class="relative z-10">
+                <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-8">
+                  <Smartphone className="h-7 w-7 text-green-600" />
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">E-Commerce</h3>
+                <div class="text-3xl font-black text-slate-900 mb-4">£399</div>
+                <p class="text-slate-600 mb-8 font-medium">
+                  Sell online with PayPal/Stripe. Unlimited products, multicurrency, order management.
+                </p>
+                <div class="flex items-center text-primary font-bold text-sm uppercase tracking-wide">
+                  Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Project -->
+      <section class="py-24 bg-slate-50">
+         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+           <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+              <div>
+                <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Featured Project</span>
+                <h2 class="text-5xl font-black tracking-tighter sm:text-6xl mb-6 text-slate-900">Recent Work.</h2>
+              </div>
+              <div class="max-w-md">
+                 <p class="text-slate-600 text-lg mb-8 font-medium">A look at what I've been building. More projects coming soon.</p>
+                 <Button variant="outline" className="group rounded-full border-slate-300 hover:border-slate-500 h-12 px-6 text-slate-700">
+                   <a href="/portfolio" class="flex items-center uppercase tracking-widest text-[10px] font-bold">View Portfolio <ChevronRight className="ml-2 h-3 w-3 transition-transform group-hover:translate-x-1" /></a>
+                 </Button>
+              </div>
+           </div>
+           
+           <div class="grid grid-cols-1 gap-16">
+              {portfolioItems.map((item) => (
+                <div class="group cursor-pointer mx-auto w-full glass-card p-4 hover:p-0 transition-all duration-500 overflow-hidden rounded-3xl bg-white">
+                  <div class="aspect-[16/9] overflow-hidden rounded-2xl group-hover:rounded-none relative mb-0 group-hover:mb-0 transition-all duration-500">
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                    />
+                    
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                    
+                    <!-- Hover Overlay Info -->
+                    <div class="absolute bottom-0 left-0 w-full p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-black/80 to-transparent">
+                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">
+                           {item.title}
+                        </h3>
+                        <p class="text-sm font-mono uppercase tracking-[0.2em] text-white/80">{item.category}</p>
                     </div>
                   </div>
-                ))}
-             </div>
+                </div>
+              ))}
            </div>
-        </section>
+         </div>
+      </section>
 
-        <!-- Simple CTA -->
-        <section class="py-48 relative overflow-hidden bg-background border-t border-white/5">
-           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(252,100,255,0.05),transparent_70%)]"></div>
-           <div class="absolute inset-0 bg-grid-pattern opacity-[0.1]"></div>
-           <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
-             <h2 class="text-6xl md:text-8xl font-black tracking-tighter mb-12 text-white drop-shadow-lg">
-                LET'S BUILD<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">THE FUTURE.</span>
-             </h2>
-             <p class="text-xl md:text-2xl font-light mb-16 max-w-2xl mx-auto text-muted-foreground">
-                Ready to transform your vision into a high-performance digital reality? Let's talk.
-             </p>
-             <Button size="lg" className="h-20 px-12 text-lg font-black uppercase tracking-widest rounded-lg bg-white text-black hover:bg-white/90 shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)] transition-all hover:scale-105">
-                <a href="/contact">Get in Touch</a>
-             </Button>
-           </div>
-        </section>
+      <!-- Simple CTA -->
+      <section class="py-32 relative overflow-hidden">
+         <div class="glass absolute inset-4 rounded-[3rem] -z-10 border border-slate-200"></div>
+         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gradient-to-r from-purple-200/40 via-pink-200/40 to-blue-200/40 blur-3xl -z-20"></div>
+         
+         <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+           <h2 class="text-5xl md:text-6xl font-black tracking-tighter mb-8 text-slate-900">
+              Ready for a<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Better Website?</span>
+           </h2>
+           <p class="text-xl md:text-2xl font-medium mb-16 max-w-2xl mx-auto text-slate-600">
+              Let's chat about your project. I'll give you an honest assessment of what you need and a fair price.
+           </p>
+           <Button size="lg" className="h-20 px-12 text-lg font-black uppercase tracking-widest rounded-full bg-slate-900 text-white hover:bg-slate-800 shadow-2xl transition-all hover:scale-105">
+              <a href="/contact">Get in Touch</a>
+           </Button>
+         </div>
+      </section>
 
-      </div>
     </main>
     <Footer />
   </div>
