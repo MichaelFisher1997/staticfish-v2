@@ -18,7 +18,7 @@ const portfolioItems = [
 const services = [
   {
     title: "Static Website",
-    price: "£149",
+    priceGbp: 149,
     icon: Globe,
     color: "ocean",
     description: "Up to 5 pages, blazing fast, includes hosting",
@@ -26,7 +26,7 @@ const services = [
   },
   {
     title: "CMS Website",
-    price: "£249",
+    priceGbp: 249,
     icon: Layers,
     color: "primary",
     description: "Unlimited pages, easy content editor, blog",
@@ -35,7 +35,7 @@ const services = [
   },
   {
     title: "E-Commerce",
-    price: "£399",
+    priceGbp: 399,
     icon: ShoppingCart,
     color: "coral",
     description: "Sell online with PayPal/Stripe, unlimited products",
@@ -207,7 +207,7 @@ const services = [
                 <!-- Content -->
                 <h3 class="text-xl font-bold text-ink font-display mb-2">{service.title}</h3>
                 <div class="flex items-baseline gap-1 mb-4">
-                  <span class="text-4xl font-extrabold text-ink font-display tracking-tighter">{service.price}</span>
+                  <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={service.priceGbp}>£{service.priceGbp}</span>
                   <span class="text-sm text-muted-foreground">one-time</span>
                 </div>
                 <p class="text-muted-foreground mb-6 text-sm leading-relaxed">{service.description}</p>
@@ -359,3 +359,54 @@ const services = [
   .stagger-4 { animation-delay: 0.4s; }
   .stagger-5 { animation-delay: 0.5s; }
 </style>
+
+<script>
+  function initCurrencyPricing() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    type Currency = "GBP" | "EUR" | "USD";
+    let currency: Currency = "USD";
+    
+    const euroTimezones = new Set([
+      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
+      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
+      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
+      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
+      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
+      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
+      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
+    ]);
+    
+    if (timezone === "Europe/London") {
+      currency = "GBP";
+    } else if (euroTimezones.has(timezone)) {
+      currency = "EUR";
+    }
+    
+    if (currency === "GBP") return;
+    
+    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
+    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
+    
+    const rate = rates[currency];
+    const symbol = symbols[currency];
+    
+    function convertPrice(gbp: number): number {
+      return Math.ceil(gbp * rate);
+    }
+    
+    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
+      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
+      const converted = convertPrice(gbp);
+      el.textContent = `${symbol}${converted}`;
+    });
+    
+    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
+      const converted = convertPrice(50);
+      const text = el.textContent || "";
+      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+</script>

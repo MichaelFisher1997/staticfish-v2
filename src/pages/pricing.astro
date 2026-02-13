@@ -8,8 +8,7 @@ import { Check, Mail, Info, ArrowRight, Sparkles } from 'lucide-react';
 const pricingTiers = [
   {
     title: "Static Site",
-    price: "149",
-    hosting: "£50/month",
+    priceGbp: 149,
     description: "A straightforward site for businesses that need an online presence.",
     features: [
       "Up to 5 pages",
@@ -22,8 +21,7 @@ const pricingTiers = [
   },
   {
     title: "CMS Site",
-    price: "249",
-    hosting: "£50/month",
+    priceGbp: 249,
     description: "For businesses that want to update their own content.",
     features: [
       "No page limit",
@@ -36,8 +34,7 @@ const pricingTiers = [
   },
   {
     title: "E-Commerce",
-    price: "399",
-    hosting: "£50/month",
+    priceGbp: 399,
     description: "For businesses selling products online.",
     features: [
       "Everything in CMS",
@@ -53,21 +50,21 @@ const pricingTiers = [
 const maintenancePlans = [
   {
     title: "Basic",
-    price: "50",
+    priceGbp: 50,
     period: "/month",
     description: "Essential security and upkeep.",
     features: ["Monthly Backups", "Security Updates", "Uptime Monitoring", "Email Support"]
   },
   {
     title: "Growth",
-    price: "150",
+    priceGbp: 150,
     period: "/month",
     description: "Regular updates and small changes.",
     features: ["Weekly Backups", "2 hrs dev time/mo", "Content Updates", "Priority Email Support"]
   },
   {
     title: "Full Partner",
-    price: "450",
+    priceGbp: 450,
     period: "/month",
     description: "Complete peace of mind.",
     features: ["Daily Backups", "5 hrs dev time/mo", "Performance Audits", "Phone & Slack Support"]
@@ -117,14 +114,11 @@ const maintenancePlans = [
 
                         <div class="mb-8">
                             <div class="flex items-baseline gap-1">
-                                <span class="text-sm text-muted-foreground">£</span>
-                                <span class="text-5xl font-extrabold text-ink font-display tracking-tighter">
-                                    {tier.price}
-                                </span>
+                                <span class="text-5xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={tier.priceGbp}>£{tier.priceGbp}</span>
                                 <span class="text-sm text-muted-foreground ml-1">upfront</span>
                             </div>
                             <div class="flex items-center gap-2 mt-2">
-                                <span class="text-sm text-muted-foreground">+ {tier.hosting} hosting</span>
+                                <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £50/month hosting</span>
                                 <div class="group relative">
                                     <Info className="h-4 w-4 text-muted-foreground/60 cursor-help" />
                                     <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 bg-ink text-white text-xs rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
@@ -222,8 +216,7 @@ const maintenancePlans = [
                         <div class="card-elevated p-8 group">
                             <h3 class="text-lg font-bold text-ink font-display mb-2">{plan.title}</h3>
                             <div class="flex items-baseline gap-1 mb-2">
-                                <span class="text-sm text-muted-foreground">£</span>
-                                <span class="text-4xl font-extrabold text-ink font-display tracking-tighter">{plan.price}</span>
+                                <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={plan.priceGbp}>£{plan.priceGbp}</span>
                                 <span class="text-sm text-muted-foreground">{plan.period}</span>
                             </div>
                             <p class="text-sm text-muted-foreground mb-8">{plan.description}</p>
@@ -270,3 +263,54 @@ const maintenancePlans = [
     <Footer />
   </div>
 </Layout>
+
+<script>
+  function initCurrencyPricing() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    type Currency = "GBP" | "EUR" | "USD";
+    let currency: Currency = "USD";
+    
+    const euroTimezones = new Set([
+      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
+      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
+      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
+      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
+      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
+      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
+      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
+    ]);
+    
+    if (timezone === "Europe/London") {
+      currency = "GBP";
+    } else if (euroTimezones.has(timezone)) {
+      currency = "EUR";
+    }
+    
+    if (currency === "GBP") return;
+    
+    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
+    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
+    
+    const rate = rates[currency];
+    const symbol = symbols[currency];
+    
+    function convertPrice(gbp: number): number {
+      return Math.ceil(gbp * rate);
+    }
+    
+    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
+      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
+      const converted = convertPrice(gbp);
+      el.textContent = `${symbol}${converted}`;
+    });
+    
+    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
+      const converted = convertPrice(50);
+      const text = el.textContent || "";
+      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+</script>

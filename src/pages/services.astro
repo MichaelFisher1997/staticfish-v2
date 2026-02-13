@@ -12,8 +12,7 @@ const services = [
     title: "Static Websites",
     description: "Fast, secure websites perfect for small businesses that don't need frequent updates.",
     icon: Globe,
-    price: "149",
-    priceNote: "+ £50/mo hosting",
+    priceGbp: 149,
     features: [
       "Up to 5 pages included",
       "Custom design for your brand",
@@ -31,8 +30,7 @@ const services = [
     title: "CMS Websites",
     description: "Easy-to-update websites for businesses that need to manage their own content.",
     icon: LayoutTemplate,
-    price: "249",
-    priceNote: "+ £50/mo hosting",
+    priceGbp: 249,
     features: [
       "No page limits",
       "Simple content editor",
@@ -51,8 +49,7 @@ const services = [
     title: "E-Commerce Sites",
     description: "Sell products online with a fast, secure storefront that converts visitors into customers.",
     icon: Database,
-    price: "399",
-    priceNote: "+ £50/mo hosting",
+    priceGbp: 399,
     features: [
       "Everything in CMS sites",
       "PayPal & Stripe integration",
@@ -70,8 +67,7 @@ const services = [
     title: "Custom Development",
     description: "Browser extensions, automation tools, or complex web applications. Let's discuss your needs.",
     icon: Wrench,
-    price: null,
-    priceNote: "Custom Quote",
+    priceGbp: null,
     features: [
       "Browser extensions",
       "Internal tools & dashboards",
@@ -182,15 +178,14 @@ const processSteps = [
                   <h3 class="text-2xl font-bold text-ink font-display mb-2">{service.title}</h3>
                   
                   <div class="mb-4">
-                    {service.price ? (
+                    {service.priceGbp ? (
                       <div class="flex items-baseline gap-1">
-                        <span class="text-sm text-muted-foreground">£</span>
-                        <span class="text-4xl font-extrabold text-ink font-display tracking-tighter">{service.price}</span>
+                        <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={service.priceGbp}>£{service.priceGbp}</span>
+                        <span class="text-sm text-muted-foreground ml-1" data-hosting-gbp>+ £50/mo hosting</span>
                       </div>
                     ) : (
-                      <span class="text-2xl font-bold text-ink font-display">{service.priceNote}</span>
+                      <span class="text-2xl font-bold text-ink font-display">Custom Quote</span>
                     )}
-                    {service.price && <span class="text-sm text-muted-foreground"> {service.priceNote}</span>}
                   </div>
 
                   <p class="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
@@ -325,3 +320,54 @@ const processSteps = [
     <Footer />
   </div>
 </Layout>
+
+<script>
+  function initCurrencyPricing() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    type Currency = "GBP" | "EUR" | "USD";
+    let currency: Currency = "USD";
+    
+    const euroTimezones = new Set([
+      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
+      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
+      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
+      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
+      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
+      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
+      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
+    ]);
+    
+    if (timezone === "Europe/London") {
+      currency = "GBP";
+    } else if (euroTimezones.has(timezone)) {
+      currency = "EUR";
+    }
+    
+    if (currency === "GBP") return;
+    
+    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
+    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
+    
+    const rate = rates[currency];
+    const symbol = symbols[currency];
+    
+    function convertPrice(gbp: number): number {
+      return Math.ceil(gbp * rate);
+    }
+    
+    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
+      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
+      const converted = convertPrice(gbp);
+      el.textContent = `${symbol}${converted}`;
+    });
+    
+    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
+      const converted = convertPrice(50);
+      const text = el.textContent || "";
+      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+</script>
