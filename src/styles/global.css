@@ -154,19 +154,19 @@
     to { transform: translateX(-50%); }
   }
 
-  /* Organic blob backgrounds */
+  /* Organic blob backgrounds - very subtle */
   .blob-ocean {
-    @apply absolute rounded-full blur-[100px] opacity-40 pointer-events-none;
+    @apply absolute rounded-full blur-[120px] opacity-10 pointer-events-none;
     background: radial-gradient(circle, hsl(192, 60%, 65%) 0%, transparent 70%);
   }
   
   .blob-coral {
-    @apply absolute rounded-full blur-[80px] opacity-30 pointer-events-none;
+    @apply absolute rounded-full blur-[100px] opacity-8 pointer-events-none;
     background: radial-gradient(circle, hsl(16, 80%, 70%) 0%, transparent 70%);
   }
   
   .blob-sand {
-    @apply absolute rounded-full blur-[120px] opacity-50 pointer-events-none;
+    @apply absolute rounded-full blur-[140px] opacity-15 pointer-events-none;
     background: radial-gradient(circle, hsl(38, 40%, 85%) 0%, transparent 70%);
   }
 
