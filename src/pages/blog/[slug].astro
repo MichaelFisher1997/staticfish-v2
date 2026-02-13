@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { sanityClient } from 'sanity:client';
+import { urlFor } from '../../lib/sanity';
+import { PortableText } from 'astro-portabletext';
+import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
+import { Button } from '../../components/ui/button';
+
+const { slug } = Astro.params;
+
+const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  body,
+  authorName,
+  categories,
+  publishedAt
+}`;
+
+const post = await sanityClient.fetch(POST_QUERY, { slug });
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<Layout title={`${post.title} | Staticfish Blog`} description={post.excerpt || post.title}>
+  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
+    <Header />
+    
+    <main class="flex-1 pt-28">
+      <article class="py-12 lg:py-20">
+        <div class="container mx-auto max-w-4xl px-6">
+          
+          <div class="mb-8">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-ink mb-6">
+              <a href="/blog" class="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Blog
+              </a>
+            </Button>
+          </div>
+
+          <header class="mb-10">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+              {post.publishedAt && (
+                <span class="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" />
+                  {formatDate(post.publishedAt)}
+                </span>
+              )}
+              {post.authorName && (
+                <span class="flex items-center gap-1.5">
+                  <User className="h-4 w-4" />
+                  {post.authorName}
+                </span>
+              )}
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter mb-4">
+              {post.title}
+            </h1>
+            
+            {post.categories && post.categories.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.categories.map((cat: string) => (
+                  <span class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full bg-secondary text-muted-foreground">
+                    <Tag className="h-3 w-3" />
+                    {cat}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          {post.mainImage?.asset && (
+            <div class="aspect-video relative overflow-hidden rounded-2xl mb-10">
+              <img 
+                src={urlFor(post.mainImage).width(1200).height(675).url()} 
+                alt={post.mainImage.alt || post.title}
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          )}
+
+          {post.body && (
+            <div class="prose prose-lg prose-slate max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
+              <PortableText value={post.body} />
+            </div>
+          )}
+
+        </div>
+      </article>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>

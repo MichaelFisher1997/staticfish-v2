@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { sanityClient } from 'sanity:client';
+import { urlFor } from '../../lib/sanity';
+import { PortableText } from 'astro-portabletext';
+import { ArrowRight, Calendar, User, Tag } from 'lucide-react';
+import { Button } from '../../components/ui/button';
+
+const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  authorName,
+  categories,
+  publishedAt,
+  "bodyPreview": body[0...3]
+}`;
+
+const posts = await sanityClient.fetch(POSTS_QUERY);
+
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<Layout title="Blog | Staticfish" description="Articles and insights about web development, design, and digital strategy.">
+  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
+    <Header />
+    
+    <main class="flex-1 pt-28">
+      <section class="py-16 lg:py-24 relative">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="max-w-2xl mb-12 lg:mb-16">
+            <span class="badge-ocean mb-6">Blog</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink font-display tracking-tighter mb-6">
+              Articles & Insights.
+            </h1>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              Thoughts on web development, design trends, and building for the modern web.
+            </p>
+          </div>
+
+          {posts.length === 0 && (
+            <div class="text-center py-16">
+              <p class="text-muted-foreground text-lg">No posts yet. Check back soon!</p>
+            </div>
+          )}
+
+          <div class="grid gap-8 lg:gap-10">
+            {posts.map((post: any) => (
+              <a 
+                href={`/blog/${post.slug.current}`}
+                class="group block relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <div class="grid md:grid-cols-[1fr_2fr] gap-0">
+                  {post.mainImage?.asset && (
+                    <div class="aspect-[4/3] md:aspect-auto relative overflow-hidden">
+                      <img 
+                        src={urlFor(post.mainImage).width(600).height(400).url()} 
+                        alt={post.mainImage.alt || post.title}
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  
+                  <div class="p-6 lg:p-8 flex flex-col justify-center">
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
+                      {post.publishedAt && (
+                        <span class="flex items-center gap-1.5">
+                          <Calendar className="h-4 w-4" />
+                          {formatDate(post.publishedAt)}
+                        </span>
+                      )}
+                      {post.authorName && (
+                        <span class="flex items-center gap-1.5">
+                          <User className="h-4 w-4" />
+                          {post.authorName}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <h2 class="text-2xl lg:text-3xl font-bold text-ink font-display tracking-tight mb-3 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h2>
+                    
+                    {post.excerpt && (
+                      <p class="text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    )}
+                    
+                    {post.categories && post.categories.length > 0 && (
+                      <div class="flex flex-wrap gap-2 mb-4">
+                        {post.categories.map((cat: string) => (
+                          <span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-secondary text-muted-foreground">
+                            <Tag className="h-3 w-3" />
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <span class="inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all duration-300">
+                      Read more <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
