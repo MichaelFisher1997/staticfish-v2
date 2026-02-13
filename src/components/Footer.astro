@@ -14,54 +14,88 @@ const legalLinks = [
 ];
 ---
 
-<footer class="bg-white/30 backdrop-blur-md border-t border-foreground/5 relative overflow-hidden mt-24">
-  <!-- Subtle ambient glow -->
-  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-gradient-to-t from-primary/10 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+<footer class="relative mt-32 border-t border-border/50">
+  <!-- Subtle gradient line at top -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+  
+  <!-- Ambient glow -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-t from-ocean/5 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
 
-  <div class="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+  <div class="container relative z-10 mx-auto max-w-7xl px-6 py-16">
+    
+    <!-- Main footer content -->
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
       
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center text-primary font-bold shadow-sm">
-          S
+      <!-- Brand column -->
+      <div class="max-w-xs">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white shadow-md shadow-ocean/20">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="currentColor" opacity="0.2"/>
+              <path d="M12 4c-1.5 2-2.5 4-2.5 6s1 4 2.5 6c1.5-2 2.5-4 2.5-6s-1-4-2.5-6z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-ink font-display tracking-tight">
+            staticfish
+          </span>
         </div>
-        <span class="text-lg font-bold text-foreground tracking-tight">
-          Staticfish
-        </span>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          Fast, secure websites for small businesses. No WordPress headaches, no hidden costs.
+        </p>
       </div>
 
-      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4">
-        {navigation.map((item) => (
-          <a
-            href={item.href}
-            class="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors font-bold"
-          >
-            {item.name}
-          </a>
-        ))}
-      </nav>
-
-      <div class="text-[11px] text-muted-foreground uppercase tracking-widest font-medium opacity-60">
-        © 2025 Staticfish
+      <!-- Navigation column -->
+      <div class="flex flex-wrap gap-x-16 gap-y-8">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-ink mb-4">Navigation</h4>
+          <nav class="flex flex-col gap-3">
+            {navigation.slice(0, 3).map((item) => (
+              <a
+                href={item.href}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-ink mb-4">&nbsp;</h4>
+          <nav class="flex flex-col gap-3">
+            {navigation.slice(3).map((item) => (
+              <a
+                href={item.href}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-ink mb-4">Legal</h4>
+          <nav class="flex flex-col gap-3">
+            {legalLinks.map((item) => (
+              <a
+                href={item.href}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
     </div>
     
-    <!-- Legal Links -->
-    <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-center items-center gap-6">
-      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
-        {legalLinks.map((item) => (
-          <a
-            href={item.href}
-            class="text-[10px] uppercase tracking-widest text-slate-400 hover:text-primary transition-colors font-bold"
-          >
-            {item.name}
-          </a>
-        ))}
-      </nav>
-      
-      <div class="text-[10px] text-slate-400">
-        Operated by Michael Fisher in the UK
-      </div>
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-muted-foreground">
+        © {new Date().getFullYear()} Staticfish. Operated by Michael Fisher in the UK.
+      </p>
+      <p class="text-xs text-muted-foreground/60">
+        Professional websites at a fair price.
+      </p>
     </div>
   </div>
 </footer>

@@ -3,71 +3,73 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Check, Mail, Info } from 'lucide-react';
+import { Check, Mail, Info, ArrowRight, Sparkles } from 'lucide-react';
 
 const pricingTiers = [
   {
     title: "Static Site",
-    price: "£149",
+    price: "149",
     hosting: "£50/month",
-    description: "Perfect for small businesses just getting started online.",
+    description: "A straightforward site for businesses that need an online presence.",
     features: [
-      "Up to 5 pages (e.g., Home, About, Services, Contact)",
-      "Custom design tailored to your brand",
-      "Mobile-responsive layout",
-      "Contact form integration",
+      "Up to 5 pages",
+      "Custom design",
+      "Mobile-responsive",
+      "Contact form",
       "Basic SEO setup"
     ],
-    popular: true
+    color: "ocean"
   },
   {
     title: "CMS Site",
-    price: "£249",
+    price: "249",
     hosting: "£50/month",
-    description: "Ideal for businesses that need to manage their own content.",
+    description: "For businesses that want to update their own content.",
     features: [
-      "Everything in Static Site (No page limit)",
-      "Easy-to-use content editor",
-      "2 Admin users included",
+      "No page limit",
+      "Easy content editor",
+      "2 Admin users",
       "Blog functionality",
       "Content scheduling"
-    ]
+    ],
+    color: "primary"
   },
   {
-    title: "E-Commerce Site",
-    price: "£399",
+    title: "E-Commerce",
+    price: "399",
     hosting: "£50/month",
-    description: "For businesses ready to sell products online.",
+    description: "For businesses selling products online.",
     features: [
-      "Everything in CMS Site",
-      "PayPal & Stripe integration",
+      "Everything in CMS",
+      "PayPal & Stripe",
       "Multicurrency support",
       "Unlimited products",
-      "Order management dashboard"
-    ]
+      "Order management"
+    ],
+    color: "coral"
   }
 ];
 
 const maintenancePlans = [
   {
     title: "Basic",
-    price: "£50",
+    price: "50",
     period: "/month",
     description: "Essential security and upkeep.",
     features: ["Monthly Backups", "Security Updates", "Uptime Monitoring", "Email Support"]
   },
   {
     title: "Growth",
-    price: "£150",
+    price: "150",
     period: "/month",
     description: "Regular updates and small changes.",
     features: ["Weekly Backups", "2 hrs dev time/mo", "Content Updates", "Priority Email Support"]
   },
   {
     title: "Full Partner",
-    price: "£450",
+    price: "450",
     period: "/month",
-    description: "Complete peace of mind and priority access.",
+    description: "Complete peace of mind.",
     features: ["Daily Backups", "5 hrs dev time/mo", "Performance Audits", "Phone & Slack Support"]
   }
 ];
@@ -76,97 +78,99 @@ const maintenancePlans = [
 <Layout title="Transparent Fixed-Rate Pricing | Staticfish" description="Simple, transparent pricing for web development. Fixed project rates with no hidden fees.">
   <div class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
-    <main class="flex-1 pt-32">
+    <main class="flex-1 pt-28">
         
-        <!-- Background Gradients -->
+        <!-- Background Elements -->
         <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-            <div class="absolute top-[10%] right-[10%] w-[40vw] h-[40vw] bg-purple-100/40 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-[10%] left-[10%] w-[30vw] h-[30vw] bg-blue-100/40 rounded-full blur-[100px]"></div>
+          <div class="blob-ocean w-[50vw] h-[50vw] top-[10%] right-[10%]"></div>
+          <div class="blob-sand w-[40vw] h-[40vw] bottom-[20%] left-[5%]"></div>
         </div>
 
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <div class="container mx-auto max-w-7xl px-6 py-12">
             
             <!-- Hero -->
-            <div class="max-w-3xl mb-24">
-                <span class="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">Transparent Pricing</span>
-                <h1 class="text-6xl font-black tracking-tighter text-slate-900 sm:text-7xl mb-6">
-                  Simple, Honest<br/>Pricing.
+            <div class="max-w-3xl mb-20">
+                <span class="badge-coral mb-6">Pricing</span>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-6">
+                  Simple.<br/>Honest.<br/>
+                  <span class="text-gradient-ocean">Fixed.</span>
                 </h1>
-                <p class="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl">
-                  No hourly billing surprises. Fixed project rates with all costs upfront. Quality web development that fits your budget.
+                <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                  One cost upfront. Set hosting fee. That's it. No hourly billing, no surprise charges, no scope creep.
+                </p>
+                <p class="text-muted-foreground">
+                  You get a clear price before we start, and that's what you pay.
                 </p>
             </div>
 
             <!-- Pricing Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-0 items-stretch mb-8 bg-white/50 backdrop-blur-sm rounded-[2rem] border border-slate-200 overflow-hidden shadow-sm">
-                {pricingTiers.map((tier, index) => (
-                    <div class={`relative p-8 md:p-12 flex flex-col ${index !== pricingTiers.length - 1 ? 'lg:border-r border-slate-200' : ''}`}>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+                {pricingTiers.map((tier) => (
+                    <div class={`relative card-elevated p-8 lg:p-10 flex flex-col`}>
                         
-                        {tier.popular && (
-                             <div class="absolute top-0 left-0 w-full">
-                                <div class="h-1 bg-gradient-to-r from-primary to-accent"></div>
-                                <div class="absolute top-6 right-6">
-                                    <span class="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg shadow-primary/20">
-                                        Popular
-                                    </span>
-                                </div>
-                             </div>
-                        )}
-                        
-                        <div class="mb-8 mt-4">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-2 uppercase tracking-tight">{tier.title}</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed min-h-[40px] font-medium">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-ink font-display mb-2">{tier.title}</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
                                 {tier.description}
                             </p>
                         </div>
 
-                        <div class="mb-6">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-5xl font-black text-slate-900 tracking-tighter">
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-sm text-muted-foreground">£</span>
+                                <span class="text-5xl font-extrabold text-ink font-display tracking-tighter">
                                     {tier.price}
                                 </span>
-                                <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">One-Off</span>
+                                <span class="text-sm text-muted-foreground ml-1">upfront</span>
                             </div>
                             <div class="flex items-center gap-2 mt-2">
-                                <span class="text-sm text-slate-500">+ {tier.hosting} hosting</span>
+                                <span class="text-sm text-muted-foreground">+ {tier.hosting} hosting</span>
                                 <div class="group relative">
-                                    <Info className="h-4 w-4 text-slate-400 cursor-help" />
-                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-slate-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                                    <Info className="h-4 w-4 text-muted-foreground/60 cursor-help" />
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 bg-ink text-white text-xs rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
                                         Includes hosting, CDN, SSL certificate, and ongoing maintenance
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <ul class="space-y-4 mt-auto">
+                        <ul class="space-y-3 flex-1">
                             {tier.features.map((feature) => (
-                                <li class="flex items-start gap-3 group">
-                                    <div class="mt-0.5">
-                                        <Check className="h-4 w-4 text-primary" strokeWidth={3} />
+                                <li class="flex items-center gap-3">
+                                    <div class={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                      tier.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
+                                      tier.color === 'coral' ? 'bg-coral/10 text-coral' :
+                                      'bg-primary/10 text-primary'
+                                    }`}>
+                                        <Check className="h-3 w-3" strokeWidth={3} />
                                     </div>
-                                    <span class="text-sm text-slate-600 font-medium leading-tight group-hover:text-slate-900 transition-colors">
+                                    <span class="text-sm text-foreground font-medium">
                                         {feature}
                                     </span>
                                 </li>
                             ))}
                         </ul>
                         
-                        <div class="mt-10 pt-10 border-t border-slate-100">
-                             <Button className={`w-full rounded-full font-bold tracking-wide ${tier.popular ? 'bg-primary hover:bg-primary/90' : 'bg-slate-900 hover:bg-slate-800'}`}>
+                        <div class="mt-10 pt-8 border-t border-border">
+                            <Button 
+                              className="w-full rounded-xl font-semibold bg-ink hover:bg-ink/90 shadow-lg shadow-ink/10"
+                            >
                                 <a href="/contact">Get Started</a>
-                             </Button>
+                            </Button>
                         </div>
                     </div>
                 ))}
             </div>
 
             <!-- Hosting Note -->
-            <div class="mb-24 bg-blue-50 border border-blue-100 rounded-2xl p-6 flex items-start gap-4">
-                <Info className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div class="mb-24 card-elevated p-6 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-ocean/10 flex items-center justify-center flex-shrink-0">
+                    <Info className="h-5 w-5 text-ocean" />
+                </div>
                 <div>
-                    <h4 class="font-bold text-slate-900 mb-1">What's included in hosting?</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        All websites include premium hosting on Cloudflare's global CDN, free SSL certificate, automated backups, 
+                    <h4 class="font-bold text-ink mb-1">What's included in hosting?</h4>
+                    <p class="text-muted-foreground text-sm leading-relaxed">
+                        Premium hosting on Cloudflare's global CDN, free SSL certificate, automated backups, 
                         and ongoing security monitoring. You can cancel hosting anytime with 30 days notice and keep your website files.
                     </p>
                 </div>
@@ -174,29 +178,30 @@ const maintenancePlans = [
 
             <!-- Custom Projects -->
             <section class="mb-32">
-                <div class="relative w-full overflow-hidden rounded-[2.5rem] bg-slate-900 text-white shadow-2xl min-h-[400px] flex items-center">
+                <div class="relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
                     <!-- Grid Background -->
-                    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
-                    <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary/30 rounded-full blur-[120px]"></div>
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+                    <div class="blob-ocean w-[40vw] h-[40vw] -right-[10%] -top-[20%] opacity-20"></div>
                     
                     <!-- Content -->
-                    <div class="relative z-10 p-12 md:p-20 w-full">
+                    <div class="relative z-10 p-10 lg:p-16">
                         <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-                             <div class="max-w-2xl">
-                                <span class="text-primary font-mono text-xs mb-6 block uppercase tracking-widest">Custom Development</span>
-                                <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">
-                                    Need Something<br/>Bespoke?
+                            <div class="max-w-2xl text-center lg:text-left">
+                                <span class="badge-ocean mb-6">Custom Development</span>
+                                <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">
+                                    Need Something<br/>
+                                    <span class="text-gradient-warm">Bespoke?</span>
                                 </h2>
-                                <p class="text-xl text-slate-300 font-medium leading-relaxed max-w-xl">
+                                <p class="text-lg text-white/70 leading-relaxed max-w-xl">
                                     Browser extensions, automation tools, internal dashboards, or complex web applications. 
                                     I'll provide a fixed-price quote after understanding your requirements.
                                 </p>
-                             </div>
-                             <div>
-                                 <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full h-16 px-12 text-base font-bold uppercase tracking-widest shadow-xl transition-transform hover:scale-105">
+                            </div>
+                            <div>
+                                <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl h-14 px-10 font-semibold shadow-xl shadow-black/20 transition-transform hover:scale-105">
                                     <a href="/contact">Get a Quote</a>
-                                 </Button>
-                             </div>
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -204,26 +209,29 @@ const maintenancePlans = [
 
             <!-- Maintenance Plans -->
             <section class="mb-32">
-                <div class="mb-16 text-center">
-                    <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Ongoing Support</span>
-                    <h2 class="text-4xl font-black tracking-tighter sm:text-5xl uppercase text-slate-900">Care Plans.</h2>
-                    <p class="text-slate-500 mt-4 max-w-2xl mx-auto font-medium">Keep your website secure and up-to-date. Optional for Static Site owners, included in CMS & E-commerce tiers.</p>
+                <div class="max-w-2xl mb-12">
+                    <span class="badge-ocean mb-4">Ongoing Support</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter mb-4">
+                      Care Plans.
+                    </h2>
+                    <p class="text-muted-foreground">Keep your website secure and up-to-date. Optional for Static Site owners, included in CMS & E-commerce tiers.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {maintenancePlans.map(plan => (
-                        <div class="bg-white border border-slate-200 p-8 rounded-[2rem] hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
-                            <h3 class="text-xl font-bold text-slate-900 mb-4 uppercase tracking-tight">{plan.title}</h3>
-                            <div class="flex items-baseline gap-1 mb-4">
-                                <span class="text-4xl font-black text-slate-900 tracking-tight">{plan.price}</span>
-                                <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">{plan.period}</span>
+                        <div class="card-elevated p-8 group">
+                            <h3 class="text-lg font-bold text-ink font-display mb-2">{plan.title}</h3>
+                            <div class="flex items-baseline gap-1 mb-2">
+                                <span class="text-sm text-muted-foreground">£</span>
+                                <span class="text-4xl font-extrabold text-ink font-display tracking-tighter">{plan.price}</span>
+                                <span class="text-sm text-muted-foreground">{plan.period}</span>
                             </div>
-                            <p class="text-sm text-slate-500 mb-8 font-medium h-10">{plan.description}</p>
+                            <p class="text-sm text-muted-foreground mb-8">{plan.description}</p>
                             
-                            <ul class="space-y-3 pt-8 border-t border-slate-100">
+                            <ul class="space-y-3 pt-6 border-t border-border">
                                 {plan.features.map(feature => (
-                                    <li class="flex items-center gap-3 text-sm text-slate-600 font-medium">
-                                        <div class="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                                    <li class="flex items-center gap-3 text-sm text-foreground">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
                                         {feature}
                                     </li>
                                 ))}
@@ -234,23 +242,25 @@ const maintenancePlans = [
             </section>
 
             <!-- Final CTA -->
-            <div class="text-center py-20 bg-slate-50 rounded-[3rem] border border-slate-100 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                <div class="relative z-10 px-4">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm text-primary">
-                        <Mail className="h-8 w-8" />
+            <div class="text-center py-20 relative overflow-hidden rounded-[2rem] bg-secondary/50 border border-border">
+                <div class="blob-ocean w-[30vw] h-[30vw] -top-[10%] left-[20%] opacity-20"></div>
+                <div class="blob-coral w-[25vw] h-[25vw] -bottom-[10%] right-[20%] opacity-20"></div>
+                
+                <div class="relative z-10 px-6">
+                    <div class="w-16 h-16 rounded-2xl bg-white border border-border flex items-center justify-center mx-auto mb-8 shadow-lg text-primary">
+                        <Mail className="h-7 w-7" />
                     </div>
-                    <h2 class="text-3xl font-black uppercase tracking-tighter mb-6 text-slate-900">
+                    <h2 class="text-3xl sm:text-4xl font-bold font-display tracking-tighter mb-4 text-ink">
                         Questions?
                     </h2>
-                    <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto font-medium">
+                    <p class="text-muted-foreground mb-10 max-w-lg mx-auto">
                         I'm happy to discuss your project and help you choose the right option. No pressure, just honest advice.
                     </p>
-                    <div class="flex gap-4 justify-center">
-                        <Button size="lg" variant="default" className="rounded-full bg-slate-900 text-white h-14 px-10 uppercase tracking-widest font-bold hover:bg-slate-800">
-                            <a href="/contact">Get in Touch</a>
-                        </Button>
-                    </div>
+                    <Button size="lg" className="bg-ink text-white hover:bg-primary rounded-xl shadow-lg shadow-ink/10 hover:shadow-primary/20 transition-all">
+                        <a href="/contact" class="flex items-center gap-2">
+                            Get in Touch <ArrowRight className="h-4 w-4" />
+                        </a>
+                    </Button>
                 </div>
             </div>
 

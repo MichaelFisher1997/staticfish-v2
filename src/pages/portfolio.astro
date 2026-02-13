@@ -3,17 +3,16 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const projects = [
   {
     title: "Chattybox AI",
-    description: "A RAG-powered AI platform that transforms documentation into conversational interfaces. Built with React, Python, and vector databases. This demonstrates my ability to handle complex SaaS architecture and AI integration.",
+    description: "An AI-powered platform that turns documentation into conversational interfaces. A more complex project that shows I can handle bigger builds when needed.",
     image: "/portfolio-chattybox.png",
     category: "AI SaaS",
     url: "https://chattybox.ai/",
-    tags: ["React", "Python", "Vector DB", "AI Integration"],
+    tags: ["React", "Python", "AI Integration"],
   }
 ];
 ---
@@ -21,88 +20,94 @@ const projects = [
 <Layout title="Portfolio | Staticfish" description="Recent work by Staticfish. Quality web development projects for small businesses.">
   <div class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
-    <main class="flex-1 pt-32">
+    <main class="flex-1 pt-28">
       
+      <!-- Background Elements -->
+      <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="blob-ocean w-[50vw] h-[50vw] top-[5%] right-[5%]"></div>
+        <div class="blob-coral w-[30vw] h-[30vw] bottom-[30%] left-[10%]"></div>
+      </div>
+
       <!-- Hero -->
-      <section class="py-24 relative">
-         <div class="absolute top-0 left-0 w-[50vw] h-[50vw] bg-purple-200/30 rounded-full blur-[120px] -z-10"></div>
-         <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            
-            <span class="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">My Work</span>
-            <h1 class="text-6xl font-black tracking-tighter text-slate-900 sm:text-8xl mb-8 leading-none">
-              Recent<br/>Projects.
+      <section class="py-16 lg:py-24 relative">
+         <div class="container mx-auto max-w-7xl px-6">
+            <span class="badge-ocean mb-6">Portfolio</span>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
+              Recent<br/>
+              <span class="text-gradient-warm">Projects.</span>
             </h1>
-            <p class="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
               A selection of projects I've worked on. This list will grow as I complete more work for clients.
             </p>
          </div>
       </section>
 
       <!-- Project Grid -->
-      <section class="py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section class="py-16 lg:py-24">
+        <div class="container mx-auto max-w-7xl px-6">
            
-          <div class="grid grid-cols-1 gap-16">
+          <div class="grid grid-cols-1 gap-12 lg:gap-16">
               {projects.map((item) => (
-                <div class="glass-card rounded-[2.5rem] p-4 hover:p-0 transition-all duration-500 overflow-hidden bg-white">
-                  <div class="aspect-[16/9] overflow-hidden rounded-2xl group-hover:rounded-none relative mb-0 group-hover:mb-0 transition-all duration-500">
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                    />
-                    
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
-                    
-                    <!-- Hover Overlay Info -->
-                    <div class="absolute bottom-0 left-0 w-full p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-black/80 to-transparent">
-                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">
-                           {item.title}
-                        </h3>
-                        <p class="text-sm font-mono uppercase tracking-[0.2em] text-white/80">{item.category}</p>
+                <div class="group relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
+                  <div class="grid lg:grid-cols-2">
+                    <!-- Image -->
+                    <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-ink/30 to-transparent lg:bg-gradient-to-r"></div>
                     </div>
-                  </div>
-                  
-                  <div class="p-8 md:p-12">
-                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-                        <div>
-                          <Badge variant="outline" className="rounded-full border-primary/20 bg-primary/5 text-primary uppercase tracking-widest text-[10px] py-1 px-3 mb-4">
-                             {item.category}
-                          </Badge>
-                          
-                          <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">{item.title}</h2>
-                        </div>
-                        
-                        <Button size="lg" className="rounded-full px-8 h-12 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
-                          <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
-                            View Live Site <ExternalLink className="h-4 w-4" />
-                          </a>
-                        </Button>
-                     </div>
-                     
-                     <p class="text-lg text-slate-600 leading-relaxed mb-8 font-medium max-w-3xl">
+                    
+                    <!-- Content -->
+                    <div class="p-8 lg:p-12 flex flex-col justify-center relative">
+                      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <ExternalLink className="h-5 w-5 text-muted-foreground" />
+                      </div>
+                      
+                      <span class="inline-block text-xs font-bold uppercase tracking-widest text-primary mb-4 bg-primary/10 px-3 py-1 rounded-full w-fit">
+                        {item.category}
+                      </span>
+                      
+                      <h2 class="text-3xl lg:text-4xl font-bold text-ink font-display tracking-tight mb-4">
+                        {item.title}
+                      </h2>
+                      
+                      <p class="text-muted-foreground leading-relaxed mb-6 max-w-lg">
                         {item.description}
-                     </p>
-                     
-                     <div class="flex flex-wrap gap-2">
+                      </p>
+                      
+                      <div class="flex flex-wrap gap-2 mb-8">
                         {item.tags.map(tag => (
-                           <span class="text-xs font-mono text-slate-500 bg-slate-100 px-3 py-1 rounded-full">{tag}</span>
+                          <span class="text-[10px] font-semibold text-muted-foreground bg-secondary px-3 py-1.5 rounded-full uppercase tracking-wide">
+                            {tag}
+                          </span>
                         ))}
-                     </div>
+                      </div>
+                      
+                      <Button className="rounded-xl w-fit bg-ink hover:bg-primary">
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+                          View Live Site <ArrowRight className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
            </div>
            
            <!-- More Coming -->
-           <div class="mt-24 text-center">
-              <div class="glass-card rounded-[2rem] p-12 max-w-2xl mx-auto">
-                 <h3 class="text-2xl font-bold text-slate-900 mb-4">More Projects Coming Soon</h3>
-                 <p class="text-slate-600 font-medium mb-8">
-                    I'm currently working with several small businesses on their websites. Check back soon to see their projects here.
+           <div class="mt-20 lg:mt-24">
+              <div class="card-elevated p-10 lg:p-12 text-center max-w-2xl mx-auto">
+                 <h3 class="text-2xl font-bold text-ink font-display mb-4">More Coming Soon</h3>
+                 <p class="text-muted-foreground mb-8 leading-relaxed">
+                    I'm currently working with several small businesses on their websites. Check back soon to see their projects.
                  </p>
-                 <Button variant="outline" className="rounded-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                    <a href="/contact">Start Your Project</a>
+                 <Button variant="outline" className="rounded-xl">
+                    <a href="/contact" class="flex items-center gap-2">
+                      Start Your Project <ArrowRight className="h-4 w-4" />
+                    </a>
                  </Button>
               </div>
            </div>
@@ -110,18 +115,29 @@ const projects = [
       </section>
 
       <!-- CTA -->
-      <section class="py-32 relative overflow-hidden">
-         <div class="container mx-auto max-w-5xl text-center px-4 relative z-10">
-            <h2 class="text-5xl md:text-6xl font-black tracking-tighter mb-8 text-slate-900">
-              Want to see your project here?
-            </h2>
-            <p class="text-xl md:text-2xl font-medium mb-12 max-w-2xl mx-auto text-slate-600">
-              I'd love to work with you. Let's build something great together.
-            </p>
-            <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 font-bold h-16 px-12 rounded-full shadow-xl hover:scale-105 transition-transform">
-              <a href="/contact">Let's Talk</a>
-            </Button>
-         </div>
+      <section class="py-16 lg:py-24">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
+            
+            <div class="relative z-10 p-10 lg:p-20 text-center">
+              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Next Project</span>
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6">
+                Want to see your<br/>
+                <span class="text-gradient-warm">project here?</span>
+              </h2>
+              <p class="text-lg text-white/70 mb-10 max-w-lg mx-auto">
+                I'd love to work with you. Let's build something great together.
+              </p>
+              <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl shadow-xl">
+                <a href="/contact" class="flex items-center gap-2">
+                  Let's Talk <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
       </section>
 
     </main>
