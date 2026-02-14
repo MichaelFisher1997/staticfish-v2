@@ -11,6 +11,7 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=development
+      - TZ=UTC
       - RESEND_API_KEY=${RESEND_API_KEY}
       - TO_EMAIL=${TO_EMAIL}
       - FROM_EMAIL=${FROM_EMAIL}

@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { PortableText } from 'astro-portabletext';
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, Clock, Share2, Twitter, Linkedin, Facebook, Link2 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 
 const { slug } = Astro.params;
@@ -19,10 +19,20 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
   body,
   authorName,
   categories,
+  publishedAt,
+  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
+}`;
+
+const RELATED_QUERY = `*[_type == "post" && slug.current != $slug && defined(slug.current)] | order(publishedAt desc)[0...3] {
+  _id,
+  title,
+  slug,
+  mainImage,
   publishedAt
 }`;
 
 const post = await sanityClient.fetch(POST_QUERY, { slug });
+const relatedPosts = await sanityClient.fetch(RELATED_QUERY, { slug });
 
 if (!post) {
   return Astro.redirect('/blog');
@@ -42,11 +52,12 @@ const formatDate = (dateStr: string) => {
     <Header />
     
     <main class="flex-1 pt-28">
-      <article class="py-12 lg:py-20">
-        <div class="container mx-auto max-w-4xl px-6">
-          
+      <article class="py-12 lg:py-20 relative">
+        <div class="blob-ocean w-[40vw] h-[40vw] -top-[10%] -right-[15%] animate-pulse-soft opacity-20"></div>
+        
+        <div class="container mx-auto max-w-4xl px-6 relative z-10">
           <div class="mb-8">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-ink mb-6">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-ink hover:bg-secondary/50">
               <a href="/blog" class="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Blog
@@ -55,11 +66,17 @@ const formatDate = (dateStr: string) => {
           </div>
 
           <header class="mb-10">
-            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
               {post.publishedAt && (
                 <span class="flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" />
                   {formatDate(post.publishedAt)}
+                </span>
+              )}
+              {post.estimatedReadingTime > 0 && (
+                <span class="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4" />
+                  {post.estimatedReadingTime} min read
                 </span>
               )}
               {post.authorName && (
@@ -70,14 +87,14 @@ const formatDate = (dateStr: string) => {
               )}
             </div>
             
-            <h1 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter mb-4">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink font-display tracking-tighter mb-6">
               {post.title}
             </h1>
             
             {post.categories && post.categories.length > 0 && (
               <div class="flex flex-wrap gap-2">
                 {post.categories.map((cat: string) => (
-                  <span class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full bg-secondary text-muted-foreground">
+                  <span class="inline-flex items-center gap-1 text-sm font-medium px-4 py-1.5 rounded-full bg-secondary text-muted-foreground">
                     <Tag className="h-3 w-3" />
                     {cat}
                   </span>
@@ -87,7 +104,7 @@ const formatDate = (dateStr: string) => {
           </header>
 
           {post.mainImage?.asset && (
-            <div class="aspect-video relative overflow-hidden rounded-2xl mb-10">
+            <div class="aspect-video relative overflow-hidden rounded-2xl mb-12 shadow-lg">
               <img 
                 src={urlFor(post.mainImage).width(1200).height(675).url()} 
                 alt={post.mainImage.alt || post.title}
@@ -97,13 +114,101 @@ const formatDate = (dateStr: string) => {
           )}
 
           {post.body && (
-            <div class="prose prose-lg prose-slate max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
+            <div class="prose prose-lg prose-slate max-w-none 
+              prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
+              prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+              prose-img:rounded-xl prose-img:shadow-lg
+              prose-blockquote:border-l-primary prose-blockquote:bg-secondary/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic
+              prose-code:text-primary prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-normal
+              prose-pre:bg-ink prose-pre:text-white prose-pre:rounded-xl
+              prose-li:text-muted-foreground
+              prose-strong:text-ink">
               <PortableText value={post.body} />
             </div>
           )}
 
+          <div class="mt-16 pt-8 border-t border-border">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-muted-foreground">Share this article:</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <a 
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                >
+                  <Twitter className="h-4 w-4" />
+                </a>
+                <a 
+                  href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+                <a 
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                >
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <button 
+                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer"
+                  onclick="navigator.clipboard.writeText(window.location.href); this.querySelector('span')?.classList.remove('hidden'); setTimeout(() => this.querySelector('span')?.classList.add('hidden'), 2000);"
+                >
+                  <Link2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
+
+      {relatedPosts.length > 0 && (
+        <section class="py-16 lg:py-20 bg-secondary/30 relative">
+          <div class="container mx-auto max-w-7xl px-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight mb-8">
+              More Articles
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+              {relatedPosts.map((relatedPost: any) => (
+                <a 
+                  href={`/blog/${relatedPost.slug.current}`}
+                  class="group block relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  {relatedPost.mainImage?.asset ? (
+                    <div class="aspect-[16/10] relative overflow-hidden">
+                      <img 
+                        src={urlFor(relatedPost.mainImage).width(400).height(250).url()} 
+                        alt={relatedPost.mainImage.alt || relatedPost.title}
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-ocean/20 to-primary/10">
+                    </div>
+                  )}
+                  
+                  <div class="p-5">
+                    <h3 class="text-lg font-bold text-ink font-display tracking-tight group-hover:text-primary transition-colors line-clamp-2">
+                      {relatedPost.title}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </main>
     
     <Footer />
