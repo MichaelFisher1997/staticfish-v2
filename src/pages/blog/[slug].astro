@@ -45,6 +45,21 @@ const formatDate = (dateStr: string) => {
     day: 'numeric'
   });
 };
+
+const projectId = '2gr3dh6t';
+const dataset = 'production';
+
+function buildImageUrl(assetRef: string): string {
+  const parts = assetRef.replace('image-', '').split('-');
+  const dimensions = parts[parts.length - 2];
+  const format = parts[parts.length - 1];
+  const id = parts.slice(0, -2).join('-');
+  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
+}
+
+// Separate inline images from text blocks
+const textBlocks = post.body?.filter((block: any) => block._type !== 'inlineImage') || [];
+const inlineImages = post.body?.filter((block: any) => block._type === 'inlineImage') || [];
 ---
 
 <Layout title={`${post.title} | Staticfish Blog`} description={post.excerpt || post.title}>
@@ -113,7 +128,7 @@ const formatDate = (dateStr: string) => {
             </div>
           )}
 
-          {post.body && (
+          {(textBlocks.length > 0 || inlineImages.length > 0) && (
             <div class="prose prose-lg prose-slate max-w-none 
               prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink
               prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
@@ -126,7 +141,23 @@ const formatDate = (dateStr: string) => {
               prose-pre:bg-ink prose-pre:text-white prose-pre:rounded-xl
               prose-li:text-muted-foreground
               prose-strong:text-ink">
-              <PortableText value={post.body} />
+              <PortableText value={textBlocks} />
+              
+              {inlineImages.map((img: any) => (
+                <figure class="my-12 -mx-4 lg:mx-0 not-prose">
+                  <img 
+                    src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
+                    alt={img.alt || ''} 
+                    class="w-full rounded-xl shadow-lg"
+                    loading="lazy"
+                  />
+                  {img.caption && (
+                    <figcaption class="mt-4 text-center text-sm text-muted-foreground italic">
+                      {img.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
             </div>
           )}
 
