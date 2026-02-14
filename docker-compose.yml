@@ -10,7 +10,7 @@ services:
       - "5050:5050"
     restart: unless-stopped
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - RESEND_API_KEY=${RESEND_API_KEY}
       - TO_EMAIL=${TO_EMAIL}
       - FROM_EMAIL=${FROM_EMAIL}
@@ -19,6 +19,14 @@ services:
       - PUBLIC_CAPTCHA_ENABLED=${PUBLIC_CAPTCHA_ENABLED}
       - HOST=0.0.0.0
       - PORT=5050
+    volumes:
+      - ./src:/app/src:ro
+      - ./public:/app/public:ro
+      - ./astro.config.mjs:/app/astro.config.mjs:ro
+      - ./astro.prod.config.mjs:/app/astro.prod.config.mjs:ro
+      - ./tailwind.config.js:/app/tailwind.config.js:ro
+      - ./sanity.config.ts:/app/sanity.config.ts:ro
+      - ./sanity.cli.ts:/app/sanity.cli.ts:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.staticfish.rule=Host(`staticfish.local`)"

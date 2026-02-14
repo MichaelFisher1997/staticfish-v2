@@ -1,12 +1,12 @@
-# Use the official Bun image as a parent image
-FROM oven/bun:latest
+# Use Node.js (full image for Cloudflare workerd compatibility)
+FROM node:22-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package files and install dependencies. This is cached by Docker.
-COPY package.json bun.lockb* ./
-RUN bun install
+# Copy package files and install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
 
 # Copy the rest of the application code
 COPY . .
@@ -18,5 +18,4 @@ EXPOSE 5050
 ENV HOST=0.0.0.0
 
 # Run the Astro development server
-# This will use the Cloudflare adapter's dev server (wrangler) automatically.
-CMD ["bun", "run", "dev", "--", "--host", "--port", "5050"]
+CMD ["npx", "astro", "dev", "--host", "--port", "5050"]
