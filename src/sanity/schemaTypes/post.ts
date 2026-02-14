@@ -50,7 +50,29 @@ export const post = defineType({
       name: 'body',
       type: 'array',
       title: 'Body',
-      of: [{ type: 'block' }],
+      of: [
+        { type: 'block' },
+        {
+          type: 'image',
+          name: 'inlineImage',
+          title: 'Image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: 'alt',
+              type: 'string',
+              title: 'Alt Text',
+            }),
+            defineField({
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: 'authorName',
