@@ -12,7 +12,8 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["@sanity/astro/module"]
   },
   "include": [
     "**/*"

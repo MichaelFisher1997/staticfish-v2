@@ -3,105 +3,151 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
+import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const projects = [
   {
+    title: "Redot Engine",
+    description: "Open-source game engine website with dark theme, feature showcase, and documentation hub. Built for a community-driven project.",
+    image: "/portfolio-redot.png",
+    category: "Open Source",
+    url: "https://www.redotengine.org/",
+    tags: ["Astro", "Documentation", "Community"],
+  },
+  {
     title: "Chattybox AI",
-    description: "A comprehensive RAG-powered intelligence layer that transforms static documentation into interactive, conversational interfaces. We engineered the end-to-end infrastructure, focusing on low-latency data ingestion, precise vector search, and a seamless, high-conversion user experience.",
+    description: "An AI-powered platform that turns documentation into conversational interfaces. A more complex project that shows I can handle bigger builds when needed.",
     image: "/portfolio-chattybox.png",
-    category: "AI & SaaS",
-    package: "Custom SaaS",
-    impact: "Live Production",
+    category: "AI SaaS",
     url: "https://chattybox.ai/",
-    features: ["Real-time AI", "Auth Systems", "Scalable Infrastructure", "Precision UI"],
-    gradient: "from-blue-500/20 to-violet-500/20",
+    tags: ["React", "Python", "AI Integration"],
   }
 ];
 ---
 
-<Layout title="Case Studies: High-Impact SaaS & Digital Products | Staticfish" description="Browse our portfolio of high-performance digital interventions, including RAG-powered AI platforms and scalable custom software solutions engineered for growth.">
-  <div class="min-h-screen flex flex-col">
+<Layout title="Portfolio | Staticfish" description="Recent work by Staticfish. Quality web development projects for small businesses.">
+  <div class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
-    <main class="flex-1">
-      <div class="min-h-screen bg-background py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <section class="py-32 bg-background border-b border-white/5">
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Our Portfolio</span>
-            <h1 class="text-6xl font-black tracking-tighter text-foreground sm:text-8xl md:text-9xl mb-12 leading-none uppercase">
-              Proved<br/>Results.
+    <main class="flex-1 pt-28">
+      
+      <!-- Background Elements -->
+      <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="blob-ocean w-[50vw] h-[50vw] top-[5%] right-[5%]"></div>
+        <div class="blob-coral w-[30vw] h-[30vw] bottom-[30%] left-[10%]"></div>
+      </div>
+
+      <!-- Hero -->
+      <section class="py-16 lg:py-24 relative">
+         <div class="container mx-auto max-w-7xl px-6">
+            <span class="badge-ocean mb-6">Portfolio</span>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
+              Recent<br/>
+              <span class="text-gradient-warm">Projects.</span>
             </h1>
-            <h2 class="text-2xl text-muted-foreground max-w-2xl leading-relaxed font-medium italic">
-              A gallery of our most impactful digital interventions. We don't just build sites; we engineer growth engines.
-            </h2>
-          </div>
-        </section>
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              A selection of projects I've worked on. This list will grow as I complete more work for clients.
+            </p>
+         </div>
+      </section>
 
-        <!-- Project Grid -->
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32">
-          <div class="grid grid-cols-1 md:grid-cols-1 gap-px bg-white/10 border border-white/10 overflow-hidden">
-            {projects.map((project) => (
-              <div class="group relative bg-background p-12 hover:bg-white/[0.02] transition-colors border-white/10 max-w-5xl mx-auto w-full">
-                <div class="relative z-10 h-full flex flex-col">
-                  <div class="aspect-[16/10] overflow-hidden bg-[#111] mb-10 group-hover:bg-[#1a1a1a] transition-all duration-500">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                    />
-                  </div>
-                  
-                  <div class="flex justify-between items-start mb-6">
-                    <div>
-                      <span class="text-xs font-mono text-primary mb-3 block">{project.category} //</span>
-                      <h3 class="text-4xl font-bold text-white tracking-tighter uppercase group-hover:text-primary transition-colors">
-                        <a href={project.url} target="_blank" rel="noopener noreferrer">
-                          {project.title}
-                        </a>
-                      </h3>
+      <!-- Project Grid -->
+      <section class="py-16 lg:py-24">
+        <div class="container mx-auto max-w-7xl px-6">
+           
+          <div class="grid grid-cols-1 gap-12 lg:gap-16">
+              {projects.map((item) => (
+                <div class="group relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
+                  <div class="grid lg:grid-cols-2">
+                    <!-- Image -->
+                    <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-ink/30 to-transparent lg:bg-gradient-to-r"></div>
                     </div>
-                  </div>
-
-                  <p class="text-gray-400 mb-10 leading-relaxed text-lg">
-                    {project.description}
-                  </p>
-
-                  <!-- Stats -->
-                  <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/10 mt-auto">
-                    <div>
-                      <div class="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">Impact</div>
-                      <div class="text-lg font-bold text-white uppercase tracking-tight">{project.impact}</div>
+                    
+                    <!-- Content -->
+                    <div class="p-8 lg:p-12 flex flex-col justify-center relative">
+                      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <ExternalLink className="h-5 w-5 text-muted-foreground" />
+                      </div>
+                      
+                      <span class="inline-block text-xs font-bold uppercase tracking-widest text-primary mb-4 bg-primary/10 px-3 py-1 rounded-full w-fit">
+                        {item.category}
+                      </span>
+                      
+                      <h2 class="text-3xl lg:text-4xl font-bold text-ink font-display tracking-tight mb-4">
+                        {item.title}
+                      </h2>
+                      
+                      <p class="text-muted-foreground leading-relaxed mb-6 max-w-lg">
+                        {item.description}
+                      </p>
+                      
+                      <div class="flex flex-wrap gap-2 mb-8">
+                        {item.tags.map(tag => (
+                          <span class="text-[10px] font-semibold text-muted-foreground bg-secondary px-3 py-1.5 rounded-full uppercase tracking-wide">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <Button className="rounded-xl w-fit bg-ink hover:bg-primary">
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+                          View Live Site <ArrowRight className="h-4 w-4" />
+                        </a>
+                      </Button>
                     </div>
                   </div>
                 </div>
+              ))}
+           </div>
+           
+           <!-- More Coming -->
+           <div class="mt-20 lg:mt-24">
+              <div class="card-elevated p-10 lg:p-12 text-center max-w-2xl mx-auto">
+                 <h3 class="text-2xl font-bold text-ink font-display mb-4">More Coming Soon</h3>
+                 <p class="text-muted-foreground mb-8 leading-relaxed">
+                    I'm currently working with several small businesses on their websites. Check back soon to see their projects.
+                 </p>
+                 <Button variant="outline" className="rounded-xl">
+                    <a href="/contact" class="flex items-center gap-2">
+                      Start Your Project <ArrowRight className="h-4 w-4" />
+                    </a>
+                 </Button>
               </div>
-            ))}
-          </div>
+           </div>
         </div>
+      </section>
 
-        <!-- Call to Action -->
-        <section class="py-48 bg-background text-center relative overflow-hidden border-t border-white/5">
-          <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-          <div class="container mx-auto max-w-5xl px-4 relative z-10">
-            <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-12 text-white">
-              Ready to win?
-            </h2>
-            <p class="text-xl md:text-2xl font-medium mb-16 max-w-2xl mx-auto text-muted-foreground">
-              Join our list of successful partners and build something that truly stands out.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="bg-white text-black hover:bg-white/90 font-black uppercase tracking-widest h-16 px-12 rounded-none">
-                <a href="/contact">Start Project</a>
-              </Button>
-              <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 font-black uppercase tracking-widest h-16 px-12 rounded-none transition-colors">
-                <a href="/pricing">View Packages</a>
+      <!-- CTA -->
+      <section class="py-16 lg:py-24">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
+            
+            <div class="relative z-10 p-10 lg:p-20 text-center">
+              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Next Project</span>
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6">
+                Want to see your<br/>
+                <span class="text-gradient-warm">project here?</span>
+              </h2>
+              <p class="text-lg text-white/70 mb-10 max-w-lg mx-auto">
+                I'd love to work with you. Let's build something great together.
+              </p>
+              <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl shadow-xl">
+                <a href="/contact" class="flex items-center gap-2">
+                  Let's Talk <ArrowRight className="h-4 w-4" />
+                </a>
               </Button>
             </div>
           </div>
-        </section>
         </div>
-      </div>
+      </section>
+
     </main>
     <Footer />
   </div>

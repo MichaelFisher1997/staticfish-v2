@@ -7,161 +7,140 @@ import {
   Zap,
   Shield,
   DollarSign,
-  Mail,
-  type LucideIcon,
+  Clock,
+  Target,
+  Code,
+  ArrowRight,
 } from 'lucide-react';
 
-// Type Definitions
-interface Value {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  avatar: string;
-  expertise: string[];
-  social: {
-    email: string;
-  };
-  gradient: string;
-}
-
-interface Stat {
-  number: string;
-  label: string;
-}
-
-interface Milestone {
-  year: string;
-  title: string;
-  description: string;
-}
-
-const values: Value[] = [
+const values = [
   {
     icon: Zap,
-    title: "Performance First",
+    title: "Built for Speed",
     description:
-      "We prioritize speed as a core feature. Every product we build is optimized for lightning-fast interactions that keep users engaged and conversion high.",
+      "Every site I build loads fast. I focus on performance because your visitors won't wait around.",
+    color: "ocean"
   },
   {
     icon: Shield,
-    title: "Technical Integrity",
+    title: "Simple & Reliable",
     description:
-      "No shortcuts. We implement industry-best security practices and robust architecture to ensure your product is a reliable foundation for your business.",
+      "I use modern tools with fewer moving parts. Less to go wrong means less to worry about.",
+    color: "primary"
   },
   {
     icon: DollarSign,
-    title: "Fixed-Rate Transparency",
+    title: "Clear Pricing",
     description:
-      "We operate on a transparent fixed-project model. No hidden hourly creep—just predictable investment for high-end technical results.",
+      "One price upfront. Set monthly fee. No hourly billing, no surprise charges.",
+    color: "coral"
   },
 ];
 
-const teamMembers: TeamMember[] = [
-  {
-    name: "Michael Fisher",
-    role: "Founder & Lead Engineer",
-    bio: "Focused on building high-performance digital infrastructure and AI-integrated products. I founded Staticfish to help brands leverage modern engineering to scale efficiently.",
-    avatar: "",
-    expertise: ["Product Architecture", "AI Integration", "Performance Engineering"],
-    social: {
-      email: "contact@staticfish.co.uk",
-    },
-    gradient: "from-blue-500/20 to-indigo-500/20",
-  }
+const expertise = [
+  "React & Next.js",
+  "Node.js & Python", 
+  "PostgreSQL & Vector DBs",
+  "Cloud Infrastructure",
+  "AI Integration"
 ];
 
-const stats: Stat[] = [
-  { number: "100%", label: "Fixed Rate" },
-  { number: "24h", label: "Response Time" },
-  { number: "Live", label: "Production Apps" },
-  { number: "Sub-1s", label: "Page Loads" },
-];
-
-const milestones: Milestone[] = [
-  {
-    year: "2024",
-    title: "Staticfish Launch",
-    description:
-      "Established with a focus on high-performance architecture and custom SaaS solutions.",
-  },
+const milestones = [
   {
     year: "2025",
-    title: "Chattybox AI",
+    title: "Staticfish Founded",
     description:
-      "Launched a comprehensive RAG-powered AI platform, demonstrating our capabilities in AI integration and scalable infrastructure.",
+      "Started with a simple idea: help small businesses get online without paying agency prices or wrestling with complex systems.",
+  },
+  {
+    year: "2026",
+    title: "Chattybox AI Launch",
+    description:
+      "Built and launched an AI platform, demonstrating that I can handle complex projects when the need arises.",
+  },
+  {
+    year: "2026",
+    title: "Redot Engine Website",
+    description:
+      "Contributed a new website for Redot, an open-source game engine. Pro bono work to support the developer community.",
   },
 ];
 ---
 
-<Layout title="About Our Premium Digital Engineering Team | Staticfish" description="Learn about Staticfish, a technical partner for ambitious companies. We focus on high-performance architecture, product engineering, and scalable digital solutions.">
-  <div class="min-h-screen flex flex-col">
+<Layout title="About Staticfish | Solo Developer for Small Businesses" description="Meet Michael Fisher, the solo developer behind Staticfish. Building fast, secure websites for small businesses with transparent pricing.">
+  <div class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
-    <main class="flex-1">
-      <div class="min-h-screen bg-background py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <!-- Header -->
-          <div class="mx-auto max-w-3xl text-center mb-20">
-            <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6 uppercase tracking-tighter">
-              About Staticfish
-            </h1>
-            <p class="text-xl text-muted-foreground leading-8 italic font-medium">
-              We're on a mission to empower ambitious companies
-              by providing them with high-performance technical engineering that 
-              drives growth and redefines digital standards.
-            </p>
-          </div>
+    <main class="flex-1 pt-28">
+        
+        <!-- Background Elements -->
+        <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+          <div class="blob-ocean w-[60vw] h-[60vw] top-[0%] right-[10%]"></div>
+          <div class="blob-coral w-[40vw] h-[40vw] bottom-[20%] left-[5%]"></div>
+        </div>
 
+        <!-- Header -->
+        <section class="py-16 lg:py-24 relative text-center">
+            <div class="container mx-auto max-w-3xl px-6">
+               <span class="badge-coral mb-6">About</span>
+               <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
+                 One Person.<br/>
+                 <span class="text-gradient-ocean">Real Craftsmanship.</span>
+               </h1>
+               <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                 I'm Michael Fisher, the solo developer behind Staticfish. No account managers, no junior developers—just me building your website with care and attention.
+               </p>
+            </div>
+        </section>
+
+        <div class="container mx-auto max-w-7xl px-6 space-y-24 lg:space-y-32">
+          
           <!-- Mission Section -->
-          <section class="mb-24">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 class="text-3xl font-bold text-foreground mb-6 uppercase tracking-tighter">
-                  The Mission
-                </h2>
-                <div class="space-y-4 text-muted-foreground leading-7 italic font-medium">
-                  <p>
-                    Staticfish was founded to eliminate the friction between complex business ideas and high-performance digital reality. We believe that modern brands shouldn't be held back by technical limitations or generic templates.
-                  </p>
-                  <p>
-                    Our focus is on precision engineering—building products that aren't just functional, but optimized for speed, security, and scalability from day one. By operating on a fixed-rate model, we provide the transparency and focus required to ship exceptional software without the typical agency bloat.
-                  </p>
-                  <p>
-                    From specialized SaaS infrastructure to RAG-powered AI platforms like Chattybox, we build the technical foundations that allow ambitious companies to lead their industries.
-                  </p>
+          <section>
+            <div class="card-elevated rounded-[2rem] lg:rounded-[3rem] p-8 lg:p-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <span class="badge-ocean mb-6">Why I Started</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-ink font-display tracking-tight mb-8">
+                      A Better Way to Build
+                    </h2>
+                    <div class="space-y-6 text-muted-foreground leading-relaxed">
+                      <p>
+                        I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
+                      </p>
+                      <p>
+                        I started Staticfish to offer something different: websites built with modern tools that are faster to build and cheaper to host. I pass those savings on to you.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="aspect-square bg-gradient-to-br from-ocean/10 via-primary/5 to-coral/10 rounded-2xl lg:rounded-3xl flex items-center justify-center relative overflow-hidden group">
+                     <div class="absolute inset-0 bg-gradient-to-br from-ocean/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                     <Target className="w-24 h-24 lg:w-32 lg:h-32 text-ocean/80 transition-transform duration-500 group-hover:scale-110" />
+                  </div>
                 </div>
-              </div>
-              <div class="relative aspect-square bg-[#0a0a0a] border border-white/5 flex items-center justify-center overflow-hidden">
-                <div class="absolute inset-0 bg-grid-white/5 opacity-20"></div>
-                <Zap className="w-32 h-32 text-primary opacity-20" />
-              </div>
             </div>
           </section>
 
-          <!-- Our Values -->
-          <section class="mb-24">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-bold text-foreground mb-4 uppercase tracking-tighter">
-                Our Values
+          <!-- My Values -->
+          <section>
+            <div class="text-center mb-12 lg:mb-16">
+              <span class="badge-ocean mb-4">How I Work</span>
+              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">
+                My Principles.
               </h2>
-              <p class="text-lg text-muted-foreground max-w-2xl mx-auto italic">
-                These core principles guide every technical decision we make for our partners.
-              </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               {values.map((value) => (
-                <div class="bg-background border border-white/5 p-10 hover:border-primary/50 transition-colors text-center">
-                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-                      <value.icon className="h-6 w-6 text-primary" />
+                <div class="card-elevated p-8 lg:p-10 text-center group hover:-translate-y-1 transition-transform duration-300">
+                    <div class={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 ${
+                      value.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
+                      value.color === 'coral' ? 'bg-coral/10 text-coral' :
+                      'bg-primary/10 text-primary'
+                    }`}>
+                      <value.icon className="h-8 w-8" />
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4 uppercase tracking-tight">{value.title}</h3>
-                    <p class="text-muted-foreground leading-6 italic text-sm">
+                    <h3 class="text-xl font-bold text-ink font-display mb-3">{value.title}</h3>
+                    <p class="text-muted-foreground leading-relaxed text-sm">
                       {value.description}
                     </p>
                 </div>
@@ -169,103 +148,76 @@ const milestones: Milestone[] = [
             </div>
           </section>
 
-          <!-- Stats -->
-          <section class="mb-24">
-            <div class="bg-white/[0.02] border border-white/10 p-12 md:p-20 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                  {stats.map((stat) => (
-                    <div class="text-center">
-                      <div class="text-4xl font-black mb-2 uppercase tracking-tighter text-white">
-                        {stat.number}
-                      </div>
-                      <div class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                        {stat.label}
-                      </div>
+          <!-- About Me -->
+          <section>
+            <div class="card-elevated rounded-[2rem] p-8 lg:p-12 flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
+               <div class="w-28 h-28 lg:w-32 lg:h-32 rounded-2xl bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white text-4xl lg:text-5xl font-bold font-display shadow-xl shadow-ocean/20 flex-shrink-0">
+                  M
+               </div>
+               
+               <div class="flex-1 text-center md:text-left">
+                  <div class="mb-4">
+                    <h3 class="text-2xl lg:text-3xl font-bold text-ink font-display tracking-tight">
+                      Michael Fisher
+                    </h3>
+                    <p class="text-primary font-bold text-xs uppercase tracking-widest mt-1">Founder & Developer</p>
+                  </div>
+                  
+                  <p class="text-muted-foreground leading-relaxed mb-6">
+                    I've spent years building everything from simple marketing sites to complex platforms. 
+                    Now I'm focused on helping small businesses get online properly — professional quality, fair price, no fluff.
+                  </p>
+
+                  <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
+                      {expertise.map((skill) => (
+                        <span class="text-[10px] bg-secondary text-muted-foreground px-3 py-1.5 rounded-full font-semibold uppercase tracking-wide">
+                          {skill}
+                        </span>
+                      ))}
+                  </div>
+                  
+                  <div class="flex gap-6 justify-center md:justify-start text-sm text-muted-foreground">
+                    <div class="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-primary" />
+                        <span>UK Based</span>
                     </div>
-                  ))}
-                </div>
-            </div>
-          </section>
-
-          <!-- Our Team -->
-          <section class="mb-24">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-bold text-foreground mb-4 uppercase tracking-tighter">
-                Our Team
-              </h2>
-              <p class="text-lg text-muted-foreground max-w-2xl mx-auto italic">
-                Meet the technical specialists behind Staticfish who are
-                dedicated to your product's success.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-1 max-w-2xl mx-auto gap-8">
-              {teamMembers.map((member) => (
-                <div class="bg-background border border-white/5 overflow-hidden p-8">
-                  <div class="flex flex-col sm:flex-row gap-8 items-center">
-                    <div class="flex-1 text-center sm:text-left">
-                      <div class="mb-4">
-                        <h3 class="text-2xl font-bold text-white uppercase tracking-tighter">
-                          {member.name}
-                        </h3>
-                        <p class="text-primary font-bold text-xs uppercase tracking-widest mt-1">{member.role}</p>
-                      </div>
-                      <p class="text-muted-foreground text-sm leading-relaxed mb-6 italic">
-                        {member.bio}
-                      </p>
-                      <div class="flex flex-wrap gap-2 justify-center sm:justify-start mb-6">
-                          {member.expertise.map((skill) => (
-                            <span
-                              class="text-[10px] bg-white/5 border border-white/10 text-white px-2 py-1 uppercase tracking-widest"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                      </div>
-                      <div class="flex gap-3 justify-center sm:justify-start">
-                        <a href={`mailto:${member.social.email}`} class="text-white hover:text-primary transition-colors">
-                          <Mail className="h-5 w-5" />
-                        </a>
-                      </div>
+                    <div class="flex items-center gap-2">
+                        <Code className="h-4 w-4 text-primary" />
+                        <span>5+ Years</span>
                     </div>
                   </div>
-                </div>
-              ))}
+               </div>
             </div>
           </section>
 
           <!-- Timeline -->
-          <section class="mb-24">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-bold text-foreground mb-4 uppercase tracking-tighter">
-                Our Journey
+          <section>
+            <div class="text-center mb-12 lg:mb-16">
+              <span class="badge-ocean mb-4">The Journey</span>
+              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">
+                So Far.
               </h2>
-              <p class="text-lg text-muted-foreground max-w-2xl mx-auto italic">
-                From technical vision to live production.
-              </p>
             </div>
 
             <div class="relative max-w-3xl mx-auto">
-              <!-- Timeline line -->
-              <div class="absolute left-8 top-0 bottom-0 w-px bg-white/10"></div>
+              <div class="absolute left-8 top-0 bottom-0 w-px bg-border"></div>
 
               <div class="space-y-12">
                 {milestones.map((milestone) => (
                   <div class="relative flex items-start gap-12 pl-4">
-                    <div class="w-8 h-8 bg-black border border-white/20 rounded-full flex items-center justify-center relative z-10">
-                      <div class="w-2 h-2 bg-primary rounded-full"></div>
+                    <div class="w-8 h-8 bg-white border-2 border-primary rounded-xl flex items-center justify-center relative z-10 shadow-md">
+                      <div class="w-2.5 h-2.5 bg-primary rounded-sm"></div>
                     </div>
-                    <div class="flex-1 pt-0">
+                    <div class="flex-1 pt-1">
                       <div class="flex items-center gap-4 mb-3">
-                        <span class="text-2xl font-black text-white tracking-tighter">
+                        <span class="text-2xl font-extrabold text-primary font-display tracking-tighter">
                           {milestone.year}
                         </span>
-                        <h3 class="text-lg font-bold text-primary uppercase tracking-tight">
+                        <h3 class="text-lg font-bold text-ink font-display uppercase tracking-tight">
                           {milestone.title}
                         </h3>
                       </div>
-                      <p class="text-muted-foreground leading-6 text-sm italic font-medium">
+                      <p class="text-muted-foreground leading-relaxed text-sm">
                         {milestone.description}
                       </p>
                     </div>
@@ -275,33 +227,36 @@ const milestones: Milestone[] = [
             </div>
           </section>
 
-          <!-- Call to Action -->
-          <div class="text-center relative overflow-hidden py-24 border-t border-white/5">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-            <div class="relative z-10">
-              <h2 class="text-4xl font-bold text-foreground mb-4 leading-none uppercase tracking-tighter">
-                Ready to Work Together?
+          <!-- CTA -->
+          <div class="text-center relative overflow-hidden py-20 rounded-[2rem] bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
+            
+            <div class="relative z-10 px-6">
+              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Ready?</span>
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6">
+                Let's Work<br/>
+                <span class="text-gradient-warm">Together.</span>
               </h2>
-              <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
-                We'd love to learn about your technical needs and discuss how we can help
-                you engineer a better digital future.
+              <p class="text-lg text-white/70 mb-10 max-w-lg mx-auto">
+                I'd love to learn about your project. Let's chat about how I can help.
               </p>
-              <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="/contact">
-                  <Button size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold bg-white text-black hover:bg-white/90">
-                    Start Your Project
-                  </Button>
-                </a>
-                <a href="/portfolio">
-                  <Button variant="outline" size="lg" className="rounded-none h-16 px-12 uppercase tracking-widest font-bold border-white/20 hover:border-white">
-                    View Our Work
-                  </Button>
-                </a>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl shadow-xl">
+                  <a href="/contact" class="flex items-center gap-2">
+                    Start Your Project <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 rounded-xl">
+                  <a href="/portfolio">See My Work</a>
+                </Button>
               </div>
             </div>
           </div>
+
         </div>
-      </div>
+        
+        <div class="py-16"></div>
     </main>
     <Footer />
   </div>

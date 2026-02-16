@@ -3,158 +3,314 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Check } from 'lucide-react';
-import services from '../data/services.json';
+import { Check, Mail, Info, ArrowRight, Sparkles } from 'lucide-react';
+
+const pricingTiers = [
+  {
+    title: "Static Site",
+    priceGbp: 149,
+    description: "A straightforward site for businesses that need an online presence.",
+    features: [
+      "Up to 5 pages",
+      "Custom design",
+      "Mobile-responsive",
+      "Contact form",
+      "Basic SEO setup"
+    ],
+    color: "ocean"
+  },
+  {
+    title: "CMS Site",
+    priceGbp: 249,
+    description: "For businesses that want to update their own content.",
+    features: [
+      "No page limit",
+      "Easy content editor",
+      "2 Admin users",
+      "Blog functionality",
+      "Content scheduling"
+    ],
+    color: "primary"
+  },
+  {
+    title: "E-Commerce",
+    priceGbp: 399,
+    description: "For businesses selling products online.",
+    features: [
+      "Everything in CMS",
+      "PayPal & Stripe",
+      "Multicurrency support",
+      "Unlimited products",
+      "Order management"
+    ],
+    color: "coral"
+  }
+];
 
 const maintenancePlans = [
   {
     title: "Basic",
-    price: "£50",
+    priceGbp: 50,
     period: "/month",
     description: "Essential security and upkeep.",
     features: ["Monthly Backups", "Security Updates", "Uptime Monitoring", "Email Support"]
   },
   {
     title: "Growth",
-    price: "£150",
+    priceGbp: 150,
     period: "/month",
     description: "Regular updates and small changes.",
     features: ["Weekly Backups", "2 hrs dev time/mo", "Content Updates", "Priority Email Support"]
   },
   {
     title: "Full Partner",
-    price: "£450",
+    priceGbp: 450,
     period: "/month",
-    description: "Complete peace of mind and priority access.",
+    description: "Complete peace of mind.",
     features: ["Daily Backups", "5 hrs dev time/mo", "Performance Audits", "Phone & Slack Support"]
   }
 ];
-
 ---
 
-<Layout title="Transparent Fixed-Rate Pricing for SaaS & Web Engineering | Staticfish" description="Invest in technical excellence with our transparent, fixed-project pricing for SaaS development, high-end websites, and long-term technical partnerships.">
-  <div class="min-h-screen flex flex-col">
+<Layout title="Transparent Fixed-Rate Pricing | Staticfish" description="Simple, transparent pricing for web development. Fixed project rates with no hidden fees.">
+  <div class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
-    <main class="flex-1">
-      <div class="min-h-screen bg-background py-24">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <section class="py-32 bg-background">
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Pricing</span>
-            <h1 class="text-6xl font-black tracking-tighter text-foreground sm:text-8xl md:text-9xl mb-12 leading-none uppercase">
-              Invest in<br/>quality.
-            </h1>
-            <h2 class="text-2xl text-muted-foreground max-w-2xl leading-relaxed font-medium italic">
-              Simple, transparent pricing for high-end digital products. No hidden fees, just pure technical excellence.
-            </h2>
-          </div>
-        </section>
+    <main class="flex-1 pt-28">
+        
+        <!-- Background Elements -->
+        <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+          <div class="blob-ocean w-[50vw] h-[50vw] top-[10%] right-[10%]"></div>
+          <div class="blob-sand w-[40vw] h-[40vw] bottom-[20%] left-[5%]"></div>
+        </div>
 
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
-          <!-- Pricing Tiers -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 overflow-hidden mb-32">
-            {services.map(service => (
-              <div class={`relative bg-background p-12 hover:bg-white/[0.02] transition-colors ${service.popular ? 'z-10 ring-1 ring-primary' : ''}`}>
-                {service.popular && (
-                  <div class="absolute top-0 right-0 p-4">
-                    <span class="text-[10px] font-black uppercase tracking-widest bg-primary text-white px-3 py-1">Popular Choice</span>
-                  </div>
-                )}
-                <div class="mb-10">
-                  <h3 class="text-3xl font-bold text-white mb-2 tracking-tighter uppercase">{service.title}</h3>
-                  <p class="text-muted-foreground text-sm h-12">
-                    {service.description}
-                  </p>
-                </div>
-                
-                <div class="mb-12">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-black text-white tracking-tighter">
-                      {service.price}
-                    </span>
-                    <span class="text-xs text-muted-foreground uppercase tracking-widest font-bold">{service.price_suffix}</span>
-                  </div>
-                </div>
-
-                <div class="space-y-8">
-                  <ul class="space-y-4">
-                    {service.features.map(feature => (
-                      <li class="flex items-start gap-3">
-                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                        <span class="text-sm text-gray-400 font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <!-- Custom SaaS -->
-          <section class="mb-32">
-             <div class="bg-white/[0.02] border border-white/10 p-16 md:p-24 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-                <div class="max-w-2xl text-center lg:text-left relative z-10">
-                   <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-8 text-white">Custom SaaS Engineering.</h2>
-                   <p class="text-xl font-medium text-muted-foreground leading-relaxed">
-                      Building a complex web application, internal tool, or subscription platform? 
-                      We offer custom engineering with transparent, fixed-project quotes.
-                   </p>
-                </div>
-                <Button size="lg" className="bg-white text-black hover:bg-white/90 h-20 px-12 text-base font-black uppercase tracking-widest rounded-none min-w-[280px] relative z-10">
-                   <a href="/contact">Consultation</a>
-                </Button>
-             </div>
-          </section>
-
-          <!-- Maintenance Plans -->
-          <section class="mb-32">
-             <div class="mb-20">
-                <span class="text-primary text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Aftercare</span>
-                <h2 class="text-4xl font-black tracking-tighter sm:text-6xl uppercase">Maintenance Plans.</h2>
-             </div>
-             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {maintenancePlans.map(plan => (
-                   <div class="bg-background border border-white/5 p-10 hover:border-primary/50 transition-colors">
-                      <h3 class="text-2xl font-bold text-white mb-6 tracking-tighter uppercase">{plan.title}</h3>
-                      <div class="flex items-baseline gap-2 mb-8">
-                         <span class="text-4xl font-black text-white">{plan.price}</span>
-                         <span class="text-xs text-muted-foreground uppercase tracking-widest font-bold">{plan.period}</span>
-                      </div>
-                      <p class="text-sm text-muted-foreground mb-10 h-10">{plan.description}</p>
-                      <ul class="space-y-4 pt-10 border-t border-white/5">
-                         {plan.features.map(feature => (
-                            <li class="flex items-center gap-3 text-sm text-gray-400 font-medium">
-                               <div class="h-1 w-1 rounded-full bg-primary"></div>
-                               {feature}
-                            </li>
-                         ))}
-                      </ul>
-                   </div>
-                ))}
-             </div>
-          </section>
-
-          <!-- Call to Action -->
-          <div class="text-center py-20 border-t border-white/5 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-            <div class="relative z-10">
-              <h2 class="text-4xl font-black uppercase tracking-tighter mb-8 text-white">
-                Still have questions?
-              </h2>
-              <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto italic font-medium">
-                Our team is here to help you choose the right package and answer any technical questions.
-              </p>
-              <Button size="lg" variant="outline" className="rounded-none border-white/20 hover:border-white h-16 px-12 uppercase tracking-widest font-bold">
-                <a href="/contact">Contact Us</a>
-              </Button>
+        <div class="container mx-auto max-w-7xl px-6 py-12">
+            
+            <!-- Hero -->
+            <div class="max-w-3xl mb-20">
+                <span class="badge-coral mb-6">Pricing</span>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-6">
+                  Simple.<br/>Honest.<br/>
+                  <span class="text-gradient-ocean">Fixed.</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                  One cost upfront. Set hosting fee. That's it. No hourly billing, no surprise charges, no scope creep.
+                </p>
+                <p class="text-muted-foreground">
+                  You get a clear price before we start, and that's what you pay.
+                </p>
             </div>
-          </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+                {pricingTiers.map((tier) => (
+                    <div class={`relative card-elevated p-8 lg:p-10 flex flex-col`}>
+                        
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-ink font-display mb-2">{tier.title}</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">
+                                {tier.description}
+                            </p>
+                        </div>
+
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-5xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={tier.priceGbp}>£{tier.priceGbp}</span>
+                                <span class="text-sm text-muted-foreground ml-1">upfront</span>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £50/month hosting</span>
+                                <div class="group relative">
+                                    <Info className="h-4 w-4 text-muted-foreground/60 cursor-help" />
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 bg-ink text-white text-xs rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+                                        Includes hosting, CDN, SSL certificate, and ongoing maintenance
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 flex-1">
+                            {tier.features.map((feature) => (
+                                <li class="flex items-center gap-3">
+                                    <div class={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                      tier.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
+                                      tier.color === 'coral' ? 'bg-coral/10 text-coral' :
+                                      'bg-primary/10 text-primary'
+                                    }`}>
+                                        <Check className="h-3 w-3" strokeWidth={3} />
+                                    </div>
+                                    <span class="text-sm text-foreground font-medium">
+                                        {feature}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        
+                        <div class="mt-10 pt-8 border-t border-border">
+                            <Button 
+                              className="w-full rounded-xl font-semibold bg-ink hover:bg-ink/90 shadow-lg shadow-ink/10"
+                            >
+                                <a href="/contact">Get Started</a>
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <!-- Hosting Note -->
+            <div class="mb-24 card-elevated p-6 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-ocean/10 flex items-center justify-center flex-shrink-0">
+                    <Info className="h-5 w-5 text-ocean" />
+                </div>
+                <div>
+                    <h4 class="font-bold text-ink mb-1">What's included in hosting?</h4>
+                    <p class="text-muted-foreground text-sm leading-relaxed">
+                        Premium hosting on Cloudflare's global CDN, free SSL certificate, automated backups, 
+                        and ongoing security monitoring. You can cancel hosting anytime with 30 days notice and keep your website files.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Custom Projects -->
+            <section class="mb-32">
+                <div class="relative w-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
+                    <!-- Grid Background -->
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+                    <div class="blob-ocean w-[40vw] h-[40vw] -right-[10%] -top-[20%] opacity-20"></div>
+                    
+                    <!-- Content -->
+                    <div class="relative z-10 p-10 lg:p-16">
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                            <div class="max-w-2xl text-center lg:text-left">
+                                <span class="badge-ocean mb-6">Custom Development</span>
+                                <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">
+                                    Need Something<br/>
+                                    <span class="text-gradient-warm">Bespoke?</span>
+                                </h2>
+                                <p class="text-lg text-white/70 leading-relaxed max-w-xl">
+                                    Browser extensions, automation tools, internal dashboards, or complex web applications. 
+                                    I'll provide a fixed-price quote after understanding your requirements.
+                                </p>
+                            </div>
+                            <div>
+                                <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl h-14 px-10 font-semibold shadow-xl shadow-black/20 transition-transform hover:scale-105">
+                                    <a href="/contact">Get a Quote</a>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Maintenance Plans -->
+            <section class="mb-32">
+                <div class="max-w-2xl mb-12">
+                    <span class="badge-ocean mb-4">Ongoing Support</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter mb-4">
+                      Care Plans.
+                    </h2>
+                    <p class="text-muted-foreground">Keep your website secure and up-to-date. Optional for Static Site owners, included in CMS & E-commerce tiers.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {maintenancePlans.map(plan => (
+                        <div class="card-elevated p-8 group">
+                            <h3 class="text-lg font-bold text-ink font-display mb-2">{plan.title}</h3>
+                            <div class="flex items-baseline gap-1 mb-2">
+                                <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={plan.priceGbp}>£{plan.priceGbp}</span>
+                                <span class="text-sm text-muted-foreground">{plan.period}</span>
+                            </div>
+                            <p class="text-sm text-muted-foreground mb-8">{plan.description}</p>
+                            
+                            <ul class="space-y-3 pt-6 border-t border-border">
+                                {plan.features.map(feature => (
+                                    <li class="flex items-center gap-3 text-sm text-foreground">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                        {feature}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <div class="text-center py-20 relative overflow-hidden rounded-[2rem] bg-secondary/50 border border-border">
+                <div class="blob-ocean w-[30vw] h-[30vw] -top-[10%] left-[20%] opacity-20"></div>
+                <div class="blob-coral w-[25vw] h-[25vw] -bottom-[10%] right-[20%] opacity-20"></div>
+                
+                <div class="relative z-10 px-6">
+                    <div class="w-16 h-16 rounded-2xl bg-white border border-border flex items-center justify-center mx-auto mb-8 shadow-lg text-primary">
+                        <Mail className="h-7 w-7" />
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-display tracking-tighter mb-4 text-ink">
+                        Questions?
+                    </h2>
+                    <p class="text-muted-foreground mb-10 max-w-lg mx-auto">
+                        I'm happy to discuss your project and help you choose the right option. No pressure, just honest advice.
+                    </p>
+                    <Button size="lg" className="bg-ink text-white hover:bg-primary rounded-xl shadow-lg shadow-ink/10 hover:shadow-primary/20 transition-all">
+                        <a href="/contact" class="flex items-center gap-2">
+                            Get in Touch <ArrowRight className="h-4 w-4" />
+                        </a>
+                    </Button>
+                </div>
+            </div>
+
         </div>
-        </div>
-      </div>
+
     </main>
     <Footer />
   </div>
 </Layout>
+
+<script>
+  function initCurrencyPricing() {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    type Currency = "GBP" | "EUR" | "USD";
+    let currency: Currency = "USD";
+    
+    const euroTimezones = new Set([
+      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
+      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
+      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
+      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
+      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
+      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
+      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
+    ]);
+    
+    if (timezone === "Europe/London") {
+      currency = "GBP";
+    } else if (euroTimezones.has(timezone)) {
+      currency = "EUR";
+    }
+    
+    if (currency === "GBP") return;
+    
+    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
+    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
+    
+    const rate = rates[currency];
+    const symbol = symbols[currency];
+    
+    function convertPrice(gbp: number): number {
+      return Math.ceil(gbp * rate);
+    }
+    
+    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
+      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
+      const converted = convertPrice(gbp);
+      el.textContent = `${symbol}${converted}`;
+    });
+    
+    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
+      const converted = convertPrice(50);
+      const text = el.textContent || "";
+      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+</script>

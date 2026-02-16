@@ -1,0 +1,77 @@
+---
+interface Props {
+  rows: any[];
+}
+
+const { rows } = Astro.props;
+
+function isBold(text: string): boolean {
+  return text.startsWith("**") && text.endsWith("**");
+}
+
+function cleanBold(text: string): string {
+  return text.replace(/^\*\*/, "").replace(/\*\*$/, "");
+}
+
+function parseRow(block: any): string[] {
+  const text = block.children?.map((child: any) => child.text).join("") || "";
+  return text
+    .split("|")
+    .map((c: string) => c.trim())
+    .filter((c: string) => c.length > 0);
+}
+
+const parsedRows = rows.map(parseRow);
+
+// Check if first row is a header (look for a separator pattern in the second row)
+let hasHeader = false;
+if (parsedRows.length >= 2) {
+  const secondRowText = rows[1]?.children?.map((child: any) => child.text).join("") || "";
+  // Check if second row is just separators (|---|)
+  if (/^[|\s\-]+$/.test(secondRowText.trim())) {
+    hasHeader = true;
+  }
+}
+
+const header = hasHeader ? parsedRows[0] : null;
+const dataRows = hasHeader ? parsedRows.slice(2) : parsedRows;
+---
+
+<div class="my-8 overflow-hidden rounded-lg border border-border shadow-sm">
+  <table class="w-full text-sm border-collapse">
+    {header && (
+      <thead>
+        <tr class="bg-secondary border-b-2 border-border">
+          {header.map((cell: string) => {
+            const bold = isBold(cell);
+            const displayText = bold ? cleanBold(cell) : cell;
+            return (
+              <th class="text-left py-3 px-4 font-semibold text-ink border-r border-border last:border-r-0">
+                {displayText}
+              </th>
+            );
+          })}
+        </tr>
+      </thead>
+    )}
+    
+    <tbody>
+      {dataRows.map((row: string[]) => (
+        <tr class="border-b border-border last:border-b-0">
+          {row.map((cell: string, cellIdx: number) => {
+            const bold = isBold(cell);
+            const displayText = bold ? cleanBold(cell) : cell;
+            const isFirstCol = cellIdx === 0;
+            return (
+              <td 
+                class={`py-3 px-4 border-r border-border last:border-r-0 ${isFirstCol ? 'font-medium text-ink' : 'text-muted-foreground'}`}
+              >
+                {displayText}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

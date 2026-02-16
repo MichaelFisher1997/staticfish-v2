@@ -1,40 +1,167 @@
 # AGENTS.md
 
-This file provides guidance to agents when working with code in this repository.
+Guidelines for AI agents working on this Astro-based static site.
 
-## Build Commands (Critical)
-- Development: `bun dev` (uses Cloudflare dev server on port 5050)
-- Production build: `bun build` (requires `astro.prod.config.mjs`, NOT regular astro.config.mjs)
-- Preview: `bun preview`
-- Use `astro.prod.config.mjs` for production builds only - contains `react-dom/server.edge` alias
+## Build Commands
 
-## Environment Variables (Dual Support)
-- Sanity supports both `PUBLIC_SANITY_PROJECT_ID`/`PUBLIC_SANITY_DATASET` and `SANITY_PROJECT_ID`/`SANITY_DATASET` fallbacks
-- Must set either public or private vars for Sanity to work
+```bash
+# Development (Cloudflare dev server, port 5050)
+bun dev
 
-## Sanity Configuration (Critical Gotcha)
-- `sanity.config.js`: projectId `2gr3dh6t`, dataset `production`
-- `astro.config.mjs`: projectId `z29mwf2i`, dataset `production` (DIFFERENT PROJECT ID)
-- Client in `src/lib/sanity.ts` uses API version `2023-05-03` and `useCdn: false`
+# Production build (uses astro.prod.config.mjs)
+bun build
 
-## Security & Middleware
-- CSP headers injected via `src/middleware.ts` with runtime nonce generation
-- Strict security headers including CSP, HSTS, X-Frame-Options
+# Preview production build
+bun preview
 
-## Linting & TypeScript
-- Uses `oxlint` (not ESLint), available in dependencies
-- TypeScript uses Astro strict config with `jsx: "react-jsx"` and `jsxImportSource: "react"`
+# Start production server
+bun start
+```
 
-## Component Patterns
-- UI components use Class Variance Authority (CVA) for variants
-- `src/lib/utils.ts` provides `cn()` utility combining `clsx` + `tailwind-merge`
-- Nordic dark theme with HSL color tokens defined in `src/styles/global.css`
+**Critical:** Production builds must use `astro.prod.config.mjs` (not `astro.config.mjs`) which contains the `react-dom/server.edge` alias for Cloudflare Workers.
 
-## Database Integration
-- Sanity queries in `src/lib/sanity.ts` follow specific patterns
-- Client has `useCdn: false` for API requests (fetches fresh data)
+## Testing
 
-## Docker Configuration
-- Uses `oven/bun:latest` image (NOT node:alpine)
-- Exposes port 5050, runs with `HOST=0.0.0.0`
-- Dev server runs via `bun run dev -- --host --port 5050`
+**No test framework is currently configured.** This project does not have unit tests, integration tests, or E2E tests. If adding tests:
+
+- Consider Vitest for unit tests (compatible with Astro/Vite)
+- Consider Playwright for E2E tests
+- Run single test: `bun test <pattern>` (once configured)
+
+## Linting
+
+The project uses **oxlint** (not ESLint). Check for linting issues:
+
+```bash
+# Check all files
+npx oxlint
+
+# Check specific file
+npx oxlint src/components/Button.tsx
+```
+
+## Code Style Guidelines
+
+### File Organization
+```
+src/
+├── components/ui/     # Reusable UI components (button, card, input, badge)
+├── components/        # Page-specific components (Header, Footer, MobileMenu)
+├── layouts/           # Astro layouts
+├── pages/             # Astro pages (file-based routing)
+├── lib/               # Utilities and helpers
+├── styles/            # Global CSS
+├── data/              # Static data files (JSON)
+└── env.d.ts           # TypeScript declarations
+```
+
+### Naming Conventions
+- **Components:** PascalCase (e.g., `Button.tsx`, `Header.astro`)
+- **Utilities:** camelCase (e.g., `utils.ts`)
+- **Pages:** lowercase with dashes (e.g., `privacy.astro`)
+- **CSS Classes:** Use Tailwind, avoid custom CSS when possible
+- **Variables:** camelCase for TS/JS, kebab-case for CSS custom properties
+
+### Imports (Order Matters)
+1. React/ Astro imports
+2. Third-party libraries
+3. Local components
+4. Local utilities
+5. Types
+
+Example:
+```typescript
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../../lib/utils";
+```
+
+### Component Patterns
+
+**UI Components (CVA Pattern):**
+```typescript
+import { cva, type VariantProps } from "class-variance-authority";
+
+const buttonVariants = cva(
+  "base-classes",
+  {
+    variants: {
+      variant: { default: "...", outline: "..." },
+      size: { default: "...", sm: "...", lg: "..." },
+    },
+    defaultVariants: { variant: "default", size: "default" },
+  }
+);
+
+export interface ButtonProps extends VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+```
+
+**Styling:**
+- Always use `cn()` utility for class merging: `cn(buttonVariants({ variant, size, className }))`
+- Use Tailwind's HSL color system (e.g., `text-primary`, `bg-slate-900`)
+- Avoid arbitrary values; extend `tailwind.config.js` if needed
+
+### TypeScript
+- **Strict mode enabled** - no implicit any
+- Use explicit return types on exported functions
+- Prefer `interface` over `type` for object shapes
+- Use `type` for unions and utility types
+- React components: `React.FC<Props>` or explicit return type
+
+### Error Handling
+- Use early returns for guard clauses
+- Don't swallow errors; log them or propagate
+- For async operations, use try/catch with proper error messages
+
+### Astro-Specific
+- Use `client:*` directives sparingly (React components only when needed)
+- Prefer static generation over SSR where possible
+- Use `Astro.props` with proper typing in layouts
+
+### Environment Variables
+- Sanity supports both `PUBLIC_SANITY_*` and `SANITY_*` prefixes
+- Client uses `useCdn: false` for fresh data
+- **Critical:** Different project IDs in `sanity.config.js` vs `astro.config.mjs`
+
+### Security
+- CSP headers auto-injected via `src/middleware.ts`
+- Runtime nonce generation for inline scripts
+- Strict headers: CSP, HSTS, X-Frame-Options
+
+### Docker
+- Base image: `oven/bun:latest` (NOT node:alpine)
+- Exposed port: 5050
+- Dev server: `bun run dev -- --host --port 5050`
+
+### Git Workflow
+- Commit messages: concise, describe "why" not "what"
+- Use GitHub Actions for CI (see `.github/workflows/opencode.yml`)
+- Trigger opencode with `/oc` or `/opencode` in PR/issue comments
+
+## Common Patterns
+
+**Button Usage:**
+```astro
+<Button size="lg" className="rounded-full">
+  <a href="/contact">Get Started</a>
+</Button>
+```
+
+**Glass Card:**
+```html
+<div class="glass-card p-8 rounded-[2rem]">...</div>
+```
+
+**Responsive Grid:**
+```html
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">...</div>
+```
+
+## Dependencies to Know
+- `class-variance-authority` - Component variants
+- `tailwind-merge` + `clsx` - Class merging via `cn()`
+- `lucide-react` - Icons
+- `astro` + `@astrojs/react` + `@astrojs/tailwind`
+- `@astrojs/cloudflare` - Cloudflare adapter

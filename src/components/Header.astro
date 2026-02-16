@@ -6,6 +6,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
+  { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
 ];
@@ -13,41 +14,58 @@ const navigation = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-background/70 border-b border-white/5">
-  <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
+<header class="fixed top-0 left-0 right-0 z-50 w-full">
+  <div class="mx-auto max-w-7xl px-6 py-4">
+    <nav class="glass rounded-2xl px-6 py-3 flex justify-between items-center transition-all duration-500 hover:shadow-xl">
       <!-- Logo -->
-      <a href="/" class="flex items-center group">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 border border-white/20 rounded-xl flex items-center justify-center transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
-            <span class="text-foreground font-semibold text-xl tracking-tighter">
-              S
-            </span>
-          </div>
-          <span class="text-lg font-bold text-foreground tracking-tight">
-            Staticfish
-          </span>
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white shadow-lg shadow-ocean/20 group-hover:shadow-primary/30 transition-shadow duration-300">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="currentColor" opacity="0.2"/>
+            <path d="M12 4c-1.5 2-2.5 4-2.5 6s1 4 2.5 6c1.5-2 2.5-4 2.5-6s-1-4-2.5-6z" fill="currentColor"/>
+            <circle cx="8" cy="10" r="1.5" fill="currentColor"/>
+            <circle cx="16" cy="14" r="1.5" fill="currentColor"/>
+          </svg>
         </div>
+        <span class="text-lg font-bold tracking-tight text-ink font-display group-hover:text-primary transition-colors duration-300">
+          staticfish
+        </span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-10">
+      <div class="hidden md:flex items-center gap-1">
         {navigation.map((item) => (
           <a
             href={item.href}
-            class={`text-[13px] uppercase tracking-widest transition-colors hover:text-primary ${
-              currentPath === item.href
-                ? "text-primary"
-                : "text-muted-foreground"
+            class={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 ${
+              currentPath === item.href 
+                ? "text-primary bg-primary/10" 
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
             }`}
           >
             {item.name}
           </a>
         ))}
-      </nav>
+      </div>
 
-      <!-- Mobile menu button -->
-      <MobileMenu navigation={navigation} currentPath={currentPath} client:load />
-    </div>
+      <!-- CTA & Mobile -->
+      <div class="flex items-center gap-4">
+        <a href="/contact" class="hidden md:inline-flex">
+          <Button size="sm" className="rounded-xl bg-ink text-white hover:bg-primary shadow-lg shadow-ink/10 hover:shadow-primary/20 transition-all duration-300 font-semibold">
+            Start Project
+          </Button>
+        </a>
+        <div class="md:hidden">
+          <MobileMenu navigation={navigation} currentPath={currentPath} client:load />
+        </div>
+      </div>
+    </nav>
   </div>
 </header>
+
+<style>
+  /* Ensure header doesn't cover content initially */
+  header {
+    animation: fade-down 0.6s ease-out forwards;
+  }
+</style>

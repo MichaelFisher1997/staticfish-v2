@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { sanityClient } from 'sanity:client';
+import { urlFor } from '../../lib/sanity';
+import { ArrowRight, Calendar, User, Tag, Clock } from 'lucide-react';
+import { Button } from '../../components/ui/button';
+
+const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  authorName,
+  categories,
+  publishedAt,
+  "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 )
+}`;
+
+const posts = await sanityClient.fetch(POSTS_QUERY);
+
+const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const featuredPost = posts[0];
+const recentPosts = posts.slice(1);
+---
+
+<Layout title="Blog | Staticfish" description="Articles and insights about web development, design, and digital strategy.">
+  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
+    <Header />
+    
+    <main class="flex-1 pt-28">
+      <section class="py-16 lg:py-24 relative">
+        <div class="blob-ocean w-[50vw] h-[50vw] -top-[10%] -right-[20%] animate-pulse-soft opacity-30"></div>
+        <div class="blob-coral w-[30vw] h-[30vw] bottom-[20%] -left-[10%] animate-pulse-soft opacity-20" style="animation-delay: 2s"></div>
+        
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-2xl mb-12 lg:mb-16">
+            <span class="badge-ocean mb-6">Blog</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink font-display tracking-tighter mb-6">
+              Thoughts & Ideas.
+            </h1>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              Web development insights, design trends, and practical tips for building better websites.
+            </p>
+          </div>
+
+          {posts.length === 0 && (
+            <div class="text-center py-24 glass-card rounded-3xl">
+              <p class="text-muted-foreground text-lg">No posts yet. Check back soon!</p>
+            </div>
+          )}
+
+          {featuredPost && (
+            <a 
+              href={`/blog/${featuredPost.slug.current}`}
+              class="group block relative overflow-hidden rounded-[2rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500 mb-12"
+            >
+              <div class="grid lg:grid-cols-2">
+                {featuredPost.mainImage?.asset ? (
+                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                    <img 
+                      src={urlFor(featuredPost.mainImage).width(900).height(600).url()} 
+                      alt={featuredPost.mainImage.alt || featuredPost.title}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent lg:bg-gradient-to-r"></div>
+                    <div class="absolute bottom-6 left-6 lg:hidden">
+                      <span class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                        Featured
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden bg-gradient-to-br from-ocean/20 to-primary/10">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-6xl opacity-20">📝</span>
+                    </div>
+                  </div>
+                )}
+                
+                <div class="p-8 lg:p-12 flex flex-col justify-center">
+                  <div class="hidden lg:block absolute top-8 right-8">
+                    <span class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-primary/30">
+                      Featured
+                    </span>
+                  </div>
+                  
+                  <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+                    {featuredPost.publishedAt && (
+                      <span class="flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4" />
+                        {formatDate(featuredPost.publishedAt)}
+                      </span>
+                    )}
+                    {featuredPost.estimatedReadingTime > 0 && (
+                      <span class="flex items-center gap-1.5">
+                        <Clock className="h-4 w-4" />
+                        {featuredPost.estimatedReadingTime} min read
+                      </span>
+                    )}
+                  </div>
+                  
+                  <h2 class="text-3xl lg:text-4xl font-bold text-ink font-display tracking-tight mb-4 group-hover:text-primary transition-colors">
+                    {featuredPost.title}
+                  </h2>
+                  
+                  {featuredPost.excerpt && (
+                    <p class="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
+                      {featuredPost.excerpt}
+                    </p>
+                  )}
+                  
+                  {featuredPost.categories && featuredPost.categories.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mb-6">
+                      {featuredPost.categories.map((cat: string) => (
+                        <span class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full bg-secondary text-muted-foreground">
+                          {cat}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  <div class="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all duration-300">
+                    Read article <ArrowRight className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+            </a>
+          )}
+
+          {recentPosts.length > 0 && (
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {recentPosts.map((post: any) => (
+                <a 
+                  href={`/blog/${post.slug.current}`}
+                  class="group block relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  {post.mainImage?.asset ? (
+                    <div class="aspect-[16/10] relative overflow-hidden">
+                      <img 
+                        src={urlFor(post.mainImage).width(600).height(375).url()} 
+                        alt={post.mainImage.alt || post.title}
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-coral/20 to-accent/10">
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-4xl opacity-20">📝</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div class="p-6">
+                    <div class="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-3">
+                      {post.publishedAt && (
+                        <span class="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(post.publishedAt)}
+                        </span>
+                      )}
+                      {post.estimatedReadingTime > 0 && (
+                        <span class="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {post.estimatedReadingTime} min
+                        </span>
+                      )}
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-ink font-display tracking-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    
+                    {post.excerpt && (
+                      <p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    )}
+                    
+                    {post.categories && post.categories.length > 0 && (
+                      <div class="flex flex-wrap gap-2">
+                        {post.categories.slice(0, 2).map((cat: string) => (
+                          <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+      
+      <section class="py-16 lg:py-24 relative section-ruled">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="relative overflow-hidden rounded-[2rem] bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
+            
+            <div class="relative z-10 p-10 lg:p-16 text-center">
+              <h2 class="text-3xl sm:text-4xl font-bold font-display tracking-tighter mb-4">
+                Want a Website Like This?
+              </h2>
+              <p class="text-white/70 max-w-xl mx-auto mb-8">
+                I build fast, affordable websites for small businesses. Let's chat about your project.
+              </p>
+              <Button size="lg" className="h-14 px-10 bg-white text-ink hover:bg-primary hover:text-white shadow-xl -translate-y-1 hover:-translate-y-1.5 transition-all duration-300">
+                <a href="/contact">Get a Quote</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
