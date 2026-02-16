@@ -5,8 +5,9 @@ import Footer from '../../components/Footer.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { PortableText } from 'astro-portabletext';
-import { ArrowLeft, Calendar, User, Tag, Clock, Twitter, Linkedin, Facebook, Link2 } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Tag, Clock, Twitter, Linkedin, Facebook, Link2, Quote } from 'lucide-react';
 import { Button } from '../../components/ui/button';
+import TableBlock from '../../components/TableBlock.astro';
 
 const { slug } = Astro.params;
 
@@ -46,6 +47,12 @@ const formatDate = (dateStr: string) => {
   });
 };
 
+const portableTextComponents = {
+  block: {
+    normal: TableBlock
+  }
+};
+
 const projectId = '2gr3dh6t';
 const dataset = 'production';
 
@@ -57,145 +64,258 @@ function buildImageUrl(assetRef: string): string {
   return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dimensions}.${format}`;
 }
 
-// Separate inline images from text blocks
-const textBlocks = post.body?.filter((block: any) => block._type !== 'inlineImage') || [];
-const inlineImages = post.body?.filter((block: any) => block._type === 'inlineImage') || [];
+// Process body blocks to group tables
+function processBodyBlocks(blocks: any[]) {
+  if (!blocks) return { processedBlocks: [], inlineImages: [] };
+  
+  const inlineImages: any[] = [];
+  const processedBlocks: any[] = [];
+  let currentTable: any[] = [];
+  
+  for (const block of blocks) {
+    if (block._type === 'inlineImage') {
+      // Flush any pending table
+      if (currentTable.length > 0) {
+        processedBlocks.push({
+          _type: 'table',
+          rows: currentTable
+        });
+        currentTable = [];
+      }
+      inlineImages.push(block);
+    } else if (isTableRow(block)) {
+      // This looks like a table row, add to current table
+      currentTable.push(block);
+    } else {
+      // Regular block - flush table if exists, then add block
+      if (currentTable.length > 0) {
+        processedBlocks.push({
+          _type: 'table',
+          rows: currentTable
+        });
+        currentTable = [];
+      }
+      processedBlocks.push(block);
+    }
+  }
+  
+  // Flush final table if exists
+  if (currentTable.length > 0) {
+    processedBlocks.push({
+      _type: 'table',
+      rows: currentTable
+    });
+  }
+  
+  return { processedBlocks, inlineImages };
+}
+
+function isTableRow(block: any): boolean {
+  if (block._type !== 'block' || block.style !== 'normal') return false;
+  const text = block.children?.map((child: any) => child.text).join('') || '';
+  // Check if it looks like a table row (contains | character)
+  return text.includes('|') && text.trim().length > 0;
+}
+
+const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.body);
 ---
 
 <Layout title={`${post.title} | Staticfish Blog`} description={post.excerpt || post.title}>
   <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
     <Header />
     
+    <!-- Reading Progress Bar -->
+    <div class="fixed top-0 left-0 right-0 h-1 bg-secondary z-50">
+      <div id="reading-progress" class="h-full bg-gradient-to-r from-ocean via-primary to-coral transition-all duration-150" style="width: 0%"></div>
+    </div>
+    
     <main class="flex-1 pt-28">
-      <article class="py-12 lg:py-20 relative">
-        <div class="blob-ocean w-[40vw] h-[40vw] -top-[10%] -right-[15%] animate-pulse-soft opacity-20"></div>
+      <article class="relative">
+        <!-- Background decorations -->
+        <div class="blob-ocean w-[50vw] h-[50vw] -top-[20%] -right-[20%] animate-pulse-soft opacity-15"></div>
+        <div class="blob-coral w-[30vw] h-[30vw] top-[40%] -left-[10%] animate-pulse-soft opacity-10" style="animation-delay: 2s"></div>
         
-        <div class="container mx-auto max-w-4xl px-6 relative z-10">
-          <div class="mb-8">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-ink hover:bg-secondary/50">
-              <a href="/blog" class="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to Blog
-              </a>
-            </Button>
-          </div>
+        <!-- Hero Section -->
+        <div class="relative py-12 lg:py-16 border-b border-border/50">
+          <div class="container mx-auto max-w-4xl px-6 relative z-10">
+            <div class="mb-6">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-ink hover:bg-secondary/50">
+                <a href="/blog" class="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Blog
+                </a>
+              </Button>
+            </div>
 
-          <header class="mb-10">
-            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
-              {post.publishedAt && (
-                <span class="flex items-center gap-1.5">
-                  <Calendar className="h-4 w-4" />
-                  {formatDate(post.publishedAt)}
-                </span>
-              )}
-              {post.estimatedReadingTime > 0 && (
-                <span class="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {post.estimatedReadingTime} min read
-                </span>
-              )}
-              {post.authorName && (
-                <span class="flex items-center gap-1.5">
-                  <User className="h-4 w-4" />
-                  {post.authorName}
-                </span>
+            <!-- Meta info with pills -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              {post.categories && post.categories.length > 0 && (
+                post.categories.map((cat: string) => (
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full bg-primary/10 text-primary">
+                    {cat}
+                  </span>
+                ))
               )}
             </div>
-            
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink font-display tracking-tighter mb-6">
+
+            <!-- Title with gradient accent -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-ink font-display tracking-tighter leading-[0.95] mb-6">
               {post.title}
             </h1>
             
-            {post.categories && post.categories.length > 0 && (
-              <div class="flex flex-wrap gap-2">
-                {post.categories.map((cat: string) => (
-                  <span class="inline-flex items-center gap-1 text-sm font-medium px-4 py-1.5 rounded-full bg-secondary text-muted-foreground">
-                    <Tag className="h-3 w-3" />
-                    {cat}
-                  </span>
-                ))}
-              </div>
+            <!-- Excerpt as lead paragraph -->
+            {post.excerpt && (
+              <p class="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+                {post.excerpt}
+              </p>
             )}
-          </header>
-
-          {post.mainImage?.asset && (
-            <div class="aspect-video relative overflow-hidden rounded-2xl mb-12 shadow-lg">
-              <img 
-                src={urlFor(post.mainImage).width(1200).height(675).url()} 
-                alt={post.mainImage.alt || post.title}
-                class="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-          )}
-
-          {(textBlocks.length > 0 || inlineImages.length > 0) && (
-            <div class="prose prose-lg prose-slate max-w-none 
-              prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-              prose-img:rounded-xl prose-img:shadow-lg
-              prose-blockquote:border-l-primary prose-blockquote:bg-secondary/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic
-              prose-code:text-primary prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-normal
-              prose-pre:bg-ink prose-pre:text-white prose-pre:rounded-xl
-              prose-li:text-muted-foreground
-              prose-strong:text-ink">
-              <PortableText value={textBlocks} />
+            
+            <!-- Author and date row -->
+            <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border/50">
+              {post.authorName && (
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white font-bold text-sm">
+                    {post.authorName.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <div class="font-medium text-ink">{post.authorName}</div>
+                    <div class="text-sm text-muted-foreground">Author</div>
+                  </div>
+                </div>
+              )}
               
-              {inlineImages.map((img: any) => (
-                <figure class="my-12 -mx-4 lg:mx-0 not-prose">
-                  <img 
-                    src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
-                    alt={img.alt || ''} 
-                    class="w-full rounded-xl shadow-lg"
-                    loading="lazy"
-                  />
-                  {img.caption && (
-                    <figcaption class="mt-4 text-center text-sm text-muted-foreground italic">
-                      {img.caption}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          )}
-
-          <div class="mt-16 pt-8 border-t border-border">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div class="flex items-center gap-2">
-                <span class="text-sm text-muted-foreground">Share this article:</span>
+              <div class="flex items-center gap-4 text-sm text-muted-foreground">
+                {post.publishedAt && (
+                  <span class="flex items-center gap-1.5">
+                    <Calendar className="h-4 w-4" />
+                    {formatDate(post.publishedAt)}
+                  </span>
+                )}
+                {post.estimatedReadingTime > 0 && (
+                  <span class="flex items-center gap-1.5">
+                    <Clock className="h-4 w-4" />
+                    {post.estimatedReadingTime} min read
+                  </span>
+                )}
               </div>
-              <div class="flex items-center gap-2">
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Image -->
+        {post.mainImage?.asset && (
+          <div class="relative py-12 lg:py-16">
+            <div class="container mx-auto max-w-5xl px-6">
+              <div class="aspect-video relative overflow-hidden rounded-3xl shadow-2xl shadow-ink/10">
+                <img 
+                  src={urlFor(post.mainImage).width(1400).height(788).url()} 
+                  alt={post.mainImage.alt || post.title}
+                  class="absolute inset-0 w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent"></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Article Content -->
+        <div class="relative py-8 lg:py-12">
+          <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+              {(textBlocks.length > 0 || inlineImages.length > 0) && (
+                <div class="article-content prose prose-lg prose-slate max-w-none
+                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink
+                  prose-headings:scroll-mt-32
+                  prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:relative prose-h2:before:content-[''] prose-h2:before:absolute prose-h2:before:-left-6 prose-h2:before:top-1/2 prose-h2:before:-translate-y-1/2 prose-h2:before:w-1 prose-h2:before:h-8 prose-h2:before:bg-gradient-to-b prose-h2:before:from-ocean prose-h2:before:to-primary prose-h2:before:rounded-full
+                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-primary
+                  prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:text-[1.125rem]
+                  prose-p:first-of-type:first-letter:text-5xl prose-p:first-of-type:first-letter:font-display prose-p:first-of-type:first-letter:font-bold prose-p:first-of-type:first-letter:text-primary prose-p:first-of-type:first-letter:mr-2 prose-p:first-of-type:first-letter:float-left prose-p:first-of-type:first-letter:leading-none
+                  prose-a:text-primary prose-a:font-medium prose-a:no-underline prose-a:relative prose-a:after:content-[''] prose-a:after:absolute prose-a:after:left-0 prose-a:after:bottom-0 prose-a:after:w-full prose-a:after:h-0.5 prose-a:after:bg-gradient-to-r prose-a:after:from-primary prose-a:after:to-coral prose-a:after:scale-x-0 prose-a:after:origin-left prose-a:after:transition-transform hover:prose-a:after:scale-x-100
+                  prose-img:rounded-2xl prose-img:shadow-xl prose-img:shadow-ink/5
+                  prose-blockquote:border-0 prose-blockquote:bg-gradient-to-br prose-blockquote:from-ocean/5 prose-blockquote:to-primary/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-2xl prose-blockquote:relative prose-blockquote:not-italic prose-blockquote:text-lg prose-blockquote:text-ink prose-blockquote:font-medium prose-blockquote:before:content-['\"'] prose-blockquote:before:absolute prose-blockquote:before:-top-2 prose-blockquote:before:left-6 prose-blockquote:before:text-6xl prose-blockquote:before:text-primary/20 prose-blockquote:before:font-serif
+                  prose-code:text-primary prose-code:bg-secondary prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-ink prose-pre:text-white prose-pre:rounded-2xl prose-pre:shadow-xl
+                  prose-li:text-muted-foreground prose-li:marker:text-primary
+                  prose-strong:text-ink prose-strong:font-semibold
+                  prose-ul:my-6 prose-ol:my-6
+                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-border prose-hr:to-transparent prose-hr:my-12">
+                   {textBlocks.map((block: any) => (
+                     block._type === 'table' 
+                       ? <TableBlock rows={block.rows} />
+                       : <PortableText value={[block]} />
+                   ))}
+                  
+                  {inlineImages.map((img: any) => (
+                    img?.asset?._ref && (
+                    <figure class="my-16 not-prose">
+                      <div class="relative overflow-hidden rounded-2xl shadow-xl shadow-ink/5">
+                        <img 
+                          src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
+                          alt={img.alt || ''} 
+                          class="w-full"
+                          loading="lazy"
+                        />
+                      </div>
+                      {img.caption && (
+                        <figcaption class="mt-4 text-center text-sm text-muted-foreground">
+                          <span class="inline-flex items-center gap-2">
+                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-border"></span>
+                            {img.caption}
+                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-border"></span>
+                          </span>
+                        </figcaption>
+                      )}
+                    </figure>
+                    )
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Share Section -->
+        <div class="relative py-12 border-t border-border/50">
+          <div class="container mx-auto max-w-3xl px-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div class="text-center sm:text-left">
+                <p class="text-sm text-muted-foreground mb-1">Enjoyed this article?</p>
+                <p class="font-medium text-ink">Share it with others</p>
+              </div>
+              <div class="flex items-center gap-3">
                 <a 
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                  class="p-3 rounded-xl bg-secondary hover:bg-[#1DA1F2] hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Share on Twitter"
                 >
-                  <Twitter className="h-4 w-4" />
+                  <Twitter className="h-5 w-5" />
                 </a>
                 <a 
                   href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                  class="p-3 rounded-xl bg-secondary hover:bg-[#0A66C2] hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Share on LinkedIn"
                 >
-                  <Linkedin className="h-4 w-4" />
+                  <Linkedin className="h-5 w-5" />
                 </a>
                 <a 
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors"
+                  class="p-3 rounded-xl bg-secondary hover:bg-[#1877F2] hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Share on Facebook"
                 >
-                  <Facebook className="h-4 w-4" />
+                  <Facebook className="h-5 w-5" />
                 </a>
                 <button 
-                  class="p-2 rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer"
-                  onclick="navigator.clipboard.writeText(window.location.href); this.querySelector('span')?.classList.remove('hidden'); setTimeout(() => this.querySelector('span')?.classList.add('hidden'), 2000);"
+                  class="p-3 rounded-xl bg-secondary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+                  onclick="navigator.clipboard.writeText(window.location.href); this.classList.add('bg-primary', 'text-white');"
+                  aria-label="Copy link"
                 >
-                  <Link2 className="h-4 w-4" />
+                  <Link2 className="h-5 w-5" />
                 </button>
               </div>
             </div>
@@ -203,36 +323,61 @@ const inlineImages = post.body?.filter((block: any) => block._type === 'inlineIm
         </div>
       </article>
 
+      <!-- Related Articles -->
       {relatedPosts.length > 0 && (
-        <section class="py-16 lg:py-20 bg-secondary/30 relative">
-          <div class="container mx-auto max-w-7xl px-6">
-            <h2 class="text-2xl sm:text-3xl font-bold text-ink font-display tracking-tight mb-8">
-              More Articles
-            </h2>
+        <section class="py-20 lg:py-24 bg-secondary/30 relative overflow-hidden">
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-50"></div>
+          
+          <div class="container mx-auto max-w-7xl px-6 relative z-10">
+            <div class="flex items-end justify-between mb-12">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary mb-3 block">Continue Reading</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-ink font-display tracking-tight">
+                  More Articles
+                </h2>
+              </div>
+              <Button variant="outline" className="rounded-xl hidden sm:flex">
+                <a href="/blog" class="flex items-center gap-2">
+                  View All <ArrowLeft className="h-4 w-4 rotate-180" />
+                </a>
+              </Button>
+            </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {relatedPosts.map((relatedPost: any) => (
                 <a 
                   href={`/blog/${relatedPost.slug.current}`}
-                  class="group block relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+                  class="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-500"
                 >
                   {relatedPost.mainImage?.asset ? (
                     <div class="aspect-[16/10] relative overflow-hidden">
                       <img 
-                        src={urlFor(relatedPost.mainImage).width(400).height(250).url()} 
+                        src={urlFor(relatedPost.mainImage).width(500).height(312).url()} 
                         alt={relatedPost.mainImage.alt || relatedPost.title}
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
+                      <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-ocean/20 to-primary/10">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-ocean/20 via-primary/10 to-coral/20">
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-5xl opacity-30">📝</span>
+                      </div>
                     </div>
                   )}
                   
-                  <div class="p-5">
+                  <div class="p-6">
+                    {relatedPost.publishedAt && (
+                      <span class="text-xs text-muted-foreground mb-2 block">
+                        {formatDate(relatedPost.publishedAt)}
+                      </span>
+                    )}
                     <h3 class="text-lg font-bold text-ink font-display tracking-tight group-hover:text-primary transition-colors line-clamp-2">
                       {relatedPost.title}
                     </h3>
+                    <span class="inline-flex items-center gap-1 text-sm font-medium text-primary mt-3 group-hover:gap-2 transition-all duration-300">
+                      Read <ArrowLeft className="h-4 w-4 rotate-180" />
+                    </span>
                   </div>
                 </a>
               ))}
@@ -245,3 +390,60 @@ const inlineImages = post.body?.filter((block: any) => block._type === 'inlineIm
     <Footer />
   </div>
 </Layout>
+
+<script>
+  // Reading progress bar
+  const progressBar = document.getElementById('reading-progress');
+  
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    if (progressBar) {
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+    }
+  }
+  
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+<style>
+  /* Pull quote styling */
+  .article-content blockquote p {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* First paragraph drop cap - only on desktop */
+  @media (min-width: 768px) {
+    .article-content > p:first-of-type:first-letter {
+      float: left;
+      font-size: 4rem;
+      line-height: 0.8;
+      margin-right: 0.75rem;
+      margin-top: 0.25rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      background: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--primary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+  
+  /* Gradient text for emphasis */
+  .article-content strong em,
+  .article-content em strong {
+    background: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--coral)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: normal;
+  }
+</style>
