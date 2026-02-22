@@ -25,5 +25,8 @@ export default defineConfig({
     ssr: {
       external: ['node:buffer'],
     },
+    server: {
+      allowedHosts: ['staticfish-1.silverside-gopher.ts.net'],
+    },
   },
 });

@@ -6,8 +6,6 @@ services:
     env_file:
       - .env
     container_name: staticfish-astro
-    ports:
-      - "5050:5050"
     restart: unless-stopped
     environment:
       - NODE_ENV=development
@@ -28,7 +26,38 @@ services:
       - ./tailwind.config.js:/app/tailwind.config.js:ro
       - ./sanity.config.ts:/app/sanity.config.ts:ro
       - ./sanity.cli.ts:/app/sanity.cli.ts:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.staticfish.rule=Host(`staticfish.local`)"
-      - "traefik.http.services.staticfish.loadbalancer.server.port=5050"
+    networks:
+      - staticfish-net
+
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: staticfish-tailscale
+    hostname: ${TS_HOSTNAME:-staticfish}
+    depends_on:
+      - staticfish-astro
+    networks:
+      - staticfish-net
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_AUTH_ONCE=true
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    command: >
+      sh -c "tailscaled &
+        sleep 5 &&
+        tailscale up --authkey=$${TS_AUTHKEY} --reset &&
+        tailscale funnel --bg --https 443 http://staticfish-astro:5050 &&
+        tail -f /dev/null"
+    restart: unless-stopped
+
+networks:
+  staticfish-net:
+
+volumes:
+  tailscale-state:
