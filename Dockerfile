@@ -9,5 +9,6 @@ RUN npm ci
 COPY . .
 
 ENV HOST=0.0.0.0
+ENV PORT=5050
 
 CMD ["npx", "astro", "dev", "--host", "--port", "5050"]
