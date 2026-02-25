@@ -53,7 +53,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     'Permissions-Policy': 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=()',
     'Content-Security-Policy': [
       `default-src 'self';`,
-      `script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://*.googletagmanager.com;`,
+      `script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://*.googletagmanager.com;`,
       `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;`,
       `img-src 'self' data: https://cdn.sanity.io;`,
       `font-src 'self' https://fonts.gstatic.com;`,
