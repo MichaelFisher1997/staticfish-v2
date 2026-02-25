@@ -5,6 +5,14 @@
       "type": "local",
       "command": ["npx", "chrome-devtools-mcp@latest", "--executablePath", "/home/micqdf/.nix-profile/bin/chromium"],
       "enabled": true
+    },
+    "kernel": {
+      "type": "remote",
+      "url": "https://mcp.onkernel.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:KERNEL_API_KEY}"
+      },
+      "enabled": true
     }
   }
 }
