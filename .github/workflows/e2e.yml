@@ -1,9 +1,7 @@
 name: E2E Tests
 
 on:
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:
 
 env:
   KERNEL_API_KEY: ${{ secrets.KERNEL_API_KEY }}
