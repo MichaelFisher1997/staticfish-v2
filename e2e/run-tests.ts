@@ -21,13 +21,37 @@ function parseTestFile(content: string): { name: string; tests: TestCase[] } {
   const name = nameMatch ? nameMatch[1] : 'Unnamed Suite';
 
   const tests: TestCase[] = [];
-  const testRegex = /test\s*\(\s*['"`](.+?)['"`]\s*,\s*async\s*\(\s*\)\s*=>\s*\{([\s\S]*?)\}\s*\);/g;
-
-  let match;
-  while ((match = testRegex.exec(content)) !== null) {
-    const testName = match[1];
-    const testCode = match[2];
-    tests.push({ name: testName, code: testCode });
+  
+  const lines = content.split('\n');
+  let i = 0;
+  
+  while (i < lines.length) {
+    const line = lines[i];
+    const testMatch = line.match(/test\s*\(\s*['"`](.+?)['"`]\s*,\s*async\s*\(\s*\)\s*=>\s*\{/);
+    
+    if (testMatch) {
+      const testName = testMatch[1];
+      let braceCount = 1;
+      let testCode = '';
+      i++;
+      
+      while (i < lines.length && braceCount > 0) {
+        const currentLine = lines[i];
+        for (const char of currentLine) {
+          if (char === '{') braceCount++;
+          else if (char === '}') braceCount--;
+          if (braceCount === 0) break;
+        }
+        if (braceCount > 0) {
+          testCode += currentLine + '\n';
+        }
+        i++;
+      }
+      
+      tests.push({ name: testName, code: testCode.trim() });
+    } else {
+      i++;
+    }
   }
 
   return { name, tests };
@@ -98,7 +122,7 @@ async function main() {
       process.stdout.write(`  ✓ ${test.name} ... `);
 
       const fullCode = wrapTestCode(test.code, baseUrl);
-      const result = await runner.runTestWithRecording(test.name, fullCode, {
+      const result = await runner.runTest(test.name, fullCode, {
         headless: process.env.DEBUG !== 'true',
         timeoutSec: 60,
       });

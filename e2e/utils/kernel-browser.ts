@@ -95,18 +95,16 @@ export class KernelTestRunner {
     }
   }
 
-  async runTestWithRecording(
+  async runTest(
     testName: string,
     testCode: string,
     options?: { headless?: boolean; timeoutSec?: number }
   ): Promise<TestResult> {
     const startTime = Date.now();
     let session: BrowserSession | null = null;
-    let replayId: string | null = null;
 
     try {
       session = await this.createBrowser(options);
-      replayId = await this.startRecording(session.sessionId);
 
       if (process.env.DEBUG === 'true') {
         console.log(`  Live view: ${session.liveViewUrl}`);
@@ -119,18 +117,9 @@ export class KernelTestRunner {
         options?.timeoutSec
       );
 
-      if (replayId) {
-        await this.stopRecording(session.sessionId, replayId);
-      }
-
       const duration = Date.now() - startTime;
 
       if (!result.success) {
-        if (replayId && session) {
-          const videoPath = await this.saveReplayVideo(session.sessionId, replayId, testName);
-          console.log(`  Video saved: ${videoPath}`);
-        }
-
         return {
           name: testName,
           passed: false,
