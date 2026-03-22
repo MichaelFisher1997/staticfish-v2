@@ -446,4 +446,28 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
     background-clip: text;
     font-style: normal;
   }
+
+  /* Enhanced code blocks for Welsh text */
+  .article-content code {
+    background: hsl(var(--muted)) !important;
+    color: hsl(var(--ink)) !important;
+    padding: 1.25rem 1.5rem !important;
+    border-radius: 0.75rem !important;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    display: block !important;
+    margin: 1rem 0 !important;
+    border: 1px solid hsl(var(--border)) !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  /* First paragraph after h3 that contains only code (Welsh examples) */
+  .article-content h3 + p code:only-child {
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--muted)) 100%) !important;
+    border-left: 3px solid hsl(var(--primary)) !important;
+    padding: 1.5rem !important;
+    font-weight: 500 !important;
+  }
 </style>
