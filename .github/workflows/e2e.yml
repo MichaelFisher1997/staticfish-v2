@@ -1,0 +1,68 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+env:
+  KERNEL_API_KEY: ${{ secrets.KERNEL_API_KEY }}
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build site
+        run: bun run build
+
+      - name: Start preview server
+        run: bun run preview &
+        env:
+          PORT: 5050
+
+      - name: Wait for server
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:5050 > /dev/null; then
+              echo "Server is ready"
+              exit 0
+            fi
+            echo "Waiting for server... ($i/30)"
+            sleep 2
+          done
+          echo "Server failed to start"
+          exit 1
+
+      - name: Run E2E tests
+        run: bun test:e2e:local
+        env:
+          TEST_URL: http://localhost:5050
+
+      - name: Upload test videos (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-videos-${{ github.sha }}
+          path: e2e/test-results/failures/*.mp4
+          retention-days: 7
+
+      - name: Upload test logs (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-logs-${{ github.sha }}
+          path: e2e/test-results/
+          retention-days: 7

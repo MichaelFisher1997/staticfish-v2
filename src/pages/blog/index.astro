@@ -62,17 +62,17 @@ const recentPosts = posts.slice(1);
           {featuredPost && (
             <a 
               href={`/blog/${featuredPost.slug.current}`}
-              class="group block relative overflow-hidden rounded-[2rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500 mb-12"
+              class="group block relative overflow-hidden rounded-4xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 mb-12"
             >
               <div class="grid lg:grid-cols-2">
                 {featuredPost.mainImage?.asset ? (
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                  <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden">
                     <img 
                       src={urlFor(featuredPost.mainImage).width(900).height(600).url()} 
                       alt={featuredPost.mainImage.alt || featuredPost.title}
                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent lg:bg-gradient-to-r"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-ink/60 via-ink/20 to-transparent lg:bg-linear-to-r"></div>
                     <div class="absolute bottom-6 left-6 lg:hidden">
                       <span class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
                         Featured
@@ -80,7 +80,7 @@ const recentPosts = posts.slice(1);
                     </div>
                   </div>
                 ) : (
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden bg-gradient-to-br from-ocean/20 to-primary/10">
+                  <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden bg-linear-to-br from-ocean/20 to-primary/10">
                     <div class="absolute inset-0 flex items-center justify-center">
                       <span class="text-6xl opacity-20">📝</span>
                     </div>
@@ -145,7 +145,7 @@ const recentPosts = posts.slice(1);
                   class="group block relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
                 >
                   {post.mainImage?.asset ? (
-                    <div class="aspect-[16/10] relative overflow-hidden">
+                    <div class="aspect-16/10 relative overflow-hidden">
                       <img 
                         src={urlFor(post.mainImage).width(600).height(375).url()} 
                         alt={post.mainImage.alt || post.title}
@@ -153,7 +153,7 @@ const recentPosts = posts.slice(1);
                       />
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-coral/20 to-accent/10">
+                    <div class="aspect-16/10 relative overflow-hidden bg-linear-to-br from-coral/20 to-accent/10">
                       <div class="absolute inset-0 flex items-center justify-center">
                         <span class="text-4xl opacity-20">📝</span>
                       </div>
@@ -205,8 +205,8 @@ const recentPosts = posts.slice(1);
       
       <section class="py-16 lg:py-24 relative section-ruled">
         <div class="container mx-auto max-w-7xl px-6">
-          <div class="relative overflow-hidden rounded-[2rem] bg-ink text-white">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+          <div class="relative overflow-hidden rounded-4xl bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
             <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
             
             <div class="relative z-10 p-10 lg:p-16 text-center">

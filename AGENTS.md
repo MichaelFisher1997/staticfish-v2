@@ -151,7 +151,7 @@ export interface ButtonProps extends VariantProps<typeof buttonVariants> {
 
 **Glass Card:**
 ```html
-<div class="glass-card p-8 rounded-[2rem]">...</div>
+<div class="glass-card p-8 rounded-4xl">...</div>
 ```
 
 **Responsive Grid:**

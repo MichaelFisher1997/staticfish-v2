@@ -111,7 +111,7 @@ const services = [
                 <!-- Floating cards -->
                 <div class="absolute -top-4 -left-4 w-72 glass rounded-2xl p-5 animate-float shadow-xl">
                   <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white">
+                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-ocean to-primary flex items-center justify-center text-white">
                       <Zap className="h-6 w-6" />
                     </div>
                     <div>
@@ -123,7 +123,7 @@ const services = [
                 
                 <div class="absolute top-24 left-20 w-72 glass rounded-2xl p-5 animate-float-slow shadow-xl" style="animation-delay: 1s">
                   <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-coral to-accent flex items-center justify-center text-white">
+                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-coral to-accent flex items-center justify-center text-white">
                       <Banknote className="h-6 w-6" />
                     </div>
                     <div>
@@ -135,7 +135,7 @@ const services = [
                 
                 <div class="absolute top-52 left-4 w-72 glass rounded-2xl p-5 animate-float shadow-xl" style="animation-delay: 2s">
                   <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sand-dark to-sand flex items-center justify-center text-ink">
+                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-sand-dark to-sand flex items-center justify-center text-ink">
                       <Shield className="h-6 w-6" />
                     </div>
                     <div>
@@ -242,7 +242,7 @@ const services = [
       <section class="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden">
         
         <!-- Background pattern -->
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-50"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-size-[60px_60px] opacity-50"></div>
         
         <div class="container relative z-10 mx-auto max-w-7xl px-6">
           <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12">
@@ -269,13 +269,13 @@ const services = [
               >
                 <div class="grid lg:grid-cols-2">
                   <!-- Image -->
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                  <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden">
                     <img 
                       src={item.image} 
                       alt={item.title}
                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent lg:bg-gradient-to-r"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-ink/40 to-transparent lg:bg-linear-to-r"></div>
                   </div>
                   
                   <!-- Content -->
@@ -306,10 +306,10 @@ const services = [
       <!-- ============================================ -->
       <section class="py-24 lg:py-32 relative">
         <div class="container mx-auto max-w-7xl px-6">
-          <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
+          <div class="relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-ink text-white">
             
             <!-- Background effects -->
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
             <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
             <div class="blob-coral w-[30vw] h-[30vw] -bottom-[10%] -left-[10%] opacity-15"></div>
             
