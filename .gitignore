@@ -23,3 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 Kimi_Agent_Small Org CMS Shift/
+
+# e2e test results
+e2e/test-results/

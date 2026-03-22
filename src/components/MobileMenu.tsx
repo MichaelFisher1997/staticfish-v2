@@ -44,7 +44,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
 
       {isMounted && createPortal(
         <div
-          className={`fixed inset-0 z-[60] bg-background/98 backdrop-blur-xl transition-all duration-500 ease-out-expo flex flex-col ${
+          className={`fixed inset-0 z-60 bg-background/98 backdrop-blur-xl transition-all duration-500 ease-out-expo flex flex-col ${
             isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         >

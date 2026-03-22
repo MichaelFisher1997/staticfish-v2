@@ -161,10 +161,10 @@ const processSteps = [
                   
                   <div class="flex items-start justify-between mb-6">
                     <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg ${
-                      service.color === 'ocean' ? 'bg-gradient-to-br from-ocean to-primary shadow-ocean/20' :
-                      service.color === 'coral' ? 'bg-gradient-to-br from-coral to-accent shadow-coral/20' :
-                      service.color === 'ink' ? 'bg-gradient-to-br from-ink to-slate-700 shadow-ink/20' :
-                      'bg-gradient-to-br from-primary to-ocean shadow-primary/20'
+                      service.color === 'ocean' ? 'bg-linear-to-br from-ocean to-primary shadow-ocean/20' :
+                      service.color === 'coral' ? 'bg-linear-to-br from-coral to-accent shadow-coral/20' :
+                      service.color === 'ink' ? 'bg-linear-to-br from-ink to-slate-700 shadow-ink/20' :
+                      'bg-linear-to-br from-primary to-ocean shadow-primary/20'
                     }`}>
                       <service.icon className="h-7 w-7" />
                     </div>
@@ -193,7 +193,7 @@ const processSteps = [
                   <ul class="space-y-2.5 mb-8">
                     {service.features.map(feature => (
                       <li class="flex items-start gap-3">
-                        <div class={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                        <div class={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
                           service.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
                           service.color === 'coral' ? 'bg-coral/10 text-coral' :
                           service.color === 'ink' ? 'bg-ink/10 text-ink' :
@@ -229,7 +229,7 @@ const processSteps = [
 
         <!-- Process Section -->
         <section class="py-24 bg-secondary/30 relative overflow-hidden">
-          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-50"></div>
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-size-[60px_60px] opacity-50"></div>
           
           <div class="container relative z-10 mx-auto max-w-7xl px-6">
             
@@ -266,7 +266,7 @@ const processSteps = [
                   
                   <div class="space-y-6">
                     <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-ocean/10 flex items-center justify-center flex-shrink-0">
+                      <div class="w-12 h-12 rounded-xl bg-ocean/10 flex items-center justify-center shrink-0">
                         <Check className="h-6 w-6 text-ocean" />
                       </div>
                       <div>
@@ -276,7 +276,7 @@ const processSteps = [
                     </div>
                     
                     <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <Check className="h-6 w-6 text-primary" />
                       </div>
                       <div>
@@ -286,7 +286,7 @@ const processSteps = [
                     </div>
                     
                     <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center flex-shrink-0">
+                      <div class="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center shrink-0">
                         <Check className="h-6 w-6 text-coral" />
                       </div>
                       <div>

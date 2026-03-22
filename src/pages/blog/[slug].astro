@@ -126,7 +126,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
     
     <!-- Reading Progress Bar -->
     <div class="fixed top-0 left-0 right-0 h-1 bg-secondary z-50">
-      <div id="reading-progress" class="h-full bg-gradient-to-r from-ocean via-primary to-coral transition-all duration-150" style="width: 0%"></div>
+      <div id="reading-progress" class="h-full bg-linear-to-r from-ocean via-primary to-coral transition-all duration-150" style="width: 0%"></div>
     </div>
     
     <main class="flex-1 pt-28">
@@ -174,7 +174,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border/50">
               {post.authorName && (
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-ocean to-primary flex items-center justify-center text-white font-bold text-sm">
+                  <div class="w-10 h-10 rounded-full bg-linear-to-br from-ocean to-primary flex items-center justify-center text-white font-bold text-sm">
                     {post.authorName.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
@@ -212,7 +212,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   alt={post.mainImage.alt || post.title}
                   class="absolute inset-0 w-full h-full object-cover"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-linear-to-t from-ink/30 via-transparent to-transparent"></div>
               </div>
             </div>
           </div>
@@ -259,9 +259,9 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                       {img.caption && (
                         <figcaption class="mt-4 text-center text-sm text-muted-foreground">
                           <span class="inline-flex items-center gap-2">
-                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-border"></span>
+                            <span class="w-8 h-px bg-linear-to-r from-transparent to-border"></span>
                             {img.caption}
-                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-border"></span>
+                            <span class="w-8 h-px bg-linear-to-l from-transparent to-border"></span>
                           </span>
                         </figcaption>
                       )}
@@ -326,7 +326,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
       <!-- Related Articles -->
       {relatedPosts.length > 0 && (
         <section class="py-20 lg:py-24 bg-secondary/30 relative overflow-hidden">
-          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-50"></div>
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-size-[60px_60px] opacity-50"></div>
           
           <div class="container mx-auto max-w-7xl px-6 relative z-10">
             <div class="flex items-end justify-between mb-12">
@@ -350,16 +350,16 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   class="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-500"
                 >
                   {relatedPost.mainImage?.asset ? (
-                    <div class="aspect-[16/10] relative overflow-hidden">
+                    <div class="aspect-16/10 relative overflow-hidden">
                       <img 
                         src={urlFor(relatedPost.mainImage).width(500).height(312).url()} 
                         alt={relatedPost.mainImage.alt || relatedPost.title}
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div class="absolute inset-0 bg-linear-to-t from-ink/60 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-ocean/20 via-primary/10 to-coral/20">
+                    <div class="aspect-16/10 relative overflow-hidden bg-linear-to-br from-ocean/20 via-primary/10 to-coral/20">
                       <div class="absolute inset-0 flex items-center justify-center">
                         <span class="text-5xl opacity-30">📝</span>
                       </div>

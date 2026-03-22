@@ -56,16 +56,16 @@ const projects = [
            
           <div class="grid grid-cols-1 gap-12 lg:gap-16">
               {projects.map((item) => (
-                <div class="group relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div class="group relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
                   <div class="grid lg:grid-cols-2">
                     <!-- Image -->
-                    <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
+                    <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden">
                       <img 
                         src={item.image} 
                         alt={item.title} 
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-ink/30 to-transparent lg:bg-gradient-to-r"></div>
+                      <div class="absolute inset-0 bg-linear-to-t from-ink/30 to-transparent lg:bg-linear-to-r"></div>
                     </div>
                     
                     <!-- Content -->
@@ -125,8 +125,8 @@ const projects = [
       <!-- CTA -->
       <section class="py-16 lg:py-24">
         <div class="container mx-auto max-w-7xl px-6">
-          <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-ink text-white">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30"></div>
+          <div class="relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-ink text-white">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
             <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
             
             <div class="relative z-10 p-10 lg:p-20 text-center">
