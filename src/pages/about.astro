@@ -12,29 +12,28 @@ import {
   Code,
   ArrowRight,
 } from 'lucide-react';
+import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
+import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
 
 const values = [
   {
     icon: Zap,
     title: "Built for Speed",
     description:
-      "Every site I build loads fast. I focus on performance because your visitors won't wait around.",
-    color: "ocean"
+      "Every site I build loads fast. I focus on performance because your visitors won't wait around."
   },
   {
     icon: Shield,
     title: "Simple & Reliable",
     description:
-      "I use modern tools with fewer moving parts. Less to go wrong means less to worry about.",
-    color: "primary"
+      "I use modern tools with fewer moving parts. Less to go wrong means less to worry about."
   },
   {
     icon: DollarSign,
     title: "Clear Pricing",
     description:
-      "One price upfront. Set monthly fee. No hourly billing, no surprise charges.",
-    color: "coral"
-  },
+      "One price upfront. Set monthly fee. No hourly billing, no surprise charges."
+  }
 ];
 
 const expertise = [
@@ -50,213 +49,201 @@ const milestones = [
     year: "2025",
     title: "Staticfish Founded",
     description:
-      "Started with a simple idea: help small businesses get online without paying agency prices or wrestling with complex systems.",
+      "Started with a simple idea: help small businesses get online without paying agency prices or wrestling with complex systems."
   },
   {
     year: "2026",
     title: "Chattybox AI Launch",
     description:
-      "Built and launched an AI platform, demonstrating that I can handle complex projects when the need arises.",
+      "Built and launched an AI platform, demonstrating that I can handle complex projects when the need arises."
   },
   {
     year: "2026",
     title: "Redot Engine Website",
     description:
-      "Contributed a new website for Redot, an open-source game engine. Pro bono work to support the developer community.",
-  },
+      "Contributed a new website for Redot, an open-source game engine. Pro bono work to support the developer community."
+  }
 ];
 ---
 
 <Layout title="About Staticfish | Solo Developer for Small Businesses" description="Meet Michael Fisher, the solo developer behind Staticfish. Building fast, secure websites for small businesses with transparent pricing.">
-  <div class="min-h-screen flex flex-col overflow-x-hidden">
+  <div class="min-h-screen flex flex-col bg-background">
     <Header />
-    <main class="flex-1 pt-28">
-        
-        <!-- Background Elements -->
-        <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div class="blob-ocean w-[60vw] h-[60vw] top-[0%] right-[10%]"></div>
-          <div class="blob-coral w-[40vw] h-[40vw] bottom-[20%] left-[5%]"></div>
+    
+    <main class="flex-1">
+      
+      <!-- Header -->
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <FlowingLines count={8} />
+        <CornerWaves position="bottom-right" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-3xl">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">About</p>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
+              One Person.
+              <br/>
+              <span class="text-accent">Real Craftsmanship.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              I'm Michael Fisher, the solo developer behind Staticfish. No account managers, no junior developers—just me building your website with care and attention.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <!-- Header -->
-        <section class="py-16 lg:py-24 relative text-center">
-            <div class="container mx-auto max-w-3xl px-6">
-               <span class="badge-coral mb-6">About</span>
-               <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
-                 One Person.<br/>
-                 <span class="text-gradient-ocean">Real Craftsmanship.</span>
-               </h1>
-               <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                 I'm Michael Fisher, the solo developer behind Staticfish. No account managers, no junior developers—just me building your website with care and attention.
-               </p>
-            </div>
-        </section>
-
-        <div class="container mx-auto max-w-7xl px-6 space-y-24 lg:space-y-32">
-          
-          <!-- Mission Section -->
-          <section>
-            <div class="card-elevated rounded-4xl lg:rounded-[3rem] p-8 lg:p-16">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  <div>
-                    <span class="badge-ocean mb-6">Why I Started</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-ink font-display tracking-tight mb-8">
-                      A Better Way to Build
-                    </h2>
-                    <div class="space-y-6 text-muted-foreground leading-relaxed">
-                      <p>
-                        I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
-                      </p>
-                      <p>
-                        I started Staticfish to offer something different: websites built with modern tools that are faster to build and cheaper to host. I pass those savings on to you.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="aspect-square bg-linear-to-br from-ocean/10 via-primary/5 to-coral/10 rounded-2xl lg:rounded-3xl flex items-center justify-center relative overflow-hidden group">
-                     <div class="absolute inset-0 bg-linear-to-br from-ocean/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                     <Target className="w-24 h-24 lg:w-32 lg:h-32 text-ocean/80 transition-transform duration-500 group-hover:scale-110" />
-                  </div>
-                </div>
-            </div>
-          </section>
-
-          <!-- My Values -->
-          <section>
-            <div class="text-center mb-12 lg:mb-16">
-              <span class="badge-ocean mb-4">How I Work</span>
-              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">
-                My Principles.
+      <div class="container mx-auto max-w-7xl px-6 space-y-20 lg:space-y-32">
+        
+        <!-- Mission Section -->
+        <section class="border-t border-border pt-20 relative overflow-hidden">
+          <GeometricArt variant="circles" />
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Why I Started</p>
+              <h2 class="text-3xl sm:text-4xl font-bold text-foreground font-display tracking-tight mb-8">
+                A Better Way to Build
               </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {values.map((value) => (
-                <div class="card-elevated p-8 lg:p-10 text-center group hover:-translate-y-1 transition-transform duration-300">
-                    <div class={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 ${
-                      value.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
-                      value.color === 'coral' ? 'bg-coral/10 text-coral' :
-                      'bg-primary/10 text-primary'
-                    }`}>
-                      <value.icon className="h-8 w-8" />
-                    </div>
-                    <h3 class="text-xl font-bold text-ink font-display mb-3">{value.title}</h3>
-                    <p class="text-muted-foreground leading-relaxed text-sm">
-                      {value.description}
-                    </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <!-- About Me -->
-          <section>
-            <div class="card-elevated rounded-4xl p-8 lg:p-12 flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
-               <div class="w-28 h-28 lg:w-32 lg:h-32 rounded-2xl bg-linear-to-br from-ocean to-primary flex items-center justify-center text-white text-4xl lg:text-5xl font-bold font-display shadow-xl shadow-ocean/20 shrink-0">
-                  M
-               </div>
-               
-               <div class="flex-1 text-center md:text-left">
-                  <div class="mb-4">
-                    <h3 class="text-2xl lg:text-3xl font-bold text-ink font-display tracking-tight">
-                      Michael Fisher
-                    </h3>
-                    <p class="text-primary font-bold text-xs uppercase tracking-widest mt-1">Founder & Developer</p>
-                  </div>
-                  
-                  <p class="text-muted-foreground leading-relaxed mb-6">
-                    I've spent years building everything from simple marketing sites to complex platforms. 
-                    Now I'm focused on helping small businesses get online properly — professional quality, fair price, no fluff.
-                  </p>
-
-                  <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
-                      {expertise.map((skill) => (
-                        <span class="text-[10px] bg-secondary text-muted-foreground px-3 py-1.5 rounded-full font-semibold uppercase tracking-wide">
-                          {skill}
-                        </span>
-                      ))}
-                  </div>
-                  
-                  <div class="flex gap-6 justify-center md:justify-start text-sm text-muted-foreground">
-                    <div class="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-primary" />
-                        <span>UK Based</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <Code className="h-4 w-4 text-primary" />
-                        <span>5+ Years</span>
-                    </div>
-                  </div>
-               </div>
-            </div>
-          </section>
-
-          <!-- Timeline -->
-          <section>
-            <div class="text-center mb-12 lg:mb-16">
-              <span class="badge-ocean mb-4">The Journey</span>
-              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">
-                So Far.
-              </h2>
-            </div>
-
-            <div class="relative max-w-3xl mx-auto">
-              <div class="absolute left-8 top-0 bottom-0 w-px bg-border"></div>
-
-              <div class="space-y-12">
-                {milestones.map((milestone) => (
-                  <div class="relative flex items-start gap-12 pl-4">
-                    <div class="w-8 h-8 bg-white border-2 border-primary rounded-xl flex items-center justify-center relative z-10 shadow-md">
-                      <div class="w-2.5 h-2.5 bg-primary rounded-sm"></div>
-                    </div>
-                    <div class="flex-1 pt-1">
-                      <div class="flex items-center gap-4 mb-3">
-                        <span class="text-2xl font-extrabold text-primary font-display tracking-tighter">
-                          {milestone.year}
-                        </span>
-                        <h3 class="text-lg font-bold text-ink font-display uppercase tracking-tight">
-                          {milestone.title}
-                        </h3>
-                      </div>
-                      <p class="text-muted-foreground leading-relaxed text-sm">
-                        {milestone.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+              <div class="space-y-6 text-muted-foreground leading-relaxed">
+                <p>
+                  I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
+                </p>
+                <p>
+                  I started Staticfish to offer something different: websites built with modern tools that are faster to build and cheaper to host. I pass those savings on to you.
+                </p>
               </div>
             </div>
-          </section>
+            <div class="aspect-square bg-secondary/30 border border-border flex items-center justify-center">
+              <Target className="w-24 h-24 lg:w-32 lg:h-32 text-accent/60" />
+            </div>
+          </div>
+        </section>
 
-          <!-- CTA -->
-          <div class="text-center relative overflow-hidden py-20 rounded-4xl bg-ink text-white">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
-            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
+        <!-- My Values -->
+        <section class="border-t border-border pt-20 relative overflow-hidden">
+          <FloatingShapes />
+          <div class="relative z-10">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">How I Work</p>
+          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">
+            My Principles.
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+            {values.map((value) => (
+              <div class="bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors relative overflow-hidden">
+                <div class="deco-dots absolute inset-0"></div>
+                <div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-6 text-accent">
+                  <value.icon className="h-6 w-6" />
+                </div>
+                <h3 class="text-xl font-bold text-foreground font-display mb-3">{value.title}</h3>
+                <p class="text-muted-foreground leading-relaxed text-sm">
+                  {value.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- About Me -->
+        <section class="border-t border-border pt-20">
+          <div class="border border-border p-8 lg:p-12 flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
+            <div class="w-28 h-28 lg:w-32 lg:h-32 bg-accent/10 flex items-center justify-center text-accent text-4xl lg:text-5xl font-bold font-display shrink-0">
+              M
+            </div>
             
-            <div class="relative z-10 px-6">
-              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Ready?</span>
-              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6">
-                Let's Work<br/>
-                <span class="text-gradient-warm">Together.</span>
-              </h2>
-              <p class="text-lg text-white/70 mb-10 max-w-lg mx-auto">
-                I'd love to learn about your project. Let's chat about how I can help.
+            <div class="flex-1 text-center md:text-left">
+              <div class="mb-4">
+                <h3 class="text-2xl lg:text-3xl font-bold text-foreground font-display tracking-tight">
+                  Michael Fisher
+                </h3>
+                <p class="text-accent font-bold text-xs uppercase tracking-widest mt-1">Founder & Developer</p>
+              </div>
+              
+              <p class="text-muted-foreground leading-relaxed mb-6">
+                I've spent years building everything from simple marketing sites to complex platforms. 
+                Now I'm focused on helping small businesses get online properly — professional quality, fair price, no fluff.
               </p>
-              <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl shadow-xl">
-                  <a href="/contact" class="flex items-center gap-2">
-                    Start Your Project <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 rounded-xl">
-                  <a href="/portfolio">See My Work</a>
-                </Button>
+
+              <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
+                {expertise.map((skill) => (
+                  <span class="text-xs bg-secondary text-muted-foreground px-3 py-1.5 font-semibold uppercase tracking-wide">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="flex gap-6 justify-center md:justify-start text-sm text-muted-foreground">
+                <div class="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-accent" />
+                  <span>UK Based</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Code className="h-4 w-4 text-accent" />
+                  <span>5+ Years</span>
+                </div>
               </div>
             </div>
           </div>
+        </section>
 
-        </div>
-        
-        <div class="py-16"></div>
+        <!-- Timeline -->
+        <section class="border-t border-border pt-20 relative overflow-hidden">
+          <GeometricArt variant="lines" />
+          <div class="relative z-10">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">The Journey</p>
+          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">
+            So Far.
+          </h2>
+
+          <div class="border-t border-border">
+            {milestones.map((milestone) => (
+              <div class="border-b border-border py-10">
+                <div class="grid grid-cols-12 gap-6 items-start">
+                  <div class="col-span-12 sm:col-span-2">
+                    <span class="text-2xl font-bold text-accent font-display tracking-tighter">
+                      {milestone.year}
+                    </span>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <h3 class="text-lg font-bold text-foreground font-display uppercase tracking-tight">
+                      {milestone.title}
+                    </h3>
+                  </div>
+                  <div class="col-span-12 sm:col-span-6">
+                    <p class="text-muted-foreground leading-relaxed text-sm">
+                      {milestone.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="border-t border-border pt-20 pb-20 relative overflow-hidden">
+          <WaveBackground variant="teal" opacity={0.12} />
+          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative z-10">
+            <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Ready?</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
+              Let's Work
+              <span class="text-accent">Together.</span>
+            </h2>
+            <p class="text-lg text-background/70 mb-10 max-w-lg mx-auto">
+              I'd love to learn about your project. Let's chat about how I can help.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
+                <a href="/contact" class="flex items-center gap-2">
+                  Start Your Project <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="outline" className="rounded-none h-12 px-8 border-background/20 text-background hover:bg-background/10">
+                <a href="/portfolio">See My Work</a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </main>
     <Footer />
   </div>

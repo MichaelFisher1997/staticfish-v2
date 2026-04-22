@@ -2,15 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
 import sanity from '@sanity/astro';
 
-// https://astro.build/config
+// Dev config (no Cloudflare adapter - workerd binds to 127.0.0.1 which breaks Docker networking)
+// Production builds use astro.prod.config.mjs with the Cloudflare adapter
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare({
-    imageService: 'compile',
-  }),
   integrations: [
     react(),
     sanity({
@@ -26,7 +23,9 @@ export default defineConfig({
       external: ['node:buffer'],
     },
     server: {
-      allowedHosts: ['staticfish-1.silverside-gopher.ts.net'],
+      host: '0.0.0.0',
+      port: 5050,
+      allowedHosts: ['staticfish-2.silverside-gopher.ts.net'],
     },
   },
 });

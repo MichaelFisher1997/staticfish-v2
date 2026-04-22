@@ -23,12 +23,10 @@ function parseRow(block: any): string[] {
 
 const parsedRows = rows.map(parseRow);
 
-// Check if first row is a header (look for a separator pattern in the second row)
 let hasHeader = false;
 if (parsedRows.length >= 2) {
   const secondRowText = rows[1]?.children?.map((child: any) => child.text).join("") || "";
-  // Check if second row is just separators (|---|)
-  if (/^[|\s\-]+$/.test(secondRowText.trim())) {
+  if (/^[|\s-]+$/.test(secondRowText.trim())) {
     hasHeader = true;
   }
 }
@@ -37,16 +35,16 @@ const header = hasHeader ? parsedRows[0] : null;
 const dataRows = hasHeader ? parsedRows.slice(2) : parsedRows;
 ---
 
-<div class="my-8 overflow-hidden rounded-lg border border-border shadow-xs">
+<div class="my-8 overflow-hidden rounded-lg border border-border">
   <table class="w-full text-sm border-collapse">
     {header && (
       <thead>
-        <tr class="bg-secondary border-b-2 border-border">
+        <tr class="bg-secondary border-b border-border">
           {header.map((cell: string) => {
             const bold = isBold(cell);
             const displayText = bold ? cleanBold(cell) : cell;
             return (
-              <th class="text-left py-3 px-4 font-semibold text-ink border-r border-border last:border-r-0">
+              <th class="text-left py-3 px-4 font-semibold text-foreground border-r border-border last:border-r-0">
                 {displayText}
               </th>
             );
@@ -64,7 +62,7 @@ const dataRows = hasHeader ? parsedRows.slice(2) : parsedRows;
             const isFirstCol = cellIdx === 0;
             return (
               <td 
-                class={`py-3 px-4 border-r border-border last:border-r-0 ${isFirstCol ? 'font-medium text-ink' : 'text-muted-foreground'}`}
+                class={`py-3 px-4 border-r border-border last:border-r-0 ${isFirstCol ? 'font-medium text-foreground' : 'text-muted-foreground'}`}
               >
                 {displayText}
               </td>

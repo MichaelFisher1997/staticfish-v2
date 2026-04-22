@@ -3,232 +3,187 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { ArrowRight, Zap, Shield, Banknote, Globe, Layers, ShoppingCart, ExternalLink } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { SeigaihaBackground, WaveBands, JapaneseWaveCorner } from '../components/WaveArt';
 
-const portfolioItems = [
+const projects = [
   {
     title: "Redot Engine",
-    category: "Open Source",
+    category: "Community Platform",
     image: "/portfolio-redot.png",
     url: "https://www.redotengine.org/",
-    description: "Website for an open-source game engine project"
+  },
+  {
+    title: "Chattybox AI",
+    category: "SaaS Platform",
+    image: "/portfolio-chattybox.png",
+    url: "https://chattybox.ai/",
   }
 ];
 
 const services = [
   {
+    num: "01",
     title: "Static Website",
-    priceGbp: 149,
-    icon: Globe,
-    color: "ocean",
-    description: "Up to 5 pages, blazing fast, includes hosting",
-    features: ["Mobile responsive", "Contact form", "Basic SEO", "SSL included"]
+    price: "£149",
+    desc: "Up to 5 pages. Perfect for businesses that want a professional presence without ongoing updates."
   },
   {
+    num: "02",
     title: "CMS Website",
-    priceGbp: 249,
-    icon: Layers,
-    color: "primary",
-    description: "Unlimited pages, easy content editor, blog",
-    features: ["2 admin users", "Content scheduling", "No page limits", "Blog included"],
-    featured: true
+    price: "£249",
+    desc: "Unlimited pages with an easy editor. Update your own content whenever you need."
   },
   {
+    num: "03",
     title: "E-Commerce",
-    priceGbp: 399,
-    icon: ShoppingCart,
-    color: "coral",
-    description: "Sell online with PayPal/Stripe, unlimited products",
-    features: ["Multicurrency", "Order management", "Inventory tracking", "Payment setup"]
+    price: "£399",
+    desc: "Sell online with secure payments. Full store management included."
   }
 ];
 ---
 
-<Layout title="Staticfish | Fast, Affordable Websites for Small Businesses" description="Professional web development for small businesses and organizations. Fixed pricing, no hidden fees, fast and reliable websites.">
-  <div class="min-h-screen flex flex-col selection:bg-primary selection:text-white overflow-x-hidden">
+<Layout title="Staticfish | Websites for Small Businesses" description="Professional web development for small businesses. Fixed pricing, fast delivery, no hidden costs.">
+  <div class="min-h-screen flex flex-col bg-background">
     
     <Header />
     
-    <main class="flex-1 pt-28">
+    <main class="flex-1">
       
-      <!-- ============================================ -->
-      <!-- HERO SECTION -->
-      <!-- ============================================ -->
-      <section class="relative min-h-[90vh] flex items-center overflow-hidden">
-        
-        <!-- Background elements -->
-        <div class="blob-ocean w-[60vw] h-[60vw] -top-[20%] -right-[20%] animate-pulse-soft"></div>
-        <div class="blob-sand w-[50vw] h-[50vw] -bottom-[20%] -left-[10%] animate-pulse-soft" style="animation-delay: 2s"></div>
-        <div class="blob-coral w-[30vw] h-[30vw] top-[30%] right-[10%] animate-pulse-soft" style="animation-delay: 4s"></div>
-        
-        <div class="container relative z-10 mx-auto max-w-7xl px-6">
-          <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <!-- HERO WITH WAVES -->
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <SeigaihaBackground opacity={0.15} />
+        <JapaneseWaveCorner position="bottom-right" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid lg:grid-cols-12 gap-12 items-end">
             
-            <!-- Left: Main content -->
-            <div class="lg:col-span-7 space-y-8">
+            <div class="lg:col-span-7">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+                Web Development Studio
+              </p>
               
-              <!-- Badge -->
-              <div class="opacity-0 animate-fade-up stagger-1">
-                <span class="badge-ocean">
-                  Web Development for Small Businesses
-                </span>
-              </div>
-
-              <!-- Headline -->
-              <h1 class="font-display opacity-0 animate-fade-up stagger-2">
-                <span class="block text-ink text-5xl sm:text-6xl lg:text-7xl xl:text-display-xl font-extrabold tracking-tighter leading-[0.9]">
-                  Websites That
-                </span>
-                <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-display-xl font-extrabold tracking-tighter leading-[0.9] text-gradient-ocean mt-2">
-                  Actually Work.
-                </span>
+              <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground mb-8">
+                We build
+                <span class="block">websites that</span>
+                <span class="block text-accent">work.</span>
               </h1>
               
-              <!-- Subheadline -->
-              <p class="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed opacity-0 animate-fade-up stagger-3">
-                Professional websites at a fair price. No agency fluff, no DIY headaches. 
-                One price upfront, no surprise costs.
+              <p class="text-lg text-muted-foreground max-w-md leading-relaxed mb-10">
+                No agency fluff. No DIY headaches. Just fast, professional websites that bring you customers.
               </p>
               
-              <!-- CTAs -->
-              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 opacity-0 animate-fade-up stagger-4">
-                <Button size="lg" className="bg-ink text-white hover:bg-primary shadow-xl shadow-ink/10 hover:shadow-primary/20 -translate-y-1 hover:-translate-y-1.5 transition-all duration-300">
+              <div class="flex items-center gap-6">
+                <Button className="rounded-none px-8 h-12 font-semibold">
                   <a href="/contact" class="flex items-center gap-2">
-                    Get Your Quote <ArrowRight className="h-4 w-4" />
+                    Get a Quote <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-ink">
-                  <a href="/portfolio" class="flex items-center gap-2">
-                    See My Work
-                  </a>
-                </Button>
+                <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  View Our Work
+                </a>
               </div>
             </div>
             
-            <!-- Right: Stats/Trust signals -->
-            <div class="lg:col-span-5 opacity-0 animate-fade-up stagger-5">
+            <div class="lg:col-span-5">
               <div class="relative">
-                <!-- Floating cards -->
-                <div class="absolute -top-4 -left-4 w-72 glass rounded-2xl p-5 animate-float shadow-xl">
-                  <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-ocean to-primary flex items-center justify-center text-white">
-                      <Zap className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div class="text-2xl font-bold text-ink font-display">Fast</div>
-                      <div class="text-sm text-muted-foreground">Built for speed</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="absolute top-24 left-20 w-72 glass rounded-2xl p-5 animate-float-slow shadow-xl" style="animation-delay: 1s">
-                  <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-coral to-accent flex items-center justify-center text-white">
-                      <Banknote className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div class="text-2xl font-bold text-ink font-display">£149</div>
-                      <div class="text-sm text-muted-foreground">Starting price</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="absolute top-52 left-4 w-72 glass rounded-2xl p-5 animate-float shadow-xl" style="animation-delay: 2s">
-                  <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-linear-to-br from-sand-dark to-sand flex items-center justify-center text-ink">
-                      <Shield className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div class="text-2xl font-bold text-ink font-display">Less</div>
-                      <div class="text-sm text-muted-foreground">To go wrong</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Spacer for layout -->
-                <div class="h-72 lg:h-80"></div>
+                <img 
+                  src="/illustrations/hero-abstract.svg" 
+                  alt="Website building illustration"
+                  class="w-full h-auto"
+                />
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Bottom wave decoration -->
-        <div class="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-          <svg class="absolute bottom-0 w-full h-full" viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path 
-              fill="hsl(var(--background))" 
-              fill-opacity="1"
-              d="M0,40 C360,100 1080,0 1440,60 L1440,100 L0,100 Z"
-            />
-          </svg>
+      </section>
+
+      <!-- STATS BAR -->
+      <section class="py-12 border-t border-border">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div class="text-5xl font-bold font-display tracking-tighter">50+</div>
+              <div class="text-sm text-muted-foreground mt-1">Projects Delivered</div>
+            </div>
+            <div class="md:border-l md:border-border md:pl-8">
+              <div class="text-5xl font-bold font-display tracking-tighter">2 Weeks</div>
+              <div class="text-sm text-muted-foreground mt-1">Average Delivery</div>
+            </div>
+            <div class="md:border-l md:border-border md:pl-8">
+              <div class="text-5xl font-bold font-display tracking-tighter">£149</div>
+              <div class="text-sm text-muted-foreground mt-1">Starting Price</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- ============================================ -->
-      <!-- SERVICES SECTION -->
-      <!-- ============================================ -->
-      <section class="py-24 lg:py-32 relative section-ruled">
-        <div class="container mx-auto max-w-7xl px-6">
+      <!-- SELECTED WORK WITH FLOWING LINES -->
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <WaveBands variant="teal" />
+        
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
           
-          <div class="max-w-2xl mb-16 lg:mb-20">
-            <span class="badge-coral mb-6">What I Build</span>
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink font-display tracking-tighter mb-6">
-              Three Simple Options.
-            </h2>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Every project includes hosting, security, and support. Pick what fits your needs—no upselling, no confusion.
-            </p>
+          <div class="flex items-baseline justify-between mb-12">
+            <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">Selected Work</h2>
+            <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
+              View All Projects
+            </a>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {services.map((service, index) => (
+          <div class="grid md:grid-cols-2 gap-px bg-border">
+            {projects.map((project) => (
+              <a 
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block bg-background hover:bg-secondary/30 transition-colors"
+              >
+                <div class="aspect-[16/10] overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div class="p-6 flex items-start justify-between">
+                  <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-accent">{project.category}</span>
+                    <h3 class="text-xl font-bold font-display mt-1">{project.title}</h3>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="py-20 border-t border-border">
+        <div class="container mx-auto max-w-7xl px-6">
+          
+          <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-16">Services</h2>
+
+          <div class="border-t border-border">
+            {services.map((service, i) => (
               <a 
                 href="/pricing" 
-                class={`group relative card-elevated p-8 lg:p-10 flex flex-col hover:no-underline opacity-0 animate-fade-up`}
-                style={`animation-delay: ${(index + 1) * 0.15}s`}
+                class="group block border-b border-border py-10 hover:bg-secondary/20 transition-colors"
               >
-                {service.featured && (
-                  <div class="absolute -top-3 right-6">
-                    <span class="bg-coral text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg shadow-coral/30">
-                      Popular
-                    </span>
+                <div class="grid grid-cols-12 gap-6 items-start">
+                  <div class="col-span-12 sm:col-span-1">
+                    <span class="text-sm font-medium text-muted-foreground">{service.num}</span>
                   </div>
-                )}
-                
-                <!-- Icon -->
-                <div class={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
-                  service.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
-                  service.color === 'coral' ? 'bg-coral/10 text-coral' :
-                  'bg-primary/10 text-primary'
-                }`                }>
-                  <service.icon className="h-7 w-7" />
-                </div>
-                
-                <!-- Content -->
-                <h3 class="text-xl font-bold text-ink font-display mb-2">{service.title}</h3>
-                <div class="flex items-baseline gap-1 mb-4">
-                  <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={service.priceGbp}>£{service.priceGbp}</span>
-                  <span class="text-sm text-muted-foreground">one-time</span>
-                </div>
-                <p class="text-muted-foreground mb-6 text-sm leading-relaxed">{service.description}</p>
-                
-                <!-- Features -->
-                <ul class="space-y-2 mt-auto mb-6">
-                  {service.features.map((feature) => (
-                    <li class="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <!-- Link -->
-                <div class={`flex items-center gap-2 text-sm font-semibold ${
-                  service.color === 'ocean' ? 'text-ocean' :
-                  service.color === 'coral' ? 'text-coral' :
-                  'text-primary'
-                } group-hover:gap-3 transition-all duration-300`}>
-                  Learn more <ArrowRight className="h-4 w-4" />
+                  <div class="col-span-12 sm:col-span-4">
+                    <h3 class="text-2xl font-bold font-display">{service.title}</h3>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <p class="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
+                  </div>
+                  <div class="col-span-12 sm:col-span-3 flex items-center justify-between">
+                    <span class="text-2xl font-bold font-display">{service.price}</span>
+                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  </div>
                 </div>
               </a>
             ))}
@@ -236,94 +191,60 @@ const services = [
         </div>
       </section>
 
-      <!-- ============================================ -->
-      <!-- FEATURED PROJECT -->
-      <!-- ============================================ -->
-      <section class="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden">
+      <!-- TESTIMONIALS WITH WAVES -->
+      <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
+        <WaveBands variant="coral" />
         
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-size-[60px_60px] opacity-50"></div>
-        
-        <div class="container relative z-10 mx-auto max-w-7xl px-6">
-          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12">
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-16">
             <div>
-              <span class="badge-ocean mb-4">Featured Work</span>
-              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">
-                Recent Projects.
+              <span class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6 block">Testimonials</span>
+              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">
+                What our
+                <span class="block">clients say</span>
               </h2>
             </div>
-            <Button variant="outline" className="rounded-xl">
-              <a href="/portfolio" class="flex items-center gap-2">
-                View All Work <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-          
-          <div class="grid gap-8">
-            {portfolioItems.map((item) => (
-              <a 
-                href={item.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="group block relative overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
-              >
-                <div class="grid lg:grid-cols-2">
-                  <!-- Image -->
-                  <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div class="absolute inset-0 bg-linear-to-t from-ink/40 to-transparent lg:bg-linear-to-r"></div>
-                  </div>
-                  
-                  <!-- Content -->
-                  <div class="p-8 lg:p-12 flex flex-col justify-center bg-white relative">
-                    <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <ExternalLink className="h-5 w-5 text-muted-foreground" />
-                    </div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-primary mb-4">{item.category}</span>
-                    <h3 class="text-3xl lg:text-4xl font-bold text-ink font-display tracking-tight mb-4">
-                      {item.title}
-                    </h3>
-                    <p class="text-muted-foreground leading-relaxed mb-6">
-                      {item.description}
-                    </p>
-                    <div class="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all duration-300">
-                      Visit Site <ArrowRight className="h-4 w-4" />
-                    </div>
-                  </div>
-                </div>
-              </a>
-            ))}
+
+            <div class="space-y-12">
+              <blockquote class="border-l-2 border-accent pl-8">
+                <p class="text-xl text-foreground leading-relaxed mb-6">
+                  "Our enquiries doubled in the first month after launch. The site looks professional and loads fast. Worth every penny."
+                </p>
+                <footer>
+                  <strong class="text-foreground">Sarah Mitchell</strong>
+                  <span class="text-muted-foreground"> — Mitchell Landscaping</span>
+                </footer>
+              </blockquote>
+
+              <blockquote class="border-l-2 border-accent pl-8">
+                <p class="text-xl text-foreground leading-relaxed mb-6">
+                  "Exactly what was quoted is exactly what we paid. No hidden fees, no upselling. Refreshing to deal with a team this straightforward."
+                </p>
+                <footer>
+                  <strong class="text-foreground">James Cooper</strong>
+                  <span class="text-muted-foreground"> — Cooper & Sons Plumbing</span>
+                </footer>
+              </blockquote>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ============================================ -->
-      <!-- CTA SECTION -->
-      <!-- ============================================ -->
-      <section class="py-24 lg:py-32 relative">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-ink text-white">
-            
-            <!-- Background effects -->
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
-            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
-            <div class="blob-coral w-[30vw] h-[30vw] -bottom-[10%] -left-[10%] opacity-15"></div>
-            
-            <div class="relative z-10 p-10 lg:p-20 text-center">
-              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Ready to Start?</span>
-              <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tighter mb-6 max-w-3xl mx-auto">
-                Let's Build What<br/>
-                <span class="text-gradient-warm">You Actually Need.</span>
+      <!-- CTA WITH CORNER WAVES -->
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <JapaneseWaveCorner position="top-left" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          
+          <div class="bg-foreground text-background p-12 lg:p-20 relative">
+            <div class="max-w-3xl">
+              <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tighter mb-6">
+                Ready to get started?
               </h2>
-              <p class="text-lg text-white/70 max-w-xl mx-auto mb-10 leading-relaxed">
-                Tell me about your project. I'll give you an honest assessment and a clear price — no pressure, no jargon.
+              <p class="text-lg text-background/70 mb-10 max-w-lg">
+                Get in touch for a free, no-obligation quote. We'll give you an honest assessment and a clear price.
               </p>
-              <Button size="lg" className="h-16 px-12 text-lg bg-white text-ink hover:bg-primary hover:text-white shadow-2xl shadow-black/20 hover:shadow-primary/30 -translate-y-1 hover:-translate-y-2 transition-all duration-300">
-                <a href="/contact">Get a Quote</a>
+              <Button className="rounded-none px-10 h-12 font-semibold bg-accent hover:bg-accent/90 text-white">
+                <a href="/contact">Get Your Free Quote</a>
               </Button>
             </div>
           </div>
@@ -334,31 +255,6 @@ const services = [
     <Footer />
   </div>
 </Layout>
-
-<style>
-  /* Trigger animations on page load */
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-fade-up {
-    animation: fade-up 0.7s ease-out forwards;
-  }
-  
-  /* Stagger delays */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
-</style>
 
 <script>
   function initCurrencyPricing() {
@@ -399,12 +295,6 @@ const services = [
       const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
       const converted = convertPrice(gbp);
       el.textContent = `${symbol}${converted}`;
-    });
-    
-    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
-      const converted = convertPrice(50);
-      const text = el.textContent || "";
-      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
     });
   }
   

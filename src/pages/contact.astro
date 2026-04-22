@@ -3,109 +3,117 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Mail, Clock, ArrowRight } from 'lucide-react';
+import { Mail, Clock } from 'lucide-react';
+import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
+import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
 ---
 
 <Layout title="Contact | Staticfish" description="Get in touch with Staticfish. Email me to discuss your web development project.">
-  <div class="min-h-screen flex flex-col overflow-x-hidden">
+  <div class="min-h-screen flex flex-col bg-background">
     <Header />
-    <main class="flex-1 pt-28">
-        
-        <!-- Background Elements -->
-        <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div class="blob-ocean w-[50vw] h-[50vw] top-[10%] right-[10%]"></div>
-          <div class="blob-sand w-[40vw] h-[40vw] bottom-[20%] left-[5%]"></div>
-        </div>
-
-        <div class="container mx-auto max-w-7xl px-6 py-16 lg:py-24">
-          
-          <!-- Header -->
-          <div class="max-w-2xl mb-16 lg:mb-20">
-            <span class="badge-coral mb-6">Contact</span>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
-              Let's<br/>
-              <span class="text-gradient-ocean">Talk.</span>
+    
+    <main class="flex-1">
+      
+      <!-- Header -->
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <FlowingLines count={8} />
+        <CornerWaves position="bottom-right" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-2xl">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Contact</p>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
+              Let's
+              <span class="text-accent">Talk.</span>
             </h1>
             <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
               Ready to start your project? I'd love to hear from you. Send me an email and I'll respond within 24 hours.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
-            
-            <!-- Email Card -->
-            <div>
-              <div class="card-elevated p-10 lg:p-12 relative overflow-hidden">
-                <div class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-ocean via-primary to-coral"></div>
-                
-                <div class="text-center mb-10">
-                  <div class="w-16 h-16 rounded-2xl bg-ocean/10 flex items-center justify-center mx-auto mb-6 text-ocean">
-                    <Mail className="h-8 w-8" />
-                  </div>
-                  <h2 class="text-2xl font-bold text-ink font-display mb-2">Send an Email</h2>
-                  <p class="text-muted-foreground text-sm">The best way to reach me</p>
-                </div>
-                
-                <a 
-                  href="mailto:contact@staticfish.co.uk" 
-                  class="block text-center text-2xl sm:text-3xl font-bold text-ink font-display hover:text-primary transition-colors tracking-tight mb-8"
-                >
-                  contact@staticfish.co.uk
-                </a>
-                
-                <div class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-secondary text-sm">
-                  <Clock className="h-4 w-4 text-primary" />
-                  <span class="text-muted-foreground">Typical response: Within 24 hours</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- What to Include -->
-            <div>
-              <h3 class="text-xl font-bold text-ink font-display mb-6">What to Include</h3>
+      <div class="container mx-auto max-w-7xl px-6 pb-20 lg:pb-32">
+        
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          
+          <!-- Email Card -->
+          <div class="relative overflow-hidden">
+            <GeometricArt variant="dots" />
+            <div class="border border-border p-10 lg:p-12 relative z-10">
               
-              <div class="space-y-6">
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 rounded-lg bg-ocean/10 flex items-center justify-center text-ocean text-sm font-bold shrink-0">1</div>
-                  <div>
-                    <div class="font-semibold text-ink mb-1">Your Business</div>
-                    <p class="text-sm text-muted-foreground">What do you do? Who are your customers?</p>
-                  </div>
+              <div class="text-center mb-10">
+                <div class="w-14 h-14 bg-accent/10 flex items-center justify-center mx-auto mb-6 text-accent">
+                  <Mail className="h-7 w-7" />
                 </div>
-                
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-sm font-bold shrink-0">2</div>
-                  <div>
-                    <div class="font-semibold text-ink mb-1">Your Goals</div>
-                    <p class="text-sm text-muted-foreground">What do you want the website to achieve?</p>
-                  </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center text-coral text-sm font-bold shrink-0">3</div>
-                  <div>
-                    <div class="font-semibold text-ink mb-1">Timeline</div>
-                    <p class="text-sm text-muted-foreground">When do you need it launched?</p>
-                  </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 rounded-lg bg-ink/10 flex items-center justify-center text-ink text-sm font-bold shrink-0">4</div>
-                  <div>
-                    <div class="font-semibold text-ink mb-1">Budget</div>
-                    <p class="text-sm text-muted-foreground">What's your budget range? (Helps me suggest the right option)</p>
-                  </div>
-                </div>
+                <h2 class="text-2xl font-bold text-foreground font-display mb-2">Send an Email</h2>
+                <p class="text-muted-foreground text-sm">The best way to reach me</p>
               </div>
               
-              <div class="mt-10 p-6 rounded-xl bg-secondary/50 border border-border">
-                <p class="text-sm text-muted-foreground leading-relaxed">
-                  <strong class="text-ink">Not sure what you need?</strong> That's okay! Just tell me about your business and I'll help you figure out the best approach.
-                </p>
+              <a 
+                href="mailto:contact@staticfish.co.uk" 
+                class="block text-center text-2xl sm:text-3xl font-bold text-foreground font-display hover:text-accent transition-colors tracking-tight mb-8"
+              >
+                contact@staticfish.co.uk
+              </a>
+              
+              <div class="flex items-center justify-center gap-2 px-4 py-3 bg-secondary text-sm">
+                <Clock className="h-4 w-4 text-accent" />
+                <span class="text-muted-foreground">Typical response: Within 24 hours</span>
               </div>
             </div>
           </div>
+          
+          <!-- What to Include -->
+          <div class="relative overflow-hidden">
+            <WaveBackground variant="teal" opacity={0.12} />
+            <FloatingShapes />
+            <div class="relative z-10 p-8">
+            <h3 class="text-xl font-bold text-foreground font-display mb-6">What to Include</h3>
+            
+            <div class="space-y-6">
+              <div class="flex items-start gap-4 py-4 border-b border-border">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center text-accent text-sm font-bold shrink-0">1</div>
+                <div>
+                  <div class="font-semibold text-foreground mb-1">Your Business</div>
+                  <p class="text-sm text-muted-foreground">What do you do? Who are your customers?</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4 py-4 border-b border-border">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center text-accent text-sm font-bold shrink-0">2</div>
+                <div>
+                  <div class="font-semibold text-foreground mb-1">Your Goals</div>
+                  <p class="text-sm text-muted-foreground">What do you want the website to achieve?</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4 py-4 border-b border-border">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center text-accent text-sm font-bold shrink-0">3</div>
+                <div>
+                  <div class="font-semibold text-foreground mb-1">Timeline</div>
+                  <p class="text-sm text-muted-foreground">When do you need it launched?</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4 py-4 border-b border-border">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center text-accent text-sm font-bold shrink-0">4</div>
+                <div>
+                  <div class="font-semibold text-foreground mb-1">Budget</div>
+                  <p class="text-sm text-muted-foreground">What's your budget range? (Helps me suggest the right option)</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-10 p-6 bg-secondary/50 border border-border relative overflow-hidden">
+              <div class="deco-dots absolute inset-0"></div>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                <strong class="text-foreground">Not sure what you need?</strong> That's okay! Just tell me about your business and I'll help you figure out the best approach.
+              </p>
+            </div>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
     <Footer />
   </div>
