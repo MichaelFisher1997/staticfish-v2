@@ -11,7 +11,7 @@ const corePackage = {
   title: 'Business Website',
   priceGbp: 599,
   features: [
-    'Up to 5 pages',
+    'The core pages your business needs to launch',
     'Custom design',
     'Mobile-friendly layout',
     'Contact form',
@@ -22,24 +22,9 @@ const corePackage = {
 
 const addOns = [
   {
-    title: 'Editing Add-On',
+    title: 'Editable Content Add-On',
     priceGbp: 600,
-    description: 'Add a simple editing system if you want to update core content yourself.',
-  },
-  {
-    title: 'Blog / News Section',
-    priceGbp: 250,
-    description: 'Add a simple posts area for updates, announcements, or articles.',
-  },
-  {
-    title: 'Extra Pages',
-    priceGbp: 100,
-    description: 'Useful for extra service pages, FAQs, case studies, or location pages.',
-  },
-  {
-    title: 'Content Upload Help',
-    priceGbp: 150,
-    description: 'If you already have text and images, I can format and load them for you.',
+    description: 'Adds a CMS so you can edit pages, services, pricing, testimonials, and blog or news posts yourself.',
   }
 ];
 
@@ -59,7 +44,7 @@ const pricingNotes = [
 ];
 ---
 
-<Layout title="Pricing | Staticfish" description="Simple pricing for business websites, with clear add-ons and a separate route for custom software projects.">
+<Layout title="Pricing | Staticfish" description="Simple pricing for business websites, with one clear editable-content add-on and a separate route for custom software projects.">
   <div class="min-h-screen flex flex-col bg-background">
     <Header />
 
@@ -80,7 +65,7 @@ const pricingNotes = [
               One upfront price for the agreed website scope, plus one monthly fee to keep the site live and looked after.
             </p>
             <p class="text-muted-foreground max-w-2xl">
-              If you need editing, extra pages, or something more bespoke, it is added clearly instead of hidden inside a bigger package you may not need.
+              If you need a CMS for editable content, that is added clearly instead of hidden inside a bigger package you may not need. Anything more tailored is quoted separately.
             </p>
           </div>
         </div>
@@ -141,16 +126,16 @@ const pricingNotes = [
         <FloatingShapes />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl mb-12">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Add-Ons</p>
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Optional Add-On</p>
             <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-4">
-              Common add-ons.
+              Add editing if you need it.
             </h2>
             <p class="text-muted-foreground leading-relaxed">
-              The base package is intentionally simple. These are the extras people most often add once the core site is scoped.
+              Most sites do not need a CMS. If you want to update pages, services, pricing, testimonials, or publish blog and news posts yourself, this is the main upgrade.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-border">
+          <div class="max-w-3xl bg-border">
             {addOns.map((addOn, index) => (
               <div class={`bg-background p-8 hover:bg-secondary/20 transition-colors ${index === 0 ? 'bg-secondary/10' : ''}`}>
                 <h3 class="text-xl font-bold text-foreground font-display mb-3">{addOn.title}</h3>
@@ -162,6 +147,10 @@ const pricingNotes = [
               </div>
             ))}
           </div>
+
+          <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
+            If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
+          </p>
         </div>
       </section>
 
