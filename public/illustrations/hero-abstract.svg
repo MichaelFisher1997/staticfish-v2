@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none">
+  <!-- Large background shapes -->
+  <rect x="20" y="20" width="200" height="200" fill="currentColor" fill-opacity="0.03"/>
+  <rect x="400" y="300" width="180" height="180" fill="#D94E2B" fill-opacity="0.06"/>
+  
+  <!-- Main browser window -->
+  <rect x="80" y="60" width="440" height="320" stroke="currentColor" stroke-width="3" fill="white"/>
+  
+  <!-- Browser chrome -->
+  <rect x="80" y="60" width="440" height="50" fill="currentColor" fill-opacity="0.05"/>
+  <circle cx="110" cy="85" r="7" fill="#D94E2B" fill-opacity="0.3"/>
+  <circle cx="135" cy="85" r="7" fill="currentColor" fill-opacity="0.15"/>
+  <circle cx="160" cy="85" r="7" fill="currentColor" fill-opacity="0.15"/>
+  <rect x="200" y="78" width="280" height="14" fill="currentColor" fill-opacity="0.06" rx="0"/>
+  
+  <!-- Content blocks with more weight -->
+  <rect x="120" y="140" width="240" height="24" fill="currentColor" fill-opacity="0.08"/>
+  <rect x="120" y="180" width="180" height="12" fill="currentColor" fill-opacity="0.05"/>
+  <rect x="120" y="205" width="200" height="12" fill="currentColor" fill-opacity="0.05"/>
+  
+  <!-- Image block -->
+  <rect x="120" y="240" width="160" height="110" fill="currentColor" fill-opacity="0.04"/>
+  <rect x="140" y="260" width="120" height="70" fill="#D94E2B" fill-opacity="0.1"/>
+  
+  <!-- Sidebar content -->
+  <rect x="310" y="240" width="180" height="8" fill="currentColor" fill-opacity="0.06"/>
+  <rect x="310" y="260" width="150" height="8" fill="currentColor" fill-opacity="0.04"/>
+  <rect x="310" y="280" width="170" height="8" fill="currentColor" fill-opacity="0.04"/>
+  <rect x="310" y="300" width="130" height="8" fill="currentColor" fill-opacity="0.04"/>
+  
+  <!-- Button -->
+  <rect x="120" y="370" width="100" height="36" fill="#D94E2B" fill-opacity="0.85"/>
+  <rect x="135" y="384" width="50" height="6" fill="white" fill-opacity="0.9"/>
+  
+  <!-- Floating accent elements -->
+  <rect x="50" y="350" width="80" height="80" fill="currentColor" fill-opacity="0.02" stroke="currentColor" stroke-width="2"/>
+  <rect x="520" y="120" width="60" height="60" fill="#D94E2B" fill-opacity="0.08"/>
+  <rect x="540" y="140" width="20" height="20" fill="#D94E2B" fill-opacity="0.15"/>
+  
+  <!-- Diagonal line decoration -->
+  <line x1="480" y1="280" x2="560" y2="360" stroke="currentColor" stroke-width="1" stroke-opacity="0.1"/>
+  <line x1="490" y1="280" x2="560" y2="350" stroke="currentColor" stroke-width="1" stroke-opacity="0.1"/>
+</svg>

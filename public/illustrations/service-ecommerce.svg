@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background elements -->
+  <rect x="20" y="20" width="120" height="120" fill="currentColor" fill-opacity="0.02"/>
+  <rect x="300" y="200" width="80" height="80" fill="#D94E2B" fill-opacity="0.04"/>
+  
+  <!-- Storefront -->
+  <rect x="70" y="50" width="260" height="200" stroke="currentColor" stroke-width="2.5" fill="white"/>
+  
+  <!-- Store header -->
+  <rect x="70" y="50" width="260" height="42" fill="currentColor" fill-opacity="0.05"/>
+  <rect x="90" y="68" width="90" height="10" fill="currentColor" fill-opacity="0.1"/>
+  <rect x="290" y="65" width="22" height="14" fill="#D94E2B" fill-opacity="0.15"/>
+  
+  <!-- Product grid 2x2 -->
+  <!-- Product 1 -->
+  <rect x="90" y="110" width="85" height="85" fill="currentColor" fill-opacity="0.04"/>
+  <rect x="100" y="120" width="65" height="50" fill="currentColor" fill-opacity="0.06"/>
+  <rect x="100" y="178" width="50" height="6" fill="currentColor" fill-opacity="0.08"/>
+  <rect x="100" y="188" width="30" height="6" fill="#D94E2B" fill-opacity="0.5"/>
+  
+  <!-- Product 2 -->
+  <rect x="190" y="110" width="85" height="85" fill="currentColor" fill-opacity="0.04"/>
+  <rect x="200" y="125" width="65" height="40" fill="currentColor" fill-opacity="0.06"/>
+  <rect x="200" y="178" width="50" height="6" fill="currentColor" fill-opacity="0.08"/>
+  <rect x="200" y="188" width="30" height="6" fill="#D94E2B" fill-opacity="0.5"/>
+  
+  <!-- Product 3 -->
+  <rect x="90" y="210" width="85" height="30" fill="currentColor" fill-opacity="0.03"/>
+  <rect x="100" y="218" width="50" height="6" fill="currentColor" fill-opacity="0.08"/>
+  <rect x="160" y="218" width="30" height="6" fill="#D94E2B" fill-opacity="0.5"/>
+  
+  <!-- Cart icon -->
+  <rect x="310" y="260" width="55" height="40" fill="#D94E2B" fill-opacity="0.08" stroke="#D94E2B" stroke-width="1.5"/>
+  <rect x="322" y="275" width="30" height="3" fill="#D94E2B" fill-opacity="0.4"/>
+  <rect x="322" y="282" width="20" height="3" fill="#D94E2B" fill-opacity="0.25"/>
+  
+  <!-- Payment icons -->
+  <rect x="90" y="260" width="28" height="16" fill="currentColor" fill-opacity="0.08"/>
+  <rect x="126" y="260" width="28" height="16" fill="currentColor" fill-opacity="0.08"/>
+</svg>

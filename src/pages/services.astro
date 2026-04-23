@@ -3,371 +3,322 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { Globe, LayoutTemplate, Wrench, Database, ArrowRight, Clock, Check } from 'lucide-react';
+import { ArrowRight, Clock, Check } from 'lucide-react';
+import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
+import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
 
-const services = [
+const websitePackage = {
+  priceGbp: 599,
+  timeline: '1-3 weeks',
+  features: [
+    'The core pages your business needs to launch',
+    'Custom design for your business',
+    'Mobile-friendly layout',
+    'Contact form',
+    'Basic SEO setup',
+    'Launch support'
+  ],
+  goodFit: [
+    'Local service businesses',
+    'Consultants and freelancers',
+    'Studios, trades, and small teams'
+  ]
+};
+
+const addOns = [
   {
-    id: "websites",
-    title: "Static Websites",
-    description: "Fast, secure websites perfect for small businesses that don't need frequent updates.",
-    icon: Globe,
-    priceGbp: 149,
-    features: [
-      "Up to 5 pages included",
-      "Custom design for your brand",
-      "Mobile-first responsive design",
-      "Contact form integration",
-      "Basic SEO optimization",
-      "Optimised for fast loading"
-    ],
-    timeline: "1-2 weeks",
-    tech: ["Astro", "React", "Tailwind CSS", "Cloudflare"],
-    color: "ocean"
-  },
-  {
-    id: "cms",
-    title: "CMS Websites",
-    description: "Easy-to-update websites for businesses that need to manage their own content.",
-    icon: LayoutTemplate,
-    priceGbp: 249,
-    features: [
-      "No page limits",
-      "Simple content editor",
-      "Blog functionality",
-      "2 admin users included",
-      "Content scheduling",
-      "Hosting & support included"
-    ],
-    timeline: "2-3 weeks",
-    tech: ["Headless CMS", "Astro", "React", "Cloudflare"],
-    color: "primary",
-    featured: true
-  },
-  {
-    id: "ecommerce",
-    title: "E-Commerce Sites",
-    description: "Sell products online with a fast, secure storefront that converts visitors into customers.",
-    icon: Database,
-    priceGbp: 399,
-    features: [
-      "Everything in CMS sites",
-      "PayPal & Stripe integration",
-      "Unlimited products",
-      "Order management dashboard",
-      "Multicurrency support",
-      "Abandoned cart recovery"
-    ],
-    timeline: "3-4 weeks",
-    tech: ["Stripe", "PayPal", "React", "Database"],
-    color: "coral"
-  },
-  {
-    id: "custom",
-    title: "Custom Development",
-    description: "Browser extensions, automation tools, or complex web applications. Let's discuss your needs.",
-    icon: Wrench,
-    priceGbp: null,
-    features: [
-      "Browser extensions",
-      "Internal tools & dashboards",
-      "API integrations",
-      "Automation scripts",
-      "AI-powered features",
-      "Technical consultation"
-    ],
-    timeline: "Varies by project",
-    tech: ["React", "Python", "Node.js", "PostgreSQL"],
-    color: "ink"
+    title: 'Editable Content Add-On',
+    priceGbp: 800,
+    description: 'Adds a CMS so you can update pages, services, pricing, testimonials, and publish blog or news posts yourself.',
+    features: ['CMS setup', 'Editable page content and blog/news', 'Editor training at handover'],
+    featured: true,
   }
 ];
 
 const processSteps = [
   {
-    step: "01",
-    title: "Discovery",
-    description: "We discuss your business, goals, and requirements. I'll ask questions to understand exactly what you need.",
-    duration: "30-60 min call"
+    step: '01',
+    title: 'Quick Discovery',
+    description: 'A short call or email exchange to understand your business and what the website needs to do.',
+    duration: '30-60 min'
   },
   {
-    step: "02",
-    title: "Proposal",
-    description: "I send you a detailed proposal with scope, timeline, and fixed price. No hidden fees.",
-    duration: "1-2 days"
+    step: '02',
+    title: 'Direction First',
+    description: 'I put together the draft direction or an initial page so you can see whether the look and structure feel right.',
+    duration: '1-2 days'
   },
   {
-    step: "03",
-    title: "Design",
-    description: "I create design mockups for your approval. We iterate until you're happy with the look.",
-    duration: "3-5 days"
+    step: '03',
+    title: 'Build and Review',
+    description: 'Once the direction is approved, I complete the site and we review everything together before launch.',
+    duration: '1-3 weeks'
   },
   {
-    step: "04",
-    title: "Build",
-    description: "I build your website with clean, modern code. You'll get progress updates throughout.",
-    duration: "1-3 weeks"
-  },
-  {
-    step: "05",
-    title: "Launch",
-    description: "Final testing, domain setup, and launch. I train you on how to update content (if applicable).",
-    duration: "1-2 days"
+    step: '04',
+    title: 'Payment, Domain, and Launch',
+    description: 'When the site is approved, payment is made before launch. I then handle DNS, domain setup, and getting the site live.',
+    duration: '1-2 days'
   }
 ];
 ---
 
-<Layout title="Services | Staticfish" description="Web development services for small businesses. Static sites, CMS websites, e-commerce, and custom development.">
-  <div class="min-h-screen flex flex-col overflow-x-hidden">
+<Layout title="Websites | Staticfish" description="Clear business websites for small businesses, with an optional CMS setup if you want to manage content yourself.">
+  <div class="min-h-screen flex flex-col bg-background">
     <Header />
-    <main class="flex-1 pt-28">
-        
-        <!-- Background Elements -->
-        <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div class="blob-ocean w-[50vw] h-[50vw] top-[5%] right-[5%]"></div>
-          <div class="blob-sand w-[40vw] h-[40vw] bottom-[30%] left-[0%]"></div>
+    <main class="flex-1">
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <FlowingLines className="hero-flow-art" fadeBottom />
+        <CornerWaves position="bottom-right" />
+
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-3xl">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+              Websites
+            </p>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
+              Websites for
+              <span class="text-accent">small businesses.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              The main offer at Staticfish is a clear business website. If you want to update content yourself, I can add a proper CMS rather than forcing that complexity into every project.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <!-- Hero -->
-        <section class="py-16 lg:py-24 relative">
-          <div class="container mx-auto max-w-7xl px-6">
-            <div class="max-w-3xl">
-              <span class="badge-coral mb-6">Services</span>
-              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
-                What I<br/>
-                <span class="text-gradient-ocean">Build.</span>
-              </h1>
-              <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                Four ways I can help your business succeed online. Each includes hosting, security, and my personal support.
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="mixed" fadeTop fadeBottom />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <img
+                src="/illustrations/service-website.svg"
+                alt="Business website illustration"
+                class="w-full h-auto"
+              />
+            </div>
+
+            <div class="spec-panel p-8 lg:p-10">
+              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                <Clock className="h-4 w-4" />
+                {websitePackage.timeline}
+              </div>
+
+              <h2 class="text-3xl font-bold text-foreground font-display mb-3">Business Website</h2>
+              <p class="text-muted-foreground leading-relaxed mb-6">
+                A professional website built to explain who you are, what you offer, what it costs, and how people can contact you.
               </p>
-            </div>
-          </div>
-        </section>
 
-        <!-- Services Grid -->
-        <section class="py-16 lg:py-24">
-          <div class="container mx-auto max-w-7xl px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-              
-              {services.map((service) => (
-                <div id={service.id} class={`card-elevated p-8 lg:p-10 relative group ${service.featured ? 'ring-2 ring-primary ring-offset-4 ring-offset-background' : ''}`}>
-                    
-                  {service.featured && (
-                    <div class="absolute -top-3 right-6">
-                      <span class="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg shadow-primary/30">
-                        Popular
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div class="flex items-start justify-between mb-6">
-                    <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg ${
-                      service.color === 'ocean' ? 'bg-linear-to-br from-ocean to-primary shadow-ocean/20' :
-                      service.color === 'coral' ? 'bg-linear-to-br from-coral to-accent shadow-coral/20' :
-                      service.color === 'ink' ? 'bg-linear-to-br from-ink to-slate-700 shadow-ink/20' :
-                      'bg-linear-to-br from-primary to-ocean shadow-primary/20'
-                    }`}>
-                      <service.icon className="h-7 w-7" />
-                    </div>
-                    
-                    <div class="flex items-center gap-2 text-sm text-muted-foreground bg-secondary px-3 py-1.5 rounded-lg">
-                      <Clock className="h-4 w-4" />
-                      {service.timeline}
-                    </div>
-                  </div>
-
-                  <h3 class="text-2xl font-bold text-ink font-display mb-2">{service.title}</h3>
-                  
-                  <div class="mb-4">
-                    {service.priceGbp ? (
-                      <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-extrabold text-ink font-display tracking-tighter" data-price-gbp={service.priceGbp}>£{service.priceGbp}</span>
-                        <span class="text-sm text-muted-foreground ml-1" data-hosting-gbp>+ £50/mo hosting</span>
-                      </div>
-                    ) : (
-                      <span class="text-2xl font-bold text-ink font-display">Custom Quote</span>
-                    )}
-                  </div>
-
-                  <p class="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
-                  
-                  <ul class="space-y-2.5 mb-8">
-                    {service.features.map(feature => (
-                      <li class="flex items-start gap-3">
-                        <div class={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                          service.color === 'ocean' ? 'bg-ocean/10 text-ocean' :
-                          service.color === 'coral' ? 'bg-coral/10 text-coral' :
-                          service.color === 'ink' ? 'bg-ink/10 text-ink' :
-                          'bg-primary/10 text-primary'
-                        }`}>
-                          <Check className="h-3 w-3" strokeWidth={3} />
-                        </div>
-                        <span class="text-foreground text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div class="flex flex-wrap gap-2 mb-8">
-                    {service.tech.map(t => (
-                      <span class="text-[10px] py-1 px-3 rounded-full uppercase tracking-wider bg-secondary text-muted-foreground font-semibold">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Button className={`rounded-xl font-semibold ${
-                    service.featured ? 'bg-primary hover:bg-primary/90' : 'bg-ink hover:bg-ink/90'
-                  }`}>
-                    <a href="/contact" class="flex items-center gap-2">
-                      Get Started <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </Button>
+              <div class="mb-8">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-5xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={websitePackage.priceGbp}>£{websitePackage.priceGbp}</span>
+                  <span class="text-sm text-muted-foreground ml-1">upfront</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <!-- Process Section -->
-        <section class="py-24 bg-secondary/30 relative overflow-hidden">
-          <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-size-[60px_60px] opacity-50"></div>
-          
-          <div class="container relative z-10 mx-auto max-w-7xl px-6">
-            
-            <div class="text-center mb-16">
-              <span class="badge-ocean mb-4">How It Works</span>
-              <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter">My Process.</h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
-              {processSteps.map((step, index) => (
-                <div class="relative">
-                  <div class="text-6xl font-extrabold text-border font-display mb-4">{step.step}</div>
-                  <h3 class="text-xl font-bold text-ink font-display mb-3">{step.title}</h3>
-                  <p class="text-muted-foreground text-sm leading-relaxed mb-4">{step.description}</p>
-                  <div class={`text-xs font-bold uppercase tracking-wider ${
-                    index % 2 === 0 ? 'text-primary' : 'text-coral'
-                  }`}>{step.duration}</div>
+                <div class="mt-2">
+                  <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
 
-          <!-- Why Static Sites -->
-          <section class="py-24">
-            <div class="container mx-auto max-w-7xl px-6">
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                  <span class="badge-ocean mb-6">Why This Approach?</span>
-                  <h2 class="text-4xl sm:text-5xl font-bold text-ink font-display tracking-tighter mb-8">
-                    Built for<br/>
-                    <span class="text-gradient-warm">Simplicity.</span>
-                  </h2>
-                  
-                  <div class="space-y-6">
-                    <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-ocean/10 flex items-center justify-center shrink-0">
-                        <Check className="h-6 w-6 text-ocean" />
-                      </div>
-                      <div>
-                        <h3 class="font-bold text-ink mb-1">Built for Speed</h3>
-                        <p class="text-muted-foreground">No database queries, no plugin bloat. Just fast, reliable pages.</p>
-                      </div>
-                    </div>
-                    
-                    <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                        <Check className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 class="font-bold text-ink mb-1">Fewer Security Concerns</h3>
-                        <p class="text-muted-foreground">No database means fewer attack vectors. Less to worry about.</p>
-                      </div>
-                    </div>
-                    
-                    <div class="flex gap-4">
-                      <div class="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center shrink-0">
-                        <Check className="h-6 w-6 text-coral" />
-                      </div>
-                      <div>
-                        <h3 class="font-bold text-ink mb-1">Low Maintenance</h3>
-                        <p class="text-muted-foreground">No constant plugin updates or security patches. It just works.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="card-elevated p-8 lg:p-12">
-                   <div class="text-center mb-8">
-                      <h3 class="text-2xl font-bold text-ink font-display mb-2">Need to Update Content?</h3>
-                      <p class="text-muted-foreground">I offer CMS options too. You get easy updates with the speed and reliability of a simple site.</p>
-                   </div>
-                   
-                   <div class="space-y-4">
-                      <Button className="w-full rounded-xl bg-ink hover:bg-ink/90 h-14">
-                        <a href="/pricing">View All Options</a>
-                      </Button>
-                      <Button variant="outline" className="w-full rounded-xl h-14">
-                        <a href="/contact">Ask Me Anything</a>
-                      </Button>
-                   </div>
+              <p class="text-sm text-muted-foreground mb-8">
+                If you need editable content, those projects start from <strong class="text-foreground" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
+              </p>
+
+              <ul class="space-y-3 mb-8">
+                {websitePackage.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
+                    <span class="text-foreground text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="pt-6 border-t border-border">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent mb-3">Good fit for</p>
+                <div class="flex flex-wrap gap-2">
+                  {websitePackage.goodFit.map((item) => (
+                    <span class="text-xs bg-secondary px-3 py-1.5 text-muted-foreground font-semibold uppercase tracking-wide">
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
+      <section id="add-ons" class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
+        <WaveBackground variant="coral" opacity={0.1} fadeTop fadeBottom fadeColor="secondary" />
+        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
+
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-3xl mb-16">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Optional Add-On</p>
+            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-6">Add editing if you need it.</h2>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              Most sites do not need a CMS. If you want to edit pages, services, pricing, testimonials, or publish blog and news posts yourself, I can add one cleanly.
+            </p>
+          </div>
+
+          <div class="max-w-3xl bg-border">
+            {addOns.map((addOn) => (
+                  <div class={`editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors ${addOn.featured ? 'bg-secondary/10' : ''}`}>
+                {addOn.featured && (
+                  <div class="inline-flex bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 mb-6">
+                    Most Common Add-On
+                  </div>
+                )}
+
+                <div class="mb-5">
+                  <h3 class="text-2xl font-bold text-foreground font-display mb-2">{addOn.title}</h3>
+                  <div class="flex items-baseline gap-1 mb-3">
+                    <span class="text-sm text-muted-foreground uppercase tracking-wider">from +</span>
+                    <span class="text-4xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</span>
+                  </div>
+                  <p class="text-muted-foreground leading-relaxed text-sm">{addOn.description}</p>
+                </div>
+
+                <ul class="space-y-3 pt-6 border-t border-border">
+                  {addOn.features.map((feature) => (
+                    <li class="flex items-start gap-3">
+                      <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
+                      <span class="text-sm text-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
+            Editable-content projects also have a higher ongoing fee than brochure sites, because there is a real CMS and editor access to support. If you need a more tailored enquiry flow, booking setup, or something outside the normal website scope, I quote that separately based on what the business actually needs.
+          </p>
+
+          <p class="text-sm text-muted-foreground mt-4 max-w-2xl">
+            If you already have a domain name, I can connect it. If you need a new one, I can register it for you, but the domain cost is paid by you separately.
+          </p>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="lines" fadeTop fadeBottom />
+        <CornerWaves position="top-left" />
+
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+                Why This Works
+              </p>
+              <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-8">
+                Built to be easy to
+                <span class="text-accent">understand.</span>
+              </h2>
+
+              <p class="text-lg text-muted-foreground leading-relaxed max-w-xl">
+                Most small businesses do not need a sprawling platform. They need a site that feels professional, loads quickly, and gives visitors the information they need without friction.
+              </p>
+            </div>
+
+            <div class="space-y-6">
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
+                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
+                </div>
+                <div>
+                  <h3 class="font-bold text-foreground mb-1">Clear information first</h3>
+                  <p class="text-muted-foreground text-sm">Visitors can quickly understand what you do, what it costs, and what to do next.</p>
+                </div>
+              </div>
+
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
+                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
+                </div>
+                <div>
+                  <h3 class="font-bold text-foreground mb-1">Fast and low-maintenance</h3>
+                  <p class="text-muted-foreground text-sm">Simple websites tend to be quicker to launch, easier to run, and less likely to create technical headaches.</p>
+                </div>
+              </div>
+
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
+                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
+                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
+                </div>
+                <div>
+                  <h3 class="font-bold text-foreground mb-1">Editing only when needed</h3>
+                  <p class="text-muted-foreground text-sm">If your prices, services, or updates change regularly, the editing add-on keeps that manageable without overcomplicating the whole site.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="dots" fadeTop fadeBottom />
+
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+            Process
+          </p>
+          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">A simple process.</h2>
+
+          <div class="border-t border-border">
+            {processSteps.map((step) => (
+              <div class="editorial-card border-b border-border py-10 hover:bg-secondary/20">
+                <div class="grid grid-cols-12 gap-6 items-start">
+                  <div class="col-span-12 sm:col-span-1">
+                    <span class="text-sm font-medium text-muted-foreground">{step.step}</span>
+                  </div>
+                  <div class="col-span-12 sm:col-span-3">
+                    <h3 class="text-xl font-bold text-foreground font-display">{step.title}</h3>
+                  </div>
+                  <div class="col-span-12 sm:col-span-5">
+                    <p class="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                  <div class="col-span-12 sm:col-span-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-accent">{step.duration}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="spec-panel p-10 lg:p-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Secondary Service</p>
+                <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6 text-foreground">
+                  Need something more
+                  <span class="text-accent">custom?</span>
+                </h2>
+                <p class="text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  Most of my work is business websites, but I also take on selected custom software projects when a business needs a portal, dashboard, workflow, or bespoke web app.
+                </p>
+              </div>
+
+              <div class="flex flex-col items-start gap-4">
+                <Button className="rounded-none h-12 px-8 font-semibold">
+                  <a href="/custom-software" class="flex items-center gap-2">
+                    View Custom Software <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button variant="outline" className="rounded-none h-12 px-8">
+                  <a href="/contact">Ask About Your Project</a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <Footer />
   </div>
 </Layout>
-
-<script>
-  function initCurrencyPricing() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    
-    type Currency = "GBP" | "EUR" | "USD";
-    let currency: Currency = "USD";
-    
-    const euroTimezones = new Set([
-      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
-      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
-      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
-      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
-      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
-      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
-      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
-    ]);
-    
-    if (timezone === "Europe/London") {
-      currency = "GBP";
-    } else if (euroTimezones.has(timezone)) {
-      currency = "EUR";
-    }
-    
-    if (currency === "GBP") return;
-    
-    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
-    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
-    
-    const rate = rates[currency];
-    const symbol = symbols[currency];
-    
-    function convertPrice(gbp: number): number {
-      return Math.ceil(gbp * rate);
-    }
-    
-    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
-      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
-      const converted = convertPrice(gbp);
-      el.textContent = `${symbol}${converted}`;
-    });
-    
-    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
-      const converted = convertPrice(50);
-      const text = el.textContent || "";
-      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
-    });
-  }
-  
-  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
-</script>

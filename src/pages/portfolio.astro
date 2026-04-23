@@ -3,146 +3,152 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Button } from '../components/ui/button';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
+import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
 
 const projects = [
   {
     title: "Redot Engine",
-    description: "Open-source game engine website with dark theme, feature showcase, and documentation hub. Built for a community-driven project.",
+    description: "A large content-heavy website for an open-source community. It shows how I approach structure, clarity, and front-end build quality.",
     image: "/portfolio-redot.png",
     category: "Open Source",
     url: "https://www.redotengine.org/",
-    tags: ["Astro", "Documentation", "Community"],
+    role: "Structure + frontend",
+    year: "2026",
+    tags: ["Astro", "Documentation", "Community"]
   },
   {
     title: "Chattybox AI",
-    description: "An AI-powered platform that turns documentation into conversational interfaces. A more complex project that shows I can handle bigger builds when needed.",
+    description: "A more involved SaaS product that shows I can take on deeper custom software work when a project needs more than a brochure website.",
     image: "/portfolio-chattybox.png",
-    category: "AI SaaS",
+    category: "SaaS Product",
     url: "https://chattybox.ai/",
-    tags: ["React", "Python", "AI Integration"],
+    role: "Product build",
+    year: "2026",
+    tags: ["React", "Python", "Custom App"]
   }
 ];
 ---
 
-<Layout title="Portfolio | Staticfish" description="Recent work by Staticfish. Quality web development projects for small businesses.">
-  <div class="min-h-screen flex flex-col overflow-x-hidden">
+<Layout title="Portfolio | Staticfish" description="A small selection of recent work that shows the quality and range behind Staticfish.">
+  <div class="min-h-screen flex flex-col bg-background">
     <Header />
-    <main class="flex-1 pt-28">
+    
+    <main class="flex-1">
       
-      <!-- Background Elements -->
-      <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div class="blob-ocean w-[50vw] h-[50vw] top-[5%] right-[5%]"></div>
-        <div class="blob-coral w-[30vw] h-[30vw] bottom-[30%] left-[10%]"></div>
-      </div>
-
       <!-- Hero -->
-      <section class="py-16 lg:py-24 relative">
-         <div class="container mx-auto max-w-7xl px-6">
-            <span class="badge-ocean mb-6">Portfolio</span>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-ink font-display tracking-tighter mb-8">
-              Recent<br/>
-              <span class="text-gradient-warm">Projects.</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              A selection of projects I've worked on. This list will grow as I complete more work for clients.
-            </p>
-         </div>
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <FlowingLines className="hero-flow-art" fadeBottom />
+        <CornerWaves position="bottom-right" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Portfolio</p>
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
+            Recent
+            <span class="text-accent">Projects.</span>
+          </h1>
+          <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            A small selection of projects that shows the standard of design and build quality I bring to client work.
+          </p>
+        </div>
       </section>
 
       <!-- Project Grid -->
-      <section class="py-16 lg:py-24">
-        <div class="container mx-auto max-w-7xl px-6">
-           
-          <div class="grid grid-cols-1 gap-12 lg:gap-16">
-              {projects.map((item) => (
-                <div class="group relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-500">
-                  <div class="grid lg:grid-cols-2">
-                    <!-- Image -->
-                    <div class="aspect-16/10 lg:aspect-auto relative overflow-hidden">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div class="absolute inset-0 bg-linear-to-t from-ink/30 to-transparent lg:bg-linear-to-r"></div>
-                    </div>
-                    
-                    <!-- Content -->
-                    <div class="p-8 lg:p-12 flex flex-col justify-center relative">
-                      <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <ExternalLink className="h-5 w-5 text-muted-foreground" />
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="mixed" fadeTop fadeBottom />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          
+          <div class="space-y-px bg-border">
+            {projects.map((item) => (
+              <div class="editorial-card group bg-background hover:bg-secondary/20 transition-colors">
+                <div class="grid lg:grid-cols-2">
+                  <!-- Image -->
+                  <div class="p-4 lg:p-6">
+                    <div class="browser-frame overflow-hidden">
+                      <div class="aspect-[16/10] relative overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                       </div>
-                      
-                      <span class="inline-block text-xs font-bold uppercase tracking-widest text-primary mb-4 bg-primary/10 px-3 py-1 rounded-full w-fit">
-                        {item.category}
-                      </span>
-                      
-                      <h2 class="text-3xl lg:text-4xl font-bold text-ink font-display tracking-tight mb-4">
-                        {item.title}
-                      </h2>
-                      
-                      <p class="text-muted-foreground leading-relaxed mb-6 max-w-lg">
-                        {item.description}
-                      </p>
-                      
-                      <div class="flex flex-wrap gap-2 mb-8">
-                        {item.tags.map(tag => (
-                          <span class="text-[10px] font-semibold text-muted-foreground bg-secondary px-3 py-1.5 rounded-full uppercase tracking-wide">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      <Button className="rounded-xl w-fit bg-ink hover:bg-primary">
-                        <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
-                          View Live Site <ArrowRight className="h-4 w-4" />
-                        </a>
-                      </Button>
                     </div>
                   </div>
+                  
+                  <!-- Content -->
+                  <div class="p-8 lg:p-12 flex flex-col justify-center">
+                    <span class="inline-block text-xs font-bold uppercase tracking-widest text-accent mb-4">
+                      {item.category}
+                    </span>
+                    <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      {item.role} / {item.year}
+                    </p>
+                    
+                    <h2 class="text-3xl lg:text-4xl font-bold text-foreground font-display tracking-tight mb-4">
+                      {item.title}
+                    </h2>
+                    
+                    <p class="text-muted-foreground leading-relaxed mb-6 max-w-lg">
+                      {item.description}
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-8">
+                      {item.tags.map(tag => (
+                        <span class="text-xs font-semibold text-muted-foreground bg-secondary px-3 py-1.5 uppercase tracking-wide">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <Button className="rounded-none w-fit">
+                      <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+                        View Live Site <ArrowUpRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-              ))}
-           </div>
-           
-           <!-- More Coming -->
-           <div class="mt-20 lg:mt-24">
-              <div class="card-elevated p-10 lg:p-12 text-center max-w-2xl mx-auto">
-                 <h3 class="text-2xl font-bold text-ink font-display mb-4">More Coming Soon</h3>
-                 <p class="text-muted-foreground mb-8 leading-relaxed">
-                    I'm currently working with several small businesses on their websites. Check back soon to see their projects.
-                 </p>
-                 <Button variant="outline" className="rounded-xl">
-                    <a href="/contact" class="flex items-center gap-2">
-                      Start Your Project <ArrowRight className="h-4 w-4" />
-                    </a>
-                 </Button>
               </div>
-           </div>
+            ))}
+          </div>
+          
+          <!-- More Coming -->
+          <div class="mt-20 lg:mt-24 relative overflow-hidden">
+            <FloatingShapes fadeTop fadeBottom />
+            <div class="spec-panel p-10 lg:p-12 text-center max-w-2xl mx-auto relative z-10">
+              <h3 class="text-2xl font-bold text-foreground font-display mb-4">More Coming Soon</h3>
+              <p class="text-muted-foreground mb-8 leading-relaxed">
+                As more client work is ready to share publicly, I'll add it here.
+              </p>
+              <Button variant="outline" className="rounded-none">
+                <a href="/contact" class="flex items-center gap-2">
+                  Start Your Project <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- CTA -->
-      <section class="py-16 lg:py-24">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="relative overflow-hidden rounded-4xl lg:rounded-[3rem] bg-ink text-white">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(220,25%,20%)_1px,transparent_1px),linear-gradient(to_bottom,hsl(220,25%,20%)_1px,transparent_1px)] bg-size-[40px_40px] opacity-30"></div>
-            <div class="blob-ocean w-[40vw] h-[40vw] -top-[20%] -right-[10%] opacity-20"></div>
-            
-            <div class="relative z-10 p-10 lg:p-20 text-center">
-              <span class="inline-block text-primary text-xs font-bold uppercase tracking-widest mb-6">Next Project</span>
-              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6">
-                Want to see your<br/>
-                <span class="text-gradient-warm">project here?</span>
-              </h2>
-              <p class="text-lg text-white/70 mb-10 max-w-lg mx-auto">
-                I'd love to work with you. Let's build something great together.
-              </p>
-              <Button size="lg" className="bg-white text-ink hover:bg-primary hover:text-white rounded-xl shadow-xl">
-                <a href="/contact" class="flex items-center gap-2">
-                  Let's Talk <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative overflow-hidden">
+            <div class="deco-dots absolute inset-0 opacity-40"></div>
+            <div class="relative z-10">
+            <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Next Project</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
+              Want to see your
+              <span class="text-accent">project here?</span>
+            </h2>
+            <p class="text-lg text-background/70 mb-10 max-w-lg mx-auto">
+              If you want this level of care on your website or a more custom project, let's talk.
+            </p>
+            <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
+              <a href="/contact" class="flex items-center gap-2">
+                Let's Talk <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
             </div>
           </div>
         </div>
