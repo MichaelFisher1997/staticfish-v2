@@ -7,7 +7,7 @@ import { urlFor } from '../../lib/sanity';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { WaveBackground, FlowingLines, CornerWaves } from '../../components/WaveArt';
-import { GeometricArt, FloatingShapes } from '../../components/GeometricArt';
+import { FloatingShapes } from '../../components/GeometricArt';
 
 const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
   _id,
@@ -41,9 +41,8 @@ const recentPosts = posts.slice(1);
     
     <main class="flex-1">
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines count={8} />
+        <FlowingLines className="hero-flow-art" fadeBottom />
         <CornerWaves position="bottom-right" />
-        <GeometricArt variant="mixed" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-2xl mb-12 lg:mb-16">
             <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Blog</p>
@@ -64,7 +63,7 @@ const recentPosts = posts.slice(1);
           {featuredPost && (
             <a 
               href={`/blog/${featuredPost.slug.current}`}
-              class="group block border border-border hover:border-accent/30 transition-colors mb-12"
+              class="group spec-panel block overflow-hidden transition-colors mb-12"
             >
               <div class="grid lg:grid-cols-2">
                 {featuredPost.mainImage?.asset ? (
@@ -81,9 +80,9 @@ const recentPosts = posts.slice(1);
                     </div>
                   </div>
                 ) : (
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden bg-secondary/30">
+                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden bg-secondary/30 fine-grid">
                     <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="text-6xl opacity-20">📝</span>
+                      <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">Article</span>
                     </div>
                   </div>
                 )}
@@ -143,7 +142,7 @@ const recentPosts = posts.slice(1);
               {recentPosts.map((post: any) => (
                 <a 
                   href={`/blog/${post.slug.current}`}
-                  class="group block bg-background hover:bg-secondary/20 transition-all duration-200"
+                  class="editorial-card group block bg-background hover:bg-secondary/20 transition-all duration-200"
                 >
                   {post.mainImage?.asset ? (
                     <div class="aspect-[16/10] relative overflow-hidden">
@@ -154,9 +153,9 @@ const recentPosts = posts.slice(1);
                       />
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-secondary/30">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-secondary/30 fine-grid">
                       <div class="absolute inset-0 flex items-center justify-center">
-                        <span class="text-4xl opacity-20">📝</span>
+                        <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">Article</span>
                       </div>
                     </div>
                   )}
@@ -205,10 +204,12 @@ const recentPosts = posts.slice(1);
       </section>
       
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} />
-        <FloatingShapes />
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
+        <FloatingShapes fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="bg-foreground text-background p-12 lg:p-16 text-center">
+          <div class="bg-foreground text-background p-12 lg:p-16 text-center corner-bracket relative overflow-hidden">
+            <div class="deco-dots absolute inset-0 opacity-40"></div>
+            <div class="relative z-10">
             <h2 class="text-3xl sm:text-4xl font-bold font-display tracking-tighter mb-4 text-background">
               Want a Website Like This?
             </h2>
@@ -218,6 +219,7 @@ const recentPosts = posts.slice(1);
             <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
               <a href="/contact">Get a Quote</a>
             </Button>
+            </div>
           </div>
         </div>
       </section>

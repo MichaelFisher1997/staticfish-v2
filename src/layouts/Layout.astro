@@ -30,5 +30,59 @@ const { title, description = "Professional web development for small businesses.
   </head>
   <body>
     <slot />
+    <script>
+      function initCurrencyPricing() {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        type Currency = "GBP" | "EUR" | "USD";
+        let currency: Currency = "USD";
+
+        const euroTimezones = new Set([
+          "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
+          "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
+          "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
+          "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
+          "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
+          "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
+          "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
+        ]);
+
+        if (timezone === "Europe/London") {
+          currency = "GBP";
+        } else if (euroTimezones.has(timezone)) {
+          currency = "EUR";
+        }
+
+        if (currency === "GBP") return;
+
+        const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
+        const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
+        const rate = rates[currency];
+        const symbol = symbols[currency];
+
+        function convertPrice(gbp: number): number {
+          return Math.ceil(gbp * rate);
+        }
+
+        document.querySelectorAll("[data-price-gbp]").forEach((el) => {
+          const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
+          el.textContent = `${symbol}${convertPrice(gbp)}`;
+        });
+
+        document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
+          const text = el.textContent || "";
+          el.textContent = text.replace(/[£€$]\d+/, `${symbol}${convertPrice(25)}`);
+        });
+
+        document.querySelectorAll("[data-currency-gbp]").forEach((el) => {
+          const gbp = parseInt(el.getAttribute("data-currency-gbp") || "0", 10);
+          const prefix = el.getAttribute("data-currency-prefix") || "";
+          const suffix = el.getAttribute("data-currency-suffix") || "";
+          el.textContent = `${prefix}${symbol}${convertPrice(gbp)}${suffix}`;
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+    </script>
   </body>
 </html>

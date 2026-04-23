@@ -1,4 +1,6 @@
 ---
+import { BrandLockup } from "./BrandMark";
+
 const navigation = [
   { name: "Websites", href: "/services" },
   { name: "Pricing", href: "/pricing" },
@@ -24,10 +26,15 @@ const legalLinks = [
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       
       <div>
-        <span class="text-xl font-bold font-display mb-4 block">staticfish</span>
+        <a href="/" aria-label="Staticfish home" class="mb-4 inline-flex">
+          <BrandLockup />
+        </a>
         <p class="text-sm text-muted-foreground leading-relaxed max-w-xs">
           Clear business websites for small businesses, with optional editing and selected custom software when needed.
         </p>
+        <div class="mt-6 inline-flex border border-border bg-background px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+          UK based / solo build partner
+        </div>
       </div>
 
       <div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { BrandLockup } from "./BrandMark";
 
 interface NavigationItem {
   name: string;
@@ -35,7 +36,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(true)}
-        className="p-2 text-foreground hover:text-primary transition-colors rounded-md hover:bg-secondary"
+        className="border border-border p-2 text-foreground transition-colors hover:bg-secondary"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -48,10 +49,10 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
           }`}
         >
           <div className="flex justify-between items-center p-6 border-b border-border/50">
-            <span className="text-lg font-bold text-foreground font-display">staticfish</span>
+            <BrandLockup />
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 text-foreground hover:text-primary transition-colors bg-secondary rounded-md"
+              className="border border-border bg-secondary p-2 text-foreground transition-colors hover:bg-background"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -64,10 +65,10 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`block text-2xl font-bold font-display tracking-tight py-3 transition-all duration-300 ${
+                  className={`block border-b border-border/50 py-4 font-display text-3xl font-bold tracking-tight transition-all duration-300 ${
                     currentPath === item.href
-                      ? "text-primary"
-                      : "text-foreground/80 hover:text-primary"
+                      ? "text-accent"
+                      : "text-foreground/80 hover:text-accent"
                   }`}
                   onClick={() => setIsOpen(false)}
                   style={{
@@ -85,7 +86,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
           <div className="p-8 border-t border-border/50">
             <a
               href="/contact"
-              className="flex items-center justify-center gap-2 w-full bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-primary/90 transition-all active:scale-[0.98]"
+              className="flex w-full items-center justify-center gap-2 bg-primary px-8 py-4 font-semibold text-white transition-all hover:bg-primary/90 active:scale-[0.98]"
               onClick={() => setIsOpen(false)}
             >
               Get a Quote <ArrowRight className="h-5 w-5" />

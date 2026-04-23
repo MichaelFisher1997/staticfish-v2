@@ -68,7 +68,7 @@ const processSteps = [
     <Header />
     <main class="flex-1">
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines fadeBottom />
+        <FlowingLines className="hero-flow-art" fadeBottom />
         <CornerWaves position="bottom-right" />
 
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
@@ -99,7 +99,7 @@ const processSteps = [
               />
             </div>
 
-            <div class="border border-border p-8 lg:p-10 bg-background">
+            <div class="spec-panel p-8 lg:p-10">
               <div class="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                 <Clock className="h-4 w-4" />
                 {websitePackage.timeline}
@@ -121,7 +121,7 @@ const processSteps = [
               </div>
 
               <p class="text-sm text-muted-foreground mb-8">
-                If you need editable content, those projects start from <strong class="text-foreground">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
+                If you need editable content, those projects start from <strong class="text-foreground" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
               </p>
 
               <ul class="space-y-3 mb-8">
@@ -163,7 +163,7 @@ const processSteps = [
 
           <div class="max-w-3xl bg-border">
             {addOns.map((addOn) => (
-              <div class={`bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors ${addOn.featured ? 'bg-secondary/10' : ''}`}>
+                  <div class={`editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors ${addOn.featured ? 'bg-secondary/10' : ''}`}>
                 {addOn.featured && (
                   <div class="inline-flex bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 mb-6">
                     Most Common Add-On
@@ -222,7 +222,7 @@ const processSteps = [
             </div>
 
             <div class="space-y-6">
-              <div class="flex gap-4 py-4 border-b border-border">
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
                 <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
                   <Check className="h-4 w-4 text-accent" strokeWidth={3} />
                 </div>
@@ -232,7 +232,7 @@ const processSteps = [
                 </div>
               </div>
 
-              <div class="flex gap-4 py-4 border-b border-border">
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
                 <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
                   <Check className="h-4 w-4 text-accent" strokeWidth={3} />
                 </div>
@@ -242,7 +242,7 @@ const processSteps = [
                 </div>
               </div>
 
-              <div class="flex gap-4 py-4 border-b border-border">
+              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
                 <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
                   <Check className="h-4 w-4 text-accent" strokeWidth={3} />
                 </div>
@@ -267,7 +267,7 @@ const processSteps = [
 
           <div class="border-t border-border">
             {processSteps.map((step) => (
-              <div class="border-b border-border py-10">
+              <div class="editorial-card border-b border-border py-10 hover:bg-secondary/20">
                 <div class="grid grid-cols-12 gap-6 items-start">
                   <div class="col-span-12 sm:col-span-1">
                     <span class="text-sm font-medium text-muted-foreground">{step.step}</span>
@@ -291,7 +291,7 @@ const processSteps = [
       <section class="py-20 border-t border-border relative overflow-hidden">
         <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="border border-border bg-background p-10 lg:p-16">
+          <div class="spec-panel p-10 lg:p-16">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Secondary Service</p>
@@ -322,54 +322,3 @@ const processSteps = [
     <Footer />
   </div>
 </Layout>
-
-<script>
-  function initCurrencyPricing() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    type Currency = "GBP" | "EUR" | "USD";
-    let currency: Currency = "USD";
-
-    const euroTimezones = new Set([
-      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
-      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
-      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
-      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
-      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
-      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
-      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
-    ]);
-
-    if (timezone === "Europe/London") {
-      currency = "GBP";
-    } else if (euroTimezones.has(timezone)) {
-      currency = "EUR";
-    }
-
-    if (currency === "GBP") return;
-
-    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
-    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
-
-    const rate = rates[currency];
-    const symbol = symbols[currency];
-
-    function convertPrice(gbp: number): number {
-      return Math.ceil(gbp * rate);
-    }
-
-    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
-      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
-      const converted = convertPrice(gbp);
-      el.textContent = `${symbol}${converted}`;
-    });
-
-    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
-      const converted = convertPrice(25);
-      const text = el.textContent || "";
-      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
-</script>

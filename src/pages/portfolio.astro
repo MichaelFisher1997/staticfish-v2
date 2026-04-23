@@ -14,6 +14,8 @@ const projects = [
     image: "/portfolio-redot.png",
     category: "Open Source",
     url: "https://www.redotengine.org/",
+    role: "Structure + frontend",
+    year: "2026",
     tags: ["Astro", "Documentation", "Community"]
   },
   {
@@ -22,6 +24,8 @@ const projects = [
     image: "/portfolio-chattybox.png",
     category: "SaaS Product",
     url: "https://chattybox.ai/",
+    role: "Product build",
+    year: "2026",
     tags: ["React", "Python", "Custom App"]
   }
 ];
@@ -35,7 +39,7 @@ const projects = [
       
       <!-- Hero -->
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines fadeBottom />
+        <FlowingLines className="hero-flow-art" fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Portfolio</p>
@@ -56,15 +60,19 @@ const projects = [
           
           <div class="space-y-px bg-border">
             {projects.map((item) => (
-              <div class="group bg-background hover:bg-secondary/20 transition-colors">
+              <div class="editorial-card group bg-background hover:bg-secondary/20 transition-colors">
                 <div class="grid lg:grid-cols-2">
                   <!-- Image -->
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div class="p-4 lg:p-6">
+                    <div class="browser-frame overflow-hidden">
+                      <div class="aspect-[16/10] relative overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </div>
                   </div>
                   
                   <!-- Content -->
@@ -72,6 +80,9 @@ const projects = [
                     <span class="inline-block text-xs font-bold uppercase tracking-widest text-accent mb-4">
                       {item.category}
                     </span>
+                    <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      {item.role} / {item.year}
+                    </p>
                     
                     <h2 class="text-3xl lg:text-4xl font-bold text-foreground font-display tracking-tight mb-4">
                       {item.title}
@@ -103,7 +114,7 @@ const projects = [
           <!-- More Coming -->
           <div class="mt-20 lg:mt-24 relative overflow-hidden">
             <FloatingShapes fadeTop fadeBottom />
-            <div class="border border-border p-10 lg:p-12 text-center max-w-2xl mx-auto relative z-10">
+            <div class="spec-panel p-10 lg:p-12 text-center max-w-2xl mx-auto relative z-10">
               <h3 class="text-2xl font-bold text-foreground font-display mb-4">More Coming Soon</h3>
               <p class="text-muted-foreground mb-8 leading-relaxed">
                 As more client work is ready to share publicly, I'll add it here.
@@ -122,7 +133,9 @@ const projects = [
       <section class="py-20 border-t border-border relative overflow-hidden">
         <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket">
+          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative overflow-hidden">
+            <div class="deco-dots absolute inset-0 opacity-40"></div>
+            <div class="relative z-10">
             <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Next Project</p>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
               Want to see your
@@ -136,6 +149,7 @@ const projects = [
                 Let's Talk <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
+            </div>
           </div>
         </div>
       </section>

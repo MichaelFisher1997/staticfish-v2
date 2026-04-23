@@ -50,7 +50,7 @@ const pricingNotes = [
 
     <main class="flex-1">
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines fadeBottom />
+        <FlowingLines className="hero-flow-art" fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl">
@@ -74,7 +74,7 @@ const pricingNotes = [
       <section class="py-20 border-t border-border relative overflow-hidden">
         <GeometricArt variant="circles" fadeTop fadeBottom />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-5xl mx-auto border border-border bg-background">
+          <div class="spec-panel max-w-5xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-px bg-border">
               <div class="bg-background p-8 lg:p-12">
                 <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Most Clients Start Here</p>
@@ -94,7 +94,7 @@ const pricingNotes = [
                 </div>
 
                 <p class="text-sm text-muted-foreground mb-8">
-                  If you need editable content, those projects start from <strong class="text-foreground">£50/month</strong> ongoing.
+                  If you need editable content, those projects start from <strong class="text-foreground" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing.
                 </p>
 
                 <Button className="rounded-none h-12 px-8 font-semibold">
@@ -141,7 +141,7 @@ const pricingNotes = [
 
           <div class="max-w-3xl bg-border">
             {addOns.map((addOn, index) => (
-              <div class={`bg-background p-8 hover:bg-secondary/20 transition-colors ${index === 0 ? 'bg-secondary/10' : ''}`}>
+              <div class={`editorial-card bg-background p-8 hover:bg-secondary/20 transition-colors ${index === 0 ? 'bg-secondary/10' : ''}`}>
                 <h3 class="text-xl font-bold text-foreground font-display mb-3">{addOn.title}</h3>
                 <div class="flex items-baseline gap-1 mb-4">
                   <span class="text-sm text-muted-foreground uppercase tracking-wide">from +</span>
@@ -163,7 +163,7 @@ const pricingNotes = [
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="grid md:grid-cols-3 gap-px bg-border">
             {pricingNotes.map((note) => (
-              <div class="bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors">
+              <div class="editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors">
                 <h3 class="text-xl font-bold text-foreground font-display mb-3">{note.title}</h3>
                 <p class="text-sm text-muted-foreground leading-relaxed">{note.description}</p>
               </div>
@@ -174,14 +174,14 @@ const pricingNotes = [
 
       <section class="py-12 border-t border-border relative overflow-hidden">
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="border border-border p-6 flex items-start gap-4 bg-background">
+          <div class="spec-panel p-6 flex items-start gap-4">
             <div class="w-10 h-10 bg-accent/10 flex items-center justify-center shrink-0">
               <span class="text-accent font-bold text-lg">?</span>
             </div>
             <div>
               <h4 class="font-bold text-foreground mb-1">What is included in the monthly fee?</h4>
               <p class="text-muted-foreground text-sm leading-relaxed">
-                Brochure sites are £25/month and editable-content projects start from £50/month. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
+                Brochure sites are <span data-hosting-gbp>£25/month</span> and editable-content projects start from <span data-currency-gbp="50" data-currency-suffix="/month">£50/month</span>. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
               </p>
             </div>
           </div>
@@ -191,7 +191,7 @@ const pricingNotes = [
       <section class="py-20 border-t border-border relative overflow-hidden">
         <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="border border-border bg-background p-10 lg:p-16">
+          <div class="spec-panel p-10 lg:p-16">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
               <div class="max-w-2xl">
                 <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">
@@ -223,54 +223,3 @@ const pricingNotes = [
     <Footer />
   </div>
 </Layout>
-
-<script>
-  function initCurrencyPricing() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    type Currency = "GBP" | "EUR" | "USD";
-    let currency: Currency = "USD";
-
-    const euroTimezones = new Set([
-      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
-      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
-      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
-      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
-      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
-      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
-      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
-    ]);
-
-    if (timezone === "Europe/London") {
-      currency = "GBP";
-    } else if (euroTimezones.has(timezone)) {
-      currency = "EUR";
-    }
-
-    if (currency === "GBP") return;
-
-    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
-    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
-
-    const rate = rates[currency];
-    const symbol = symbols[currency];
-
-    function convertPrice(gbp: number): number {
-      return Math.ceil(gbp * rate);
-    }
-
-    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
-      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
-      const converted = convertPrice(gbp);
-      el.textContent = `${symbol}${converted}`;
-    });
-
-    document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
-      const converted = convertPrice(25);
-      const text = el.textContent || "";
-      el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
-</script>

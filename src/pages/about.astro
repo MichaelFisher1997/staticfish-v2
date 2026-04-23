@@ -8,12 +8,12 @@ import {
   Shield,
   DollarSign,
   Clock,
-  Target,
   Code,
   ArrowRight,
 } from 'lucide-react';
 import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
 import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
+import { BrandMark } from '../components/BrandMark';
 
 const values = [
   {
@@ -75,7 +75,7 @@ const milestones = [
       
       <!-- Header -->
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines fadeBottom />
+        <FlowingLines className="hero-flow-art" fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl">
@@ -112,8 +112,15 @@ const milestones = [
                 </p>
               </div>
             </div>
-            <div class="aspect-square bg-secondary/30 border border-border flex items-center justify-center">
-              <Target className="w-24 h-24 lg:w-32 lg:h-32 text-accent/60" />
+            <div class="spec-panel aspect-square overflow-hidden bg-secondary/30">
+              <div class="fine-grid absolute inset-0 opacity-80"></div>
+              <div class="relative z-10 flex h-full flex-col items-center justify-center p-8 text-center">
+                <p class="mb-6 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">Staticfish Principle</p>
+                <BrandMark markClassName="h-28 w-28 bg-background text-foreground [&_svg]:h-20 [&_svg]:w-20" />
+                <p class="mt-8 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                  Clear websites, direct communication, and no unnecessary moving parts.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -129,7 +136,7 @@ const milestones = [
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
             {values.map((value) => (
-              <div class="bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors relative overflow-hidden">
+              <div class="editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors relative overflow-hidden">
                 <div class="deco-dots absolute inset-0"></div>
                 <div class="w-12 h-12 bg-accent/10 flex items-center justify-center mb-6 text-accent">
                   <value.icon className="h-6 w-6" />
@@ -141,13 +148,21 @@ const milestones = [
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         <!-- About Me -->
         <section class="border-t border-border pt-20">
-          <div class="border border-border p-8 lg:p-12 flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
-            <div class="w-28 h-28 lg:w-32 lg:h-32 bg-accent/10 flex items-center justify-center text-accent text-4xl lg:text-5xl font-bold font-display shrink-0">
-              M
+          <div class="spec-panel p-8 lg:p-12 flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
+            <div class="relative shrink-0">
+              <div class="h-32 w-32 border border-border bg-background fine-grid flex items-center justify-center">
+                <div class="h-20 w-20 bg-foreground text-background flex items-center justify-center font-display text-3xl font-bold tracking-tighter">
+                  MF
+                </div>
+              </div>
+              <div class="absolute -bottom-3 -right-3 bg-accent px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                Founder
+              </div>
             </div>
             
             <div class="flex-1 text-center md:text-left">
@@ -196,7 +211,7 @@ const milestones = [
 
           <div class="border-t border-border">
             {milestones.map((milestone) => (
-              <div class="border-b border-border py-10">
+              <div class="editorial-card border-b border-border py-10 hover:bg-secondary/20">
                 <div class="grid grid-cols-12 gap-6 items-start">
                   <div class="col-span-12 sm:col-span-2">
                     <span class="text-2xl font-bold text-accent font-display tracking-tighter">
@@ -217,12 +232,15 @@ const milestones = [
               </div>
             ))}
           </div>
+          </div>
         </section>
 
         <!-- CTA -->
         <section class="border-t border-border pt-20 pb-20 relative overflow-hidden">
           <WaveBackground variant="teal" opacity={0.12} fadeTop />
-          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative z-10">
+          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative z-10 overflow-hidden">
+            <div class="deco-dots absolute inset-0 opacity-40"></div>
+            <div class="relative z-10">
             <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Ready?</p>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
               Let's Work
@@ -240,6 +258,7 @@ const milestones = [
               <Button variant="outline" className="rounded-none h-12 px-8 border-background/20 text-background hover:bg-background/10">
                 <a href="/portfolio">See My Work</a>
               </Button>
+            </div>
             </div>
           </div>
         </section>

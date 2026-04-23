@@ -1,5 +1,5 @@
-function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "transparent" }) {
-  const fadeBg = fadeColor === "background" ? "hsl(var(--background))" : "transparent";
+function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "secondary" | "transparent" }) {
+  const fadeBg = fadeColor === "secondary" ? "hsl(var(--secondary))" : fadeColor === "background" ? "hsl(var(--background))" : "transparent";
   return (
     <>
       {fadeTop && (
@@ -25,7 +25,7 @@ export function SeigaihaBackground({
   color?: "accent" | "foreground";
   fadeTop?: boolean;
   fadeBottom?: boolean;
-  fadeColor?: "background" | "transparent";
+  fadeColor?: "background" | "secondary" | "transparent";
 }) {
   const strokeColor = color === "accent" ? "hsl(var(--accent))" : "hsl(var(--foreground))";
 
@@ -155,7 +155,7 @@ export function WaveBands({
   variant?: "teal" | "coral" | "purple";
   fadeTop?: boolean;
   fadeBottom?: boolean;
-  fadeColor?: "background" | "transparent";
+  fadeColor?: "background" | "secondary" | "transparent";
 }) {
   const palettes = {
     teal: ["#2D6B6B", "#3D8B8B", "#4DA9A9", "#5EC7C7", "#6EE5E5"],
@@ -178,7 +178,7 @@ export function WaveBands({
           <g key={i} opacity={0.7 - i * 0.12}>
             {/* Main wave band - much thicker */}
             <path
-              d={generateWaveBand(i, colors.length)}
+              d={generateWaveBand(i)}
               fill={color}
               opacity={0.12}
             />
@@ -186,7 +186,7 @@ export function WaveBands({
             {Array.from({ length: 8 }).map((_, j) => (
               <path
                 key={j}
-                d={generateWaveLine(i, j, colors.length)}
+                d={generateWaveLine(i, j)}
                 fill="none"
                 stroke={color}
                 strokeWidth="1.5"
@@ -200,7 +200,7 @@ export function WaveBands({
   );
 }
 
-function generateWaveBand(index: number, total: number): string {
+function generateWaveBand(index: number): string {
   const baseY = 150 + index * 80;
   const amplitude = 60 + index * 15;
   const bandHeight = 70;
@@ -223,7 +223,7 @@ function generateWaveBand(index: number, total: number): string {
   return `${topPath} ${bottomPath} L0,${baseY} Z`;
 }
 
-function generateWaveLine(bandIndex: number, lineIndex: number, total: number): string {
+function generateWaveLine(bandIndex: number, lineIndex: number): string {
   const baseY = 150 + bandIndex * 80 + lineIndex * 8;
   const amplitude = 60 + bandIndex * 15;
   

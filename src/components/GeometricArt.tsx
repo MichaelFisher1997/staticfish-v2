@@ -1,5 +1,5 @@
-function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "transparent" }) {
-  const fadeBg = fadeColor === "background" ? "hsl(var(--background))" : "transparent";
+function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "secondary" | "transparent" }) {
+  const fadeBg = fadeColor === "secondary" ? "hsl(var(--secondary))" : fadeColor === "background" ? "hsl(var(--background))" : "transparent";
   return (
     <>
       {fadeTop && (
@@ -23,7 +23,7 @@ export function GeometricArt({
   variant?: "circles" | "lines" | "mixed" | "dots";
   fadeTop?: boolean;
   fadeBottom?: boolean;
-  fadeColor?: "background" | "transparent";
+  fadeColor?: "background" | "secondary" | "transparent";
 }) {
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
@@ -160,7 +160,7 @@ export function FloatingShapes({
   className?: string;
   fadeTop?: boolean;
   fadeBottom?: boolean;
-  fadeColor?: "background" | "transparent";
+  fadeColor?: "background" | "secondary" | "transparent";
 }) {
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
