@@ -1,16 +1,37 @@
+function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "transparent" }) {
+  const fadeBg = fadeColor === "background" ? "hsl(var(--background))" : "transparent";
+  return (
+    <>
+      {fadeTop && (
+        <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: `linear-gradient(to bottom, ${fadeBg}, transparent)` }} />
+      )}
+      {fadeBottom && (
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: `linear-gradient(to top, ${fadeBg}, transparent)` }} />
+      )}
+    </>
+  );
+}
+
 export function SeigaihaBackground({ 
   className = "",
   opacity = 0.12,
-  color = "accent"
+  color = "accent",
+  fadeTop = false,
+  fadeBottom = false,
+  fadeColor = "background"
 }: { 
   className?: string;
   opacity?: number;
   color?: "accent" | "foreground";
+  fadeTop?: boolean;
+  fadeBottom?: boolean;
+  fadeColor?: "background" | "transparent";
 }) {
   const strokeColor = color === "accent" ? "hsl(var(--accent))" : "hsl(var(--foreground))";
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
+      <FadeMasks fadeTop={fadeTop} fadeBottom={fadeBottom} fadeColor={fadeColor} />
       <svg
         className="absolute inset-0 w-full h-full"
         style={{ opacity }}
@@ -125,10 +146,16 @@ export function SeigaihaBackground({
 
 export function WaveBands({ 
   className = "",
-  variant = "teal"
+  variant = "teal",
+  fadeTop = false,
+  fadeBottom = false,
+  fadeColor = "background"
 }: { 
   className?: string;
   variant?: "teal" | "coral" | "purple";
+  fadeTop?: boolean;
+  fadeBottom?: boolean;
+  fadeColor?: "background" | "transparent";
 }) {
   const palettes = {
     teal: ["#2D6B6B", "#3D8B8B", "#4DA9A9", "#5EC7C7", "#6EE5E5"],
@@ -140,6 +167,7 @@ export function WaveBands({
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
+      <FadeMasks fadeTop={fadeTop} fadeBottom={fadeBottom} fadeColor={fadeColor} />
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 1440 800"

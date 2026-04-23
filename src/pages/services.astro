@@ -68,7 +68,7 @@ const processSteps = [
     <Header />
     <main class="flex-1">
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines count={8} />
+        <FlowingLines fadeBottom />
         <CornerWaves position="bottom-right" />
 
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
@@ -88,7 +88,7 @@ const processSteps = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="mixed" />
+        <GeometricArt variant="mixed" fadeTop fadeBottom />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -149,8 +149,8 @@ const processSteps = [
       </section>
 
       <section id="add-ons" class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <WaveBackground variant="coral" opacity={0.1} />
-        <FloatingShapes />
+        <WaveBackground variant="coral" opacity={0.1} fadeTop fadeBottom fadeColor="secondary" />
+        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
 
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl mb-16">
@@ -202,7 +202,7 @@ const processSteps = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="lines" />
+        <GeometricArt variant="lines" fadeTop fadeBottom />
         <CornerWaves position="top-left" />
 
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
@@ -257,7 +257,7 @@ const processSteps = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="dots" />
+        <GeometricArt variant="dots" fadeTop fadeBottom />
 
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
@@ -289,7 +289,7 @@ const processSteps = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} />
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="border border-border bg-background p-10 lg:p-16">
             <div class="grid lg:grid-cols-2 gap-12 items-center">

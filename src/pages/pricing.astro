@@ -50,7 +50,7 @@ const pricingNotes = [
 
     <main class="flex-1">
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines count={8} />
+        <FlowingLines fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl">
@@ -72,7 +72,7 @@ const pricingNotes = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="circles" />
+        <GeometricArt variant="circles" fadeTop fadeBottom />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-5xl mx-auto border border-border bg-background">
             <div class="grid lg:grid-cols-2 gap-px bg-border">
@@ -127,7 +127,7 @@ const pricingNotes = [
       </section>
 
       <section id="add-ons" class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <FloatingShapes />
+        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-3xl mb-12">
             <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Optional Add-On</p>
@@ -159,7 +159,7 @@ const pricingNotes = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="dots" />
+        <GeometricArt variant="dots" fadeTop fadeBottom />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="grid md:grid-cols-3 gap-px bg-border">
             {pricingNotes.map((note) => (
@@ -189,7 +189,7 @@ const pricingNotes = [
       </section>
 
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} />
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="border border-border bg-background p-10 lg:p-16">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">

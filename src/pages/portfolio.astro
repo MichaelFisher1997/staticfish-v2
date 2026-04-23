@@ -35,7 +35,7 @@ const projects = [
       
       <!-- Hero -->
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines count={8} />
+        <FlowingLines fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Portfolio</p>
@@ -51,7 +51,7 @@ const projects = [
 
       <!-- Project Grid -->
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="mixed" />
+        <GeometricArt variant="mixed" fadeTop fadeBottom />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           
           <div class="space-y-px bg-border">
@@ -102,7 +102,7 @@ const projects = [
           
           <!-- More Coming -->
           <div class="mt-20 lg:mt-24 relative overflow-hidden">
-            <FloatingShapes />
+            <FloatingShapes fadeTop fadeBottom />
             <div class="border border-border p-10 lg:p-12 text-center max-w-2xl mx-auto relative z-10">
               <h3 class="text-2xl font-bold text-foreground font-display mb-4">More Coming Soon</h3>
               <p class="text-muted-foreground mb-8 leading-relaxed">
@@ -120,7 +120,7 @@ const projects = [
 
       <!-- CTA -->
       <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} />
+        <WaveBackground variant="teal" opacity={0.12} fadeTop />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket">
             <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Next Project</p>

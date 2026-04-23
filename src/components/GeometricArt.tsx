@@ -1,12 +1,33 @@
+function FadeMasks({ fadeTop, fadeBottom, fadeColor = "background" }: { fadeTop?: boolean; fadeBottom?: boolean; fadeColor?: "background" | "transparent" }) {
+  const fadeBg = fadeColor === "background" ? "hsl(var(--background))" : "transparent";
+  return (
+    <>
+      {fadeTop && (
+        <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: `linear-gradient(to bottom, ${fadeBg}, transparent)` }} />
+      )}
+      {fadeBottom && (
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: `linear-gradient(to top, ${fadeBg}, transparent)` }} />
+      )}
+    </>
+  );
+}
+
 export function GeometricArt({ 
   className = "",
-  variant = "circles"
+  variant = "circles",
+  fadeTop = false,
+  fadeBottom = false,
+  fadeColor = "background"
 }: { 
   className?: string;
   variant?: "circles" | "lines" | "mixed" | "dots";
+  fadeTop?: boolean;
+  fadeBottom?: boolean;
+  fadeColor?: "background" | "transparent";
 }) {
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
+      <FadeMasks fadeTop={fadeTop} fadeBottom={fadeBottom} fadeColor={fadeColor} />
       {variant === "circles" && <CircleComposition />}
       {variant === "lines" && <LineComposition />}
       {variant === "mixed" && <MixedComposition />}
@@ -131,12 +152,19 @@ function DotComposition() {
 }
 
 export function FloatingShapes({ 
-  className = "" 
+  className = "",
+  fadeTop = false,
+  fadeBottom = false,
+  fadeColor = "background"
 }: { 
   className?: string;
+  fadeTop?: boolean;
+  fadeBottom?: boolean;
+  fadeColor?: "background" | "transparent";
 }) {
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
+      <FadeMasks fadeTop={fadeTop} fadeBottom={fadeBottom} fadeColor={fadeColor} />
       <div className="absolute top-[10%] right-[5%] w-32 h-32 border-2 border-accent/10 rotate-12" />
       <div className="absolute top-[20%] left-[8%] w-24 h-24 border border-foreground/5 rotate-45" />
       <div className="absolute bottom-[15%] right-[10%] w-40 h-40 border-2 border-accent/8 -rotate-6" />

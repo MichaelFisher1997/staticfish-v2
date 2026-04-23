@@ -16,7 +16,7 @@ import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
       
       <!-- Header -->
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines count={8} />
+        <FlowingLines fadeBottom />
         <CornerWaves position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="max-w-2xl">
@@ -38,7 +38,7 @@ import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
           
           <!-- Email Card -->
           <div class="relative overflow-hidden">
-            <GeometricArt variant="dots" />
+            <GeometricArt variant="dots" fadeTop fadeBottom />
             <div class="border border-border p-10 lg:p-12 relative z-10">
               
               <div class="text-center mb-10">
@@ -65,8 +65,8 @@ import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
           
           <!-- What to Include -->
           <div class="relative overflow-hidden">
-            <WaveBackground variant="teal" opacity={0.12} />
-            <FloatingShapes />
+            <WaveBackground variant="teal" opacity={0.12} fadeTop />
+            <FloatingShapes fadeTop />
             <div class="relative z-10 p-8">
             <h3 class="text-xl font-bold text-foreground font-display mb-6">What to Include</h3>
             
