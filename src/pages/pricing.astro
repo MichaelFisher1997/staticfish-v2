@@ -10,7 +10,7 @@ import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
 const pricingTiers = [
   {
     title: "Static Site",
-    priceGbp: 149,
+    priceGbp: 599,
     description: "A straightforward site for businesses that need an online presence.",
     features: [
       "Up to 5 pages",
@@ -22,7 +22,7 @@ const pricingTiers = [
   },
   {
     title: "CMS Site",
-    priceGbp: 249,
+    priceGbp: 1199,
     description: "For businesses that want to update their own content.",
     features: [
       "No page limit",
@@ -34,7 +34,7 @@ const pricingTiers = [
   },
   {
     title: "E-Commerce",
-    priceGbp: 399,
+    priceGbp: 2499,
     description: "For businesses selling products online.",
     features: [
       "Everything in CMS",
@@ -49,21 +49,21 @@ const pricingTiers = [
 const maintenancePlans = [
   {
     title: "Basic",
-    priceGbp: 50,
+    priceGbp: 75,
     period: "/month",
     description: "Essential security and upkeep.",
     features: ["Monthly Backups", "Security Updates", "Uptime Monitoring", "Email Support"]
   },
   {
     title: "Growth",
-    priceGbp: 150,
+    priceGbp: 199,
     period: "/month",
     description: "Regular updates and small changes.",
     features: ["Weekly Backups", "2 hrs dev time/mo", "Content Updates", "Priority Email Support"]
   },
   {
     title: "Full Partner",
-    priceGbp: 450,
+    priceGbp: 499,
     period: "/month",
     description: "Complete peace of mind.",
     features: ["Daily Backups", "5 hrs dev time/mo", "Performance Audits", "Phone & Slack Support"]
@@ -97,7 +97,8 @@ const maintenancePlans = [
               One cost upfront. Set hosting fee. That's it. No hourly billing, no surprise charges, no scope creep.
             </p>
             <p class="text-muted-foreground">
-              You get a clear price before we start, and that's what you pay.
+              You get a clear price before I start, and that's what you pay for the agreed scope. 
+              Additional features quoted separately.
             </p>
           </div>
         </div>
@@ -125,7 +126,7 @@ const maintenancePlans = [
                     <span class="text-sm text-muted-foreground ml-1">upfront</span>
                   </div>
                   <div class="mt-2">
-                    <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £50/month hosting</span>
+                    <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting</span>
                   </div>
                 </div>
 
@@ -162,8 +163,9 @@ const maintenancePlans = [
             <div>
               <h4 class="font-bold text-foreground mb-1">What's included in hosting?</h4>
               <p class="text-muted-foreground text-sm leading-relaxed">
-                Premium hosting on Cloudflare's global CDN, free SSL certificate, automated backups, 
-                and ongoing security monitoring. You can cancel hosting anytime with 30 days notice and keep your website files.
+                Hosting covers your domain name, Cloudflare CDN for fast global delivery, SSL certificate, 
+                automated backups, and security monitoring. £25/month for all sites. You can cancel anytime 
+                with 30 days notice and take your files elsewhere.
               </p>
             </div>
           </div>
@@ -305,7 +307,7 @@ const maintenancePlans = [
     });
     
     document.querySelectorAll("[data-hosting-gbp]").forEach((el) => {
-      const converted = convertPrice(50);
+      const converted = convertPrice(25);
       const text = el.textContent || "";
       el.textContent = text.replace(/[£€$]\d+/, `${symbol}${converted}`);
     });
