@@ -1,10 +1,15 @@
 ---
 const navigation = [
-  { name: "Work", href: "/portfolio" },
-  { name: "Services", href: "/services" },
-  { name: "About", href: "/about" },
+  { name: "Websites", href: "/services" },
   { name: "Pricing", href: "/pricing" },
+  { name: "Work", href: "/portfolio" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
+];
+
+const secondaryLinks = [
+  { name: "Custom Software", href: "/custom-software" },
+  { name: "Blog", href: "/blog" },
 ];
 
 const legalLinks = [
@@ -16,16 +21,16 @@ const legalLinks = [
 <footer class="border-t border-border bg-secondary/20">
   <div class="container mx-auto max-w-7xl px-6 py-16">
     
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       
-      <div class="md:col-span-4">
+      <div>
         <span class="text-xl font-bold font-display mb-4 block">staticfish</span>
         <p class="text-sm text-muted-foreground leading-relaxed max-w-xs">
-          Professional websites for small businesses. Fixed pricing, fast delivery, no hidden costs.
+          Clear business websites for small businesses, with optional editing and selected custom software when needed.
         </p>
       </div>
 
-      <div class="md:col-span-4">
+      <div>
         <span class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4 block">Navigation</span>
         <nav class="flex flex-col gap-3">
           {navigation.map((item) => (
@@ -39,7 +44,21 @@ const legalLinks = [
         </nav>
       </div>
       
-      <div class="md:col-span-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4 block">More</span>
+        <nav class="flex flex-col gap-3">
+          {secondaryLinks.map((item) => (
+            <a
+              href={item.href}
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div>
         <span class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4 block">Legal</span>
         <nav class="flex flex-col gap-3">
           {legalLinks.map((item) => (

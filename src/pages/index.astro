@@ -9,86 +9,85 @@ import { SeigaihaBackground, WaveBands, JapaneseWaveCorner } from '../components
 const projects = [
   {
     title: "Redot Engine",
-    category: "Community Platform",
+    category: "Community Website",
     image: "/portfolio-redot.png",
     url: "https://www.redotengine.org/",
   },
   {
     title: "Chattybox AI",
-    category: "SaaS Platform",
+    category: "Custom Platform",
     image: "/portfolio-chattybox.png",
     url: "https://chattybox.ai/",
   }
 ];
 
-const services = [
+const offers = [
   {
     num: "01",
-    title: "Static Website",
-    price: "£599",
-    desc: "Up to 5 pages. Perfect for businesses that want a professional presence without ongoing updates."
+    title: "Business Website",
+    price: "£599 upfront",
+    desc: "A clear website for your services, pricing, FAQs, and contact details.",
+    href: "/services",
   },
   {
     num: "02",
-    title: "CMS Website",
-    price: "£1,199",
-    desc: "Unlimited pages with an easy editor. Update your own content whenever you need."
+    title: "Editing Add-On",
+    price: "From +£600",
+    desc: "Add simple editing if you want to update prices, services, testimonials, or news yourself.",
+    href: "/pricing#add-ons",
   },
   {
     num: "03",
-    title: "E-Commerce",
-    price: "£2,499",
-    desc: "Sell online with secure payments. Full store management included."
+    title: "Custom Software",
+    price: "Quoted separately",
+    desc: "For portals, dashboards, workflows, and bespoke tools when a standard site is not enough.",
+    href: "/custom-software",
   }
 ];
 ---
 
-<Layout title="Staticfish | Websites for Small Businesses" description="Professional web development for small businesses. Fixed pricing, fast delivery, no hidden costs.">
+<Layout title="Staticfish | Business Websites for Small Businesses" description="Clear business websites for small businesses, with optional editing and selected custom software when needed.">
   <div class="min-h-screen flex flex-col bg-background">
-    
     <Header />
-    
+
     <main class="flex-1">
-      
-      <!-- HERO WITH WAVES -->
       <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
         <SeigaihaBackground opacity={0.15} />
         <JapaneseWaveCorner position="bottom-right" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="grid lg:grid-cols-12 gap-12 items-end">
-            
             <div class="lg:col-span-7">
               <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-                Web Development Studio
+                Business Websites
               </p>
-              
+
               <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground mb-8">
-                I build
-                <span class="block">websites that</span>
-                <span class="block text-accent">work.</span>
+                Websites that help
+                <span class="block">small businesses</span>
+                <span class="block text-accent">look credible.</span>
               </h1>
-              
-              <p class="text-lg text-muted-foreground max-w-md leading-relaxed mb-10">
-                No agency fluff. No DIY headaches. Just fast, professional websites that bring you customers.
+
+              <p class="text-lg text-muted-foreground max-w-xl leading-relaxed mb-10">
+                I build clear, fast websites that explain what you do, what it costs, and how people can get in touch.
               </p>
-              
-              <div class="flex items-center gap-6">
+
+              <div class="flex flex-wrap items-center gap-6">
                 <Button className="rounded-none px-8 h-12 font-semibold">
-                  <a href="/contact" class="flex items-center gap-2">
-                    Get a Quote <ArrowRight className="h-4 w-4" />
+                  <a href="/pricing" class="flex items-center gap-2">
+                    See Pricing <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
-                <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  View Our Work
+                <a href="/custom-software" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Need Something More Custom?
                 </a>
               </div>
             </div>
-            
+
             <div class="lg:col-span-5">
               <div class="relative">
-                <img 
-                  src="/illustrations/hero-abstract.svg" 
-                  alt="Website building illustration"
+                <img
+                  src="/illustrations/hero-abstract.svg"
+                  alt="Abstract website illustration"
                   class="w-full h-auto"
                 />
               </div>
@@ -97,34 +96,71 @@ const services = [
         </div>
       </section>
 
-      <!-- STATS BAR -->
       <section class="py-12 border-t border-border">
         <div class="container mx-auto max-w-7xl px-6">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <div class="text-5xl font-bold font-display tracking-tighter">100%</div>
-              <div class="text-sm text-muted-foreground mt-1">Fixed Price</div>
-            </div>
-            <div class="md:border-l md:border-border md:pl-8">
-              <div class="text-5xl font-bold font-display tracking-tighter">2-4 Weeks</div>
-              <div class="text-sm text-muted-foreground mt-1">Typical Delivery</div>
-            </div>
-            <div class="md:border-l md:border-border md:pl-8">
               <div class="text-5xl font-bold font-display tracking-tighter">£599</div>
               <div class="text-sm text-muted-foreground mt-1">Starting Price</div>
+            </div>
+            <div class="md:border-l md:border-border md:pl-8">
+              <div class="text-5xl font-bold font-display tracking-tighter">1-3 Weeks</div>
+              <div class="text-sm text-muted-foreground mt-1">Typical Website Build</div>
+            </div>
+            <div class="md:border-l md:border-border md:pl-8">
+              <div class="text-5xl font-bold font-display tracking-tighter">£25/mo</div>
+              <div class="text-sm text-muted-foreground mt-1">Hosting &amp; Maintenance</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SELECTED WORK WITH FLOWING LINES -->
+      <section class="py-20 border-t border-border">
+        <div class="container mx-auto max-w-7xl px-6">
+          <div class="max-w-3xl mb-16">
+            <span class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6 block">What I Offer</span>
+            <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">One clear core offer.</h2>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              Most businesses need a straightforward website first. Editing is optional, and custom software only comes into the picture when a normal website is not enough.
+            </p>
+          </div>
+
+          <div class="border-t border-border">
+            {offers.map((offer) => (
+              <a
+                href={offer.href}
+                class="group block border-b border-border py-10 hover:bg-secondary/20 transition-colors"
+              >
+                <div class="grid grid-cols-12 gap-6 items-start">
+                  <div class="col-span-12 sm:col-span-1">
+                    <span class="text-sm font-medium text-muted-foreground">{offer.num}</span>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <h3 class="text-2xl font-bold font-display">{offer.title}</h3>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <p class="text-muted-foreground text-sm leading-relaxed">{offer.desc}</p>
+                  </div>
+                  <div class="col-span-12 sm:col-span-3 flex items-center justify-between">
+                    <span class="text-2xl font-bold font-display">{offer.price}</span>
+                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section class="py-20 border-t border-border relative overflow-hidden">
         <WaveBands variant="teal" />
-        
+
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          
           <div class="flex items-baseline justify-between mb-12">
-            <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">Selected Work</h2>
+            <div>
+              <span class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6 block">Selected Work</span>
+              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">Recent work.</h2>
+            </div>
             <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
               View All Projects
             </a>
@@ -132,15 +168,15 @@ const services = [
 
           <div class="grid md:grid-cols-2 gap-px bg-border">
             {projects.map((project) => (
-              <a 
+              <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="group block bg-background hover:bg-secondary/30 transition-colors"
               >
                 <div class="aspect-[16/10] overflow-hidden">
-                  <img 
-                    src={project.image} 
+                  <img
+                    src={project.image}
                     alt={project.title}
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
@@ -158,167 +194,71 @@ const services = [
         </div>
       </section>
 
-      <!-- SERVICES -->
-      <section class="py-20 border-t border-border">
-        <div class="container mx-auto max-w-7xl px-6">
-          
-          <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-16">Services</h2>
-
-          <div class="border-t border-border">
-            {services.map((service, i) => (
-              <a 
-                href="/pricing" 
-                class="group block border-b border-border py-10 hover:bg-secondary/20 transition-colors"
-              >
-                <div class="grid grid-cols-12 gap-6 items-start">
-                  <div class="col-span-12 sm:col-span-1">
-                    <span class="text-sm font-medium text-muted-foreground">{service.num}</span>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <h3 class="text-2xl font-bold font-display">{service.title}</h3>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <p class="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
-                  </div>
-                  <div class="col-span-12 sm:col-span-3 flex items-center justify-between">
-                    <span class="text-2xl font-bold font-display">{service.price}</span>
-                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- WHY WORK WITH ME -->
       <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
         <WaveBands variant="coral" />
-        
+
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
           <div class="grid lg:grid-cols-2 gap-16">
             <div>
-              <span class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6 block">Why Me?</span>
-              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">
-                Straightforward.
-                <span class="block">No Surprises.</span>
+              <span class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6 block">Why Staticfish</span>
+              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">
+                Clear scope.
+                <span class="block">Clear price.</span>
               </h2>
+              <p class="text-lg text-muted-foreground leading-relaxed max-w-lg">
+                You work directly with me. The offer is simple, the scope is agreed up front, and there is no pressure to buy things you do not need.
+              </p>
             </div>
 
-            <div class="space-y-12">
-              <blockquote class="border-l-2 border-accent pl-8">
-                <p class="text-xl text-foreground leading-relaxed mb-6">
-                  "I work directly with every client. No account managers, no junior developers — just me, building your website with care and attention to detail."
+            <div class="space-y-6">
+              <div class="border-l-2 border-accent pl-8">
+                <h3 class="text-xl font-bold text-foreground mb-2">Fixed price for the agreed scope</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  You get a clear quote before work starts. If you want to add more later, I quote that separately.
                 </p>
-                <footer>
-                  <strong class="text-foreground">Michael Fisher</strong>
-                  <span class="text-muted-foreground"> — Staticfish</span>
-                </footer>
-              </blockquote>
+              </div>
 
-              <div class="space-y-4">
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                    <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  </div>
-                  <div>
-                    <h3 class="font-bold text-foreground mb-1">Fixed Price, Always</h3>
-                    <p class="text-muted-foreground text-sm">The price we agree on is the price you pay. No hidden fees, no scope creep charges.</p>
-                  </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                    <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  </div>
-                  <div>
-                    <h3 class="font-bold text-foreground mb-1">Fast Delivery</h3>
-                    <p class="text-muted-foreground text-sm">Most sites are live within 2 weeks. No endless back-and-forth, no months of waiting.</p>
-                  </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                  <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                    <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  </div>
-                  <div>
-                    <h3 class="font-bold text-foreground mb-1">You Own Everything</h3>
-                    <p class="text-muted-foreground text-sm">Your website, your code, your domain. No lock-in, no proprietary platforms.</p>
-                  </div>
-                </div>
+              <div class="border-l-2 border-accent pl-8">
+                <h3 class="text-xl font-bold text-foreground mb-2">Built to explain the business clearly</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  The goal is simple: help people understand what you do, what it costs, and how to contact you.
+                </p>
+              </div>
+
+              <div class="border-l-2 border-accent pl-8">
+                <h3 class="text-xl font-bold text-foreground mb-2">Optional editing when you need it</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CTA WITH CORNER WAVES -->
       <section class="py-20 border-t border-border relative overflow-hidden">
         <JapaneseWaveCorner position="top-left" />
         <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          
           <div class="bg-foreground text-background p-12 lg:p-20 relative">
             <div class="max-w-3xl">
               <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tighter mb-6">
-                Ready to get started?
+                Need a website that explains the business properly?
               </h2>
-              <p class="text-lg text-background/70 mb-10 max-w-lg">
-                Get in touch for a free, no-obligation quote. I'll give you an honest assessment and a clear price.
+              <p class="text-lg text-background/70 mb-6 max-w-xl">
+                Get in touch for a clear quote and an honest recommendation on whether you need a straightforward website, an editing add-on, or something more bespoke.
+              </p>
+              <p class="text-sm text-background/60 mb-10">
+                For more bespoke work, see <a href="/custom-software" class="underline underline-offset-4 text-background">Custom Software</a>.
               </p>
               <Button className="rounded-none px-10 h-12 font-semibold bg-accent hover:bg-accent/90 text-white">
-                <a href="/contact">Get Your Free Quote</a>
+                <a href="/contact">Get a Quote</a>
               </Button>
             </div>
           </div>
         </div>
       </section>
-
     </main>
+
     <Footer />
   </div>
 </Layout>
-
-<script>
-  function initCurrencyPricing() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    
-    type Currency = "GBP" | "EUR" | "USD";
-    let currency: Currency = "USD";
-    
-    const euroTimezones = new Set([
-      "Europe/Dublin", "Europe/Lisbon", "Europe/Berlin", "Europe/Paris",
-      "Europe/Rome", "Europe/Madrid", "Europe/Amsterdam", "Europe/Brussels",
-      "Europe/Vienna", "Europe/Bratislava", "Europe/Budapest", "Europe/Prague",
-      "Europe/Warsaw", "Europe/Copenhagen", "Europe/Stockholm", "Europe/Oslo",
-      "Europe/Helsinki", "Europe/Tallinn", "Europe/Riga", "Europe/Vilnius",
-      "Europe/Ljubljana", "Europe/Zagreb", "Europe/Athens", "Europe/Sofia",
-      "Europe/Bucharest", "Europe/Nicosia", "Europe/Malta", "Europe/Luxembourg",
-    ]);
-    
-    if (timezone === "Europe/London") {
-      currency = "GBP";
-    } else if (euroTimezones.has(timezone)) {
-      currency = "EUR";
-    }
-    
-    if (currency === "GBP") return;
-    
-    const rates: Record<Currency, number> = { GBP: 1, EUR: 1.17, USD: 1.27 };
-    const symbols: Record<Currency, string> = { GBP: "£", EUR: "€", USD: "$" };
-    
-    const rate = rates[currency];
-    const symbol = symbols[currency];
-    
-    function convertPrice(gbp: number): number {
-      return Math.ceil(gbp * rate);
-    }
-    
-    document.querySelectorAll("[data-price-gbp]").forEach((el) => {
-      const gbp = parseInt(el.getAttribute("data-price-gbp") || "0", 10);
-      const converted = convertPrice(gbp);
-      el.textContent = `${symbol}${converted}`;
-    });
-  }
-  
-  document.addEventListener("DOMContentLoaded", initCurrencyPricing);
-</script>

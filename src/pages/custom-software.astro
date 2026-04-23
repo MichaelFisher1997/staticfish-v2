@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Button } from '../components/ui/button';
+import { ArrowRight, Check, X } from 'lucide-react';
+import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
+import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
+
+const softwareTypes = [
+  {
+    title: 'Internal Tools',
+    description: 'Dashboards, admin tools, or lightweight systems that save time inside the business.'
+  },
+  {
+    title: 'Client Portals',
+    description: 'Private areas where clients can view information, upload details, or track progress.'
+  },
+  {
+    title: 'Booking & Workflows',
+    description: 'Custom enquiry, booking, approval, or handoff flows when off-the-shelf tools do not fit.'
+  },
+  {
+    title: 'Custom Web Apps',
+    description: 'When a standard brochure website is not enough and the business needs something bespoke.'
+  }
+];
+
+const goodFit = [
+  'A clear business problem to solve',
+  'A defined first version or scope',
+  'A web-based tool rather than a huge product roadmap',
+  'A project where custom functionality matters more than marketing pages'
+];
+
+const notTypical = [
+  'Large open-ended product teams',
+  'Native mobile app projects',
+  'Very large e-commerce builds',
+  'Anything that is still too vague to scope properly'
+];
+
+const processSteps = [
+  {
+    step: '01',
+    title: 'Scope the problem',
+    description: 'We define what the software needs to do, who it is for, and what the first version actually needs.'
+  },
+  {
+    step: '02',
+    title: 'Fixed proposal',
+    description: 'If the scope is clear enough, I will quote a fixed price and timeline for the agreed work.'
+  },
+  {
+    step: '03',
+    title: 'Build in stages',
+    description: 'I build the core functionality, share progress, and keep the scope grounded in the real business need.'
+  },
+  {
+    step: '04',
+    title: 'Launch and handover',
+    description: 'Once the core version is ready, I handle launch and we decide what support or next steps are needed.'
+  }
+];
+---
+
+<Layout title="Custom Software | Staticfish" description="Selected custom software work for businesses that need more than pages and contact forms.">
+  <div class="min-h-screen flex flex-col bg-background">
+    <Header />
+
+    <main class="flex-1">
+      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
+        <FlowingLines count={8} />
+        <CornerWaves position="bottom-right" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 max-w-3xl">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+                Custom Software
+              </p>
+              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
+                Custom software for
+                <span class="text-accent">business problems.</span>
+              </h1>
+              <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
+                Most of my work is business websites. I also take on selected software projects when a business needs a portal, dashboard, workflow, or tailored web app.
+              </p>
+              <p class="text-muted-foreground max-w-2xl">
+                This is a secondary service at Staticfish, so I only take on projects that are a good fit and clear enough to scope properly.
+              </p>
+            </div>
+
+            <div class="lg:col-span-5">
+              <img
+                src="/illustrations/service-custom.svg"
+                alt="Custom software illustration"
+                class="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="mixed" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="max-w-3xl mb-12">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">What I Build</p>
+            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-4">
+              Bespoke tools, not fixed packages.
+            </h2>
+            <p class="text-muted-foreground leading-relaxed">
+              Custom software is scoped and quoted case by case. These are the kinds of projects that usually fit best.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-border">
+            {softwareTypes.map((item) => (
+              <div class="bg-background p-8 hover:bg-secondary/20 transition-colors">
+                <h3 class="text-2xl font-bold text-foreground font-display mb-3">{item.title}</h3>
+                <p class="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
+        <WaveBackground variant="coral" opacity={0.1} />
+        <FloatingShapes />
+
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-px bg-border">
+            <div class="bg-background p-8 lg:p-12">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Good Fit</p>
+              <h2 class="text-3xl font-bold text-foreground font-display mb-8">Good fit if...</h2>
+              <ul class="space-y-4">
+                {goodFit.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
+                    <span class="text-sm text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="bg-background p-8 lg:p-12">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Not Typical</p>
+              <h2 class="text-3xl font-bold text-foreground font-display mb-8">Probably not the right fit if...</h2>
+              <ul class="space-y-4">
+                {notTypical.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <X className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
+                    <span class="text-sm text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <GeometricArt variant="dots" />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Process</p>
+          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">How custom projects work.</h2>
+
+          <div class="border-t border-border">
+            {processSteps.map((step) => (
+              <div class="border-b border-border py-10">
+                <div class="grid grid-cols-12 gap-6 items-start">
+                  <div class="col-span-12 sm:col-span-1">
+                    <span class="text-sm font-medium text-muted-foreground">{step.step}</span>
+                  </div>
+                  <div class="col-span-12 sm:col-span-3">
+                    <h3 class="text-xl font-bold text-foreground font-display">{step.title}</h3>
+                  </div>
+                  <div class="col-span-12 sm:col-span-8">
+                    <p class="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 border-t border-border relative overflow-hidden">
+        <WaveBackground variant="teal" opacity={0.12} />
+        <div class="container mx-auto max-w-7xl px-6 relative z-10">
+          <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket">
+            <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Next Step</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
+              Think your project needs more than a
+              <span class="text-accent">standard website?</span>
+            </h2>
+            <p class="text-lg text-background/70 mb-10 max-w-2xl mx-auto">
+              Send me an outline of the business problem, the users involved, and the outcome you want. If it is a good fit, I will tell you how I would approach the first phase.
+            </p>
+            <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
+              <a href="/contact" class="flex items-center gap-2">
+                Discuss Your Project <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
