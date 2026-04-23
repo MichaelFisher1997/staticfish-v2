@@ -23,7 +23,7 @@ const corePackage = {
 const addOns = [
   {
     title: 'Editable Content Add-On',
-    priceGbp: 600,
+    priceGbp: 800,
     description: 'Adds a CMS so you can edit pages, services, pricing, testimonials, and blog or news posts yourself.',
   }
 ];
@@ -34,17 +34,17 @@ const pricingNotes = [
     description: 'You get a clear quote before work starts. Changes outside the agreed scope are quoted separately.'
   },
   {
-    title: '50% to start, 50% before launch',
-    description: 'The remaining 50% is due before launch, once the site is reviewed and approved.'
+    title: 'Approve first, pay before launch',
+    description: 'I will show you the direction first. Once the site is complete and approved, payment is due before it goes live.'
   },
   {
-    title: 'One monthly fee after launch',
-    description: 'Hosting, backups, security monitoring, and routine maintenance are covered by a single £25/month fee.'
+    title: 'Domain and DNS are handled clearly',
+    description: 'If you already have a domain, I can help connect it. If you need a new one, I can register it for you, but you cover the domain cost.'
   }
 ];
 ---
 
-<Layout title="Pricing | Staticfish" description="Simple pricing for business websites, with one clear editable-content add-on and a separate route for custom software projects.">
+<Layout title="Pricing | Staticfish" description="Simple pricing for business websites, with an editable-content option and a separate route for custom software projects.">
   <div class="min-h-screen flex flex-col bg-background">
     <Header />
 
@@ -92,6 +92,10 @@ const pricingNotes = [
                     <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</span>
                   </div>
                 </div>
+
+                <p class="text-sm text-muted-foreground mb-8">
+                  If you need editable content, those projects start from <strong class="text-foreground">£50/month</strong> ongoing.
+                </p>
 
                 <Button className="rounded-none h-12 px-8 font-semibold">
                   <a href="/contact" class="flex items-center gap-2">
@@ -149,7 +153,7 @@ const pricingNotes = [
           </div>
 
           <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
-            If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
+            Editable-content projects have a higher monthly fee than brochure sites, because there is a real CMS, editor access, and more ongoing support involved. If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
           </p>
         </div>
       </section>
@@ -177,7 +181,7 @@ const pricingNotes = [
             <div>
               <h4 class="font-bold text-foreground mb-1">What is included in the monthly fee?</h4>
               <p class="text-muted-foreground text-sm leading-relaxed">
-                The £25/month fee covers your domain name, Cloudflare CDN, SSL certificate, backups, security monitoring, and routine website upkeep. If you want additional content changes or new features later, I quote those separately.
+                Brochure sites are £25/month and editable-content projects start from £50/month. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
               </p>
             </div>
           </div>

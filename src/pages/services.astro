@@ -28,9 +28,9 @@ const websitePackage = {
 const addOns = [
   {
     title: 'Editable Content Add-On',
-    priceGbp: 600,
+    priceGbp: 800,
     description: 'Adds a CMS so you can update pages, services, pricing, testimonials, and publish blog or news posts yourself.',
-    features: ['Editable page content', 'Blog / news if needed', 'Training at handover'],
+    features: ['CMS setup', 'Editable page content and blog/news', 'Editor training at handover'],
     featured: true,
   }
 ];
@@ -44,26 +44,26 @@ const processSteps = [
   },
   {
     step: '02',
-    title: 'Fixed Quote',
-    description: 'You get a clear price for the agreed scope before any work starts. Extra requests are quoted separately.',
+    title: 'Direction First',
+    description: 'I put together the draft direction or an initial page so you can see whether the look and structure feel right.',
     duration: '1-2 days'
   },
   {
     step: '03',
     title: 'Build and Review',
-    description: 'I design and build the site, then we review it together before launch.',
+    description: 'Once the direction is approved, I complete the site and we review everything together before launch.',
     duration: '1-3 weeks'
   },
   {
     step: '04',
-    title: 'Launch and Support',
-    description: 'I handle launch, technical setup, and ongoing hosting and maintenance.',
+    title: 'Payment, Domain, and Launch',
+    description: 'When the site is approved, payment is made before launch. I then handle DNS, domain setup, and getting the site live.',
     duration: '1-2 days'
   }
 ];
 ---
 
-<Layout title="Websites | Staticfish" description="Clear business websites for small businesses, with optional editing if you want to manage content yourself.">
+<Layout title="Websites | Staticfish" description="Clear business websites for small businesses, with an optional CMS setup if you want to manage content yourself.">
   <div class="min-h-screen flex flex-col bg-background">
     <Header />
     <main class="flex-1">
@@ -81,7 +81,7 @@ const processSteps = [
               <span class="text-accent">small businesses.</span>
             </h1>
             <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              The main offer at Staticfish is a clear business website. If you want to update content yourself, I can add a CMS rather than forcing that complexity into every project.
+              The main offer at Staticfish is a clear business website. If you want to update content yourself, I can add a proper CMS rather than forcing that complexity into every project.
             </p>
           </div>
         </div>
@@ -119,6 +119,10 @@ const processSteps = [
                   <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</span>
                 </div>
               </div>
+
+              <p class="text-sm text-muted-foreground mb-8">
+                If you need editable content, those projects start from <strong class="text-foreground">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
+              </p>
 
               <ul class="space-y-3 mb-8">
                 {websitePackage.features.map((feature) => (
@@ -188,7 +192,11 @@ const processSteps = [
           </div>
 
           <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
-            If you need a more tailored enquiry flow, booking setup, or something outside the normal website scope, I quote that separately based on what the business actually needs.
+            Editable-content projects also have a higher ongoing fee than brochure sites, because there is a real CMS and editor access to support. If you need a more tailored enquiry flow, booking setup, or something outside the normal website scope, I quote that separately based on what the business actually needs.
+          </p>
+
+          <p class="text-sm text-muted-foreground mt-4 max-w-2xl">
+            If you already have a domain name, I can connect it. If you need a new one, I can register it for you, but the domain cost is paid by you separately.
           </p>
         </div>
       </section>
