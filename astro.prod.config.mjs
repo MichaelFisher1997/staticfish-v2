@@ -13,7 +13,6 @@ export default defineConfig({
       projectId: '2gr3dh6t',
       dataset: 'production',
       useCdn: false,
-      studioBasePath: '/studio',
     }),
   ],
   vite: {
