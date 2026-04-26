@@ -27,3 +27,6 @@ Kimi_Agent_Small Org CMS Shift/
 # e2e test results
 e2e/test-results/
 .wrangler/
+
+# opencode
+.opencode/
