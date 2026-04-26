@@ -2,16 +2,11 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import cloudflare from '@astrojs/cloudflare';
 import sanity from '@sanity/astro';
 
-// This is the production-specific configuration.
-// It includes the .edge alias needed for Cloudflare deployment.
+// Production config - static output for Cloudflare Pages
 export default defineConfig({
-  output: 'server',
-  adapter: cloudflare({
-    imageService: 'compile',
-  }),
+  output: 'static',
   integrations: [
     react(),
     sanity({
@@ -27,7 +22,6 @@ export default defineConfig({
       external: ['node:buffer'],
     },
     resolve: {
-      // This alias is ONLY for production builds on Cloudflare.
       alias: { 'react-dom/server': 'react-dom/server.edge' },
     },
   },

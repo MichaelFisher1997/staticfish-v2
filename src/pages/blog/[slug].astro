@@ -11,6 +11,17 @@ import TableBlock from '../../components/TableBlock.astro';
 import { WaveBackground, FlowingLines, CornerWaves } from '../../components/WaveArt';
 import { GeometricArt, FloatingShapes } from '../../components/GeometricArt';
 
+export async function getStaticPaths() {
+  const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] {
+    "slug": slug.current
+  }`;
+  const posts = await sanityClient.fetch(POSTS_QUERY);
+  
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+  }));
+}
+
 const { slug } = Astro.params;
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
