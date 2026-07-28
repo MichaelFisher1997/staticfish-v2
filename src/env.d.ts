@@ -1,5 +1,13 @@
 /// <reference types="astro/client" />
 
+interface ImportMetaEnv {
+  readonly PUBLIC_CHATTYBOX_KEY: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 declare namespace App {
   interface Locals {
     cspNonce: string;

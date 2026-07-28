@@ -7,6 +7,8 @@ export interface Props {
 }
 
 const { title, description = "Professional web development for small businesses. Fixed pricing, fast delivery, no hidden costs." } = Astro.props;
+
+const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
 ---
 
 <!doctype html>
@@ -27,6 +29,12 @@ const { title, description = "Professional web development for small businesses.
     <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script
+      src="https://chattybox.ai/widget.js"
+      data-api-key={chattyboxKey}
+      data-api-url="https://adorable-woodpecker-629.convex.site/chat"
+      async
+    ></script>
   </head>
   <body>
     <slot />
