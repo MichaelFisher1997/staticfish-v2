@@ -2,21 +2,19 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Aurora from '../../components/effects/Aurora.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { PortableText } from 'astro-portabletext';
-import { ArrowLeft, Calendar, Clock, Twitter, Linkedin, Facebook, Link2 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
+import { ArrowLeft, ArrowRight, Calendar, Clock, Twitter, Linkedin, Facebook, Link2 } from 'lucide-react';
 import TableBlock from '../../components/TableBlock.astro';
-import { WaveBackground, FlowingLines, CornerWaves } from '../../components/WaveArt';
-import { GeometricArt, FloatingShapes } from '../../components/GeometricArt';
 
 export async function getStaticPaths() {
   const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] {
     "slug": slug.current
   }`;
   const posts = await sanityClient.fetch(POSTS_QUERY);
-  
+
   return posts.map((post: any) => ({
     params: { slug: post.slug },
   }));
@@ -79,11 +77,11 @@ function buildImageUrl(assetRef: string): string {
 
 function processBodyBlocks(blocks: any[]) {
   if (!blocks) return { processedBlocks: [], inlineImages: [] };
-  
+
   const inlineImages: any[] = [];
   const processedBlocks: any[] = [];
   let currentTable: any[] = [];
-  
+
   for (const block of blocks) {
     if (block._type === 'inlineImage') {
       if (currentTable.length > 0) {
@@ -107,14 +105,14 @@ function processBodyBlocks(blocks: any[]) {
       processedBlocks.push(block);
     }
   }
-  
+
   if (currentTable.length > 0) {
     processedBlocks.push({
       _type: 'table',
       rows: currentTable
     });
   }
-  
+
   return { processedBlocks, inlineImages };
 }
 
@@ -128,65 +126,62 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 ---
 
 <Layout title={`${post.title} | Staticfish Blog`} description={post.excerpt || post.title}>
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
-    
+
     <!-- Reading Progress Bar -->
-    <div class="fixed top-0 left-0 right-0 h-0.5 bg-border z-50">
-      <div id="reading-progress" class="h-full bg-accent transition-all duration-150" style="width: 0%"></div>
+    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-indigo-100/50">
+      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);"></div>
     </div>
-    
+
     <main class="flex-1">
       <article>
-        
+
         <!-- Hero Section -->
-        <div class="pt-32 pb-12 lg:pb-16 border-b border-border relative overflow-hidden">
-          <FlowingLines className="hero-flow-art" fadeBottom />
-          <CornerWaves position="bottom-right" />
-          <div class="container mx-auto max-w-4xl px-6 relative z-10">
-            <div class="mb-6">
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-none">
-                <a href="/blog" class="flex items-center gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Blog
-                </a>
-              </Button>
+        <div class="pt-36 pb-12 lg:pb-16 relative overflow-hidden">
+          <Aurora variant="light" density="soft" />
+          <div class="mx-auto max-w-4xl px-6 relative z-10">
+            <div class="mb-8" data-reveal>
+              <a href="/blog" class="btn-ghost-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-700">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Blog
+              </a>
             </div>
 
-            <div class="flex flex-wrap items-center gap-3 mb-6">
+            <div class="flex flex-wrap items-center gap-2 mb-6" data-reveal style="--reveal-delay: 80ms">
               {post.categories && post.categories.length > 0 && (
                 post.categories.map((cat: string) => (
-                  <span class="text-xs font-bold uppercase tracking-widest px-3 py-1.5 bg-accent/10 text-accent">
+                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-indigo-100 bg-indigo-50/70 text-indigo-700">
                     {cat}
                   </span>
                 ))
               )}
             </div>
 
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground font-display tracking-tighter leading-[0.95] mb-6">
+            <h1 data-reveal style="--reveal-delay: 140ms" class="text-balance font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
               {post.title}
             </h1>
-            
+
             {post.excerpt && (
-              <p class="text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+              <p data-reveal style="--reveal-delay: 200ms" class="text-xl lg:text-2xl text-slate-500 leading-relaxed max-w-3xl">
                 {post.excerpt}
               </p>
             )}
-            
-            <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border">
+
+            <div data-reveal style="--reveal-delay: 260ms" class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-indigo-100/70">
               {post.authorName && (
                 <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-accent/10 flex items-center justify-center text-accent font-bold text-sm">
-                    {post.authorName.split(' ').map(n => n[0]).join('')}
+                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4 130%)">
+                    {post.authorName.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
-                    <div class="font-medium text-foreground">{post.authorName}</div>
-                    <div class="text-sm text-muted-foreground">Author</div>
+                    <div class="font-semibold text-slate-900">{post.authorName}</div>
+                    <div class="text-sm text-slate-500">Author</div>
                   </div>
                 </div>
               )}
-              
-              <div class="flex items-center gap-4 text-sm text-muted-foreground">
+
+              <div class="flex items-center gap-4 text-sm text-slate-500">
                 {post.publishedAt && (
                   <span class="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
@@ -206,11 +201,11 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 
         <!-- Main Image -->
         {post.mainImage?.asset && (
-          <div class="py-12 lg:py-16">
-            <div class="container mx-auto max-w-5xl px-6">
-              <div class="aspect-video relative overflow-hidden border border-border">
-                <img 
-                  src={urlFor(post.mainImage).width(1400).height(788).url()} 
+          <div class="pb-12 lg:pb-16">
+            <div class="mx-auto max-w-5xl px-6">
+              <div class="browser-glow relative aspect-video overflow-hidden rounded-[2rem]">
+                <img
+                  src={urlFor(post.mainImage).width(1400).height(788).url()}
                   alt={post.mainImage.alt || post.title}
                   class="absolute inset-0 w-full h-full object-cover"
                 />
@@ -220,49 +215,48 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
         )}
 
         <!-- Article Content -->
-        <div class="py-8 lg:py-12 relative overflow-hidden">
-          <GeometricArt variant="dots" />
-          <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl mx-auto">
+        <div class="py-8 lg:py-12">
+          <div class="px-6">
+            <div class="max-w-3xl mx-auto rounded-[2rem] border border-indigo-100/60 bg-white/85 p-8 sm:p-12 shadow-xl shadow-indigo-500/5 backdrop-blur">
               {(textBlocks.length > 0 || inlineImages.length > 0) && (
                 <div class="article-content prose prose-lg max-w-none
-                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-foreground
+                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-slate-900
                   prose-headings:scroll-mt-32
-                  prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6
-                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-accent
-                  prose-p:text-muted-foreground prose-p:leading-[1.8] prose-p:text-[1.125rem]
-                  prose-a:text-accent prose-a:font-medium prose-a:no-underline prose-a:hover:underline
-                  prose-img:border prose-img:border-border
-                  prose-blockquote:border-l-2 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground
-                  prose-code:text-accent prose-code:bg-secondary prose-code:px-2 prose-code:py-0.5 prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
-                  prose-pre:bg-secondary prose-pre:text-foreground prose-pre:border prose-pre:border-border
-                  prose-li:text-muted-foreground prose-li:marker:text-accent
-                  prose-strong:text-foreground prose-strong:font-semibold
+                  prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
+                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-indigo-700
+                  prose-p:text-slate-600 prose-p:leading-[1.85] prose-p:text-[1.1rem]
+                  prose-a:text-indigo-600 prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
+                  prose-img:rounded-2xl
+                  prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-800 prose-blockquote:rounded-r-2xl prose-blockquote:py-1
+                  prose-code:text-indigo-700 prose-code:bg-indigo-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-2xl
+                  prose-li:text-slate-600 prose-li:marker:text-indigo-500
+                  prose-strong:text-slate-900 prose-strong:font-semibold
                   prose-ul:my-6 prose-ol:my-6
-                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-border prose-hr:my-12">
+                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-indigo-200 prose-hr:to-transparent prose-hr:my-12">
                   {textBlocks.map((block: any) => (
-                    block._type === 'table' 
+                    block._type === 'table'
                       ? <TableBlock rows={block.rows} />
                       : <PortableText value={[block]} />
                   ))}
-                  
+
                   {inlineImages.map((img: any) => (
                     img?.asset?._ref && (
-                    <figure class="my-16 not-prose">
-                      <div class="relative overflow-hidden border border-border">
-                        <img 
+                    <figure class="my-14 not-prose">
+                      <div class="relative overflow-hidden rounded-3xl border border-indigo-100/60 shadow-lg">
+                        <img
                           src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
-                          alt={img.alt || ''} 
+                          alt={img.alt || ''}
                           class="w-full"
                           loading="lazy"
                         />
                       </div>
                       {img.caption && (
-                        <figcaption class="mt-4 text-center text-sm text-muted-foreground">
+                        <figcaption class="mt-4 text-center text-sm text-slate-500">
                           <span class="inline-flex items-center gap-2">
-                            <span class="w-8 h-px bg-border"></span>
+                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-indigo-300"></span>
                             {img.caption}
-                            <span class="w-8 h-px bg-border"></span>
+                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-indigo-300"></span>
                           </span>
                         </figcaption>
                       )}
@@ -276,44 +270,45 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
         </div>
 
         <!-- Share Section -->
-        <div class="py-12 border-t border-border">
-          <div class="container mx-auto max-w-3xl px-6">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="py-12">
+          <div class="mx-auto max-w-3xl px-6">
+            <div class="glass flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[2rem] p-7">
               <div class="text-center sm:text-left">
-                <p class="text-sm text-muted-foreground mb-1">Enjoyed this article?</p>
-                <p class="font-medium text-foreground">Share it with others</p>
+                <p class="text-sm text-slate-500 mb-1">Enjoyed this article?</p>
+                <p class="font-bold text-slate-900">Share it with others</p>
               </div>
               <div class="flex items-center gap-3">
-                <a 
+                <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-3 bg-secondary hover:bg-[#1DA1F2] hover:text-white transition-all duration-200"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#1DA1F2] hover:scale-110"
                   aria-label="Share on Twitter"
                 >
                   <Twitter className="h-5 w-5" />
                 </a>
-                <a 
+                <a
                   href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-3 bg-secondary hover:bg-[#0A66C2] hover:text-white transition-all duration-200"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#0A66C2] hover:scale-110"
                   aria-label="Share on LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a 
+                <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="p-3 bg-secondary hover:bg-[#1877F2] hover:text-white transition-all duration-200"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#1877F2] hover:scale-110"
                   aria-label="Share on Facebook"
                 >
                   <Facebook className="h-5 w-5" />
                 </a>
-                <button 
-                  class="p-3 bg-secondary hover:bg-accent hover:text-white transition-all duration-200 cursor-pointer"
-                  onclick="navigator.clipboard.writeText(window.location.href); this.classList.add('bg-accent', 'text-white');"
+                <button
+                  class="flex h-11 w-11 items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-110 cursor-pointer"
+                  style="background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4 130%)"
+                  onclick="navigator.clipboard.writeText(window.location.href)"
                   aria-label="Copy link"
                 >
                   <Link2 className="h-5 w-5" />
@@ -326,57 +321,54 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 
       <!-- Related Articles -->
       {relatedPosts.length > 0 && (
-        <section class="py-20 border-t border-border relative overflow-hidden">
-          <WaveBackground variant="teal" opacity={0.12} />
-          <FloatingShapes />
-          <div class="container mx-auto max-w-7xl px-6 relative z-10">
+        <section class="py-20 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/60 to-transparent" aria-hidden="true"></div>
+          <div class="mx-auto max-w-7xl px-6 relative">
             <div class="flex items-end justify-between mb-12">
               <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-accent mb-3 block">Continue Reading</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-foreground font-display tracking-tight">
+                <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Continue reading</span>
+                <h2 class="mt-5 font-display text-3xl sm:text-4xl font-bold tracking-tight">
                   More Articles
                 </h2>
               </div>
-              <Button variant="outline" className="rounded-none hidden sm:flex">
-                <a href="/blog" class="flex items-center gap-2">
-                  View All <ArrowLeft className="h-4 w-4 rotate-180" />
-                </a>
-              </Button>
+              <a href="/blog" class="btn-ghost-glass hidden sm:inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-slate-800">
+                View All <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost: any) => (
-                <a 
+                <a
                   href={`/blog/${relatedPost.slug.current}`}
-                  class="group block bg-background hover:bg-secondary/20 transition-all duration-200"
+                  class="card-lift group block overflow-hidden rounded-3xl border border-indigo-100/60 bg-white/85 backdrop-blur"
                 >
                   {relatedPost.mainImage?.asset ? (
                     <div class="aspect-[16/10] relative overflow-hidden">
-                      <img 
-                        src={urlFor(relatedPost.mainImage).width(500).height(312).url()} 
+                      <img
+                        src={urlFor(relatedPost.mainImage).width(500).height(312).url()}
                         alt={relatedPost.mainImage.alt || relatedPost.title}
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-secondary/30">
+                    <div class="dot-pattern aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-indigo-50 to-cyan-50">
                       <div class="absolute inset-0 flex items-center justify-center">
-                        <span class="text-5xl opacity-20">📝</span>
+                        <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                       </div>
                     </div>
                   )}
-                  
+
                   <div class="p-6">
                     {relatedPost.publishedAt && (
-                      <span class="text-xs text-muted-foreground mb-2 block">
+                      <span class="text-xs font-semibold text-slate-400 mb-2 block">
                         {formatDate(relatedPost.publishedAt)}
                       </span>
                     )}
-                    <h3 class="text-lg font-bold text-foreground font-display tracking-tight group-hover:text-accent transition-colors line-clamp-2">
+                    <h3 class="text-lg font-bold font-display tracking-tight group-hover:text-indigo-700 transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {relatedPost.title}
                     </h3>
-                    <span class="inline-flex items-center gap-1 text-sm font-medium text-accent mt-3 group-hover:gap-2 transition-all duration-200">
-                      Read <ArrowLeft className="h-4 w-4 rotate-180" />
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 mt-3 group-hover:gap-2.5 transition-all duration-200">
+                      Read <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>
                 </a>
@@ -386,14 +378,14 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
         </section>
       )}
     </main>
-    
+
     <Footer />
   </div>
 </Layout>
 
 <script>
   const progressBar = document.getElementById('reading-progress');
-  
+
   function updateProgress() {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -402,7 +394,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
       progressBar.style.width = `${Math.min(progress, 100)}%`;
     }
   }
-  
+
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 </script>

@@ -2,10 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Button } from '../components/ui/button';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { SeigaihaBackground, WaveBands, JapaneseWaveCorner } from '../components/WaveArt';
-import { BrandMark } from '../components/BrandMark';
+import Aurora from '../components/effects/Aurora.astro';
+import Reveal from '../components/effects/Reveal.astro';
+import Counter from '../components/effects/Counter';
+import TiltCard from '../components/effects/TiltCard';
+import Spotlight from '../components/effects/Spotlight';
+import { ArrowRight, ArrowUpRight, BadgeCheck, Gauge, MousePointerClick, Rocket, ShieldCheck, Sparkles, Star, Zap } from 'lucide-react';
 
 const projects = [
   {
@@ -15,6 +17,7 @@ const projects = [
     url: "https://www.redotengine.org/",
     role: "Structure + frontend",
     year: "2026",
+    blurb: "A large content-heavy site rebuilt for speed and clarity.",
   },
   {
     title: "Chattybox AI",
@@ -23,6 +26,7 @@ const projects = [
     url: "https://chattybox.ai/",
     role: "SaaS product build",
     year: "2026",
+    blurb: "A full SaaS product — proof custom builds ship here too.",
   }
 ];
 
@@ -31,15 +35,23 @@ const offers = [
     num: "01",
     title: "Business Website",
     price: "£599 upfront",
+    priceGbp: 599,
+    priceSuffix: " upfront",
     desc: "A clear website for your services, pricing, FAQs, and contact details.",
     href: "/services",
+    icon: Rocket,
+    gradient: "from-indigo-500 to-violet-500",
   },
   {
     num: "02",
     title: "Editable Content Add-On",
     price: "From +£800",
+    priceGbp: 800,
+    pricePrefix: "From +",
     desc: "Adds a CMS so you can edit pages, services, pricing, testimonials, and blog or news posts yourself.",
     href: "/pricing#add-ons",
+    icon: MousePointerClick,
+    gradient: "from-violet-500 to-fuchsia-500",
   },
   {
     num: "03",
@@ -47,248 +59,345 @@ const offers = [
     price: "Quoted separately",
     desc: "For portals, dashboards, workflows, and bespoke tools when a standard site is not enough.",
     href: "/custom-software",
+    icon: Sparkles,
+    gradient: "from-cyan-500 to-blue-500",
   }
 ];
+
+const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sanity CMS", "Convex", "Stripe"];
 ---
 
 <Layout title="Staticfish | Business Websites for Small Businesses" description="Clear business websites for small businesses, with optional editing and selected custom software when needed.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
 
     <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <SeigaihaBackground opacity={0.15} fadeBottom />
-        <JapaneseWaveCorner position="bottom-right" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-12 gap-12 items-end">
-            <div class="lg:col-span-7">
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-                Business Websites
-              </p>
+      <!-- ============ HERO ============ -->
+      <section class="relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24">
+        <Aurora variant="light" density="rich" />
 
-              <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground mb-8">
+        <div class="relative z-10 mx-auto max-w-7xl px-6">
+          <div class="grid items-center gap-14 lg:grid-cols-12">
+            <div class="lg:col-span-7">
+              <div data-reveal>
+                <span class="eyebrow-pill">
+                  <span class="eyebrow-dot"></span>
+                  Business websites · UK based
+                </span>
+              </div>
+
+              <h1 data-reveal style="--reveal-delay: 90ms" class="text-balance mt-7 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
                 Websites that help
                 <span class="block">small businesses</span>
-                <span class="block text-accent">look credible.</span>
+                <span class="gradient-text-animated block pb-2">look credible.</span>
               </h1>
 
-              <p class="text-lg text-muted-foreground max-w-xl leading-relaxed mb-10">
+              <p data-reveal style="--reveal-delay: 180ms" class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
                 I build clear, fast websites that explain what you do, what it costs, and how people can get in touch.
               </p>
 
-              <div class="flex flex-wrap items-center gap-6">
-                <Button className="rounded-none px-8 h-12 font-semibold">
-                  <a href="/pricing" class="flex items-center gap-2">
-                    See Pricing <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <a href="/custom-software" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              <div data-reveal style="--reveal-delay: 260ms" class="mt-9 flex flex-wrap items-center gap-4">
+                <a href="/pricing" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+                  <span class="relative z-[2] flex items-center gap-2">
+                    See Pricing
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </a>
+                <a href="/custom-software" class="btn-ghost-glass inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-slate-800">
                   Need Something More Custom?
                 </a>
               </div>
-            </div>
 
-            <div class="lg:col-span-5">
-              <div class="spec-panel overflow-hidden">
-                <div class="flex items-center justify-between border-b border-border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-                  <span>Staticfish / 01</span>
-                  <span>Web Spec</span>
-                </div>
-                <div class="fine-grid relative p-6 lg:p-8">
-                  <div class="absolute right-5 top-5">
-                    <BrandMark markClassName="bg-background" />
+              <div data-reveal style="--reveal-delay: 340ms" class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <div class="flex items-center gap-3">
+                  <div class="flex -space-x-2.5">
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-[11px] font-bold text-white ring-2 ring-white">RE</span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 text-[11px] font-bold text-white ring-2 ring-white">CB</span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-[11px] font-bold text-white ring-2 ring-white">MF</span>
                   </div>
-                  <img
-                    src="/illustrations/hero-abstract.svg"
-                    alt="Abstract website illustration"
-                    class="w-full h-auto"
-                  />
+                  <div class="text-sm">
+                    <div class="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map(() => (
+                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p class="mt-0.5 font-semibold text-slate-700">Direct with the builder</p>
+                  </div>
                 </div>
-                <div class="grid grid-cols-3 divide-x divide-border border-t border-border text-center text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                  <span class="px-3 py-3">Fast</span>
-                  <span class="px-3 py-3">Clear</span>
-                  <span class="px-3 py-3">Fixed</span>
+                <div class="hidden h-10 w-px bg-gradient-to-b from-transparent via-indigo-200 to-transparent sm:block"></div>
+                <div class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+                  <ShieldCheck className="h-4 w-4 text-emerald-500" />
+                  Fixed price · No surprises
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="border-y border-foreground bg-foreground text-background">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="grid grid-cols-1 md:grid-cols-3 divide-y divide-background/15 md:divide-x md:divide-y-0">
-            <div class="py-8 md:pr-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Starting Price</div>
-              <div class="text-5xl font-bold font-display tracking-tighter" data-price-gbp="599">£599</div>
-              <div class="text-sm text-background/60 mt-1">Upfront for agreed scope</div>
-            </div>
-            <div class="py-8 md:px-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Typical Build</div>
-              <div class="text-5xl font-bold font-display tracking-tighter">1-3 Weeks</div>
-              <div class="text-sm text-background/60 mt-1">From direction to launch</div>
-            </div>
-            <div class="py-8 md:pl-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Ongoing Care</div>
-              <div class="text-5xl font-bold font-display tracking-tighter" data-currency-gbp="25" data-currency-suffix="/mo">£25/mo</div>
-              <div class="text-sm text-background/60 mt-1">Hosting, backups, upkeep</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="max-w-3xl mb-16">
-            <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">What I Offer</span>
-            <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">One clear core offer.</h2>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Most businesses need a straightforward website first. Editing is optional, and custom software only comes into the picture when a normal website is not enough.
-            </p>
-          </div>
-
-          <div class="border-t border-border">
-            {offers.map((offer) => (
-              <a
-                href={offer.href}
-                class="editorial-card group block border-b border-border py-10 hover:bg-secondary/20 transition-colors"
-              >
-                <div class="grid grid-cols-12 gap-6 items-start">
-                  <div class="col-span-12 sm:col-span-1">
-                    <span class="inline-flex h-8 w-8 items-center justify-center border border-border text-xs font-bold text-accent">{offer.num}</span>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <h3 class="text-2xl font-bold font-display">{offer.title}</h3>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <p class="text-muted-foreground text-sm leading-relaxed">{offer.desc}</p>
-                  </div>
-                  <div class="col-span-12 sm:col-span-3 flex items-center justify-between">
-                    {offer.num === "01" && <span class="text-2xl font-bold font-display" data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
-                    {offer.num === "02" && <span class="text-2xl font-bold font-display" data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
-                    {offer.num === "03" && <span class="text-2xl font-bold font-display">{offer.price}</span>}
-                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBands variant="teal" fadeTop fadeBottom />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="flex items-baseline justify-between mb-12">
-            <div>
-              <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Selected Work</span>
-              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">Recent work.</h2>
-            </div>
-            <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
-              View All Projects
-            </a>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-px bg-border">
-            {projects.map((project) => (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="editorial-card group block bg-background hover:bg-secondary/30 transition-colors"
-              >
-                <div class="p-4 pb-0">
-                  <div class="browser-frame overflow-hidden">
-                    <div class="aspect-[16/10] overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+            <!-- Floating browser mock -->
+            <div class="lg:col-span-5" data-reveal="scale" style="--reveal-delay: 200ms">
+              <TiltCard client:load max={6}>
+                <div class="relative">
+                  <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-indigo-400/30 via-violet-400/20 to-cyan-400/30 blur-2xl" aria-hidden="true"></div>
+                  <div class="browser-glow tilt-inner relative overflow-hidden rounded-3xl border border-white/60 bg-white/90 backdrop-blur-xl">
+                    <div class="flex items-center gap-2 border-b border-slate-100 bg-white/70 px-5 py-3.5">
+                      <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                      <span class="ml-3 hidden flex-1 items-center gap-2 rounded-full bg-slate-100/80 px-4 py-1.5 text-[11px] font-medium text-slate-500 sm:flex">
+                        <BadgeCheck className="h-3 w-3 text-emerald-500" /> yourbusiness.co.uk
+                      </span>
+                      <span class="ml-auto inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-emerald-600">
+                        <span class="live-badge inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live
+                      </span>
+                    </div>
+                    <div class="relative overflow-hidden">
+                      <img src="/portfolio-chattybox.png" alt="Example website built by Staticfish" class="h-auto w-full object-cover" loading="eager" />
+                      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-indigo-950/30 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="flex items-center justify-between gap-3 border-t border-slate-100 bg-white/80 px-5 py-4 backdrop-blur">
+                      <div class="flex items-center gap-3">
+                        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-500 text-white">
+                          <Gauge className="h-4 w-4" />
+                        </span>
+                        <div>
+                          <p class="text-xs font-bold text-slate-800">98 / 100 performance</p>
+                          <p class="text-[11px] text-slate-500">Loads in under a second</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-1 rounded-full bg-indigo-50 px-3 py-1.5 text-[11px] font-bold text-indigo-600">
+                        <Zap className="h-3 w-3" /> Fast
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="p-6 flex items-start justify-between">
-                  <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-accent">{project.category}</span>
-                    <h3 class="text-xl font-bold font-display mt-1">{project.title}</h3>
-                    <p class="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{project.role} / {project.year}</p>
+
+                  <div class="glass animate-float absolute -left-4 top-16 hidden rounded-2xl px-4 py-3 sm:block lg:-left-10">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-indigo-500">Starting at</p>
+                    <p class="font-display text-2xl font-bold text-slate-900" data-price-gbp="599">£599</p>
                   </div>
-                  <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <div class="glass animate-float-slow absolute -right-3 bottom-20 hidden rounded-2xl px-4 py-3 sm:block lg:-right-8" style="animation-delay: -4s">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-cyan-600">Typical build</p>
+                    <p class="font-display text-2xl font-bold text-slate-900">1–3 weeks</p>
+                  </div>
                 </div>
+              </TiltCard>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech marquee -->
+        <div class="relative z-10 mx-auto mt-16 max-w-7xl px-6" data-reveal style="--reveal-delay: 200ms">
+          <div class="marquee-mask overflow-hidden rounded-2xl border border-indigo-100/70 bg-white/50 py-4 backdrop-blur">
+            <div class="marquee-track items-center gap-10 pr-10">
+              {[...stack, ...stack].map((tech) => (
+                <span class="flex shrink-0 items-center gap-2.5 text-sm font-bold uppercase tracking-widest text-slate-400">
+                  <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500"></span>
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STATS BAND ============ -->
+      <section class="relative z-10 mx-auto max-w-7xl px-6">
+        <Reveal>
+          <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2rem] px-8 py-10 lg:px-14">
+            <Aurora variant="dark" density="soft" />
+            <div class="relative grid grid-cols-1 gap-10 sm:grid-cols-3">
+              <div class="text-center sm:text-left">
+                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-300">Starting price</p>
+                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">
+                  <Counter client:visible to={599} prefix="£" />
+                </p>
+                <p class="mt-2 text-sm text-slate-400">Upfront for agreed scope</p>
+              </div>
+              <div class="text-center sm:border-x sm:border-white/10 sm:text-left sm:pl-10">
+                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Typical build</p>
+                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">1–3 <span class="text-3xl text-slate-300">weeks</span></p>
+                <p class="mt-2 text-sm text-slate-400">From direction to launch</p>
+              </div>
+              <div class="text-center sm:text-left sm:pl-10">
+                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-violet-300">Ongoing care</p>
+                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">
+                  <Counter client:visible to={25} prefix="£" suffix="/mo" />
+                </p>
+                <p class="mt-2 text-sm text-slate-400">Hosting, backups, upkeep</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <!-- ============ OFFERS ============ -->
+      <section class="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
+        <div class="mb-14 max-w-3xl">
+          <Reveal>
+            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> What I offer</span>
+          </Reveal>
+          <Reveal delay={90}>
+            <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              One clear core offer, <span class="serif-accent font-normal">zero confusion.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p class="mt-5 text-lg leading-relaxed text-slate-600">
+              Most businesses need a straightforward website first. Editing is optional, and custom software only comes into the picture when a normal website is not enough.
+            </p>
+          </Reveal>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          {offers.map((offer, i) => (
+            <Reveal delay={i * 110} variant="scale">
+              <Spotlight client:load className="card-lift group h-full rounded-3xl border border-indigo-100/70 bg-white/80 p-8 backdrop-blur">
+                <a href={offer.href} class="relative block h-full">
+                  <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${offer.gradient} text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                    <offer.icon className="h-5 w-5" />
+                  </span>
+                  <p class="mt-6 font-display text-sm font-bold tracking-widest text-slate-400">{offer.num}</p>
+                  <h3 class="mt-1 font-display text-2xl font-bold tracking-tight">{offer.title}</h3>
+                  <p class="mt-3 text-sm leading-relaxed text-slate-600">{offer.desc}</p>
+                  <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
+                    {offer.num === "01" && <span class="font-display text-xl font-bold gradient-text" data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
+                    {offer.num === "02" && <span class="font-display text-xl font-bold gradient-text" data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
+                    {offer.num === "03" && <span class="font-display text-xl font-bold gradient-text">{offer.price}</span>}
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-violet-600">
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </a>
+              </Spotlight>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ WORK ============ -->
+      <section class="relative overflow-hidden py-24 lg:py-28">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/60 to-transparent" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-7xl px-6">
+          <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Reveal>
+                <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Selected work</span>
+              </Reveal>
+              <Reveal delay={90}>
+                <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Recent work<span class="gradient-text">.</span></h2>
+              </Reveal>
+            </div>
+            <Reveal delay={160}>
+              <a href="/portfolio" class="link-underline hidden items-center gap-2 text-sm font-bold text-slate-600 hover:text-indigo-700 sm:inline-flex">
+                View All Projects <ArrowUpRight className="h-4 w-4" />
               </a>
+            </Reveal>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2">
+            {projects.map((project, i) => (
+              <Reveal delay={i * 120} variant="scale">
+                <TiltCard client:load max={5}>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="card-lift group block overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl shadow-indigo-500/10">
+                    <div class="relative overflow-hidden">
+                      <img src={project.image} alt={project.title} class="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                      <span class="glass absolute left-4 top-4 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-700">{project.category}</span>
+                      <span class="absolute bottom-4 right-4 flex h-12 w-12 translate-y-3 items-center justify-center rounded-full bg-white text-slate-900 opacity-0 shadow-xl transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <ArrowUpRight className="h-5 w-5" />
+                      </span>
+                    </div>
+                    <div class="p-7">
+                      <h3 class="font-display text-2xl font-bold tracking-tight">{project.title}</h3>
+                      <p class="mt-2 text-sm leading-relaxed text-slate-600">{project.blurb}</p>
+                      <p class="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{project.role} / {project.year}</p>
+                    </div>
+                  </a>
+                </TiltCard>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <WaveBands variant="coral" fadeTop fadeBottom fadeColor="secondary" />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-2 gap-16">
-            <div>
-              <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Why Staticfish</span>
-              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">
-                Clear scope.
-                <span class="block">Clear price.</span>
+      <!-- ============ WHY ============ -->
+      <section class="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+        <div class="grid items-start gap-14 lg:grid-cols-2">
+          <div class="lg:sticky lg:top-32">
+            <Reveal>
+              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why Staticfish</span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+                Clear scope.<br />Clear price.<br />
+                <span class="serif-accent font-normal gradient-text">No games.</span>
               </h2>
-              <p class="text-lg text-muted-foreground leading-relaxed max-w-lg">
+            </Reveal>
+            <Reveal delay={160}>
+              <p class="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
                 You work directly with me. The offer is simple, the scope is agreed up front, and there is no pressure to buy things you do not need.
               </p>
-            </div>
+            </Reveal>
+            <Reveal delay={220}>
+              <a href="/about" class="btn-ghost-glass mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-slate-800">
+                Meet the builder <ArrowRight className="h-4 w-4" />
+              </a>
+            </Reveal>
+          </div>
 
-            <div class="space-y-6">
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Fixed price for the agreed scope</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  You get a clear quote before work starts. If you want to add more later, I quote that separately.
-                </p>
-              </div>
-
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Built to explain the business clearly</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  The goal is simple: help people understand what you do, what it costs, and how to contact you.
-                </p>
-              </div>
-
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Optional editing when you need it</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.
-                </p>
-              </div>
-            </div>
+          <div class="space-y-5">
+            {[
+              { title: "Fixed price for the agreed scope", desc: "You get a clear quote before work starts. If you want to add more later, I quote that separately.", icon: BadgeCheck, tint: "from-indigo-500 to-violet-500" },
+              { title: "Built to explain the business clearly", desc: "The goal is simple: help people understand what you do, what it costs, and how to contact you.", icon: MousePointerClick, tint: "from-violet-500 to-fuchsia-500" },
+              { title: "Optional editing when you need it", desc: "If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.", icon: Sparkles, tint: "from-cyan-500 to-blue-500" },
+            ].map((item, i) => (
+              <Reveal delay={i * 110}>
+                <Spotlight client:load className="card-lift rounded-3xl border border-indigo-100/70 bg-white/80 p-7 backdrop-blur sm:p-8">
+                  <div class="flex gap-5">
+                    <span class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${item.tint} text-white shadow-lg`}>
+                      <item.icon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <h3 class="font-display text-xl font-bold tracking-tight">{item.title}</h3>
+                      <p class="mt-2 leading-relaxed text-slate-600">{item.desc}</p>
+                    </div>
+                  </div>
+                </Spotlight>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <JapaneseWaveCorner position="top-left" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="bg-foreground text-background p-12 lg:p-20 relative corner-bracket overflow-hidden">
-            <div class="deco-dots absolute inset-0 opacity-40"></div>
-            <div class="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 items-end">
-              <div class="max-w-3xl">
-                <p class="text-sm font-medium text-background/50 uppercase tracking-widest mb-6">Next Step</p>
-              <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tighter mb-6">
-                Need a website that explains the business properly?
+      <!-- ============ CTA ============ -->
+      <section class="mx-auto max-w-7xl px-6 pb-24 lg:pb-32">
+        <Reveal variant="scale">
+          <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center sm:px-14 lg:py-24">
+            <Aurora variant="dark" density="rich" />
+            <div class="relative">
+              <span class="eyebrow-pill eyebrow-pill-dark mx-auto">
+                <span class="eyebrow-dot"></span> Next step
+              </span>
+              <h2 class="text-balance mx-auto mt-7 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Need a website that explains the business <span class="serif-accent font-normal text-transparent" style="background: linear-gradient(92deg, #a5b4fc, #67e8f9); -webkit-background-clip: text; background-clip: text;">properly?</span>
               </h2>
-              <p class="text-lg text-background/70 mb-6 max-w-xl">
+              <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
                 Get in touch for a clear quote and an honest recommendation on whether you need a straightforward website, an editing add-on, or something more bespoke.
               </p>
-              <p class="text-sm text-background/60 mb-10">
-                For more bespoke work, see <a href="/custom-software" class="underline underline-offset-4 text-background">Custom Software</a>.
-              </p>
+              <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <a href="/contact" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-bold text-white">
+                  <span class="relative z-[2] flex items-center gap-2">
+                    Get a Quote <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </a>
+                <a href="/custom-software" class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/10">
+                  Custom Software
+                </a>
               </div>
-              <Button className="rounded-none px-10 h-12 font-semibold bg-accent hover:bg-accent/90 text-white">
-                <a href="/contact">Get a Quote</a>
-              </Button>
+              <p class="mt-8 text-sm text-slate-400">
+                Typical response within 24 hours · <span class="text-slate-200">contact@staticfish.co.uk</span>
+              </p>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </main>
 

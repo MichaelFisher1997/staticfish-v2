@@ -1,0 +1,65 @@
+---
+import Aurora from './effects/Aurora.astro';
+import Reveal from './effects/Reveal.astro';
+import { ArrowRight } from 'lucide-react';
+
+interface CtaLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  highlight?: string;
+  description?: string;
+  primary: CtaLink;
+  secondary?: CtaLink;
+  note?: string;
+}
+
+const {
+  eyebrow = "Next step",
+  title,
+  highlight = "",
+  description = "",
+  primary,
+  secondary,
+  note = "",
+} = Astro.props;
+---
+
+<section class="mx-auto max-w-7xl px-6 pb-24 lg:pb-32">
+  <Reveal variant="scale">
+    <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center sm:px-14 lg:py-20">
+      <Aurora variant="dark" density="rich" />
+      <div class="relative">
+        <span class="eyebrow-pill eyebrow-pill-dark mx-auto">
+          <span class="eyebrow-dot"></span> {eyebrow}
+        </span>
+        <h2 class="text-balance mx-auto mt-7 max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          {title}
+          {highlight && (
+            <span class="serif-accent font-normal text-transparent" style="background: linear-gradient(92deg, #a5b4fc, #67e8f9); -webkit-background-clip: text; background-clip: text;"> {highlight}</span>
+          )}
+        </h2>
+        {description && (
+          <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-300">{description}</p>
+        )}
+        <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href={primary.href} class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-bold text-white">
+            <span class="relative z-[2] flex items-center gap-2">
+              {primary.label} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </a>
+          {secondary && (
+            <a href={secondary.href} class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/10">
+              {secondary.label}
+            </a>
+          )}
+        </div>
+        {note && <p class="mt-7 text-sm text-slate-400">{note}</p>}
+      </div>
+    </div>
+  </Reveal>
+</section>

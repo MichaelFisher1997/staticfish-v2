@@ -2,12 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaPanel from '../../components/CtaPanel.astro';
+import Reveal from '../../components/effects/Reveal.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { WaveBackground, FlowingLines, CornerWaves } from '../../components/WaveArt';
-import { FloatingShapes } from '../../components/GeometricArt';
 
 const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
   _id,
@@ -36,132 +36,119 @@ const recentPosts = posts.slice(1);
 ---
 
 <Layout title="Blog | Staticfish" description="Articles and insights about web development, design, and digital strategy.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
-    
+
     <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines className="hero-flow-art" fadeBottom />
-        <CornerWaves position="bottom-right" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-2xl mb-12 lg:mb-16">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Blog</p>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground font-display tracking-tighter mb-6">
-              Thoughts & Ideas.
-            </h1>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Web development insights, design trends, and practical tips for building better websites.
-            </p>
-          </div>
+      <PageHero eyebrow="Blog">
+        <span slot="title">Thoughts <span class="serif-accent font-normal gradient-text">& ideas.</span></span>
+        Web development insights, design trends, and practical tips for building better websites.
+      </PageHero>
 
-          {posts.length === 0 && (
-            <div class="text-center py-24 border border-border">
-              <p class="text-muted-foreground text-lg">No posts yet. Check back soon!</p>
+      <section class="mx-auto max-w-7xl px-6 pb-24">
+        {posts.length === 0 && (
+          <Reveal variant="scale">
+            <div class="glass rounded-[2rem] py-24 text-center">
+              <p class="text-lg text-slate-500">No posts yet. Check back soon!</p>
             </div>
-          )}
+          </Reveal>
+        )}
 
-          {featuredPost && (
-            <a 
+        {featuredPost && (
+          <Reveal variant="scale">
+            <a
               href={`/blog/${featuredPost.slug.current}`}
-              class="group spec-panel block overflow-hidden transition-colors mb-12"
+              class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-xl shadow-indigo-500/10 lg:grid-cols-2"
             >
-              <div class="grid lg:grid-cols-2">
-                {featuredPost.mainImage?.asset ? (
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
-                    <img 
-                      src={urlFor(featuredPost.mainImage).width(900).height(600).url()} 
-                      alt={featuredPost.mainImage.alt || featuredPost.title}
-                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div class="absolute bottom-6 left-6 lg:hidden">
-                      <span class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5">
-                        Featured
+              {featuredPost.mainImage?.asset ? (
+                <div class="relative min-h-[280px] overflow-hidden">
+                  <img
+                    src={urlFor(featuredPost.mainImage).width(900).height(600).url()}
+                    alt={featuredPost.mainImage.alt || featuredPost.title}
+                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span class="glass absolute left-5 top-5 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-700 lg:hidden">
+                    Featured
+                  </span>
+                </div>
+              ) : (
+                <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-gradient-to-br from-indigo-50 to-cyan-50">
+                  <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
+                </div>
+              )}
+
+              <div class="relative flex flex-col justify-center p-8 lg:p-12">
+                <span class="absolute right-8 top-8 hidden rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 lg:block">
+                  Featured
+                </span>
+
+                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                  {featuredPost.publishedAt && (
+                    <span class="flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4" />
+                      {formatDate(featuredPost.publishedAt)}
+                    </span>
+                  )}
+                  {featuredPost.estimatedReadingTime > 0 && (
+                    <span class="flex items-center gap-1.5">
+                      <Clock className="h-4 w-4" />
+                      {featuredPost.estimatedReadingTime} min read
+                    </span>
+                  )}
+                </div>
+
+                <h2 class="mt-4 font-display text-3xl font-bold tracking-tight transition-colors group-hover:text-indigo-700 lg:text-4xl">
+                  {featuredPost.title}
+                </h2>
+
+                {featuredPost.excerpt && (
+                  <p class="mt-4 leading-relaxed text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+                    {featuredPost.excerpt}
+                  </p>
+                )}
+
+                {featuredPost.categories && featuredPost.categories.length > 0 && (
+                  <div class="mb-6 mt-5 flex flex-wrap gap-2">
+                    {featuredPost.categories.map((cat: string) => (
+                      <span class="inline-flex items-center gap-1 rounded-full border border-indigo-100 bg-indigo-50/60 px-3 py-1 text-xs font-bold text-indigo-700">
+                        {cat}
                       </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden bg-secondary/30 fine-grid">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">Article</span>
-                    </div>
+                    ))}
                   </div>
                 )}
-                
-                <div class="p-8 lg:p-12 flex flex-col justify-center relative">
-                  <div class="hidden lg:block absolute top-8 right-8">
-                    <span class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5">
-                      Featured
-                    </span>
-                  </div>
-                  
-                  <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
-                    {featuredPost.publishedAt && (
-                      <span class="flex items-center gap-1.5">
-                        <Calendar className="h-4 w-4" />
-                        {formatDate(featuredPost.publishedAt)}
-                      </span>
-                    )}
-                    {featuredPost.estimatedReadingTime > 0 && (
-                      <span class="flex items-center gap-1.5">
-                        <Clock className="h-4 w-4" />
-                        {featuredPost.estimatedReadingTime} min read
-                      </span>
-                    )}
-                  </div>
-                  
-                  <h2 class="text-3xl lg:text-4xl font-bold text-foreground font-display tracking-tight mb-4 group-hover:text-accent transition-colors">
-                    {featuredPost.title}
-                  </h2>
-                  
-                  {featuredPost.excerpt && (
-                    <p class="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
-                      {featuredPost.excerpt}
-                    </p>
-                  )}
-                  
-                  {featuredPost.categories && featuredPost.categories.length > 0 && (
-                    <div class="flex flex-wrap gap-2 mb-6">
-                      {featuredPost.categories.map((cat: string) => (
-                        <span class="inline-flex items-center gap-1 text-xs font-medium px-3 py-1 bg-secondary text-muted-foreground">
-                          {cat}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  
-                  <div class="flex items-center gap-2 text-sm font-semibold text-accent group-hover:gap-3 transition-all duration-200">
-                    Read article <ArrowRight className="h-4 w-4" />
-                  </div>
+
+                <div class="flex items-center gap-2 text-sm font-bold text-indigo-600 transition-all duration-200 group-hover:gap-3">
+                  Read article <ArrowRight className="h-4 w-4" />
                 </div>
               </div>
             </a>
-          )}
+          </Reveal>
+        )}
 
-          {recentPosts.length > 0 && (
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border relative z-10">
-              {recentPosts.map((post: any) => (
-                <a 
+        {recentPosts.length > 0 && (
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {recentPosts.map((post: any, i: number) => (
+              <div data-reveal={i % 2 === 0 ? "true" : "true"} style={`--reveal-delay: ${(i % 3) * 100}ms`}>
+                <a
                   href={`/blog/${post.slug.current}`}
-                  class="editorial-card group block bg-background hover:bg-secondary/20 transition-all duration-200"
+                  class="card-lift group block h-full overflow-hidden rounded-3xl border border-indigo-100/60 bg-white/85 backdrop-blur"
                 >
                   {post.mainImage?.asset ? (
-                    <div class="aspect-[16/10] relative overflow-hidden">
-                      <img 
-                        src={urlFor(post.mainImage).width(600).height(375).url()} 
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={urlFor(post.mainImage).width(600).height(375).url()}
                         alt={post.mainImage.alt || post.title}
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                   ) : (
-                    <div class="aspect-[16/10] relative overflow-hidden bg-secondary/30 fine-grid">
-                      <div class="absolute inset-0 flex items-center justify-center">
-                        <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">Article</span>
-                      </div>
+                    <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 to-cyan-50">
+                      <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                     </div>
                   )}
-                  
+
                   <div class="p-6">
-                    <div class="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-3">
+                    <div class="mb-3 flex flex-wrap items-center gap-3 text-xs text-slate-500">
                       {post.publishedAt && (
                         <span class="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
@@ -175,21 +162,21 @@ const recentPosts = posts.slice(1);
                         </span>
                       )}
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-foreground font-display tracking-tight mb-2 group-hover:text-accent transition-colors line-clamp-2">
+
+                    <h3 class="font-display text-xl font-bold tracking-tight transition-colors group-hover:text-indigo-700 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {post.title}
                     </h3>
-                    
+
                     {post.excerpt && (
-                      <p class="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                      <p class="mb-4 mt-2 text-sm leading-relaxed text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                         {post.excerpt}
                       </p>
                     )}
-                    
+
                     {post.categories && post.categories.length > 0 && (
                       <div class="flex flex-wrap gap-2">
                         {post.categories.slice(0, 2).map((cat: string) => (
-                          <span class="text-xs font-medium px-2 py-0.5 bg-secondary text-muted-foreground">
+                          <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-500">
                             {cat}
                           </span>
                         ))}
@@ -197,34 +184,21 @@ const recentPosts = posts.slice(1);
                     )}
                   </div>
                 </a>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-      
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} fadeTop />
-        <FloatingShapes fadeTop />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="bg-foreground text-background p-12 lg:p-16 text-center corner-bracket relative overflow-hidden">
-            <div class="deco-dots absolute inset-0 opacity-40"></div>
-            <div class="relative z-10">
-            <h2 class="text-3xl sm:text-4xl font-bold font-display tracking-tighter mb-4 text-background">
-              Want a Website Like This?
-            </h2>
-            <p class="text-background/70 max-w-xl mx-auto mb-8">
-              I build fast, affordable websites for small businesses. Let's chat about your project.
-            </p>
-            <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
-              <a href="/contact">Get a Quote</a>
-            </Button>
-            </div>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </section>
+
+      <CtaPanel
+        eyebrow="Work with me"
+        title="Want a website"
+        highlight="like this?"
+        description="I build fast, affordable websites for small businesses. Let's chat about your project."
+        primary={{ href: "/contact", label: "Get a Quote" }}
+      />
     </main>
-    
+
     <Footer />
   </div>
 </Layout>

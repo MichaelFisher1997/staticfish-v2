@@ -2,10 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Button } from '../components/ui/button';
-import { ArrowRight, Clock, Check } from 'lucide-react';
-import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
-import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
+import PageHero from '../components/PageHero.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import Reveal from '../components/effects/Reveal.astro';
+import Spotlight from '../components/effects/Spotlight';
+import TiltCard from '../components/effects/TiltCard';
+import { ArrowRight, Check, Clock, Gauge, MousePointerClick, ShieldCheck, Sparkles } from 'lucide-react';
 
 const websitePackage = {
   priceGbp: 599,
@@ -61,263 +63,230 @@ const processSteps = [
     duration: '1-2 days'
   }
 ];
+
+const whyPoints = [
+  { title: "Clear information first", desc: "Visitors can quickly understand what you do, what it costs, and what to do next.", icon: MousePointerClick, tint: "from-indigo-500 to-violet-500" },
+  { title: "Fast and low-maintenance", desc: "Simple websites tend to be quicker to launch, easier to run, and less likely to create technical headaches.", icon: Gauge, tint: "from-violet-500 to-fuchsia-500" },
+  { title: "Editing only when needed", desc: "If your prices, services, or updates change regularly, the editing add-on keeps that manageable without overcomplicating the whole site.", icon: ShieldCheck, tint: "from-cyan-500 to-blue-500" },
+];
 ---
 
 <Layout title="Websites | Staticfish" description="Clear business websites for small businesses, with an optional CMS setup if you want to manage content yourself.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
     <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines className="hero-flow-art" fadeBottom />
-        <CornerWaves position="bottom-right" />
+      <PageHero eyebrow="Websites">
+        <span slot="title">Websites for <span class="gradient-text-animated">small businesses.</span></span>
+        The main offer at Staticfish is a clear business website. If you want to update content yourself, I can add a proper CMS rather than forcing that complexity into every project.
+      </PageHero>
 
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-              Websites
-            </p>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
-              Websites for
-              <span class="text-accent">small businesses.</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              The main offer at Staticfish is a clear business website. If you want to update content yourself, I can add a proper CMS rather than forcing that complexity into every project.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="mixed" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img
-                src="/illustrations/service-website.svg"
-                alt="Business website illustration"
-                class="w-full h-auto"
-              />
-            </div>
-
-            <div class="spec-panel p-8 lg:p-10">
-              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                <Clock className="h-4 w-4" />
-                {websitePackage.timeline}
-              </div>
-
-              <h2 class="text-3xl font-bold text-foreground font-display mb-3">Business Website</h2>
-              <p class="text-muted-foreground leading-relaxed mb-6">
-                A professional website built to explain who you are, what you offer, what it costs, and how people can contact you.
-              </p>
-
-              <div class="mb-8">
-                <div class="flex items-baseline gap-1">
-                  <span class="text-5xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={websitePackage.priceGbp}>£{websitePackage.priceGbp}</span>
-                  <span class="text-sm text-muted-foreground ml-1">upfront</span>
-                </div>
-                <div class="mt-2">
-                  <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</span>
-                </div>
-              </div>
-
-              <p class="text-sm text-muted-foreground mb-8">
-                If you need editable content, those projects start from <strong class="text-foreground" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
-              </p>
-
-              <ul class="space-y-3 mb-8">
-                {websitePackage.features.map((feature) => (
-                  <li class="flex items-start gap-3">
-                    <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
-                    <span class="text-foreground text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div class="pt-6 border-t border-border">
-                <p class="text-xs font-bold uppercase tracking-widest text-accent mb-3">Good fit for</p>
-                <div class="flex flex-wrap gap-2">
-                  {websitePackage.goodFit.map((item) => (
-                    <span class="text-xs bg-secondary px-3 py-1.5 text-muted-foreground font-semibold uppercase tracking-wide">
-                      {item}
+      <!-- Core package -->
+      <section class="mx-auto max-w-7xl px-6 pb-24">
+        <div class="grid items-start gap-8 lg:grid-cols-12">
+          <Reveal variant="left" className="lg:col-span-5">
+            <TiltCard client:load max={5}>
+              <div class="gradient-border glow-shadow overflow-hidden">
+                <div class="relative p-8 lg:p-10">
+                  <div class="mb-6 flex items-center justify-between">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-600">
+                      <Clock className="h-3.5 w-3.5" /> {websitePackage.timeline}
                     </span>
-                  ))}
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-600">
+                      <span class="live-badge inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Booking now
+                    </span>
+                  </div>
+                  <h2 class="font-display text-3xl font-bold tracking-tight">Business Website</h2>
+                  <p class="mt-3 leading-relaxed text-slate-600">
+                    A professional website built to explain who you are, what you offer, what it costs, and how people can contact you.
+                  </p>
+                  <div class="mt-7 flex items-end gap-2">
+                    <span class="gradient-text-animated font-display text-6xl font-bold tracking-tight" data-price-gbp={websitePackage.priceGbp}>£{websitePackage.priceGbp}</span>
+                    <span class="pb-2 text-sm font-semibold text-slate-500">upfront</span>
+                  </div>
+                  <p class="mt-2 text-sm text-slate-500" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</p>
+                  <div class="mt-7 flex flex-col gap-3">
+                    <a href="/contact" class="btn-primary-glow group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+                      <span class="relative z-[2] flex items-center gap-2">Ask for a Quote <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
+                    </a>
+                    <a href="/pricing" class="btn-ghost-glass inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold text-slate-800">
+                      Compare pricing
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </TiltCard>
+          </Reveal>
 
-      <section id="add-ons" class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <WaveBackground variant="coral" opacity={0.1} fadeTop fadeBottom fadeColor="secondary" />
-        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl mb-16">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Optional Add-On</p>
-            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-6">Add editing if you need it.</h2>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Most sites do not need a CMS. If you want to edit pages, services, pricing, testimonials, or publish blog and news posts yourself, I can add one cleanly.
-            </p>
-          </div>
-
-          <div class="max-w-3xl bg-border">
-            {addOns.map((addOn) => (
-                  <div class={`editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors ${addOn.featured ? 'bg-secondary/10' : ''}`}>
-                {addOn.featured && (
-                  <div class="inline-flex bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 mb-6">
-                    Most Common Add-On
-                  </div>
-                )}
-
-                <div class="mb-5">
-                  <h3 class="text-2xl font-bold text-foreground font-display mb-2">{addOn.title}</h3>
-                  <div class="flex items-baseline gap-1 mb-3">
-                    <span class="text-sm text-muted-foreground uppercase tracking-wider">from +</span>
-                    <span class="text-4xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</span>
-                  </div>
-                  <p class="text-muted-foreground leading-relaxed text-sm">{addOn.description}</p>
-                </div>
-
-                <ul class="space-y-3 pt-6 border-t border-border">
-                  {addOn.features.map((feature) => (
-                    <li class="flex items-start gap-3">
-                      <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
-                      <span class="text-sm text-foreground">{feature}</span>
+          <div class="lg:col-span-7">
+            <Reveal delay={110}>
+              <Spotlight client:load className="card-lift rounded-3xl border border-indigo-100/70 bg-white/80 p-8 backdrop-blur lg:p-10">
+                <h3 class="mb-6 font-display text-xl font-bold tracking-tight">What's included</h3>
+                <ul class="grid gap-4 sm:grid-cols-2">
+                  {websitePackage.features.map((feature) => (
+                    <li class="flex items-start gap-3 rounded-2xl bg-slate-50/80 p-4">
+                      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-white">
+                        <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                      </span>
+                      <span class="text-sm font-medium leading-relaxed text-slate-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
+                <div class="mt-7 border-t border-slate-100 pt-6">
+                  <p class="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-500">Good fit for</p>
+                  <div class="flex flex-wrap gap-2">
+                    {websitePackage.goodFit.map((item) => (
+                      <span class="rounded-full border border-indigo-100 bg-indigo-50/60 px-4 py-1.5 text-xs font-bold text-indigo-700">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <p class="mt-6 text-sm leading-relaxed text-slate-500">
+                    If you need editable content, those projects start from <strong class="text-slate-800" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing to cover the CMS, hosting, and support properly.
+                  </p>
+                </div>
+              </Spotlight>
+            </Reveal>
           </div>
-
-          <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
-            Editable-content projects also have a higher ongoing fee than brochure sites, because there is a real CMS and editor access to support. If you need a more tailored enquiry flow, booking setup, or something outside the normal website scope, I quote that separately based on what the business actually needs.
-          </p>
-
-          <p class="text-sm text-muted-foreground mt-4 max-w-2xl">
-            If you already have a domain name, I can connect it. If you need a new one, I can register it for you, but the domain cost is paid by you separately.
-          </p>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="lines" fadeTop fadeBottom />
-        <CornerWaves position="top-left" />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-                Why This Works
+      <!-- Add-on -->
+      <section class="relative overflow-hidden py-24">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-50/70 to-transparent" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-7xl px-6">
+          <div class="mb-12 max-w-3xl">
+            <Reveal>
+              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Optional add-on</span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Add editing <span class="serif-accent font-normal">if you need it.</span></h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p class="mt-5 text-lg leading-relaxed text-slate-600">
+                Most sites do not need a CMS. If you want to edit pages, services, pricing, testimonials, or publish blog and news posts yourself, I can add one cleanly.
               </p>
-              <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-8">
-                Built to be easy to
-                <span class="text-accent">understand.</span>
-              </h2>
+            </Reveal>
+          </div>
 
-              <p class="text-lg text-muted-foreground leading-relaxed max-w-xl">
+          {addOns.map((addOn) => (
+            <Reveal variant="scale">
+              <Spotlight client:load className="card-lift relative max-w-3xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl shadow-violet-500/10 backdrop-blur lg:p-12">
+                <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-violet-400/25 to-cyan-400/25 blur-3xl" aria-hidden="true"></div>
+                <div class="relative">
+                  {addOn.featured && (
+                    <span class="mb-6 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30">
+                      <Sparkles className="h-3 w-3" /> Most common add-on
+                    </span>
+                  )}
+                  <h3 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">{addOn.title}</h3>
+                  <p class="mt-3 flex items-baseline gap-2">
+                    <span class="text-sm font-semibold uppercase tracking-wider text-slate-400">from +</span>
+                    <span class="gradient-text font-display text-5xl font-bold tracking-tight" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</span>
+                  </p>
+                  <p class="mt-4 max-w-xl leading-relaxed text-slate-600">{addOn.description}</p>
+                  <ul class="mt-7 grid gap-3 border-t border-slate-100 pt-7 sm:grid-cols-3">
+                    {addOn.features.map((feature) => (
+                      <li class="flex items-start gap-2.5 text-sm font-medium text-slate-700">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" strokeWidth={3} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Spotlight>
+            </Reveal>
+          ))}
+
+          <Reveal delay={120}>
+            <div class="mt-8 max-w-3xl space-y-4 text-sm leading-relaxed text-slate-500">
+              <p>
+                Editable-content projects also have a higher ongoing fee than brochure sites, because there is a real CMS and editor access to support. If you need a more tailored enquiry flow, booking setup, or something outside the normal website scope, I quote that separately based on what the business actually needs.
+              </p>
+              <p>
+                If you already have a domain name, I can connect it. If you need a new one, I can register it for you, but the domain cost is paid by you separately.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <!-- Why -->
+      <section class="mx-auto max-w-7xl px-6 py-24">
+        <div class="grid items-start gap-12 lg:grid-cols-2">
+          <div class="lg:sticky lg:top-32">
+            <Reveal>
+              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why this works</span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+                Built to be easy to <span class="gradient-text">understand.</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p class="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
                 Most small businesses do not need a sprawling platform. They need a site that feels professional, loads quickly, and gives visitors the information they need without friction.
               </p>
-            </div>
-
-            <div class="space-y-6">
-              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
-                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
-                </div>
-                <div>
-                  <h3 class="font-bold text-foreground mb-1">Clear information first</h3>
-                  <p class="text-muted-foreground text-sm">Visitors can quickly understand what you do, what it costs, and what to do next.</p>
-                </div>
-              </div>
-
-              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
-                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
-                </div>
-                <div>
-                  <h3 class="font-bold text-foreground mb-1">Fast and low-maintenance</h3>
-                  <p class="text-muted-foreground text-sm">Simple websites tend to be quicker to launch, easier to run, and less likely to create technical headaches.</p>
-                </div>
-              </div>
-
-              <div class="editorial-card flex gap-4 py-4 border-b border-border hover:bg-secondary/20">
-                <div class="w-8 h-8 bg-accent/10 flex items-center justify-center shrink-0 mt-1">
-                  <Check className="h-4 w-4 text-accent" strokeWidth={3} />
-                </div>
-                <div>
-                  <h3 class="font-bold text-foreground mb-1">Editing only when needed</h3>
-                  <p class="text-muted-foreground text-sm">If your prices, services, or updates change regularly, the editing add-on keeps that manageable without overcomplicating the whole site.</p>
-                </div>
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="dots" fadeTop fadeBottom />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-            Process
-          </p>
-          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">A simple process.</h2>
-
-          <div class="border-t border-border">
-            {processSteps.map((step) => (
-              <div class="editorial-card border-b border-border py-10 hover:bg-secondary/20">
-                <div class="grid grid-cols-12 gap-6 items-start">
-                  <div class="col-span-12 sm:col-span-1">
-                    <span class="text-sm font-medium text-muted-foreground">{step.step}</span>
+          <div class="space-y-5">
+            {whyPoints.map((point, i) => (
+              <Reveal delay={i * 110}>
+                <Spotlight client:load className="card-lift rounded-3xl border border-indigo-100/70 bg-white/80 p-7 backdrop-blur">
+                  <div class="flex gap-5">
+                    <span class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${point.tint} text-white shadow-lg`}>
+                      <point.icon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <h3 class="font-display text-lg font-bold tracking-tight">{point.title}</h3>
+                      <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{point.desc}</p>
+                    </div>
                   </div>
-                  <div class="col-span-12 sm:col-span-3">
-                    <h3 class="text-xl font-bold text-foreground font-display">{step.title}</h3>
-                  </div>
-                  <div class="col-span-12 sm:col-span-5">
-                    <p class="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
-                  </div>
-                  <div class="col-span-12 sm:col-span-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-accent">{step.duration}</span>
-                  </div>
-                </div>
-              </div>
+                </Spotlight>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} fadeTop />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="spec-panel p-10 lg:p-16">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Secondary Service</p>
-                <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6 text-foreground">
-                  Need something more
-                  <span class="text-accent">custom?</span>
-                </h2>
-                <p class="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                  Most of my work is business websites, but I also take on selected custom software projects when a business needs a portal, dashboard, workflow, or bespoke web app.
-                </p>
-              </div>
-
-              <div class="flex flex-col items-start gap-4">
-                <Button className="rounded-none h-12 px-8 font-semibold">
-                  <a href="/custom-software" class="flex items-center gap-2">
-                    View Custom Software <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" className="rounded-none h-12 px-8">
-                  <a href="/contact">Ask About Your Project</a>
-                </Button>
-              </div>
-            </div>
+      <!-- Process -->
+      <section class="mx-auto max-w-5xl px-6 pb-24">
+        <Reveal>
+          <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Process</span>
+        </Reveal>
+        <Reveal delay={90}>
+          <h2 class="mb-14 mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">A simple process.</h2>
+        </Reveal>
+        <div class="relative">
+          <div class="absolute bottom-8 left-[27px] top-8 w-0.5 rounded-full bg-gradient-to-b from-indigo-500 via-violet-400 to-cyan-400" aria-hidden="true"></div>
+          <div class="space-y-5">
+            {processSteps.map((step, i) => (
+              <Reveal delay={i * 90}>
+                <div class="card-lift group relative ml-0 flex gap-6 rounded-3xl border border-indigo-100/70 bg-white/80 p-6 pl-5 backdrop-blur sm:p-7">
+                  <span class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900 font-display text-sm font-bold text-white shadow-lg transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-violet-600">
+                    {step.step}
+                  </span>
+                  <div class="flex flex-1 flex-wrap items-start justify-between gap-3">
+                    <div class="min-w-[200px] flex-1">
+                      <h3 class="font-display text-xl font-bold tracking-tight">{step.title}</h3>
+                      <p class="mt-2 max-w-xl text-sm leading-relaxed text-slate-600">{step.description}</p>
+                    </div>
+                    <span class="rounded-full bg-indigo-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-600">{step.duration}</span>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
+
+      <CtaPanel
+        eyebrow="Secondary service"
+        title="Need something more"
+        highlight="custom?"
+        description="Most of my work is business websites, but I also take on selected custom software projects when a business needs a portal, dashboard, workflow, or bespoke web app."
+        primary={{ href: "/custom-software", label: "View Custom Software" }}
+        secondary={{ href: "/contact", label: "Ask About Your Project" }}
+      />
     </main>
     <Footer />
   </div>

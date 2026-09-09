@@ -2,10 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Button } from '../components/ui/button';
-import { Check, ArrowRight } from 'lucide-react';
-import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
-import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
+import PageHero from '../components/PageHero.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import Reveal from '../components/effects/Reveal.astro';
+import Spotlight from '../components/effects/Spotlight';
+import TiltCard from '../components/effects/TiltCard';
+import { ArrowRight, Check, CircleHelp, FileCheck, Handshake, Receipt } from 'lucide-react';
 
 const corePackage = {
   title: 'Business Website',
@@ -31,194 +33,175 @@ const addOns = [
 const pricingNotes = [
   {
     title: 'No surprise billing',
-    description: 'You get a clear quote before work starts. Changes outside the agreed scope are quoted separately.'
+    description: 'You get a clear quote before work starts. Changes outside the agreed scope are quoted separately.',
+    icon: Receipt,
+    tint: "from-indigo-500 to-violet-500",
   },
   {
     title: 'Approve first, pay before launch',
-    description: 'I will show you the direction first. Once the site is complete and approved, payment is due before it goes live.'
+    description: 'I will show you the direction first. Once the site is complete and approved, payment is due before it goes live.',
+    icon: FileCheck,
+    tint: "from-violet-500 to-fuchsia-500",
   },
   {
     title: 'Domain and DNS are handled clearly',
-    description: 'If you already have a domain, I can help connect it. If you need a new one, I can register it for you, but you cover the domain cost.'
+    description: 'If you already have a domain, I can help connect it. If you need a new one, I can register it for you, but you cover the domain cost.',
+    icon: Handshake,
+    tint: "from-cyan-500 to-blue-500",
   }
 ];
 ---
 
 <Layout title="Pricing | Staticfish" description="Simple pricing for business websites, with an editable-content option and a separate route for custom software projects.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
 
     <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines className="hero-flow-art" fadeBottom />
-        <CornerWaves position="bottom-right" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-              Pricing
-            </p>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
-              Simple website
-              <span class="text-accent">pricing.</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-4">
-              One upfront price for the agreed website scope, plus one monthly fee to keep the site live and looked after.
-            </p>
-            <p class="text-muted-foreground max-w-2xl">
-              If you need a CMS for editable content, that is added clearly instead of hidden inside a bigger package you may not need. Anything more tailored is quoted separately.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero eyebrow="Pricing">
+        <span slot="title">Simple website <span class="gradient-text-animated">pricing.</span></span>
+        One upfront price for the agreed website scope, plus one monthly fee to keep the site live and looked after.
+        <span slot="extra">
+          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block text-base text-slate-500">
+            If you need a CMS for editable content, that is added clearly instead of hidden inside a bigger package you may not need. Anything more tailored is quoted separately.
+          </span>
+        </span>
+      </PageHero>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="circles" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="spec-panel max-w-5xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-px bg-border">
-              <div class="bg-background p-8 lg:p-12">
-                <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Most Clients Start Here</p>
-                <h2 class="text-3xl sm:text-4xl font-bold text-foreground font-display tracking-tight mb-4">{corePackage.title}</h2>
-                <p class="text-muted-foreground leading-relaxed mb-8">
-                  A clear, professional website for businesses that need to explain what they do and make it easy for people to enquire.
-                </p>
-
-                <div class="mb-8">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-6xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={corePackage.priceGbp}>£{corePackage.priceGbp}</span>
-                    <span class="text-sm text-muted-foreground">upfront</span>
-                  </div>
-                  <div class="mt-3">
-                    <span class="text-sm text-muted-foreground" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</span>
+      <!-- Core package -->
+      <section class="mx-auto max-w-6xl px-6 pb-24">
+        <Reveal variant="scale">
+          <TiltCard client:load max={4}>
+            <div class="gradient-border glow-shadow overflow-hidden">
+              <div class="grid lg:grid-cols-2">
+                <div class="relative overflow-hidden p-8 lg:p-12">
+                  <div class="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/25 to-cyan-400/25 blur-3xl" aria-hidden="true"></div>
+                  <div class="relative">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30">
+                      Most clients start here
+                    </span>
+                    <h2 class="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">{corePackage.title}</h2>
+                    <p class="mt-3 leading-relaxed text-slate-600">
+                      A clear, professional website for businesses that need to explain what they do and make it easy for people to enquire.
+                    </p>
+                    <div class="mt-7 flex items-end gap-2">
+                      <span class="gradient-text-animated font-display text-6xl font-bold tracking-tight sm:text-7xl" data-price-gbp={corePackage.priceGbp}>£{corePackage.priceGbp}</span>
+                      <span class="pb-2 text-sm font-semibold text-slate-500">upfront</span>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-500" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</p>
+                    <p class="mt-4 text-sm text-slate-500">
+                      If you need editable content, those projects start from <strong class="text-slate-800" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing.
+                    </p>
+                    <a href="/contact" class="btn-primary-glow group mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+                      <span class="relative z-[2] flex items-center gap-2">Ask for a Quote <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
+                    </a>
                   </div>
                 </div>
-
-                <p class="text-sm text-muted-foreground mb-8">
-                  If you need editable content, those projects start from <strong class="text-foreground" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing.
-                </p>
-
-                <Button className="rounded-none h-12 px-8 font-semibold">
-                  <a href="/contact" class="flex items-center gap-2">
-                    Ask for a Quote <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-
-              <div class="bg-background p-8 lg:p-12">
-                <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Included</p>
-                <ul class="space-y-4">
-                  {corePackage.features.map((feature) => (
-                    <li class="flex items-start gap-3">
-                      <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
-                      <span class="text-sm text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div class="mt-10 pt-8 border-t border-border">
-                  <p class="text-sm text-muted-foreground leading-relaxed">
+                <div class="border-t border-slate-100 bg-slate-50/60 p-8 lg:border-l lg:border-t-0 lg:p-12">
+                  <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Included</p>
+                  <ul class="space-y-3.5">
+                    {corePackage.features.map((feature) => (
+                      <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-white">
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                        </span>
+                        <span class="text-sm font-medium text-slate-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="mt-6 border-t border-slate-200/70 pt-6 text-sm leading-relaxed text-slate-500">
                     Good fit for local service businesses, consultants, studios, trades, and small teams that need a trustworthy online presence without unnecessary complexity.
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </TiltCard>
+        </Reveal>
       </section>
 
-      <section id="add-ons" class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl mb-12">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Optional Add-On</p>
-            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-4">
-              Add editing if you need it.
-            </h2>
-            <p class="text-muted-foreground leading-relaxed">
-              Most sites do not need a CMS. If you want to update pages, services, pricing, testimonials, or publish blog and news posts yourself, this is the main upgrade.
+      <!-- Add-on -->
+      <section class="relative overflow-hidden py-24">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-50/70 to-transparent" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-7xl px-6">
+          <div class="mb-10 max-w-3xl">
+            <Reveal>
+              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Optional add-on</span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Add editing <span class="serif-accent font-normal">if you need it.</span></h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p class="mt-4 leading-relaxed text-slate-600">
+                Most sites do not need a CMS. If you want to update pages, services, pricing, testimonials, or publish blog and news posts yourself, this is the main upgrade.
+              </p>
+            </Reveal>
+          </div>
+
+          <div class="max-w-3xl">
+            {addOns.map((addOn) => (
+              <Reveal variant="scale">
+                <Spotlight client:load className="card-lift rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl shadow-violet-500/10 backdrop-blur lg:p-10">
+                  <div class="flex flex-wrap items-start justify-between gap-6">
+                    <div>
+                      <h3 class="font-display text-2xl font-bold tracking-tight">{addOn.title}</h3>
+                      <p class="mt-3 max-w-lg text-sm leading-relaxed text-slate-600">{addOn.description}</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-[11px] font-bold uppercase tracking-widest text-slate-400">from +</p>
+                      <p class="gradient-text font-display text-5xl font-bold tracking-tight" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</p>
+                    </div>
+                  </div>
+                </Spotlight>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={120}>
+            <p class="mt-8 max-w-2xl text-sm leading-relaxed text-slate-500">
+              Editable-content projects have a higher monthly fee than brochure sites, because there is a real CMS, editor access, and more ongoing support involved. If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
             </p>
-          </div>
-
-          <div class="max-w-3xl bg-border">
-            {addOns.map((addOn, index) => (
-              <div class={`editorial-card bg-background p-8 hover:bg-secondary/20 transition-colors ${index === 0 ? 'bg-secondary/10' : ''}`}>
-                <h3 class="text-xl font-bold text-foreground font-display mb-3">{addOn.title}</h3>
-                <div class="flex items-baseline gap-1 mb-4">
-                  <span class="text-sm text-muted-foreground uppercase tracking-wide">from +</span>
-                  <span class="text-4xl font-bold text-foreground font-display tracking-tighter" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</span>
-                </div>
-                <p class="text-sm text-muted-foreground leading-relaxed">{addOn.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <p class="text-sm text-muted-foreground mt-8 max-w-2xl">
-            Editable-content projects have a higher monthly fee than brochure sites, because there is a real CMS, editor access, and more ongoing support involved. If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
-          </p>
+          </Reveal>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="dots" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid md:grid-cols-3 gap-px bg-border">
-            {pricingNotes.map((note) => (
-              <div class="editorial-card bg-background p-8 lg:p-10 hover:bg-secondary/20 transition-colors">
-                <h3 class="text-xl font-bold text-foreground font-display mb-3">{note.title}</h3>
-                <p class="text-sm text-muted-foreground leading-relaxed">{note.description}</p>
-              </div>
-            ))}
-          </div>
+      <!-- Notes -->
+      <section class="mx-auto max-w-7xl px-6 pb-24">
+        <div class="grid gap-6 md:grid-cols-3">
+          {pricingNotes.map((note, i) => (
+            <Reveal delay={i * 110} variant="scale">
+              <Spotlight client:load className="card-lift h-full rounded-3xl border border-indigo-100/70 bg-white/80 p-8 backdrop-blur">
+                <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${note.tint} text-white shadow-lg`}>
+                  <note.icon className="h-5 w-5" />
+                </span>
+                <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{note.title}</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-slate-600">{note.description}</p>
+              </Spotlight>
+            </Reveal>
+          ))}
         </div>
-      </section>
 
-      <section class="py-12 border-t border-border relative overflow-hidden">
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="spec-panel p-6 flex items-start gap-4">
-            <div class="w-10 h-10 bg-accent/10 flex items-center justify-center shrink-0">
-              <span class="text-accent font-bold text-lg">?</span>
-            </div>
+        <Reveal delay={140}>
+          <div class="glass mt-8 flex items-start gap-5 rounded-3xl p-7">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-500 text-white shadow-lg">
+              <CircleHelp className="h-5 w-5" />
+            </span>
             <div>
-              <h4 class="font-bold text-foreground mb-1">What is included in the monthly fee?</h4>
-              <p class="text-muted-foreground text-sm leading-relaxed">
-                Brochure sites are <span data-hosting-gbp>£25/month</span> and editable-content projects start from <span data-currency-gbp="50" data-currency-suffix="/month">£50/month</span>. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
+              <h4 class="font-display font-bold tracking-tight">What is included in the monthly fee?</h4>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">
+                Brochure sites are <span class="font-semibold text-slate-800" data-hosting-gbp>£25/month</span> and editable-content projects start from <span class="font-semibold text-slate-800" data-currency-gbp="50" data-currency-suffix="/month">£50/month</span>. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
               </p>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} fadeTop />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="spec-panel p-10 lg:p-16">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div class="max-w-2xl">
-                <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">
-                  Secondary Service
-                </p>
-                <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6 text-foreground">
-                  Need more than a
-                  <span class="text-accent">standard site?</span>
-                </h2>
-                <p class="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                  If your business needs a portal, dashboard, workflow, or more bespoke web app, I also take on selected custom software projects. Those are scoped and quoted separately.
-                </p>
-              </div>
-              <div class="flex flex-col sm:flex-row gap-4">
-                <Button className="rounded-none h-12 px-8 font-semibold">
-                  <a href="/custom-software" class="flex items-center gap-2">
-                    See Custom Software <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" className="rounded-none h-12 px-8">
-                  <a href="/contact">Get in Touch</a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaPanel
+        eyebrow="Secondary service"
+        title="Need more than a"
+        highlight="standard site?"
+        description="If your business needs a portal, dashboard, workflow, or more bespoke web app, I also take on selected custom software projects. Those are scoped and quoted separately."
+        primary={{ href: "/custom-software", label: "See Custom Software" }}
+        secondary={{ href: "/contact", label: "Get in Touch" }}
+      />
     </main>
     <Footer />
   </div>

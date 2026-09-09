@@ -1,0 +1,32 @@
+---
+import Aurora from './effects/Aurora.astro';
+
+interface Props {
+  eyebrow: string;
+  align?: "left" | "center";
+}
+
+const { eyebrow, align = "left" } = Astro.props;
+const centered = align === "center";
+---
+
+<section class="relative overflow-hidden pt-36 pb-14 lg:pt-44 lg:pb-20">
+  <Aurora variant="light" density="rich" />
+  <div class={`relative z-10 mx-auto max-w-7xl px-6 ${centered ? "text-center" : ""}`}>
+    <div class={centered ? "mx-auto max-w-3xl" : "max-w-3xl"}>
+      <div data-reveal>
+        <span class="eyebrow-pill">
+          <span class="eyebrow-dot"></span>
+          {eyebrow}
+        </span>
+      </div>
+      <h1 data-reveal style="--reveal-delay: 90ms" class="text-balance mt-7 font-display text-5xl font-bold leading-[1.03] tracking-tight sm:text-6xl lg:text-7xl">
+        <slot name="title" />
+      </h1>
+      <div data-reveal style="--reveal-delay: 180ms" class="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
+        <slot />
+      </div>
+      <slot name="extra" />
+    </div>
+  </div>
+</section>

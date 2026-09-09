@@ -2,38 +2,49 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Button } from '../components/ui/button';
-import { ArrowRight, Check, X } from 'lucide-react';
-import { WaveBackground, FlowingLines, CornerWaves } from '../components/WaveArt';
-import { GeometricArt, FloatingShapes } from '../components/GeometricArt';
+import PageHero from '../components/PageHero.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import Reveal from '../components/effects/Reveal.astro';
+import Spotlight from '../components/effects/Spotlight';
+import { ArrowRight, Check, Compass, KeyRound, LayoutDashboard, Rocket, Users, Workflow, X } from 'lucide-react';
 
 const softwareTypes = [
   {
     title: 'SaaS MVPs',
-    description: 'The core offer here: turning a product idea into a real first version without wasting months building the wrong thing.'
+    description: 'The core offer here: turning a product idea into a real first version without wasting months building the wrong thing.',
+    icon: Rocket,
+    tint: "from-indigo-500 to-violet-500",
   },
   {
     title: 'Founder Dashboards',
-    description: 'Admin areas, internal tools, and operational dashboards that help founders actually run the product from day one.'
+    description: 'Admin areas, internal tools, and operational dashboards that help founders actually run the product from day one.',
+    icon: LayoutDashboard,
+    tint: "from-violet-500 to-fuchsia-500",
   },
   {
     title: 'Client Portals',
-    description: 'Private areas where users can log in, view information, submit data, and work through a service or workflow.'
+    description: 'Private areas where users can log in, view information, submit data, and work through a service or workflow.',
+    icon: Users,
+    tint: "from-cyan-500 to-blue-500",
   },
   {
     title: 'Product Workflows',
-    description: 'Onboarding flows, approvals, bookings, submissions, and other product logic that turns an idea into a working service.'
+    description: 'Onboarding flows, approvals, bookings, submissions, and other product logic that turns an idea into a working service.',
+    icon: Workflow,
+    tint: "from-emerald-400 to-cyan-500",
   }
 ];
 
 const deliveryModels = [
   {
     title: 'Build and handoff',
-    description: 'I build the MVP, structure the repo properly, document the setup, and hand it over cleanly to you or your team.'
+    description: 'I build the MVP, structure the repo properly, document the setup, and hand it over cleanly to you or your team.',
+    icon: KeyRound,
   },
   {
     title: 'Built and managed in-house',
-    description: 'I build and continue handling the technical side so you can focus on customers, sales, and running the business.'
+    description: 'I build and continue handling the technical side so you can focus on customers, sales, and running the business.',
+    icon: Compass,
   }
 ];
 
@@ -76,174 +87,168 @@ const processSteps = [
 ---
 
 <Layout title="Custom Software | Staticfish" description="SaaS MVP development for founders who need a real first product, not just a landing page or prototype.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
 
     <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <FlowingLines className="hero-flow-art" fadeBottom />
-        <CornerWaves position="bottom-right" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-7 max-w-3xl">
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-                SaaS MVP Development
-              </p>
-              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground font-display tracking-tighter mb-8">
-                Build the first real
-                <span class="text-accent">version of the product.</span>
-              </h1>
-              <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-8">
-                This is actually what I specialise in most: building SaaS MVPs and early product versions that get an idea into the real world quickly and properly.
-              </p>
-              <p class="text-muted-foreground max-w-2xl">
-                It is not the main service I market on Staticfish, but if you need a real product rather than a brochure site or loose prototype, this is the work I am strongest at.
-              </p>
-            </div>
+      <PageHero eyebrow="SaaS MVP Development">
+        <span slot="title">Build the first <span class="gradient-text-animated">real version</span> of the product.</span>
+        This is actually what I specialise in most: building SaaS MVPs and early product versions that get an idea into the real world quickly and properly.
+        <span slot="extra">
+          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block max-w-2xl text-base text-slate-500">
+            It is not the main service I market on Staticfish, but if you need a real product rather than a brochure site or loose prototype, this is the work I am strongest at.
+          </span>
+          <span data-reveal style="--reveal-delay: 320ms" class="mt-8 flex flex-wrap gap-4">
+            <a href="/contact" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+              <span class="relative z-[2] flex items-center gap-2">Talk About Your MVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
+            </a>
+            <a href="/services" class="btn-ghost-glass inline-flex items-center rounded-full px-7 py-4 text-sm font-bold text-slate-800">
+              Just need a website?
+            </a>
+          </span>
+        </span>
+      </PageHero>
 
-            <div class="lg:col-span-5">
-              <img
-                src="/illustrations/service-custom.svg"
-                alt="Custom software illustration"
-                class="w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="mixed" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl mb-12">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">What I Build</p>
-            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-4">
-              MVP-first product work.
-            </h2>
-            <p class="text-muted-foreground leading-relaxed">
+      <!-- What I build -->
+      <section class="mx-auto max-w-7xl px-6 pb-24">
+        <div class="mb-12 max-w-3xl">
+          <Reveal>
+            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> What I build</span>
+          </Reveal>
+          <Reveal delay={90}>
+            <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">MVP-first <span class="serif-accent font-normal">product work.</span></h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p class="mt-4 leading-relaxed text-slate-600">
               The goal is not to build everything at once. The goal is to build the first version that is strong enough to launch, test with real users, and improve from there.
             </p>
-          </div>
+          </Reveal>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          {softwareTypes.map((item, i) => (
+            <Reveal delay={i * 100} variant="scale">
+              <Spotlight client:load className="card-lift group h-full rounded-3xl border border-indigo-100/70 bg-white/85 p-7 backdrop-blur">
+                <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.tint} text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                  <item.icon className="h-5 w-5" />
+                </span>
+                <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{item.title}</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-slate-600">{item.description}</p>
+              </Spotlight>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-px bg-border">
-            {softwareTypes.map((item) => (
-              <div class="editorial-card bg-background p-8 hover:bg-secondary/20 transition-colors">
-                <h3 class="text-2xl font-bold text-foreground font-display mb-3">{item.title}</h3>
-                <p class="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
+      <!-- Delivery -->
+      <section class="relative overflow-hidden py-24">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-50/60 to-transparent" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-7xl px-6">
+          <div class="mb-12 max-w-3xl">
+            <Reveal>
+              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Delivery model</span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Two ways I can <span class="serif-accent font-normal">deliver it.</span></h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p class="mt-4 leading-relaxed text-slate-600">
+                Some founders want the repo handed over once the MVP is ready. Others want me to stay on the technical side while they focus on customers, growth, and running the business.
+              </p>
+            </Reveal>
+          </div>
+          <div class="grid gap-6 lg:grid-cols-2">
+            {deliveryModels.map((item, i) => (
+              <Reveal delay={i * 120}>
+                <Spotlight client:load className="card-lift h-full rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl shadow-indigo-500/10 backdrop-blur lg:p-12">
+                  <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-lg">
+                    <item.icon className="h-6 w-6" />
+                  </span>
+                  <h3 class="mt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">{item.title}</h3>
+                  <p class="mt-3 leading-relaxed text-slate-600">{item.description}</p>
+                </Spotlight>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <WaveBackground variant="coral" opacity={0.1} fadeTop fadeBottom fadeColor="secondary" />
-        <FloatingShapes fadeTop fadeBottom fadeColor="secondary" />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="max-w-3xl mb-12">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Delivery Model</p>
-            <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-4">
-              Two ways I can deliver it.
-            </h2>
-            <p class="text-muted-foreground leading-relaxed">
-              Some founders want the repo handed over once the MVP is ready. Others want me to stay on the technical side while they focus on customers, growth, and running the business.
-            </p>
-          </div>
-
-          <div class="grid lg:grid-cols-2 gap-px bg-border">
-            {deliveryModels.map((item) => (
-              <div class="editorial-card bg-background p-8 lg:p-12 hover:bg-secondary/20">
-                <h3 class="text-3xl font-bold text-foreground font-display mb-4">{item.title}</h3>
-                <p class="text-muted-foreground leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="dots" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-2 gap-px bg-border">
-            <div class="editorial-card bg-background p-8 lg:p-12 hover:bg-secondary/20">
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Good Fit</p>
-              <h2 class="text-3xl font-bold text-foreground font-display mb-8">Good fit if...</h2>
-              <ul class="space-y-4">
+      <!-- Fit -->
+      <section class="mx-auto max-w-7xl px-6 pb-24">
+        <div class="grid gap-6 lg:grid-cols-2">
+          <Reveal>
+            <div class="h-full rounded-[2rem] border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-8 lg:p-10">
+              <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-600">
+                Good fit
+              </span>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight sm:text-3xl">Good fit if...</h2>
+              <ul class="mt-7 space-y-4">
                 {goodFit.map((item) => (
-                  <li class="flex items-start gap-3">
-                    <Check className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
-                    <span class="text-sm text-foreground">{item}</span>
+                  <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-white">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    </span>
+                    <span class="text-sm font-medium leading-relaxed text-slate-700">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            <div class="editorial-card bg-background p-8 lg:p-12 hover:bg-secondary/20">
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-4">Not Typical</p>
-              <h2 class="text-3xl font-bold text-foreground font-display mb-8">Probably not the right fit if...</h2>
-              <ul class="space-y-4">
+          </Reveal>
+          <Reveal delay={120}>
+            <div class="h-full rounded-[2rem] border border-rose-100 bg-gradient-to-b from-rose-50/70 to-white p-8 lg:p-10">
+              <span class="inline-flex items-center gap-2 rounded-full bg-rose-500/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-rose-500">
+                Not typical
+              </span>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight sm:text-3xl">Probably not the right fit if...</h2>
+              <ul class="mt-7 space-y-4">
                 {notTypical.map((item) => (
-                  <li class="flex items-start gap-3">
-                    <X className="h-4 w-4 text-accent mt-0.5 shrink-0" strokeWidth={3} />
-                    <span class="text-sm text-foreground">{item}</span>
+                  <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-500">
+                      <X className="h-3.5 w-3.5" strokeWidth={3} />
+                    </span>
+                    <span class="text-sm font-medium leading-relaxed text-slate-600">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <GeometricArt variant="lines" fadeTop fadeBottom />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Process</p>
-          <h2 class="text-4xl sm:text-5xl font-bold text-foreground font-display tracking-tighter mb-16">How SaaS MVP projects work.</h2>
-
-          <div class="spec-panel overflow-hidden">
-            {processSteps.map((step) => (
-              <div class="editorial-card border-b border-border bg-background px-6 py-10 last:border-b-0 hover:bg-secondary/20 lg:px-8">
-                <div class="grid grid-cols-12 gap-6 items-start">
-                  <div class="col-span-12 sm:col-span-1">
-                    <span class="text-sm font-medium text-muted-foreground">{step.step}</span>
-                  </div>
-                  <div class="col-span-12 sm:col-span-3">
-                    <h3 class="text-xl font-bold text-foreground font-display">{step.title}</h3>
-                  </div>
-                  <div class="col-span-12 sm:col-span-8">
-                    <p class="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+      <!-- Process -->
+      <section class="mx-auto max-w-5xl px-6 pb-24">
+        <Reveal>
+          <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Process</span>
+        </Reveal>
+        <Reveal delay={90}>
+          <h2 class="mb-14 mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">How SaaS MVP projects work.</h2>
+        </Reveal>
+        <div class="relative">
+          <div class="absolute bottom-8 left-[27px] top-8 w-0.5 rounded-full bg-gradient-to-b from-indigo-500 via-violet-400 to-cyan-400" aria-hidden="true"></div>
+          <div class="space-y-5">
+            {processSteps.map((step, i) => (
+              <Reveal delay={i * 90}>
+                <div class="card-lift group flex gap-6 rounded-3xl border border-indigo-100/70 bg-white/80 p-6 backdrop-blur sm:p-7">
+                  <span class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900 font-display text-sm font-bold text-white shadow-lg transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-violet-600">
+                    {step.step}
+                  </span>
+                  <div>
+                    <h3 class="font-display text-xl font-bold tracking-tight">{step.title}</h3>
+                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{step.description}</p>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBackground variant="teal" opacity={0.12} fadeTop />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-            <div class="bg-foreground text-background p-12 lg:p-20 text-center corner-bracket relative overflow-hidden">
-              <div class="deco-dots absolute inset-0 opacity-40"></div>
-              <div class="relative z-10">
-            <p class="text-sm font-medium text-background/60 uppercase tracking-widest mb-6">Next Step</p>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tighter mb-6 text-background">
-              Need help turning an idea into a
-              <span class="text-accent">real MVP?</span>
-            </h2>
-            <p class="text-lg text-background/70 mb-10 max-w-2xl mx-auto">
-              Send me the product idea, the core user flow, and what version one needs to do. I will tell you whether it makes sense as a real MVP and whether it is better as a handoff build or something I continue managing with you.
-            </p>
-            <Button className="rounded-none h-12 px-8 font-semibold bg-accent hover:bg-accent/90 text-white">
-              <a href="/contact" class="flex items-center gap-2">
-                Talk About Your MVP <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-              </div>
-          </div>
-        </div>
-      </section>
+      <CtaPanel
+        eyebrow="Next step"
+        title="Need help turning an idea into a"
+        highlight="real MVP?"
+        description="Send me the product idea, the core user flow, and what version one needs to do. I will tell you whether it makes sense as a real MVP and whether it is better as a handoff build or something I continue managing with you."
+        primary={{ href: "/contact", label: "Talk About Your MVP" }}
+      />
     </main>
 
     <Footer />
