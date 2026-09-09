@@ -3,11 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Aurora from '../components/effects/Aurora.astro';
+import Halftone from '../components/effects/Halftone.astro';
 import Reveal from '../components/effects/Reveal.astro';
 import Counter from '../components/effects/Counter';
 import TiltCard from '../components/effects/TiltCard';
-import Spotlight from '../components/effects/Spotlight';
-import { ArrowRight, ArrowUpRight, BadgeCheck, Gauge, MousePointerClick, Rocket, ShieldCheck, Sparkles, Star, Zap } from 'lucide-react';
+import SplitReveal from '../components/effects/SplitReveal';
+import ParticleField from '../components/effects/ParticleField';
+import Magnetic from '../components/effects/Magnetic';
+import { ArrowRight, ArrowUpRight, BadgeCheck, Gauge, MousePointerClick, ShieldCheck, Sparkles, Star, Timer, Wallet, Zap } from 'lucide-react';
 
 const projects = [
   {
@@ -39,8 +42,6 @@ const offers = [
     priceSuffix: " upfront",
     desc: "A clear website for your services, pricing, FAQs, and contact details.",
     href: "/services",
-    icon: Rocket,
-    gradient: "from-indigo-500 to-violet-500",
   },
   {
     num: "02",
@@ -50,8 +51,6 @@ const offers = [
     pricePrefix: "From +",
     desc: "Adds a CMS so you can edit pages, services, pricing, testimonials, and blog or news posts yourself.",
     href: "/pricing#add-ons",
-    icon: MousePointerClick,
-    gradient: "from-violet-500 to-fuchsia-500",
   },
   {
     num: "03",
@@ -59,8 +58,6 @@ const offers = [
     price: "Quoted separately",
     desc: "For portals, dashboards, workflows, and bespoke tools when a standard site is not enough.",
     href: "/custom-software",
-    icon: Sparkles,
-    gradient: "from-cyan-500 to-blue-500",
   }
 ];
 
@@ -73,47 +70,55 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
 
     <main class="flex-1">
       <!-- ============ HERO ============ -->
-      <section class="relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24">
-        <Aurora variant="light" density="rich" />
+      <section class="bg-abyss noise-overlay relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24">
+        <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
+        <Halftone />
+        <div class="aurora-blob animate-blob-drift left-[5%] top-[-25%] h-[28rem] w-[28rem]" style="background: radial-gradient(circle, rgba(255,77,109,0.22), transparent 65%);" aria-hidden="true" />
+        <div class="aurora-blob animate-blob-drift-2 right-[0%] top-[-5%] h-[24rem] w-[24rem]" style="background: radial-gradient(circle, rgba(6,182,212,0.16), transparent 65%); animation-delay: -7s;" aria-hidden="true" />
+        <ParticleField client:visible className="absolute inset-0 h-full w-full opacity-80" />
 
         <div class="relative z-10 mx-auto max-w-7xl px-6">
           <div class="grid items-center gap-14 lg:grid-cols-12">
             <div class="lg:col-span-7">
               <div data-reveal>
-                <span class="eyebrow-pill">
-                  <span class="eyebrow-dot"></span>
+                <span class="eyebrow-pill-fruity">
+                  <span class="eyebrow-dot-fruity"></span>
                   Business websites · UK based
                 </span>
               </div>
 
-              <h1 data-reveal style="--reveal-delay: 90ms" class="text-balance mt-7 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-                Websites that help
-                <span class="block">small businesses</span>
-                <span class="gradient-text-animated block pb-2">look credible.</span>
+              <h1 class="text-balance mt-7 font-display text-5xl font-bold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                <SplitReveal client:load text="Websites that help" className="block" />
+                <SplitReveal client:load text="small businesses" delay={0.28} className="block" />
+                <SplitReveal client:load text="look credible." delay={0.55} className="gradient-text-fruity-animated block pb-2" />
               </h1>
 
-              <p data-reveal style="--reveal-delay: 180ms" class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+              <p data-reveal style="--reveal-delay: 180ms" class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
                 I build clear, fast websites that explain what you do, what it costs, and how people can get in touch.
               </p>
 
               <div data-reveal style="--reveal-delay: 260ms" class="mt-9 flex flex-wrap items-center gap-4">
-                <a href="/pricing" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
-                  <span class="relative z-[2] flex items-center gap-2">
-                    See Pricing
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </a>
-                <a href="/custom-software" class="btn-ghost-glass inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-slate-800">
-                  Need Something More Custom?
-                </a>
+                <Magnetic client:load strength={0.3}>
+                  <a href="/pricing" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+                    <span class="relative z-[2] flex items-center gap-2">
+                      See Pricing
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </a>
+                </Magnetic>
+                <Magnetic client:load strength={0.3}>
+                  <a href="/custom-software" class="btn-ghost-glass inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-bold">
+                    Need Something More Custom?
+                  </a>
+                </Magnetic>
               </div>
 
               <div data-reveal style="--reveal-delay: 340ms" class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
                 <div class="flex items-center gap-3">
                   <div class="flex -space-x-2.5">
-                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-[11px] font-bold text-white ring-2 ring-white">RE</span>
-                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 text-[11px] font-bold text-white ring-2 ring-white">CB</span>
-                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-[11px] font-bold text-white ring-2 ring-white">MF</span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-[11px] font-bold text-white ring-2 ring-[#0a0a20]">RE</span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 text-[11px] font-bold text-white ring-2 ring-[#0a0a20]">CB</span>
+                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[11px] font-bold text-white ring-2 ring-[#0a0a20]">MF</span>
                   </div>
                   <div class="text-sm">
                     <div class="flex items-center gap-1">
@@ -121,12 +126,12 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
                         <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p class="mt-0.5 font-semibold text-slate-700">Direct with the builder</p>
+                    <p class="mt-0.5 font-semibold text-slate-200">Direct with the builder</p>
                   </div>
                 </div>
-                <div class="hidden h-10 w-px bg-gradient-to-b from-transparent via-indigo-200 to-transparent sm:block"></div>
-                <div class="flex items-center gap-2 text-sm font-semibold text-slate-600">
-                  <ShieldCheck className="h-4 w-4 text-emerald-500" />
+                <div class="hidden h-10 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent sm:block"></div>
+                <div class="flex items-center gap-2 text-sm font-semibold text-slate-300">
+                  <ShieldCheck className="h-4 w-4 text-emerald-400" />
                   Fixed price · No surprises
                 </div>
               </div>
@@ -136,7 +141,7 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
             <div class="lg:col-span-5" data-reveal="scale" style="--reveal-delay: 200ms">
               <TiltCard client:load max={6}>
                 <div class="relative">
-                  <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-indigo-400/30 via-violet-400/20 to-cyan-400/30 blur-2xl" aria-hidden="true"></div>
+                  <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-[#ff4d6d]/25 via-violet-500/20 to-cyan-400/25 blur-2xl" aria-hidden="true"></div>
                   <div class="browser-glow tilt-inner relative overflow-hidden rounded-3xl border border-white/60 bg-white/90 backdrop-blur-xl">
                     <div class="flex items-center gap-2 border-b border-slate-100 bg-white/70 px-5 py-3.5">
                       <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
@@ -169,13 +174,17 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
                     </div>
                   </div>
 
-                  <div class="glass animate-float absolute -left-4 top-16 hidden rounded-2xl px-4 py-3 sm:block lg:-left-10">
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-indigo-500">Starting at</p>
-                    <p class="font-display text-2xl font-bold text-slate-900" data-price-gbp="599">£599</p>
+                  <div class="animate-float absolute -left-4 top-16 hidden sm:block lg:-left-10">
+                    <div class="sticker px-4 py-3" style="--tilt: -6deg; --sticker-glow: rgba(255,77,109,0.45);">
+                      <p class="text-[10px] font-bold uppercase tracking-widest text-[#e11d5f]">Starting at</p>
+                      <p class="font-display text-2xl font-bold text-slate-900" data-price-gbp="599">£599</p>
+                    </div>
                   </div>
-                  <div class="glass animate-float-slow absolute -right-3 bottom-20 hidden rounded-2xl px-4 py-3 sm:block lg:-right-8" style="animation-delay: -4s">
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-cyan-600">Typical build</p>
-                    <p class="font-display text-2xl font-bold text-slate-900">1–3 weeks</p>
+                  <div class="animate-float-slow absolute -right-3 bottom-20 hidden sm:block lg:-right-8" style="animation-delay: -4s">
+                    <div class="sticker px-4 py-3" style="--tilt: 5deg; --sticker-glow: rgba(6,182,212,0.45);">
+                      <p class="text-[10px] font-bold uppercase tracking-widest text-cyan-600">Typical build</p>
+                      <p class="font-display text-2xl font-bold text-slate-900">1–3 weeks</p>
+                    </div>
                   </div>
                 </div>
               </TiltCard>
@@ -185,96 +194,111 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
 
         <!-- Tech marquee -->
         <div class="relative z-10 mx-auto mt-16 max-w-7xl px-6" data-reveal style="--reveal-delay: 200ms">
-          <div class="marquee-mask overflow-hidden rounded-2xl border border-indigo-100/70 bg-white/50 py-4 backdrop-blur">
+          <div class="marquee-mask overflow-hidden rounded-2xl border border-white/10 bg-white/5 py-4 backdrop-blur">
             <div class="marquee-track items-center gap-10 pr-10">
               {[...stack, ...stack].map((tech) => (
-                <span class="flex shrink-0 items-center gap-2.5 text-sm font-bold uppercase tracking-widest text-slate-400">
-                  <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500"></span>
+                <span class="flex shrink-0 items-center gap-2.5 text-sm font-bold uppercase tracking-widest text-slate-500">
+                  <span class="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-[#ff4d6d] to-cyan-400"></span>
                   {tech}
                 </span>
               ))}
             </div>
           </div>
         </div>
+
+        <div class="hero-fade" aria-hidden="true" />
       </section>
 
       <!-- ============ STATS BAND ============ -->
-      <section class="relative z-10 mx-auto max-w-7xl px-6">
-        <Reveal>
-          <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2rem] px-8 py-10 lg:px-14">
-            <Aurora variant="dark" density="soft" />
-            <div class="relative grid grid-cols-1 gap-10 sm:grid-cols-3">
-              <div class="text-center sm:text-left">
-                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-300">Starting price</p>
-                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">
+      <section class="relative border-y border-white/[0.08] bg-white/[0.015]">
+        <div class="dot-pattern absolute inset-0 opacity-50" style="mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);" aria-hidden="true" />
+        <div class="absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff4d6d]/60 via-30% to-transparent" aria-hidden="true" />
+        <div class="relative mx-auto max-w-7xl px-6 py-12 lg:py-14">
+          <div class="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
+            <div data-reveal class="flex items-start gap-5 sm:px-10 sm:first:pl-0 sm:last:pr-0">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-[#FF6B8A] shadow-[0_0_24px_rgba(255,77,109,0.35)]">
+                <Wallet className="h-5 w-5" />
+              </span>
+              <div>
+                <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">Starting price</p>
+                <p class="font-display text-4xl font-bold tracking-tight text-white lg:text-5xl">
                   <Counter client:visible to={599} prefix="£" />
                 </p>
-                <p class="mt-2 text-sm text-slate-400">Upfront for agreed scope</p>
+                <p class="mt-1 text-sm text-slate-500">Upfront for agreed scope</p>
               </div>
-              <div class="text-center sm:border-x sm:border-white/10 sm:text-left sm:pl-10">
-                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Typical build</p>
-                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">1–3 <span class="text-3xl text-slate-300">weeks</span></p>
-                <p class="mt-2 text-sm text-slate-400">From direction to launch</p>
+            </div>
+            <div data-reveal style="--reveal-delay: 100ms" class="flex items-start gap-5 sm:px-10 sm:first:pl-0 sm:last:pr-0">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-300 shadow-[0_0_24px_rgba(6,182,212,0.35)]">
+                <Timer className="h-5 w-5" />
+              </span>
+              <div>
+                <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">Typical build</p>
+                <p class="font-display text-4xl font-bold tracking-tight text-white lg:text-5xl">1–3 <span class="text-2xl text-slate-500">weeks</span></p>
+                <p class="mt-1 text-sm text-slate-500">From direction to launch</p>
               </div>
-              <div class="text-center sm:text-left sm:pl-10">
-                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-violet-300">Ongoing care</p>
-                <p class="font-display text-5xl font-bold tracking-tight text-white lg:text-6xl">
+            </div>
+            <div data-reveal style="--reveal-delay: 200ms" class="flex items-start gap-5 sm:px-10 sm:first:pl-0 sm:last:pr-0">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-violet-300 shadow-[0_0_24px_rgba(139,92,246,0.35)]">
+                <ShieldCheck className="h-5 w-5" />
+              </span>
+              <div>
+                <p class="mb-1 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">Ongoing care</p>
+                <p class="font-display text-4xl font-bold tracking-tight text-white lg:text-5xl">
                   <Counter client:visible to={25} prefix="£" suffix="/mo" />
                 </p>
-                <p class="mt-2 text-sm text-slate-400">Hosting, backups, upkeep</p>
+                <p class="mt-1 text-sm text-slate-500">Hosting, backups, upkeep</p>
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       <!-- ============ OFFERS ============ -->
-      <section class="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
-        <div class="mb-14 max-w-3xl">
+      <section class="relative mx-auto max-w-7xl px-6 py-20 lg:py-28">
+        <div class="mb-12 max-w-3xl">
           <Reveal>
             <span class="eyebrow-pill"><span class="eyebrow-dot"></span> What I offer</span>
           </Reveal>
           <Reveal delay={90}>
-            <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              One clear core offer, <span class="serif-accent font-normal">zero confusion.</span>
+            <h2 class="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              One clear core offer, <span class="serif-accent font-normal gradient-text-bright">zero confusion.</span>
             </h2>
           </Reveal>
-          <Reveal delay={160}>
-            <p class="mt-5 text-lg leading-relaxed text-slate-600">
+          <Reveal delay={150}>
+            <p class="mt-4 text-lg leading-relaxed text-slate-400">
               Most businesses need a straightforward website first. Editing is optional, and custom software only comes into the picture when a normal website is not enough.
             </p>
           </Reveal>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur">
           {offers.map((offer, i) => (
-            <Reveal delay={i * 110} variant="scale">
-              <Spotlight client:load className="card-lift group h-full rounded-3xl border border-indigo-100/70 bg-white/80 p-8 backdrop-blur">
-                <a href={offer.href} class="relative block h-full">
-                  <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${offer.gradient} text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
-                    <offer.icon className="h-5 w-5" />
-                  </span>
-                  <p class="mt-6 font-display text-sm font-bold tracking-widest text-slate-400">{offer.num}</p>
-                  <h3 class="mt-1 font-display text-2xl font-bold tracking-tight">{offer.title}</h3>
-                  <p class="mt-3 text-sm leading-relaxed text-slate-600">{offer.desc}</p>
-                  <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                    {offer.num === "01" && <span class="font-display text-xl font-bold gradient-text" data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
-                    {offer.num === "02" && <span class="font-display text-xl font-bold gradient-text" data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
-                    {offer.num === "03" && <span class="font-display text-xl font-bold gradient-text">{offer.price}</span>}
-                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-violet-600">
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
-                </a>
-              </Spotlight>
-            </Reveal>
+            <a
+              href={offer.href}
+              data-reveal
+              style={`--reveal-delay: ${i * 90}ms`}
+              class="group grid gap-3 border-b border-white/[0.07] p-7 transition-colors duration-300 last:border-b-0 hover:bg-white/[0.05] sm:grid-cols-[3rem_1.2fr_1fr_auto] sm:items-center sm:gap-8 sm:px-10 sm:py-8"
+            >
+              <span class="font-display text-sm font-bold tracking-widest text-white/20 transition-colors duration-300 group-hover:text-[#ff4d6d]">{offer.num}</span>
+              <div>
+                <h3 class="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">{offer.title}</h3>
+                <p class="mt-1.5 text-sm font-semibold text-slate-400">
+                  {offer.num === "01" && <span data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
+                  {offer.num === "02" && <span data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
+                  {offer.num === "03" && <span>{offer.price}</span>}
+                </p>
+              </div>
+              <p class="max-w-md text-sm leading-relaxed text-slate-400">{offer.desc}</p>
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-slate-400 transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-slate-900">
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </span>
+            </a>
           ))}
         </div>
       </section>
 
       <!-- ============ WORK ============ -->
-      <section class="relative overflow-hidden py-24 lg:py-28">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/60 to-transparent" aria-hidden="true"></div>
+      <section class="relative overflow-hidden py-20 lg:py-24">
         <div class="relative mx-auto max-w-7xl px-6">
           <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -282,11 +306,11 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
                 <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Selected work</span>
               </Reveal>
               <Reveal delay={90}>
-                <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Recent work<span class="gradient-text">.</span></h2>
+                <h2 class="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">Recent work<span class="gradient-text-ember">.</span></h2>
               </Reveal>
             </div>
-            <Reveal delay={160}>
-              <a href="/portfolio" class="link-underline hidden items-center gap-2 text-sm font-bold text-slate-600 hover:text-indigo-700 sm:inline-flex">
+            <Reveal delay={150}>
+              <a href="/portfolio" class="link-underline hidden items-center gap-2 text-sm font-bold text-slate-300 hover:text-white sm:inline-flex">
                 View All Projects <ArrowUpRight className="h-4 w-4" />
               </a>
             </Reveal>
@@ -296,19 +320,19 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
             {projects.map((project, i) => (
               <Reveal delay={i * 120} variant="scale">
                 <TiltCard client:load max={5}>
-                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="card-lift group block overflow-hidden rounded-3xl border border-white/70 bg-white shadow-xl shadow-indigo-500/10">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="card-lift group block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur">
                     <div class="relative overflow-hidden">
                       <img src={project.image} alt={project.title} class="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" loading="lazy" />
-                      <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                      <span class="glass absolute left-4 top-4 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-700">{project.category}</span>
+                      <div class="absolute inset-0 bg-gradient-to-t from-[#050512]/60 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90"></div>
+                      <span class="glass absolute left-4 top-4 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-200">{project.category}</span>
                       <span class="absolute bottom-4 right-4 flex h-12 w-12 translate-y-3 items-center justify-center rounded-full bg-white text-slate-900 opacity-0 shadow-xl transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                         <ArrowUpRight className="h-5 w-5" />
                       </span>
                     </div>
                     <div class="p-7">
-                      <h3 class="font-display text-2xl font-bold tracking-tight">{project.title}</h3>
-                      <p class="mt-2 text-sm leading-relaxed text-slate-600">{project.blurb}</p>
-                      <p class="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{project.role} / {project.year}</p>
+                      <h3 class="font-display text-2xl font-bold tracking-tight text-white">{project.title}</h3>
+                      <p class="mt-2 text-sm leading-relaxed text-slate-400">{project.blurb}</p>
+                      <p class="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">{project.role} / {project.year}</p>
                     </div>
                   </a>
                 </TiltCard>
@@ -319,58 +343,52 @@ const stack = ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare", "Sa
       </section>
 
       <!-- ============ WHY ============ -->
-      <section class="mx-auto max-w-7xl px-6 py-24 lg:py-28">
-        <div class="grid items-start gap-14 lg:grid-cols-2">
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div class="grid items-start gap-12 lg:grid-cols-2">
           <div class="lg:sticky lg:top-32">
             <Reveal>
               <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why Staticfish</span>
             </Reveal>
             <Reveal delay={90}>
-              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              <h2 class="mt-5 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
                 Clear scope.<br />Clear price.<br />
-                <span class="serif-accent font-normal gradient-text">No games.</span>
+                <span class="serif-accent font-normal gradient-text-bright">No games.</span>
               </h2>
             </Reveal>
-            <Reveal delay={160}>
-              <p class="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
+            <Reveal delay={150}>
+              <p class="mt-5 max-w-lg text-lg leading-relaxed text-slate-400">
                 You work directly with me. The offer is simple, the scope is agreed up front, and there is no pressure to buy things you do not need.
               </p>
             </Reveal>
-            <Reveal delay={220}>
-              <a href="/about" class="btn-ghost-glass mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-slate-800">
+            <Reveal delay={200}>
+              <a href="/about" class="btn-ghost-glass mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold">
                 Meet the builder <ArrowRight className="h-4 w-4" />
               </a>
             </Reveal>
           </div>
 
-          <div class="space-y-5">
+          <div class="grid gap-10 sm:grid-cols-1 sm:gap-0 sm:divide-y sm:divide-white/10">
             {[
-              { title: "Fixed price for the agreed scope", desc: "You get a clear quote before work starts. If you want to add more later, I quote that separately.", icon: BadgeCheck, tint: "from-indigo-500 to-violet-500" },
-              { title: "Built to explain the business clearly", desc: "The goal is simple: help people understand what you do, what it costs, and how to contact you.", icon: MousePointerClick, tint: "from-violet-500 to-fuchsia-500" },
-              { title: "Optional editing when you need it", desc: "If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.", icon: Sparkles, tint: "from-cyan-500 to-blue-500" },
+              { title: "Fixed price for the agreed scope", desc: "You get a clear quote before work starts. If you want to add more later, I quote that separately.", icon: BadgeCheck },
+              { title: "Built to explain the business clearly", desc: "The goal is simple: help people understand what you do, what it costs, and how to contact you.", icon: MousePointerClick },
+              { title: "Optional editing when you need it", desc: "If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.", icon: Sparkles },
             ].map((item, i) => (
-              <Reveal delay={i * 110}>
-                <Spotlight client:load className="card-lift rounded-3xl border border-indigo-100/70 bg-white/80 p-7 backdrop-blur sm:p-8">
-                  <div class="flex gap-5">
-                    <span class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${item.tint} text-white shadow-lg`}>
-                      <item.icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <h3 class="font-display text-xl font-bold tracking-tight">{item.title}</h3>
-                      <p class="mt-2 leading-relaxed text-slate-600">{item.desc}</p>
-                    </div>
-                  </div>
-                </Spotlight>
-              </Reveal>
+              <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="sm:py-8 sm:first:pt-0 sm:last:pb-0">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                  <item.icon className="h-[18px] w-[18px]" />
+                </span>
+                <h3 class="mt-4 font-display text-lg font-bold tracking-tight text-white">{item.title}</h3>
+                <p class="mt-1.5 max-w-md text-sm leading-relaxed text-slate-400">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       <!-- ============ CTA ============ -->
-      <section class="mx-auto max-w-7xl px-6 pb-24 lg:pb-32">
+      <section class="mx-auto max-w-7xl px-6 pb-20 lg:pb-28">
         <Reveal variant="scale">
-          <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center sm:px-14 lg:py-24">
+          <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] sm:px-14 lg:py-24">
             <Aurora variant="dark" density="rich" />
             <div class="relative">
               <span class="eyebrow-pill eyebrow-pill-dark mx-auto">

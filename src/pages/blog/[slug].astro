@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import Aurora from '../../components/effects/Aurora.astro';
+import Halftone from '../../components/effects/Halftone.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { PortableText } from 'astro-portabletext';
@@ -130,7 +130,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
     <Header />
 
     <!-- Reading Progress Bar -->
-    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-indigo-100/50">
+    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-white/10">
       <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);"></div>
     </div>
 
@@ -138,11 +138,12 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
       <article>
 
         <!-- Hero Section -->
-        <div class="pt-36 pb-12 lg:pb-16 relative overflow-hidden">
-          <Aurora variant="light" density="soft" />
+        <div class="bg-abyss noise-overlay pt-36 pb-12 lg:pb-16 relative overflow-hidden">
+          <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
+          <Halftone />
           <div class="mx-auto max-w-4xl px-6 relative z-10">
             <div class="mb-8" data-reveal>
-              <a href="/blog" class="btn-ghost-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-slate-700">
+              <a href="/blog" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-slate-200 backdrop-blur transition-all duration-300 hover:bg-white/10">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Blog
               </a>
@@ -151,37 +152,37 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div class="flex flex-wrap items-center gap-2 mb-6" data-reveal style="--reveal-delay: 80ms">
               {post.categories && post.categories.length > 0 && (
                 post.categories.map((cat: string) => (
-                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-indigo-100 bg-indigo-50/70 text-indigo-700">
+                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-indigo-200">
                     {cat}
                   </span>
                 ))
               )}
             </div>
 
-            <h1 data-reveal style="--reveal-delay: 140ms" class="text-balance font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6">
+            <h1 data-reveal style="--reveal-delay: 140ms" class="text-balance font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6 text-white">
               {post.title}
             </h1>
 
             {post.excerpt && (
-              <p data-reveal style="--reveal-delay: 200ms" class="text-xl lg:text-2xl text-slate-500 leading-relaxed max-w-3xl">
+              <p data-reveal style="--reveal-delay: 200ms" class="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-3xl">
                 {post.excerpt}
               </p>
             )}
 
-            <div data-reveal style="--reveal-delay: 260ms" class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-indigo-100/70">
+            <div data-reveal style="--reveal-delay: 260ms" class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-white/10">
               {post.authorName && (
                 <div class="flex items-center gap-3">
                   <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4 130%)">
                     {post.authorName.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
-                    <div class="font-semibold text-slate-900">{post.authorName}</div>
-                    <div class="text-sm text-slate-500">Author</div>
+                    <div class="font-semibold text-white">{post.authorName}</div>
+                    <div class="text-sm text-slate-400">Author</div>
                   </div>
                 </div>
               )}
 
-              <div class="flex items-center gap-4 text-sm text-slate-500">
+              <div class="flex items-center gap-4 text-sm text-slate-400">
                 {post.publishedAt && (
                   <span class="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
@@ -197,11 +198,12 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
               </div>
             </div>
           </div>
+          <div class="hero-fade" aria-hidden="true" />
         </div>
 
         <!-- Main Image -->
         {post.mainImage?.asset && (
-          <div class="pb-12 lg:pb-16">
+          <div class="pb-12 lg:pb-16 pt-12 lg:pt-16">
             <div class="mx-auto max-w-5xl px-6">
               <div class="browser-glow relative aspect-video overflow-hidden rounded-[2rem]">
                 <img
@@ -217,21 +219,21 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
         <!-- Article Content -->
         <div class="py-8 lg:py-12">
           <div class="px-6">
-            <div class="max-w-3xl mx-auto rounded-[2rem] border border-indigo-100/60 bg-white/85 p-8 sm:p-12 shadow-xl shadow-indigo-500/5 backdrop-blur">
+            <div class="max-w-3xl mx-auto rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 sm:p-12 backdrop-blur">
               {(textBlocks.length > 0 || inlineImages.length > 0) && (
                 <div class="article-content prose prose-lg max-w-none
-                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-slate-900
+                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-white
                   prose-headings:scroll-mt-32
                   prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
-                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-indigo-700
-                  prose-p:text-slate-600 prose-p:leading-[1.85] prose-p:text-[1.1rem]
-                  prose-a:text-indigo-600 prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
+                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-indigo-300
+                  prose-p:text-slate-300 prose-p:leading-[1.85] prose-p:text-[1.1rem]
+                  prose-a:text-indigo-300 prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
                   prose-img:rounded-2xl
-                  prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-800 prose-blockquote:rounded-r-2xl prose-blockquote:py-1
-                  prose-code:text-indigo-700 prose-code:bg-indigo-50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
-                  prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-2xl
-                  prose-li:text-slate-600 prose-li:marker:text-indigo-500
-                  prose-strong:text-slate-900 prose-strong:font-semibold
+                  prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-100 prose-blockquote:rounded-r-2xl prose-blockquote:py-1
+                  prose-code:text-indigo-200 prose-code:bg-white/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-black/40 prose-pre:text-slate-100 prose-pre:rounded-2xl prose-pre:border prose-pre:border-white/10
+                  prose-li:text-slate-300 prose-li:marker:text-indigo-400
+                  prose-strong:text-white prose-strong:font-semibold
                   prose-ul:my-6 prose-ol:my-6
                   prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-indigo-200 prose-hr:to-transparent prose-hr:my-12">
                   {textBlocks.map((block: any) => (
@@ -243,7 +245,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   {inlineImages.map((img: any) => (
                     img?.asset?._ref && (
                     <figure class="my-14 not-prose">
-                      <div class="relative overflow-hidden rounded-3xl border border-indigo-100/60 shadow-lg">
+                      <div class="relative overflow-hidden rounded-3xl border border-white/10 shadow-lg">
                         <img
                           src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
                           alt={img.alt || ''}
@@ -252,7 +254,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                         />
                       </div>
                       {img.caption && (
-                        <figcaption class="mt-4 text-center text-sm text-slate-500">
+                        <figcaption class="mt-4 text-center text-sm text-slate-400">
                           <span class="inline-flex items-center gap-2">
                             <span class="w-8 h-px bg-gradient-to-r from-transparent to-indigo-300"></span>
                             {img.caption}
@@ -274,15 +276,15 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
           <div class="mx-auto max-w-3xl px-6">
             <div class="glass flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[2rem] p-7">
               <div class="text-center sm:text-left">
-                <p class="text-sm text-slate-500 mb-1">Enjoyed this article?</p>
-                <p class="font-bold text-slate-900">Share it with others</p>
+                <p class="text-sm text-slate-400 mb-1">Enjoyed this article?</p>
+                <p class="font-bold text-white">Share it with others</p>
               </div>
               <div class="flex items-center gap-3">
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#1DA1F2] hover:scale-110"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#1DA1F2] hover:scale-110"
                   aria-label="Share on Twitter"
                 >
                   <Twitter className="h-5 w-5" />
@@ -291,7 +293,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#0A66C2] hover:scale-110"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#0A66C2] hover:scale-110"
                   aria-label="Share on LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
@@ -300,7 +302,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-white transition-all duration-300 hover:bg-[#1877F2] hover:scale-110"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#1877F2] hover:scale-110"
                   aria-label="Share on Facebook"
                 >
                   <Facebook className="h-5 w-5" />
@@ -322,7 +324,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
       <!-- Related Articles -->
       {relatedPosts.length > 0 && (
         <section class="py-20 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/60 to-transparent" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.03] to-transparent" aria-hidden="true"></div>
           <div class="mx-auto max-w-7xl px-6 relative">
             <div class="flex items-end justify-between mb-12">
               <div>
@@ -340,7 +342,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
               {relatedPosts.map((relatedPost: any) => (
                 <a
                   href={`/blog/${relatedPost.slug.current}`}
-                  class="card-lift group block overflow-hidden rounded-3xl border border-indigo-100/60 bg-white/85 backdrop-blur"
+                  class="card-lift group block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur"
                 >
                   {relatedPost.mainImage?.asset ? (
                     <div class="aspect-[16/10] relative overflow-hidden">
@@ -351,23 +353,23 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                       />
                     </div>
                   ) : (
-                    <div class="dot-pattern aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-indigo-50 to-cyan-50">
+                    <div class="dot-pattern aspect-[16/10] relative overflow-hidden bg-white/[0.02]">
                       <div class="absolute inset-0 flex items-center justify-center">
-                        <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
+                        <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Article</span>
                       </div>
                     </div>
                   )}
 
                   <div class="p-6">
                     {relatedPost.publishedAt && (
-                      <span class="text-xs font-semibold text-slate-400 mb-2 block">
+                      <span class="text-xs font-semibold text-slate-500 mb-2 block">
                         {formatDate(relatedPost.publishedAt)}
                       </span>
                     )}
-                    <h3 class="text-lg font-bold font-display tracking-tight group-hover:text-indigo-700 transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                    <h3 class="text-lg font-bold font-display tracking-tight text-white group-hover:text-indigo-200 transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {relatedPost.title}
                     </h3>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 mt-3 group-hover:gap-2.5 transition-all duration-200">
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-300 mt-3 group-hover:gap-2.5 transition-all duration-200">
                       Read <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>

@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Aurora from '../components/effects/Aurora.astro';
+import Halftone from '../components/effects/Halftone.astro';
 ---
 
 <Layout title="Terms of Service | Staticfish" description="Terms of Service for Staticfish web development services.">
@@ -10,34 +10,39 @@ import Aurora from '../components/effects/Aurora.astro';
     <Header />
 
     <main class="flex-1">
-      <section class="relative overflow-hidden pt-36 pb-12 lg:pt-44">
-        <Aurora variant="light" density="soft" />
+      <section class="bg-abyss noise-overlay relative overflow-hidden pt-36 pb-12 lg:pt-44">
+        <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
+        <Halftone />
         <div class="relative z-10 mx-auto max-w-4xl px-6">
           <div data-reveal>
-            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Legal</span>
+            <span class="eyebrow-pill eyebrow-pill-dark">
+              <span class="eyebrow-dot" style="background: linear-gradient(135deg, #FF4D6D, #FF8A3D); box-shadow: 0 0 12px rgba(255,77,109,0.9);"></span>
+              Legal
+            </span>
           </div>
-          <h1 data-reveal style="--reveal-delay: 90ms" class="mt-7 font-display text-5xl font-bold tracking-tight sm:text-6xl">
-            Terms of <span class="gradient-text">Service</span>
+          <h1 data-reveal style="--reveal-delay: 90ms" class="mt-7 font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">
+            Terms of <span class="gradient-text-bright">Service</span>
           </h1>
-          <p data-reveal style="--reveal-delay: 160ms" class="mt-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-sm font-semibold text-slate-500 backdrop-blur">
+          <p data-reveal style="--reveal-delay: 160ms" class="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-slate-300 backdrop-blur">
             Last updated: April 2026
           </p>
         </div>
+        <div class="hero-fade" aria-hidden="true" />
       </section>
 
-      <div class="mx-auto max-w-4xl px-6 pb-24">
-        <div data-reveal style="--reveal-delay: 120ms" class="rounded-[2rem] border border-indigo-100/60 bg-white/85 p-8 shadow-xl shadow-indigo-500/5 backdrop-blur sm:p-12">
-          <div class="space-y-10 leading-relaxed text-slate-600">
+      <div class="mx-auto max-w-4xl px-6 py-16">
+        <div data-reveal style="--reveal-delay: 120ms" class="rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur sm:p-12">
+          <div class="space-y-10 leading-relaxed text-slate-300">
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">1. Agreement to Terms</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">1. Agreement to Terms</h2>
               <p>
                 By engaging Staticfish for web development services, you agree to these Terms of Service. If you don't agree with any part of these terms, please don't use my services.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">2. Services Provided</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">2. Services Provided</h2>
               <p class="mb-3">I offer the following web development services:</p>
               <ul class="list-disc space-y-2 pl-6">
                 <li>Business website development</li>
@@ -48,8 +53,8 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">3. Pricing and Payment</h2>
-              <p class="mb-3"><strong class="text-slate-900">Pricing Structure:</strong></p>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">3. Pricing and Payment</h2>
+              <p class="mb-3"><strong class="text-white">Pricing Structure:</strong></p>
               <ul class="mb-5 list-disc space-y-2 pl-6">
                 <li>All prices are listed in GBP (£)</li>
                 <li>Website development fees are one-time payments</li>
@@ -57,7 +62,7 @@ import Aurora from '../components/effects/Aurora.astro';
                 <li>Brochure-site hosting fees start at £25/month</li>
                 <li>Editable-content projects have higher recurring fees due to CMS access and support</li>
               </ul>
-              <p class="mb-3"><strong class="text-slate-900">Payment Terms:</strong></p>
+              <p class="mb-3"><strong class="text-white">Payment Terms:</strong></p>
               <ul class="list-disc space-y-2 pl-6">
                 <li>No upfront payment is required before initial direction is shown</li>
                 <li>Full payment is due once the completed website is approved and before launch</li>
@@ -67,8 +72,8 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">4. Project Scope and Revisions</h2>
-              <p class="mb-3"><strong class="text-slate-900">What's Included:</strong></p>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">4. Project Scope and Revisions</h2>
+              <p class="mb-3"><strong class="text-white">What's Included:</strong></p>
               <ul class="mb-5 list-disc space-y-2 pl-6">
                 <li>Design mockups for approval before development</li>
                 <li>Up to 2 rounds of revisions at each stage</li>
@@ -76,14 +81,14 @@ import Aurora from '../components/effects/Aurora.astro';
                 <li>Basic SEO optimization</li>
                 <li>Training on content management (if applicable)</li>
               </ul>
-              <p class="mb-3"><strong class="text-slate-900">Scope Changes:</strong></p>
+              <p class="mb-3"><strong class="text-white">Scope Changes:</strong></p>
               <p>
                 If you request changes outside the agreed scope, I'll provide a separate quote. Major changes after development begins may delay the timeline and incur additional costs.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">5. Timeline</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">5. Timeline</h2>
               <p class="mb-3">Typical project timelines:</p>
               <ul class="mb-5 list-disc space-y-2 pl-6">
                 <li>Business Website: 1-3 weeks</li>
@@ -96,8 +101,8 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">6. Content and Assets</h2>
-              <p class="mb-3"><strong class="text-slate-900">Your Responsibilities:</strong></p>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">6. Content and Assets</h2>
+              <p class="mb-3"><strong class="text-white">Your Responsibilities:</strong></p>
               <ul class="mb-5 list-disc space-y-2 pl-6">
                 <li>Provide all text content</li>
                 <li>Provide images, logos, and brand assets</li>
@@ -111,8 +116,8 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">7. Intellectual Property</h2>
-              <p class="mb-3"><strong class="text-slate-900">Ownership:</strong></p>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">7. Intellectual Property</h2>
+              <p class="mb-3"><strong class="text-white">Ownership:</strong></p>
               <ul class="list-disc space-y-2 pl-6">
                 <li>You own the final website and all custom code created for you</li>
                 <li>I retain the right to use the project in my portfolio</li>
@@ -122,8 +127,8 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">8. Hosting and Ongoing Support</h2>
-              <p class="mb-3"><strong class="text-slate-900">Hosting:</strong></p>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">8. Hosting and Ongoing Support</h2>
+              <p class="mb-3"><strong class="text-white">Hosting:</strong></p>
               <ul class="mb-5 list-disc space-y-2 pl-6">
                 <li>Hosting is provided via Cloudflare's global CDN</li>
                 <li>Includes hosting, SSL certificate, backups, and security monitoring</li>
@@ -141,7 +146,7 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">9. Refunds and Cancellations</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">9. Refunds and Cancellations</h2>
               <p class="mb-4">
                 Because payment is due after approval and before launch, there is normally no refund situation before launch. If a project is cancelled before approval, no launch will take place and no hosting fees will begin. If payment has been made and the site has launched, any future cancellation only affects ongoing monthly services, not the completed project work.
               </p>
@@ -151,40 +156,40 @@ import Aurora from '../components/effects/Aurora.astro';
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">10. Support</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">10. Support</h2>
               <p>
                 I offer email support for all clients. Response time is typically within 24 hours during business days. Hosting clients receive routine monitoring and upkeep, while additional content or feature requests are quoted separately.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">11. Limitation of Liability</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">11. Limitation of Liability</h2>
               <p>
                 While I strive for excellence, I'm not liable for: loss of profits, business interruption, data loss, or any indirect damages. My total liability is limited to the amount you paid for services.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">12. Governing Law</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">12. Governing Law</h2>
               <p>
                 These terms are governed by the laws of England and Wales. Any disputes will be resolved in the courts of England and Wales.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">13. Changes to Terms</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">13. Changes to Terms</h2>
               <p>
                 I may update these terms from time to time. I'll notify clients of significant changes. Continued use of services after changes constitutes acceptance.
               </p>
             </div>
 
             <div>
-              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-slate-900">14. Contact</h2>
+              <h2 class="mb-4 font-display text-2xl font-bold tracking-tight text-white">14. Contact</h2>
               <p class="mb-5">
                 Questions about these terms? Contact me:
               </p>
               <div class="gradient-border p-6">
-                <p class="mb-2 font-bold text-slate-900">Staticfish</p>
+                <p class="mb-2 font-bold text-white">Staticfish</p>
                 <p>Email: contact@staticfish.co.uk</p>
               </div>
             </div>

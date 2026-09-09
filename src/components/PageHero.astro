@@ -1,5 +1,5 @@
 ---
-import Aurora from './effects/Aurora.astro';
+import Halftone from './effects/Halftone.astro';
 
 interface Props {
   eyebrow: string;
@@ -10,23 +10,29 @@ const { eyebrow, align = "left" } = Astro.props;
 const centered = align === "center";
 ---
 
-<section class="relative overflow-hidden pt-36 pb-14 lg:pt-44 lg:pb-20">
-  <Aurora variant="light" density="rich" />
+<section class="bg-abyss noise-overlay relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24">
+  <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
+  <Halftone />
+  <div class="aurora-blob animate-blob-drift left-[8%] top-[-25%] h-[26rem] w-[26rem]" style="background: radial-gradient(circle, rgba(255,77,109,0.22), transparent 65%);" aria-hidden="true" />
+  <div class="aurora-blob animate-blob-drift-2 right-[5%] top-[-10%] h-[24rem] w-[24rem]" style="background: radial-gradient(circle, rgba(6,182,212,0.18), transparent 65%); animation-delay: -7s;" aria-hidden="true" />
+
   <div class={`relative z-10 mx-auto max-w-7xl px-6 ${centered ? "text-center" : ""}`}>
     <div class={centered ? "mx-auto max-w-3xl" : "max-w-3xl"}>
       <div data-reveal>
-        <span class="eyebrow-pill">
-          <span class="eyebrow-dot"></span>
+        <span class="eyebrow-pill eyebrow-pill-dark">
+          <span class="eyebrow-dot" style="background: linear-gradient(135deg, #FF4D6D, #FF8A3D); box-shadow: 0 0 12px rgba(255,77,109,0.9);"></span>
           {eyebrow}
         </span>
       </div>
-      <h1 data-reveal style="--reveal-delay: 90ms" class="text-balance mt-7 font-display text-5xl font-bold leading-[1.03] tracking-tight sm:text-6xl lg:text-7xl">
+      <h1 data-reveal style="--reveal-delay: 90ms" class="text-balance mt-7 font-display text-5xl font-bold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-7xl">
         <slot name="title" />
       </h1>
-      <div data-reveal style="--reveal-delay: 180ms" class="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
+      <div data-reveal style="--reveal-delay: 180ms" class="mt-6 text-lg leading-relaxed text-slate-300 sm:text-xl">
         <slot />
       </div>
       <slot name="extra" />
     </div>
   </div>
+
+  <div class="hero-fade" aria-hidden="true" />
 </section>

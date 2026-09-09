@@ -36,7 +36,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(true)}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-100 bg-white/70 text-slate-800 shadow-sm backdrop-blur transition-all hover:shadow-md active:scale-95"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-sm backdrop-blur transition-all hover:bg-white/20 active:scale-95"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -48,20 +48,20 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
             isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
           style={{
-            background: "linear-gradient(160deg, rgba(248,249,255,0.97), rgba(238,242,255,0.97))",
+            background: "linear-gradient(160deg, rgba(10,10,28,0.97), rgba(20,16,48,0.97))",
             backdropFilter: "blur(24px)",
           }}
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, #818cf8, transparent 65%)" }} />
+            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, #ff4d6d, transparent 65%)" }} />
             <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-25 blur-3xl" style={{ background: "radial-gradient(circle, #22d3ee, transparent 65%)" }} />
           </div>
 
           <div className="relative flex items-center justify-between p-6">
-            <BrandLockup />
+            <BrandLockup textClassName="!text-white" />
             <button
               onClick={() => setIsOpen(false)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -77,7 +77,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
                   className={`block rounded-2xl px-5 py-4 font-display text-3xl font-bold tracking-tight transition-all duration-300 ${
                     currentPath === item.href
                       ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-xl shadow-indigo-500/30"
-                      : "text-slate-800 hover:bg-white hover:shadow-lg"
+                      : "text-slate-200 hover:bg-white/10"
                   }`}
                   onClick={() => setIsOpen(false)}
                   style={{
@@ -100,7 +100,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
             >
               Get a Quote <ArrowRight className="relative z-[2] h-5 w-5" />
             </a>
-            <p className="mt-4 text-center text-sm text-slate-500">
+            <p className="mt-4 text-center text-sm text-slate-400">
               contact@staticfish.co.uk
             </p>
           </div>

@@ -5,8 +5,6 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaPanel from '../components/CtaPanel.astro';
 import Reveal from '../components/effects/Reveal.astro';
-import Spotlight from '../components/effects/Spotlight';
-import TiltCard from '../components/effects/TiltCard';
 import { ArrowRight, Check, CircleHelp, FileCheck, Handshake, Receipt } from 'lucide-react';
 
 const corePackage = {
@@ -35,19 +33,16 @@ const pricingNotes = [
     title: 'No surprise billing',
     description: 'You get a clear quote before work starts. Changes outside the agreed scope are quoted separately.',
     icon: Receipt,
-    tint: "from-indigo-500 to-violet-500",
   },
   {
     title: 'Approve first, pay before launch',
     description: 'I will show you the direction first. Once the site is complete and approved, payment is due before it goes live.',
     icon: FileCheck,
-    tint: "from-violet-500 to-fuchsia-500",
   },
   {
     title: 'Domain and DNS are handled clearly',
     description: 'If you already have a domain, I can help connect it. If you need a new one, I can register it for you, but you cover the domain cost.',
     icon: Handshake,
-    tint: "from-cyan-500 to-blue-500",
   }
 ];
 ---
@@ -58,79 +53,71 @@ const pricingNotes = [
 
     <main class="flex-1">
       <PageHero eyebrow="Pricing">
-        <span slot="title">Simple website <span class="gradient-text-animated">pricing.</span></span>
+        <span slot="title">Simple website <span class="gradient-text-bright">pricing.</span></span>
         One upfront price for the agreed website scope, plus one monthly fee to keep the site live and looked after.
         <span slot="extra">
-          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block text-base text-slate-500">
+          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block text-base text-slate-400">
             If you need a CMS for editable content, that is added clearly instead of hidden inside a bigger package you may not need. Anything more tailored is quoted separately.
           </span>
         </span>
       </PageHero>
 
       <!-- Core package -->
-      <section class="mx-auto max-w-6xl px-6 pb-24">
+      <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
         <Reveal variant="scale">
-          <TiltCard client:load max={4}>
-            <div class="gradient-border glow-shadow overflow-hidden">
-              <div class="grid lg:grid-cols-2">
-                <div class="relative overflow-hidden p-8 lg:p-12">
-                  <div class="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/25 to-cyan-400/25 blur-3xl" aria-hidden="true"></div>
-                  <div class="relative">
-                    <span class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30">
-                      Most clients start here
-                    </span>
-                    <h2 class="mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl">{corePackage.title}</h2>
-                    <p class="mt-3 leading-relaxed text-slate-600">
-                      A clear, professional website for businesses that need to explain what they do and make it easy for people to enquire.
-                    </p>
-                    <div class="mt-7 flex items-end gap-2">
-                      <span class="gradient-text-animated font-display text-6xl font-bold tracking-tight sm:text-7xl" data-price-gbp={corePackage.priceGbp}>£{corePackage.priceGbp}</span>
-                      <span class="pb-2 text-sm font-semibold text-slate-500">upfront</span>
-                    </div>
-                    <p class="mt-2 text-sm text-slate-500" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</p>
-                    <p class="mt-4 text-sm text-slate-500">
-                      If you need editable content, those projects start from <strong class="text-slate-800" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing.
-                    </p>
-                    <a href="/contact" class="btn-primary-glow group mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
-                      <span class="relative z-[2] flex items-center gap-2">Ask for a Quote <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
-                    </a>
-                  </div>
-                </div>
-                <div class="border-t border-slate-100 bg-slate-50/60 p-8 lg:border-l lg:border-t-0 lg:p-12">
-                  <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Included</p>
-                  <ul class="space-y-3.5">
-                    {corePackage.features.map((feature) => (
-                      <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
-                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-white">
-                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                        </span>
-                        <span class="text-sm font-medium text-slate-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p class="mt-6 border-t border-slate-200/70 pt-6 text-sm leading-relaxed text-slate-500">
-                    Good fit for local service businesses, consultants, studios, trades, and small teams that need a trustworthy online presence without unnecessary complexity.
-                  </p>
-                </div>
+          <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur">
+            <div class="grid lg:grid-cols-2">
+              <div class="p-8 sm:p-10 lg:p-12">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-900">
+                  Most clients start here
+                </span>
+                <h2 class="mt-6 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">{corePackage.title}</h2>
+                <p class="mt-3 leading-relaxed text-slate-400">
+                  A clear, professional website for businesses that need to explain what they do and make it easy for people to enquire.
+                </p>
+                <p class="mt-8 flex items-baseline gap-2">
+                  <span class="font-display text-6xl font-bold tracking-tight text-white sm:text-7xl" data-price-gbp={corePackage.priceGbp}>£{corePackage.priceGbp}</span>
+                  <span class="text-sm font-medium text-slate-500">upfront</span>
+                </p>
+                <p class="mt-1.5 text-sm text-slate-500" data-hosting-gbp>+ £25/month hosting, backups &amp; upkeep</p>
+                <p class="mt-4 text-sm text-slate-400">
+                  If you need editable content, those projects start from <strong class="font-semibold text-white" data-currency-gbp="50" data-currency-suffix="/month">£50/month</strong> ongoing.
+                </p>
+                <a href="/contact" class="btn-primary-glow group mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
+                  <span class="relative z-[2] flex items-center gap-2">Ask for a Quote <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
+                </a>
+              </div>
+              <div class="border-t border-white/10 bg-white/[0.02] p-8 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
+                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">Included</p>
+                <ul class="divide-y divide-white/10">
+                  {corePackage.features.map((feature) => (
+                    <li class="flex items-center gap-3 py-3.5">
+                      <Check className="h-4 w-4 shrink-0 text-emerald-400" strokeWidth={3} />
+                      <span class="text-[15px] font-medium text-slate-200">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p class="mt-6 border-t border-white/10 pt-6 text-sm leading-relaxed text-slate-400">
+                  Good fit for local service businesses, consultants, studios, trades, and small teams that need a trustworthy online presence without unnecessary complexity.
+                </p>
               </div>
             </div>
-          </TiltCard>
+          </div>
         </Reveal>
       </section>
 
       <!-- Add-on -->
-      <section class="relative overflow-hidden py-24">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-50/70 to-transparent" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-7xl px-6">
-          <div class="mb-10 max-w-3xl">
+      <section class="border-y border-white/[0.07] bg-white/[0.02] py-16 lg:py-24">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-10 max-w-2xl">
             <Reveal>
               <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Optional add-on</span>
             </Reveal>
             <Reveal delay={90}>
-              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Add editing <span class="serif-accent font-normal">if you need it.</span></h2>
+              <h2 class="mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">Add editing <span class="serif-accent font-normal">if you need it.</span></h2>
             </Reveal>
-            <Reveal delay={160}>
-              <p class="mt-4 leading-relaxed text-slate-600">
+            <Reveal delay={150}>
+              <p class="mt-4 leading-relaxed text-slate-400">
                 Most sites do not need a CMS. If you want to update pages, services, pricing, testimonials, or publish blog and news posts yourself, this is the main upgrade.
               </p>
             </Reveal>
@@ -139,24 +126,24 @@ const pricingNotes = [
           <div class="max-w-3xl">
             {addOns.map((addOn) => (
               <Reveal variant="scale">
-                <Spotlight client:load className="card-lift rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl shadow-violet-500/10 backdrop-blur lg:p-10">
-                  <div class="flex flex-wrap items-start justify-between gap-6">
-                    <div>
-                      <h3 class="font-display text-2xl font-bold tracking-tight">{addOn.title}</h3>
-                      <p class="mt-3 max-w-lg text-sm leading-relaxed text-slate-600">{addOn.description}</p>
+                <div class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur sm:p-10">
+                  <div class="flex flex-wrap items-end justify-between gap-6">
+                    <div class="max-w-md">
+                      <h3 class="font-display text-2xl font-bold tracking-tight text-white">{addOn.title}</h3>
+                      <p class="mt-3 text-sm leading-relaxed text-slate-400">{addOn.description}</p>
                     </div>
-                    <div class="text-right">
-                      <p class="text-[11px] font-bold uppercase tracking-widest text-slate-400">from +</p>
-                      <p class="gradient-text font-display text-5xl font-bold tracking-tight" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</p>
-                    </div>
+                    <p class="text-right">
+                      <span class="block text-[11px] font-bold uppercase tracking-widest text-slate-500">from +</span>
+                      <span class="font-display text-5xl font-bold tracking-tight text-white" data-price-gbp={addOn.priceGbp}>£{addOn.priceGbp}</span>
+                    </p>
                   </div>
-                </Spotlight>
+                </div>
               </Reveal>
             ))}
           </div>
 
-          <Reveal delay={120}>
-            <p class="mt-8 max-w-2xl text-sm leading-relaxed text-slate-500">
+          <Reveal delay={100}>
+            <p class="mt-8 max-w-2xl text-sm leading-relaxed text-slate-400">
               Editable-content projects have a higher monthly fee than brochure sites, because there is a real CMS, editor access, and more ongoing support involved. If you need a more tailored enquiry flow, booking setup, or more bespoke functionality, I quote that separately based on scope.
             </p>
           </Reveal>
@@ -164,30 +151,28 @@ const pricingNotes = [
       </section>
 
       <!-- Notes -->
-      <section class="mx-auto max-w-7xl px-6 pb-24">
-        <div class="grid gap-6 md:grid-cols-3">
+      <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+        <div class="grid gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
           {pricingNotes.map((note, i) => (
-            <Reveal delay={i * 110} variant="scale">
-              <Spotlight client:load className="card-lift h-full rounded-3xl border border-indigo-100/70 bg-white/80 p-8 backdrop-blur">
-                <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${note.tint} text-white shadow-lg`}>
-                  <note.icon className="h-5 w-5" />
-                </span>
-                <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{note.title}</h3>
-                <p class="mt-2.5 text-sm leading-relaxed text-slate-600">{note.description}</p>
-              </Spotlight>
-            </Reveal>
+            <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="sm:px-8 sm:first:pl-0 sm:last:pr-0">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                <note.icon className="h-[18px] w-[18px]" />
+              </span>
+              <h3 class="mt-5 font-display text-lg font-bold tracking-tight text-white">{note.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">{note.description}</p>
+            </div>
           ))}
         </div>
 
-        <Reveal delay={140}>
-          <div class="glass mt-8 flex items-start gap-5 rounded-3xl p-7">
-            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-500 text-white shadow-lg">
-              <CircleHelp className="h-5 w-5" />
+        <Reveal delay={120}>
+          <div class="mt-14 flex items-start gap-5 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-7 backdrop-blur sm:p-8">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+              <CircleHelp className="h-[18px] w-[18px]" />
             </span>
             <div>
-              <h4 class="font-display font-bold tracking-tight">What is included in the monthly fee?</h4>
-              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">
-                Brochure sites are <span class="font-semibold text-slate-800" data-hosting-gbp>£25/month</span> and editable-content projects start from <span class="font-semibold text-slate-800" data-currency-gbp="50" data-currency-suffix="/month">£50/month</span>. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
+              <h4 class="font-display font-bold tracking-tight text-white">What is included in the monthly fee?</h4>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-400">
+                Brochure sites are <span class="font-semibold text-white" data-hosting-gbp>£25/month</span> and editable-content projects start from <span class="font-semibold text-white" data-currency-gbp="50" data-currency-suffix="/month">£50/month</span>. The monthly fee covers hosting, SSL certificate, backups, security monitoring, and routine upkeep. If you need a new domain, you pay the registration cost separately. If you want additional content changes or new features later, I quote those separately.
               </p>
             </div>
           </div>

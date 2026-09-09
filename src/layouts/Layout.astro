@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SmoothScroll from '../components/effects/SmoothScroll';
 
 export interface Props {
   title: string;
@@ -37,9 +38,11 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
       async
     ></script>
   </head>
-  <body>
+  <body id="top">
     <slot />
+    <SmoothScroll client:load />
     <script>
+      import { initSeedBurst } from '../lib/seed-burst';
       function initReveal() {
         const els = document.querySelectorAll("[data-reveal]:not(.is-visible)");
         if (!("IntersectionObserver" in window)) {
@@ -124,6 +127,7 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
       document.addEventListener("DOMContentLoaded", () => {
         initReveal();
         initNavbar();
+        initSeedBurst();
         initCurrencyPricing();
       });
       document.addEventListener("astro:after-swap", () => {
@@ -132,19 +136,54 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
       });
     </script>
     <style>
+      /* Integrated nav bar: transparent over heroes, glass on scroll */
       #site-nav {
         transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       }
       #site-nav .nav-shell {
         transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        border: 1px solid transparent;
+        background: linear-gradient(to bottom, rgba(4, 4, 14, 0.55), transparent);
+        border-bottom: 1px solid transparent;
       }
       #site-nav.is-scrolled .nav-shell {
-        background: rgba(255, 255, 255, 0.78);
+        background: rgba(6, 6, 18, 0.82);
         backdrop-filter: blur(20px) saturate(1.4);
         -webkit-backdrop-filter: blur(20px) saturate(1.4);
-        border-color: rgba(99, 102, 241, 0.14);
-        box-shadow: 0 12px 40px -12px rgba(79, 70, 229, 0.3);
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.7);
+      }
+      #site-nav .nav-link {
+        position: relative;
+        color: #94a3b8;
+      }
+      #site-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        text-shadow: 0 0 18px rgba(255, 255, 255, 0.4);
+      }
+      #site-nav .nav-link.active-link {
+        color: #ffffff;
+      }
+      #site-nav .nav-link.active-link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 2px;
+        width: 5px;
+        height: 5px;
+        border-radius: 999px;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #ff4d6d, #ff8a3d);
+        box-shadow: 0 0 10px rgba(255, 77, 109, 0.9);
+      }
+      #site-nav .brand-word {
+        color: #ffffff;
+      }
+      #site-nav .brand-word .gradient-text {
+        background: linear-gradient(92deg, #a5b4fc, #67e8f9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
     </style>
   </body>

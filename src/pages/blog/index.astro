@@ -41,15 +41,15 @@ const recentPosts = posts.slice(1);
 
     <main class="flex-1">
       <PageHero eyebrow="Blog">
-        <span slot="title">Thoughts <span class="serif-accent font-normal gradient-text">& ideas.</span></span>
+        <span slot="title">Thoughts <span class="serif-accent font-normal gradient-text-bright">& ideas.</span></span>
         Web development insights, design trends, and practical tips for building better websites.
       </PageHero>
 
-      <section class="mx-auto max-w-7xl px-6 pb-24">
+      <section class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         {posts.length === 0 && (
           <Reveal variant="scale">
             <div class="glass rounded-[2rem] py-24 text-center">
-              <p class="text-lg text-slate-500">No posts yet. Check back soon!</p>
+              <p class="text-lg text-slate-400">No posts yet. Check back soon!</p>
             </div>
           </Reveal>
         )}
@@ -58,7 +58,7 @@ const recentPosts = posts.slice(1);
           <Reveal variant="scale">
             <a
               href={`/blog/${featuredPost.slug.current}`}
-              class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-white/70 bg-white shadow-xl shadow-indigo-500/10 lg:grid-cols-2"
+              class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-2"
             >
               {featuredPost.mainImage?.asset ? (
                 <div class="relative min-h-[280px] overflow-hidden">
@@ -67,13 +67,14 @@ const recentPosts = posts.slice(1);
                     alt={featuredPost.mainImage.alt || featuredPost.title}
                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span class="glass absolute left-5 top-5 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-700 lg:hidden">
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#050512]/50 via-transparent to-transparent"></div>
+                  <span class="glass absolute left-5 top-5 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-200 lg:hidden">
                     Featured
                   </span>
                 </div>
               ) : (
-                <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-gradient-to-br from-indigo-50 to-cyan-50">
-                  <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
+                <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-white/[0.02]">
+                  <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Article</span>
                 </div>
               )}
 
@@ -82,7 +83,7 @@ const recentPosts = posts.slice(1);
                   Featured
                 </span>
 
-                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-400">
                   {featuredPost.publishedAt && (
                     <span class="flex items-center gap-1.5">
                       <Calendar className="h-4 w-4" />
@@ -97,12 +98,12 @@ const recentPosts = posts.slice(1);
                   )}
                 </div>
 
-                <h2 class="mt-4 font-display text-3xl font-bold tracking-tight transition-colors group-hover:text-indigo-700 lg:text-4xl">
+                <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white transition-colors group-hover:text-indigo-200 lg:text-4xl">
                   {featuredPost.title}
                 </h2>
 
                 {featuredPost.excerpt && (
-                  <p class="mt-4 leading-relaxed text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+                  <p class="mt-4 leading-relaxed text-slate-400 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
                     {featuredPost.excerpt}
                   </p>
                 )}
@@ -110,14 +111,14 @@ const recentPosts = posts.slice(1);
                 {featuredPost.categories && featuredPost.categories.length > 0 && (
                   <div class="mb-6 mt-5 flex flex-wrap gap-2">
                     {featuredPost.categories.map((cat: string) => (
-                      <span class="inline-flex items-center gap-1 rounded-full border border-indigo-100 bg-indigo-50/60 px-3 py-1 text-xs font-bold text-indigo-700">
+                      <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-bold text-slate-300">
                         {cat}
                       </span>
                     ))}
                   </div>
                 )}
 
-                <div class="flex items-center gap-2 text-sm font-bold text-indigo-600 transition-all duration-200 group-hover:gap-3">
+                <div class="flex items-center gap-2 text-sm font-bold text-indigo-300 transition-all duration-200 group-hover:gap-3">
                   Read article <ArrowRight className="h-4 w-4" />
                 </div>
               </div>
@@ -128,10 +129,10 @@ const recentPosts = posts.slice(1);
         {recentPosts.length > 0 && (
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recentPosts.map((post: any, i: number) => (
-              <div data-reveal={i % 2 === 0 ? "true" : "true"} style={`--reveal-delay: ${(i % 3) * 100}ms`}>
+              <div data-reveal style={`--reveal-delay: ${(i % 3) * 100}ms`}>
                 <a
                   href={`/blog/${post.slug.current}`}
-                  class="card-lift group block h-full overflow-hidden rounded-3xl border border-indigo-100/60 bg-white/85 backdrop-blur"
+                  class="card-lift group block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur"
                 >
                   {post.mainImage?.asset ? (
                     <div class="relative aspect-[16/10] overflow-hidden">
@@ -142,8 +143,8 @@ const recentPosts = posts.slice(1);
                       />
                     </div>
                   ) : (
-                    <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-50 to-cyan-50">
-                      <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
+                    <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-white/[0.02]">
+                      <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Article</span>
                     </div>
                   )}
 
@@ -163,12 +164,12 @@ const recentPosts = posts.slice(1);
                       )}
                     </div>
 
-                    <h3 class="font-display text-xl font-bold tracking-tight transition-colors group-hover:text-indigo-700 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                    <h3 class="font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-indigo-200 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {post.title}
                     </h3>
 
                     {post.excerpt && (
-                      <p class="mb-4 mt-2 text-sm leading-relaxed text-slate-600 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                      <p class="mb-4 mt-2 text-sm leading-relaxed text-slate-400 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                         {post.excerpt}
                       </p>
                     )}
@@ -176,7 +177,7 @@ const recentPosts = posts.slice(1);
                     {post.categories && post.categories.length > 0 && (
                       <div class="flex flex-wrap gap-2">
                         {post.categories.slice(0, 2).map((cat: string) => (
-                          <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-500">
+                          <span class="rounded-full bg-white/[0.06] px-2.5 py-1 text-xs font-bold text-slate-400">
                             {cat}
                           </span>
                         ))}

@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaPanel from '../components/CtaPanel.astro';
 import Reveal from '../components/effects/Reveal.astro';
-import Spotlight from '../components/effects/Spotlight';
+import Steps from '../components/Steps.astro';
 import { ArrowRight, Check, Compass, KeyRound, LayoutDashboard, Rocket, Users, Workflow, X } from 'lucide-react';
 
 const softwareTypes = [
@@ -13,25 +13,21 @@ const softwareTypes = [
     title: 'SaaS MVPs',
     description: 'The core offer here: turning a product idea into a real first version without wasting months building the wrong thing.',
     icon: Rocket,
-    tint: "from-indigo-500 to-violet-500",
   },
   {
     title: 'Founder Dashboards',
     description: 'Admin areas, internal tools, and operational dashboards that help founders actually run the product from day one.',
     icon: LayoutDashboard,
-    tint: "from-violet-500 to-fuchsia-500",
   },
   {
     title: 'Client Portals',
     description: 'Private areas where users can log in, view information, submit data, and work through a service or workflow.',
     icon: Users,
-    tint: "from-cyan-500 to-blue-500",
   },
   {
     title: 'Product Workflows',
     description: 'Onboarding flows, approvals, bookings, submissions, and other product logic that turns an idea into a working service.',
     icon: Workflow,
-    tint: "from-emerald-400 to-cyan-500",
   }
 ];
 
@@ -64,22 +60,22 @@ const notTypical = [
 
 const processSteps = [
   {
-    step: '01',
+    marker: '01',
     title: 'Define the MVP',
     description: 'We work out what the first usable version actually needs, what can wait, and what the core workflow is.'
   },
   {
-    step: '02',
+    marker: '02',
     title: 'Direction and scope',
     description: 'I map the product direction, key screens, and technical approach so we are aligned before the full build starts.'
   },
   {
-    step: '03',
+    marker: '03',
     title: 'Build the product',
     description: 'I build the MVP in stages, keeping it grounded in the business goal rather than piling on unnecessary features.'
   },
   {
-    step: '04',
+    marker: '04',
     title: 'Handoff or manage',
     description: 'Once the MVP is ready, I either hand over the repo cleanly or continue managing the technical side in-house for you.'
   }
@@ -92,17 +88,17 @@ const processSteps = [
 
     <main class="flex-1">
       <PageHero eyebrow="SaaS MVP Development">
-        <span slot="title">Build the first <span class="gradient-text-animated">real version</span> of the product.</span>
+        <span slot="title">Build the first <span class="gradient-text-bright">real version</span> of the product.</span>
         This is actually what I specialise in most: building SaaS MVPs and early product versions that get an idea into the real world quickly and properly.
         <span slot="extra">
-          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block max-w-2xl text-base text-slate-500">
+          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block max-w-2xl text-base text-slate-400">
             It is not the main service I market on Staticfish, but if you need a real product rather than a brochure site or loose prototype, this is the work I am strongest at.
           </span>
           <span data-reveal style="--reveal-delay: 320ms" class="mt-8 flex flex-wrap gap-4">
             <a href="/contact" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
               <span class="relative z-[2] flex items-center gap-2">Talk About Your MVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
             </a>
-            <a href="/services" class="btn-ghost-glass inline-flex items-center rounded-full px-7 py-4 text-sm font-bold text-slate-800">
+            <a href="/services" class="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/10">
               Just need a website?
             </a>
           </span>
@@ -110,136 +106,114 @@ const processSteps = [
       </PageHero>
 
       <!-- What I build -->
-      <section class="mx-auto max-w-7xl px-6 pb-24">
-        <div class="mb-12 max-w-3xl">
+      <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+        <div class="mb-12 max-w-2xl">
           <Reveal>
             <span class="eyebrow-pill"><span class="eyebrow-dot"></span> What I build</span>
           </Reveal>
           <Reveal delay={90}>
-            <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">MVP-first <span class="serif-accent font-normal">product work.</span></h2>
+            <h2 class="mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">MVP-first <span class="serif-accent font-normal">product work.</span></h2>
           </Reveal>
-          <Reveal delay={160}>
-            <p class="mt-4 leading-relaxed text-slate-600">
+          <Reveal delay={150}>
+            <p class="mt-4 leading-relaxed text-slate-400">
               The goal is not to build everything at once. The goal is to build the first version that is strong enough to launch, test with real users, and improve from there.
             </p>
           </Reveal>
         </div>
-        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {softwareTypes.map((item, i) => (
-            <Reveal delay={i * 100} variant="scale">
-              <Spotlight client:load className="card-lift group h-full rounded-3xl border border-indigo-100/70 bg-white/85 p-7 backdrop-blur">
-                <span class={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.tint} text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
-                  <item.icon className="h-5 w-5" />
-                </span>
-                <h3 class="mt-5 font-display text-xl font-bold tracking-tight">{item.title}</h3>
-                <p class="mt-2.5 text-sm leading-relaxed text-slate-600">{item.description}</p>
-              </Spotlight>
-            </Reveal>
+            <div data-reveal style={`--reveal-delay: ${i * 90}ms`} class="border-t border-white/10 pt-8">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                <item.icon className="h-[18px] w-[18px]" />
+              </span>
+              <h3 class="mt-5 font-display text-xl font-bold tracking-tight text-white">{item.title}</h3>
+              <p class="mt-2 max-w-md text-sm leading-relaxed text-slate-400">{item.description}</p>
+            </div>
           ))}
         </div>
       </section>
 
       <!-- Delivery -->
-      <section class="relative overflow-hidden py-24">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-50/60 to-transparent" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-7xl px-6">
-          <div class="mb-12 max-w-3xl">
+      <section class="border-y border-white/[0.07] bg-white/[0.02] py-16 lg:py-24">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-12 max-w-2xl">
             <Reveal>
               <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Delivery model</span>
             </Reveal>
             <Reveal delay={90}>
-              <h2 class="mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">Two ways I can <span class="serif-accent font-normal">deliver it.</span></h2>
+              <h2 class="mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">Two ways I can <span class="serif-accent font-normal">deliver it.</span></h2>
             </Reveal>
-            <Reveal delay={160}>
-              <p class="mt-4 leading-relaxed text-slate-600">
+            <Reveal delay={150}>
+              <p class="mt-4 leading-relaxed text-slate-400">
                 Some founders want the repo handed over once the MVP is ready. Others want me to stay on the technical side while they focus on customers, growth, and running the business.
               </p>
             </Reveal>
           </div>
           <div class="grid gap-6 lg:grid-cols-2">
             {deliveryModels.map((item, i) => (
-              <Reveal delay={i * 120}>
-                <Spotlight client:load className="card-lift h-full rounded-[2rem] border border-white/70 bg-white/90 p-8 shadow-xl shadow-indigo-500/10 backdrop-blur lg:p-12">
-                  <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-lg">
-                    <item.icon className="h-6 w-6" />
-                  </span>
-                  <h3 class="mt-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">{item.title}</h3>
-                  <p class="mt-3 leading-relaxed text-slate-600">{item.description}</p>
-                </Spotlight>
-              </Reveal>
+              <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur sm:p-10">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                  <item.icon className="h-[18px] w-[18px]" />
+                </span>
+                <h3 class="mt-5 font-display text-2xl font-bold tracking-tight text-white">{item.title}</h3>
+                <p class="mt-2.5 leading-relaxed text-slate-400">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       <!-- Fit -->
-      <section class="mx-auto max-w-7xl px-6 pb-24">
-        <div class="grid gap-6 lg:grid-cols-2">
-          <Reveal>
-            <div class="h-full rounded-[2rem] border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-8 lg:p-10">
-              <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-600">
+      <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <Reveal>
+              <span class="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-300">
                 Good fit
               </span>
-              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight sm:text-3xl">Good fit if...</h2>
-              <ul class="mt-7 space-y-4">
-                {goodFit.map((item) => (
-                  <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
-                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-white">
-                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                    </span>
-                    <span class="text-sm font-medium leading-relaxed text-slate-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <div class="h-full rounded-[2rem] border border-rose-100 bg-gradient-to-b from-rose-50/70 to-white p-8 lg:p-10">
-              <span class="inline-flex items-center gap-2 rounded-full bg-rose-500/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-rose-500">
+            </Reveal>
+            <Reveal delay={80}>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white">Good fit if...</h2>
+            </Reveal>
+            <ul class="mt-6 divide-y divide-white/10 border-y border-white/10">
+              {goodFit.map((item) => (
+                <li class="flex items-start gap-3 py-4">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" strokeWidth={3} />
+                  <span class="text-[15px] leading-relaxed text-slate-300">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <Reveal>
+              <span class="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
                 Not typical
               </span>
-              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight sm:text-3xl">Probably not the right fit if...</h2>
-              <ul class="mt-7 space-y-4">
-                {notTypical.map((item) => (
-                  <li class="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm">
-                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-500">
-                      <X className="h-3.5 w-3.5" strokeWidth={3} />
-                    </span>
-                    <span class="text-sm font-medium leading-relaxed text-slate-600">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+            </Reveal>
+            <Reveal delay={80}>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white">Probably not the right fit if...</h2>
+            </Reveal>
+            <ul class="mt-6 divide-y divide-white/10 border-y border-white/10">
+              {notTypical.map((item) => (
+                <li class="flex items-start gap-3 py-4">
+                  <X className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" strokeWidth={3} />
+                  <span class="text-[15px] leading-relaxed text-slate-400">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
       <!-- Process -->
-      <section class="mx-auto max-w-5xl px-6 pb-24">
+      <section class="mx-auto max-w-4xl px-6 pb-20 lg:pb-28">
         <Reveal>
           <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Process</span>
         </Reveal>
         <Reveal delay={90}>
-          <h2 class="mb-14 mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">How SaaS MVP projects work.</h2>
+          <h2 class="mb-10 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">How SaaS MVP projects work.</h2>
         </Reveal>
-        <div class="relative">
-          <div class="absolute bottom-8 left-[27px] top-8 w-0.5 rounded-full bg-gradient-to-b from-indigo-500 via-violet-400 to-cyan-400" aria-hidden="true"></div>
-          <div class="space-y-5">
-            {processSteps.map((step, i) => (
-              <Reveal delay={i * 90}>
-                <div class="card-lift group flex gap-6 rounded-3xl border border-indigo-100/70 bg-white/80 p-6 backdrop-blur sm:p-7">
-                  <span class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-900 font-display text-sm font-bold text-white shadow-lg transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-violet-600">
-                    {step.step}
-                  </span>
-                  <div>
-                    <h3 class="font-display text-xl font-bold tracking-tight">{step.title}</h3>
-                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{step.description}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        <Steps items={processSteps} />
       </section>
 
       <CtaPanel

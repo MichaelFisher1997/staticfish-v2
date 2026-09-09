@@ -1,6 +1,7 @@
 ---
 import { BrandLockup } from "./BrandMark";
 import MobileMenu from "./MobileMenu";
+import Magnetic from "./effects/Magnetic";
 
 const navigation = [
   { name: "Websites", href: "/services" },
@@ -12,21 +13,19 @@ const navigation = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 w-full px-4 pt-4 sm:px-6">
-  <div class="nav-shell mx-auto max-w-6xl rounded-2xl px-4 py-3 sm:px-5">
-    <nav class="flex items-center justify-between">
-      <a href="/" class="group flex items-center gap-3" aria-label="Staticfish home">
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 w-full">
+  <div class="nav-shell">
+    <nav class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
+      <a href="/" class="group flex shrink-0 items-center" aria-label="Staticfish home">
         <BrandLockup markClassName="transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3" />
       </a>
 
-      <div class="hidden items-center gap-1 rounded-full border border-indigo-100/80 bg-white/60 p-1.5 backdrop-blur-xl md:flex">
+      <div class="hidden items-center gap-1 md:flex">
         {navigation.map((item) => (
           <a
             href={item.href}
-            class={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${
-              currentPath === item.href
-                ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/30"
-                : "text-slate-600 hover:bg-indigo-50 hover:text-indigo-700"
+            class={`nav-link rounded-lg px-4 py-2 text-[15px] font-semibold transition-all duration-300 ${
+              currentPath === item.href ? "active-link text-white" : ""
             }`}
           >
             {item.name}
@@ -35,13 +34,17 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <div class="flex items-center gap-3">
-        <a
-          href="/contact"
-          class="btn-primary-glow hidden items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white md:inline-flex"
-        >
-          Get a Quote
-          <span class="relative z-[2]">→</span>
-        </a>
+        <div class="hidden md:block">
+          <Magnetic client:load strength={0.35}>
+            <a
+              href="/contact"
+              class="btn-primary-glow inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white"
+            >
+              Get a Quote
+              <span class="relative z-[2]">→</span>
+            </a>
+          </Magnetic>
+        </div>
         <div class="md:hidden">
           <MobileMenu navigation={navigation} currentPath={currentPath} client:load />
         </div>

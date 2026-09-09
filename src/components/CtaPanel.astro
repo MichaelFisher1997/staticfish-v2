@@ -1,6 +1,8 @@
 ---
 import Aurora from './effects/Aurora.astro';
+import Halftone from './effects/Halftone.astro';
 import Reveal from './effects/Reveal.astro';
+import Magnetic from './effects/Magnetic';
 import { ArrowRight } from 'lucide-react';
 
 interface CtaLink {
@@ -31,8 +33,19 @@ const {
 
 <section class="mx-auto max-w-7xl px-6 pb-24 lg:pb-32">
   <Reveal variant="scale">
-    <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center sm:px-14 lg:py-20">
+    <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2.5rem] px-8 py-16 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_40px_100px_-40px_rgba(255,77,109,0.3)] sm:px-14 lg:py-20">
       <Aurora variant="dark" density="rich" />
+      <Halftone
+        clusters={[
+          { top: "-15%", left: "-8%", width: "22rem", height: "18rem", color: "rgba(255,77,109,0.5)", opacity: 0.7 },
+          { bottom: "-20%", right: "-5%", width: "24rem", height: "18rem", color: "rgba(103,232,249,0.4)", opacity: 0.6 },
+        ]}
+      />
+      <div class="orbit-ring left-1/2 top-1/2 hidden h-[125%] w-[58%] -translate-x-1/2 -translate-y-1/2 opacity-70 lg:block" aria-hidden="true">
+        <span class="orbit-seed left-[8%] top-[12%] h-3 w-3 bg-[#FF4D6D] text-[#FF4D6D]"></span>
+        <span class="orbit-seed bottom-[10%] right-[14%] h-2.5 w-2.5 bg-[#06B6D4] text-[#06B6D4]"></span>
+        <span class="orbit-seed right-[10%] top-[38%] h-2 w-2 bg-[#FFC53D] text-[#FFC53D]"></span>
+      </div>
       <div class="relative">
         <span class="eyebrow-pill eyebrow-pill-dark mx-auto">
           <span class="eyebrow-dot"></span> {eyebrow}
@@ -47,11 +60,13 @@ const {
           <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-300">{description}</p>
         )}
         <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a href={primary.href} class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-bold text-white">
-            <span class="relative z-[2] flex items-center gap-2">
-              {primary.label} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </span>
-          </a>
+          <Magnetic client:load strength={0.3}>
+            <a href={primary.href} class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-bold text-white">
+              <span class="relative z-[2] flex items-center gap-2">
+                {primary.label} <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </a>
+          </Magnetic>
           {secondary && (
             <a href={secondary.href} class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/10">
               {secondary.label}

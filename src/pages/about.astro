@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaPanel from '../components/CtaPanel.astro';
 import Reveal from '../components/effects/Reveal.astro';
-import Spotlight from '../components/effects/Spotlight';
+import Steps from '../components/Steps.astro';
 import { ArrowRight, Clock, Code, DollarSign, Shield, Zap } from 'lucide-react';
 
 const values = [
@@ -13,19 +13,16 @@ const values = [
     icon: Zap,
     title: "Built for Speed",
     description: "Every site I build loads fast. I focus on performance because your visitors won't wait around.",
-    tint: "from-amber-400 to-orange-500",
   },
   {
     icon: Shield,
     title: "Simple & Reliable",
     description: "I use modern tools with fewer moving parts. Less to go wrong means less to worry about.",
-    tint: "from-emerald-400 to-cyan-500",
   },
   {
     icon: DollarSign,
     title: "Clear Pricing",
     description: "One price upfront. Set monthly fee. No hourly billing, no surprise charges.",
-    tint: "from-indigo-500 to-violet-500",
   }
 ];
 
@@ -40,20 +37,27 @@ const expertise = [
 
 const milestones = [
   {
-    year: "2025",
+    marker: "2025",
     title: "Staticfish Founded",
     description: "Started with a simple idea: help small businesses get online without paying agency prices or wrestling with complex systems."
   },
   {
-    year: "2026",
+    marker: "2026",
     title: "Chattybox Launch",
     description: "Built and launched a more complex SaaS product, demonstrating that I can handle custom software work when a project needs more than a standard website."
   },
   {
-    year: "2026",
+    marker: "2026",
     title: "Redot Engine Website",
     description: "Contributed a new website for Redot, an open-source game engine. Pro bono work to support the developer community."
   }
+];
+
+const facts = [
+  { icon: Clock, label: "Based in the UK" },
+  { icon: Code, label: "5+ years building" },
+  { icon: Zap, label: "Solo — you talk to me" },
+  { icon: Shield, label: "Replies within 24 hours" },
 ];
 ---
 
@@ -63,154 +67,104 @@ const milestones = [
 
     <main class="flex-1">
       <PageHero eyebrow="About">
-        <span slot="title">One person.<br /><span class="gradient-text-animated">Real craftsmanship.</span></span>
+        <span slot="title">One person.<br /><span class="gradient-text-bright">Real craftsmanship.</span></span>
         I'm Michael Fisher, the solo developer behind Staticfish. No account managers, no junior developers — just me building your website with care and attention.
       </PageHero>
 
-      <!-- Mission -->
-      <section class="mx-auto max-w-7xl px-6 pb-24">
-        <div class="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <Reveal>
-              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why I started</span>
-            </Reveal>
-            <Reveal delay={90}>
-              <h2 class="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">A better way to build</h2>
-            </Reveal>
-            <Reveal delay={160}>
-              <div class="mt-6 space-y-5 leading-relaxed text-slate-600">
-                <p>
-                  I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
-                </p>
-                <p>
-                  I started Staticfish to offer something simpler: clear business websites, clear pricing, and direct communication with the person building the work. Alongside that, I also build SaaS MVPs for founders who need a real first product.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={220}>
-              <a href="/portfolio" class="btn-ghost-glass group mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-slate-800">
-                See the proof <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </Reveal>
+      <!-- Statement -->
+      <section class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
+        <Reveal>
+          <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why I started</span>
+        </Reveal>
+        <Reveal delay={90}>
+          <h2 class="mt-6 font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+            Too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain.
+          </h2>
+        </Reveal>
+        <Reveal delay={160}>
+          <div class="mt-8 grid gap-6 leading-relaxed text-slate-400 sm:grid-cols-2">
+            <p>
+              I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
+            </p>
+            <p>
+              I started Staticfish to offer something simpler: clear business websites, clear pricing, and direct communication with the person building the work. Alongside that, I also build SaaS MVPs for founders who need a real first product.
+            </p>
           </div>
-          <Reveal variant="scale" delay={140}>
-            <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-14">
-              <div class="dot-pattern-light absolute inset-0 opacity-50" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);" aria-hidden="true"></div>
-              <div class="relative">
-                <p class="mb-8 text-[11px] font-bold uppercase tracking-[0.24em] text-indigo-300">Staticfish principle</p>
-                <span class="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl text-white shadow-2xl shadow-indigo-500/40" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #06b6d4 130%)" aria-hidden="true">
-                  <svg viewBox="0 0 32 32" class="h-14 w-14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 17C8.5 10.5 15.5 8.5 25 12.5L29 9.5V21.5L25 18.5C15.5 22.5 8.5 20.5 5 17Z" stroke="white" strokeWidth="1.9" strokeLinejoin="round" />
-                    <path d="M9 17C11.8 15.2 15.1 15.2 19 17C21.2 18 23.2 18.4 25 18.2" stroke="white" strokeWidth="1.9" strokeLinecap="round" opacity="0.75" />
-                    <circle cx="22.5" cy="13.5" r="1.3" fill="white" />
-                  </svg>
-                </span>
-                <p class="serif-accent mx-auto mt-8 max-w-xs text-2xl leading-snug text-white">
-                  "Clear websites, direct communication, no unnecessary moving parts."
-                </p>
+        </Reveal>
+        <Reveal delay={220}>
+          <div class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/10 sm:grid-cols-4">
+            {facts.map((fact) => (
+              <div class="flex items-center gap-3 bg-[#0a0a20] px-5 py-5">
+                <fact.icon className="h-4 w-4 shrink-0 text-slate-500" />
+                <span class="text-[13px] font-semibold leading-snug text-slate-300">{fact.label}</span>
               </div>
-            </div>
-          </Reveal>
-        </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
-      <!-- Values -->
-      <section class="relative overflow-hidden py-24">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/60 to-transparent" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-7xl px-6">
+      <!-- Principles -->
+      <section class="border-y border-white/[0.07] bg-white/[0.02] py-16 lg:py-24">
+        <div class="mx-auto max-w-6xl px-6">
           <Reveal>
             <span class="eyebrow-pill"><span class="eyebrow-dot"></span> How I work</span>
           </Reveal>
           <Reveal delay={90}>
-            <h2 class="mb-12 mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">My principles.</h2>
+            <h2 class="mb-12 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">My principles.</h2>
           </Reveal>
-          <div class="grid gap-6 md:grid-cols-3">
+          <div class="grid gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
             {values.map((value, i) => (
-              <Reveal delay={i * 110} variant="scale">
-                <Spotlight client:load className="card-lift h-full rounded-3xl border border-indigo-100/70 bg-white/85 p-8 backdrop-blur lg:p-10">
-                  <span class={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${value.tint} text-white shadow-lg`}>
-                    <value.icon className="h-6 w-6" />
-                  </span>
-                  <h3 class="mt-6 font-display text-xl font-bold tracking-tight">{value.title}</h3>
-                  <p class="mt-2.5 text-sm leading-relaxed text-slate-600">{value.description}</p>
-                </Spotlight>
-              </Reveal>
+              <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="sm:px-8 sm:first:pl-0 sm:last:pr-0">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                  <value.icon className="h-[18px] w-[18px]" />
+                </span>
+                <h3 class="mt-5 font-display text-lg font-bold tracking-tight text-white">{value.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-400">{value.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Founder card -->
-      <section class="mx-auto max-w-7xl px-6 pb-24">
-        <Reveal variant="scale">
-          <div class="gradient-border overflow-hidden">
-            <div class="flex flex-col items-center gap-10 p-8 sm:p-12 lg:flex-row">
-              <div class="relative shrink-0">
-                <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-indigo-400/30 to-cyan-400/30 blur-2xl" aria-hidden="true"></div>
-                <div class="relative flex h-36 w-36 items-center justify-center rounded-[1.75rem] bg-slate-900 font-display text-4xl font-bold tracking-tight text-white shadow-2xl">
-                  MF
-                  <span class="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/20" aria-hidden="true"></span>
-                </div>
-                <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg">
-                  Founder
-                </span>
-              </div>
-              <div class="flex-1 text-center lg:text-left">
-                <h3 class="font-display text-2xl font-bold tracking-tight lg:text-3xl">Michael Fisher</h3>
-                <p class="gradient-text mt-1 text-xs font-bold uppercase tracking-[0.2em]">Founder & Developer</p>
-                <p class="mx-auto mt-5 max-w-2xl leading-relaxed text-slate-600 lg:mx-0">
-                  I've spent years building everything from straightforward websites to SaaS products and more involved software builds.
-                  Staticfish is positioned mainly around business websites, but SaaS MVP work is still a real specialism for me when the right project comes along.
-                </p>
-                <div class="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
-                  {expertise.map((skill) => (
-                    <span class="rounded-full border border-indigo-100 bg-indigo-50/60 px-4 py-1.5 text-xs font-bold text-indigo-700">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-                <div class="mt-6 flex justify-center gap-6 text-sm font-semibold text-slate-600 lg:justify-start">
-                  <span class="inline-flex items-center gap-2">
-                    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-50 text-indigo-600"><Clock className="h-4 w-4" /></span>
-                    UK Based
+      <!-- Founder -->
+      <section class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
+        <Reveal>
+          <div class="flex flex-col gap-6 border-y border-white/10 py-10 sm:flex-row sm:items-start sm:gap-8">
+            <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] font-display text-xl font-bold text-white">
+              MF
+            </span>
+            <div>
+              <h3 class="font-display text-2xl font-bold tracking-tight text-white">Michael Fisher</h3>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Founder & Developer</p>
+              <p class="mt-4 max-w-2xl leading-relaxed text-slate-400">
+                I've spent years building everything from straightforward websites to SaaS products and more involved software builds.
+                Staticfish is positioned mainly around business websites, but SaaS MVP work is still a real specialism for me when the right project comes along.
+              </p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {expertise.map((skill) => (
+                  <span class="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-slate-300">
+                    {skill}
                   </span>
-                  <span class="inline-flex items-center gap-2">
-                    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-cyan-600"><Code className="h-4 w-4" /></span>
-                    5+ Years
-                  </span>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </Reveal>
-      </section>
-
-      <!-- Timeline -->
-      <section class="mx-auto max-w-5xl px-6 pb-24">
-        <Reveal>
-          <span class="eyebrow-pill"><span class="eyebrow-dot"></span> The journey</span>
-        </Reveal>
-        <Reveal delay={90}>
-          <h2 class="mb-14 mt-6 font-display text-4xl font-bold tracking-tight sm:text-5xl">So far.</h2>
-        </Reveal>
-        <div class="relative">
-          <div class="absolute bottom-8 left-[27px] top-8 w-0.5 rounded-full bg-gradient-to-b from-indigo-500 via-violet-400 to-cyan-400" aria-hidden="true"></div>
-          <div class="space-y-5">
-            {milestones.map((milestone, i) => (
-              <Reveal delay={i * 90}>
-                <div class="card-lift flex gap-6 rounded-3xl border border-indigo-100/70 bg-white/80 p-6 backdrop-blur sm:p-8">
-                  <span class="gradient-text relative z-10 flex h-14 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 px-4 font-display text-lg font-bold">
-                    {milestone.year}
-                  </span>
-                  <div>
-                    <h3 class="font-display text-lg font-bold uppercase tracking-tight">{milestone.title}</h3>
-                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{milestone.description}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        <div class="mt-16">
+          <Reveal>
+            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> The journey</span>
+          </Reveal>
+          <Reveal delay={90}>
+            <h2 class="mb-10 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">So far.</h2>
+          </Reveal>
+          <Steps items={milestones} />
         </div>
+        <Reveal delay={100}>
+          <a href="/portfolio" class="group mt-12 inline-flex items-center gap-2 text-sm font-bold text-white">
+            <span class="link-underline">See the proof in the work</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+        </Reveal>
       </section>
 
       <CtaPanel
