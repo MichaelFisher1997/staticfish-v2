@@ -54,7 +54,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, #ff4d6d, transparent 65%)" }} />
-            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-25 blur-3xl" style={{ background: "radial-gradient(circle, #22d3ee, transparent 65%)" }} />
+            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-25 blur-3xl" style={{ background: "radial-gradient(circle, #FF8A3D, transparent 65%)" }} />
           </div>
 
           <div className="relative flex items-center justify-between p-6">
@@ -76,7 +76,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
                   href={item.href}
                   className={`block rounded-2xl px-5 py-4 font-display text-3xl font-bold tracking-tight transition-all duration-300 ${
                     currentPath === item.href
-                      ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-xl shadow-indigo-500/30"
+                      ? "bg-gradient-to-r from-[#ff4d5d] to-[#ff7a3d] text-white shadow-xl shadow-[#ff4d5d]/30"
                       : "text-slate-200 hover:bg-white/10"
                   }`}
                   onClick={() => setIsOpen(false)}

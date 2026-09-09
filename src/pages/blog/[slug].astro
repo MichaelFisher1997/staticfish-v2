@@ -131,7 +131,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 
     <!-- Reading Progress Bar -->
     <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-white/10">
-      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);"></div>
+      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #ff4d5d, #ff8a3d);"></div>
     </div>
 
     <main class="flex-1">
@@ -152,7 +152,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div class="flex flex-wrap items-center gap-2 mb-6" data-reveal style="--reveal-delay: 80ms">
               {post.categories && post.categories.length > 0 && (
                 post.categories.map((cat: string) => (
-                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-indigo-200">
+                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-slate-200">
                     {cat}
                   </span>
                 ))
@@ -172,7 +172,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div data-reveal style="--reveal-delay: 260ms" class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-white/10">
               {post.authorName && (
                 <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4 130%)">
+                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #ff4d5d, #ff7a3d)">
                     {post.authorName.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
@@ -225,17 +225,17 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   prose-headings:font-display prose-headings:tracking-tight prose-headings:text-white
                   prose-headings:scroll-mt-32
                   prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
-                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-indigo-300
+                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-[#ffb3a6]
                   prose-p:text-slate-300 prose-p:leading-[1.85] prose-p:text-[1.1rem]
-                  prose-a:text-indigo-300 prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
+                  prose-a:text-[#ff8a9d] prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
                   prose-img:rounded-2xl
                   prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-100 prose-blockquote:rounded-r-2xl prose-blockquote:py-1
-                  prose-code:text-indigo-200 prose-code:bg-white/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
+                  prose-code:text-[#ffc9b0] prose-code:bg-white/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
                   prose-pre:bg-black/40 prose-pre:text-slate-100 prose-pre:rounded-2xl prose-pre:border prose-pre:border-white/10
-                  prose-li:text-slate-300 prose-li:marker:text-indigo-400
+                  prose-li:text-slate-300 prose-li:marker:text-[#ff4d5d]
                   prose-strong:text-white prose-strong:font-semibold
                   prose-ul:my-6 prose-ol:my-6
-                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-indigo-200 prose-hr:to-transparent prose-hr:my-12">
+                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-white/25 prose-hr:to-transparent prose-hr:my-12">
                   {textBlocks.map((block: any) => (
                     block._type === 'table'
                       ? <TableBlock rows={block.rows} />
@@ -256,9 +256,9 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                       {img.caption && (
                         <figcaption class="mt-4 text-center text-sm text-slate-400">
                           <span class="inline-flex items-center gap-2">
-                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-indigo-300"></span>
+                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-[#ff4d5d]/70"></span>
                             {img.caption}
-                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-indigo-300"></span>
+                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-[#ff4d5d]/70"></span>
                           </span>
                         </figcaption>
                       )}
@@ -309,7 +309,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                 </a>
                 <button
                   class="flex h-11 w-11 items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-110 cursor-pointer"
-                  style="background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4 130%)"
+                  style="background: linear-gradient(135deg, #ff4d5d, #ff7a3d)"
                   onclick="navigator.clipboard.writeText(window.location.href)"
                   aria-label="Copy link"
                 >
@@ -366,10 +366,10 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                         {formatDate(relatedPost.publishedAt)}
                       </span>
                     )}
-                    <h3 class="text-lg font-bold font-display tracking-tight text-white group-hover:text-indigo-200 transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                    <h3 class="text-lg font-bold font-display tracking-tight text-white group-hover:text-[#ffb3a6] transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {relatedPost.title}
                     </h3>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-300 mt-3 group-hover:gap-2.5 transition-all duration-200">
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-[#ff8a9d] mt-3 group-hover:gap-2.5 transition-all duration-200">
                       Read <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>

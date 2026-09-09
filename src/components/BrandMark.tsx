@@ -9,8 +9,8 @@ export function BrandMark({ className = "", markClassName = "", showText = false
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <span
-        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-lg shadow-indigo-500/40 ${markClassName}`}
-        style={{ background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #06b6d4 130%)" }}
+        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-lg shadow-[#ff4d5d]/40 ${markClassName}`}
+        style={{ background: "linear-gradient(135deg, #ff4d5d 0%, #ff7a3d 100%)" }}
         aria-hidden="true"
       >
         <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none" xmlns="http://www.w3.org/2000/svg">

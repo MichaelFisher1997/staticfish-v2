@@ -5,7 +5,7 @@ interface ParticleFieldProps {
   density?: number;
 }
 
-const COLORS = ["#FF4D6D", "#FF8A3D", "#8B5CF6", "#06B6D4", "#22B573"];
+const COLORS = ["#FF4D6D", "#FF8A3D", "#FFC53D", "#ffffff", "#ff8a9d"];
 
 interface Particle {
   x: number;
@@ -90,7 +90,7 @@ export default function ParticleField({ className = "", density = 1 }: ParticleF
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < 130) {
             ctx!.globalAlpha = (1 - d / 130) * 0.28;
-            ctx!.strokeStyle = "#6366f1";
+            ctx!.strokeStyle = "#ff8a7a";
             ctx!.beginPath();
             ctx!.moveTo(a.x, a.y);
             ctx!.lineTo(b.x, b.y);

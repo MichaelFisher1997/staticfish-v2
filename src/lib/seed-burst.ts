@@ -1,7 +1,7 @@
 // Melon "Burst Button" — melon seeds + sparks explode from the click point
 // on primary CTAs. Vanilla canvas, zero framework cost, delegates globally.
 
-const COLORS = ["#FF4D6D", "#FF8A3D", "#FFC53D", "#2FD27D", "#8B5CF6", "#06B6D4"];
+const COLORS = ["#FF4D6D", "#FF8A3D", "#FFC53D", "#ffffff", "#ff8a9d"];
 const SEED = "#2b2135";
 
 interface Bit {

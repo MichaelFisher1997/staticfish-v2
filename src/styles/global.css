@@ -53,9 +53,9 @@
   --color-ink: #0b0b1e;
   --color-ink-soft: #23233d;
   --color-mist: #f4f5ff;
-  --color-glow-indigo: #6366f1;
-  --color-glow-violet: #8b5cf6;
-  --color-glow-cyan: #06b6d4;
+  --color-glow-ember: #ff4d5d;
+  --color-glow-amber: #ff8a3d;
+  --color-glow-bone: #f4f1ea;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -151,7 +151,7 @@
 
     --border: 240 22% 14%;
     --input: 240 22% 14%;
-    --ring: 239 84% 67%;
+    --ring: 4 90% 64%;
 
     --radius: 1rem;
   }
@@ -174,8 +174,8 @@
     @apply bg-background text-foreground overflow-x-hidden;
     background-image:
       radial-gradient(ellipse 70% 45% at 50% -8%, rgba(255, 77, 109, 0.07), transparent 65%),
-      radial-gradient(ellipse 55% 40% at 88% 8%, rgba(6, 182, 212, 0.06), transparent 65%),
-      radial-gradient(ellipse 60% 45% at 8% 12%, rgba(99, 102, 241, 0.08), transparent 65%);
+      radial-gradient(ellipse 55% 40% at 88% 8%, rgba(255, 170, 90, 0.06), transparent 65%),
+      radial-gradient(ellipse 60% 45% at 8% 12%, rgba(255, 77, 93, 0.08), transparent 65%);
     background-attachment: fixed;
   }
 
@@ -186,7 +186,7 @@
   }
 
   ::selection {
-    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    background: #ff4d5d;
     color: white;
   }
 
@@ -197,8 +197,11 @@
     background: #08081a;
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6366f1, #06b6d4);
+    background: #33334d;
     border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff4d5d;
   }
 }
 
@@ -212,14 +215,14 @@
   }
 
   .gradient-text {
-    background: linear-gradient(92deg, #818cf8 0%, #22d3ee 100%);
+    background: linear-gradient(92deg, #ff8a5c 0%, #ff4d5d 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .gradient-text-animated {
-    background: linear-gradient(92deg, #4f46e5, #8b5cf6, #06b6d4, #4f46e5);
+    background: linear-gradient(92deg, #ff4d5d, #ff8a3d, #ffc53d, #ff4d5d);
     background-size: 220% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -293,8 +296,8 @@
   .glow-shadow {
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-      0 20px 60px -12px rgba(99, 102, 241, 0.45),
-      0 8px 24px -8px rgba(6, 182, 212, 0.35);
+      0 20px 60px -12px rgba(255, 77, 93, 0.45),
+      0 8px 24px -8px rgba(255, 170, 90, 0.35);
   }
 
   .gradient-border {
@@ -308,7 +311,7 @@
     inset: -1.5px;
     border-radius: inherit;
     padding: 1.5px;
-    background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.25), rgba(6,182,212,0.6));
+    background: linear-gradient(135deg, rgba(255,77,93,0.6), rgba(255,77,93,0.25), rgba(255,170,90,0.6));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -318,8 +321,8 @@
   .dark-panel {
     background:
       radial-gradient(ellipse 55% 60% at 10% 0%, rgba(255, 77, 109, 0.2), transparent 62%),
-      radial-gradient(ellipse 48% 55% at 90% 12%, rgba(6, 182, 212, 0.15), transparent 62%),
-      radial-gradient(ellipse 75% 60% at 50% 118%, rgba(124, 58, 237, 0.22), transparent 70%),
+      radial-gradient(ellipse 48% 55% at 90% 12%, rgba(255, 170, 90, 0.15), transparent 62%),
+      radial-gradient(ellipse 75% 60% at 50% 118%, rgba(255, 77, 93, 0.22), transparent 70%),
       linear-gradient(180deg, #0a0a22 0%, #060614 100%);
     border: 1px solid rgba(255, 255, 255, 0.11);
     box-shadow:
@@ -332,11 +335,11 @@
   .btn-primary-glow {
     position: relative;
     isolation: isolate;
-    background: linear-gradient(92deg, #4f46e5, #7c3aed 55%, #6366f1);
+    background: linear-gradient(92deg, #e63e4f, #ff7a3d 60%, #ff9a5c);
     background-size: 180% auto;
     box-shadow:
-      0 12px 32px -8px rgba(99, 102, 241, 0.65),
-      0 2px 8px -2px rgba(99, 102, 241, 0.5),
+      0 12px 32px -8px rgba(255, 77, 93, 0.55),
+      0 2px 8px -2px rgba(255, 77, 93, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.25);
     transition: background-position 0.5s ease, transform 0.25s ease, box-shadow 0.3s ease;
     overflow: hidden;
@@ -345,8 +348,8 @@
     background-position: 100% center;
     transform: translateY(-2px);
     box-shadow:
-      0 20px 44px -10px rgba(124, 58, 237, 0.7),
-      0 2px 8px -2px rgba(99, 102, 241, 0.5),
+      0 20px 44px -10px rgba(255, 122, 61, 0.6),
+      0 2px 8px -2px rgba(255, 77, 93, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   .btn-primary-glow:active {
@@ -382,15 +385,15 @@
   /* ---------- Patterns ---------- */
   .grid-pattern {
     background-image:
-      linear-gradient(to right, rgba(99, 102, 241, 0.09) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(99, 102, 241, 0.09) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 30%, transparent 75%);
   }
 
   .dot-pattern {
-    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.22) 1.2px, transparent 1.2px);
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1.2px, transparent 1.2px);
     background-size: 26px 26px;
   }
 
@@ -482,8 +485,8 @@
     pointer-events: none;
     background: radial-gradient(
       480px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(99, 102, 241, 0.14),
-      rgba(6, 182, 212, 0.06) 40%,
+      rgba(255, 77, 93, 0.12),
+      rgba(255, 138, 61, 0.05) 40%,
       transparent 65%
     );
   }
@@ -510,7 +513,7 @@
   }
 
   .shimmer-line {
-    background: linear-gradient(90deg, transparent, rgba(99,102,241,0.5), rgba(6,182,212,0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,77,93,0.5), rgba(255,138,61,0.5), transparent);
     background-size: 200% 100%;
     animation: shimmer 3.2s linear infinite;
   }
@@ -529,9 +532,9 @@
 
   .browser-glow {
     box-shadow:
-      0 0 0 1px rgba(99, 102, 241, 0.15),
+      0 0 0 1px rgba(255, 77, 93, 0.15),
       0 40px 80px -24px rgba(79, 70, 229, 0.45),
-      0 0 120px -30px rgba(6, 182, 212, 0.4);
+      0 0 120px -30px rgba(255, 170, 90, 0.4);
   }
 
   .link-underline {
@@ -545,7 +548,7 @@
     height: 2px;
     width: 100%;
     border-radius: 2px;
-    background: linear-gradient(90deg, #6366f1, #06b6d4);
+    background: linear-gradient(90deg, #ff4d5d, #ff8a3d);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -588,14 +591,14 @@
 
 @layer components {
   .gradient-text-fruity {
-    background: linear-gradient(92deg, #ff4d6d 0%, #ff8a3d 48%, #22b573 100%);
+    background: linear-gradient(92deg, #ff4d5d 0%, #ff8a3d 55%, #ffc53d 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .gradient-text-fruity-animated {
-    background: linear-gradient(92deg, #ff4d6d, #ff8a3d, #22b573, #ff4d6d);
+    background: linear-gradient(92deg, #ff4d5d, #ff8a3d, #ffc53d, #ff4d5d);
     background-size: 220% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -681,13 +684,13 @@
   .bg-abyss {
     background:
       radial-gradient(ellipse 55% 45% at 12% 0%, rgba(255, 77, 109, 0.14), transparent 65%),
-      radial-gradient(ellipse 45% 40% at 88% 20%, rgba(6, 182, 212, 0.12), transparent 65%),
-      radial-gradient(ellipse 70% 55% at 50% 115%, rgba(124, 58, 237, 0.16), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 88% 20%, rgba(255, 170, 90, 0.12), transparent 65%),
+      radial-gradient(ellipse 70% 55% at 50% 115%, rgba(255, 77, 93, 0.16), transparent 70%),
       linear-gradient(180deg, #08081a 0%, #050512 100%);
   }
 
   .gradient-text-bright {
-    background: linear-gradient(92deg, #c4b5fd 0%, #f9a8d4 50%, #67e8f9 100%);
+    background: linear-gradient(92deg, #ffffff 0%, #ffd9c4 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
