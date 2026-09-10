@@ -1,0 +1,74 @@
+---
+import { Bath, Droplets, Flame, ShieldCheck, Wrench } from "lucide-react";
+
+const services = [
+  { icon: Flame, title: "Boiler repair", price: "From £89" },
+  { icon: Droplets, title: "Leak detection", price: "From £120" },
+  { icon: Bath, title: "Bathrooms fitted", price: "Quoted free" },
+];
+---
+
+<div class="bg-[#f6f3ec] font-sans" aria-hidden="true">
+  <div class="flex items-center justify-between gap-3 border-b border-black/[0.06] bg-white px-4 py-2.5">
+    <div class="flex items-center gap-1.5">
+      <span class="flex h-5 w-5 items-center justify-center rounded-md bg-[#0f172a] text-white">
+        <Wrench className="h-2.5 w-2.5" />
+      </span>
+      <span class="text-[10px] font-bold tracking-tight text-slate-900">Northside Plumbing</span>
+    </div>
+    <div class="hidden items-center gap-3 text-[8px] font-semibold text-slate-500 sm:flex">
+      <span>Services</span>
+      <span>Pricing</span>
+      <span>Reviews</span>
+      <span>Contact</span>
+    </div>
+    <span class="rounded-md bg-[#e11d48] px-2 py-1 text-[8px] font-bold text-white">Get a quote</span>
+  </div>
+
+  <div class="grid grid-cols-[1.2fr_0.8fr] items-stretch gap-3 p-4 sm:gap-4 sm:p-5">
+    <div class="flex flex-col justify-center">
+      <p class="text-[7px] font-bold uppercase tracking-[0.16em] text-[#e11d48] sm:text-[8px]">Gas Safe registered · Manchester</p>
+      <p class="mt-1.5 font-display text-[14px] font-bold leading-[1.15] tracking-tight text-slate-900 sm:text-[17px]">
+        Boilers, leaks &amp; bathrooms done properly.
+      </p>
+      <p class="mt-1.5 hidden text-[9px] leading-relaxed text-slate-500 sm:block">
+        Fixed quotes, tidy work and a 12-month guarantee on every job.
+      </p>
+      <div class="mt-2.5 flex items-center gap-1.5 sm:mt-3 sm:gap-2">
+        <span class="rounded-md bg-[#e11d48] px-2 py-1 text-[8px] font-bold text-white sm:px-2.5 sm:py-1.5 sm:text-[9px]">Book a repair</span>
+        <span class="rounded-md border border-slate-300 bg-white px-2 py-1 text-[8px] font-bold text-slate-700 sm:px-2.5 sm:py-1.5 sm:text-[9px]">See prices</span>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden rounded-lg bg-gradient-to-br from-[#1e293b] via-[#111c34] to-[#050816] p-2.5 sm:rounded-xl sm:p-3">
+      <div class="absolute -right-5 -top-5 h-16 w-16 rounded-full bg-[#ff8a3d]/25 blur-xl"></div>
+      <Wrench className="absolute right-1.5 top-1.5 h-8 w-8 text-white/[0.08]" />
+      <div class="relative mt-5 sm:mt-7">
+        <p class="text-[7px] font-bold uppercase tracking-[0.14em] text-[#ff8a9d]">Emergency callout</p>
+        <p class="mt-0.5 text-[10px] font-bold leading-tight text-white sm:text-[11px]">Same-day boiler repair</p>
+        <p class="mt-0.5 text-[8px] text-slate-400">From £89 · no call-out fee</p>
+      </div>
+      <span class="absolute bottom-2 left-2.5 inline-flex items-center gap-1 rounded-full bg-emerald-400/15 px-1.5 py-0.5 text-[7px] font-bold uppercase tracking-widest text-emerald-300">
+        <span class="h-1 w-1 rounded-full bg-emerald-400"></span> Available today
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-2 px-4 pb-4 sm:px-5 sm:pb-5">
+    {services.map(({ icon: Icon, title, price }) => (
+      <div class="rounded-lg border border-black/[0.06] bg-white p-2 sm:p-2.5">
+        <Icon className="h-3 w-3 text-[#e11d48] sm:h-3.5 sm:w-3.5" />
+        <p class="mt-1 text-[8px] font-bold text-slate-900 sm:mt-1.5 sm:text-[9px]">{title}</p>
+        <p class="text-[7px] text-slate-500 sm:text-[8px]">{price}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="flex items-center justify-center gap-2 border-t border-black/[0.06] bg-white px-4 py-2 text-[7px] font-semibold text-slate-500 sm:gap-3 sm:text-[8px]">
+    <span class="inline-flex items-center gap-1"><ShieldCheck className="h-2.5 w-2.5 text-emerald-500" /> Gas Safe registered</span>
+    <span class="h-2.5 w-px bg-slate-200"></span>
+    <span>Fully insured</span>
+    <span class="h-2.5 w-px bg-slate-200"></span>
+    <span>12-month guarantee</span>
+  </div>
+</div>

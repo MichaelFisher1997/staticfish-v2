@@ -50,7 +50,6 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
-  --color-ink: #0b0b1e;
   --color-ink-soft: #23233d;
   --color-mist: #f4f5ff;
   --color-ink: #07070f;
@@ -404,51 +403,21 @@
 
 /* ================= FRUITY LAYER (Melon-inspired) ================= */
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(var(--tilt, -2deg)) scale(1); }
-  25% { transform: rotate(calc(var(--tilt, -2deg) + 2.5deg)) scale(1.05); }
-  50% { transform: rotate(calc(var(--tilt, -2deg) - 2.5deg)) scale(1.05); }
-  75% { transform: rotate(calc(var(--tilt, -2deg) + 1.5deg)) scale(1.04); }
-}
-
 @layer components {
   .gradient-text-fruity {
-    background: linear-gradient(92deg, #ff4d5d 0%, #ff8a3d 55%, #ffc53d 100%);
+    background: linear-gradient(92deg, #ff4d5d 0%, #ff8a3d 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .gradient-text-fruity-animated {
-    background: linear-gradient(92deg, #ff4d5d, #ff8a3d, #ffc53d, #ff4d5d);
+    background: linear-gradient(92deg, #ff4d5d, #ff8a3d, #ff4d5d);
     background-size: 220% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: gradient-pan 7s ease infinite;
-  }
-
-  /* Sticker badges — thick white shell, juicy shadow, playful tilt */
-  .sticker {
-    --tilt: -3deg;
-    --sticker-glow: rgba(255, 77, 109, 0.4);
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 3px solid #ffffff;
-    border-radius: 1.3rem;
-    box-shadow:
-      0 20px 45px -15px var(--sticker-glow),
-      0 2px 6px rgba(11, 11, 30, 0.08);
-    transform: rotate(var(--tilt));
-    transition: transform 0.45s cubic-bezier(0.34, 1.7, 0.4, 1), box-shadow 0.3s ease;
-  }
-  .sticker:hover {
-    transform: rotate(0deg) scale(1.07);
-    animation: wiggle 0.55s ease;
-    box-shadow:
-      0 28px 60px -15px var(--sticker-glow),
-      0 2px 6px rgba(11, 11, 30, 0.08);
   }
 
   /* Seed burst canvas layer */
@@ -477,7 +446,7 @@
   }
 
   .gradient-text-ember {
-    background: linear-gradient(92deg, #ff4d6d 0%, #ff8a3d 55%, #ffc53d 100%);
+    background: linear-gradient(92deg, #ff4d6d 0%, #ff8a3d 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -513,11 +482,5 @@
     background-size: 64px 64px;
     mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 25%, transparent 78%);
     -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 25%, transparent 78%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sticker:hover {
-      animation: none;
-    }
   }
 }
