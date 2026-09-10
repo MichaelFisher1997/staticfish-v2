@@ -4,24 +4,22 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaPanel from '../components/CtaPanel.astro';
-import Reveal from '../components/effects/Reveal.astro';
 import Steps from '../components/Steps.astro';
-import { ArrowRight, Clock, Code, DollarSign, Shield, Zap } from 'lucide-react';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Chip from '../components/ui/Chip.astro';
+import { ArrowRight } from 'lucide-react';
 
 const values = [
   {
-    icon: Zap,
-    title: "Built for Speed",
+    num: "01", title: "Built for Speed",
     description: "Every site I build loads fast. I focus on performance because your visitors won't wait around.",
   },
   {
-    icon: Shield,
-    title: "Simple & Reliable",
+    num: "02", title: "Simple & Reliable",
     description: "I use modern tools with fewer moving parts. Less to go wrong means less to worry about.",
   },
   {
-    icon: DollarSign,
-    title: "Clear Pricing",
+    num: "03", title: "Clear Pricing",
     description: "One price upfront. Set monthly fee. No hourly billing, no surprise charges.",
   }
 ];
@@ -54,10 +52,10 @@ const milestones = [
 ];
 
 const facts = [
-  { icon: Clock, label: "Based in the UK" },
-  { icon: Code, label: "5+ years building" },
-  { icon: Zap, label: "Solo — you talk to me" },
-  { icon: Shield, label: "Replies within 24 hours" },
+  "Based in the UK",
+  "5+ years building",
+  "Solo — you talk to me",
+  "Replies within 24 hours",
 ];
 ---
 
@@ -73,15 +71,10 @@ const facts = [
 
       <!-- Statement -->
       <section class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
-        <Reveal>
           <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Why I started</span>
-        </Reveal>
-        <Reveal delay={90}>
           <h2 class="mt-6 font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
             Too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain.
           </h2>
-        </Reveal>
-        <Reveal delay={160}>
           <div class="mt-8 grid gap-6 leading-relaxed text-slate-400 sm:grid-cols-2">
             <p>
               I've seen too many small businesses overpay for websites that are slow, hard to update, and expensive to maintain. They get locked into contracts for things they don't need.
@@ -90,34 +83,25 @@ const facts = [
               I started Staticfish to offer something simpler: clear business websites, clear pricing, and direct communication with the person building the work. Alongside that, I also build SaaS MVPs for founders who need a real first product.
             </p>
           </div>
-        </Reveal>
-        <Reveal delay={220}>
           <div class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/10 sm:grid-cols-4">
             {facts.map((fact) => (
-              <div class="flex items-center gap-3 bg-[#0a0a20] px-5 py-5">
-                <fact.icon className="h-4 w-4 shrink-0 text-slate-500" />
-                <span class="text-[13px] font-semibold leading-snug text-slate-300">{fact.label}</span>
+              <div class="flex items-center bg-[#0a0a20] px-5 py-5">
+                <span class="text-[13px] font-semibold leading-snug text-slate-300">{fact}</span>
               </div>
             ))}
           </div>
-        </Reveal>
       </section>
 
       <!-- Principles -->
       <section class="border-y border-white/[0.07] bg-white/[0.02] py-16 lg:py-24">
         <div class="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> How I work</span>
-          </Reveal>
-          <Reveal delay={90}>
-            <h2 class="mb-12 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">My principles.</h2>
-          </Reveal>
+          <SectionHeading eyebrow="How I work">
+            <span slot="title">My principles.</span>
+          </SectionHeading>
           <div class="grid gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
             {values.map((value, i) => (
-              <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="sm:px-8 sm:first:pl-0 sm:last:pr-0">
-                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
-                  <value.icon className="h-[18px] w-[18px]" />
-                </span>
+              <div class="sm:px-8 sm:first:pl-0 sm:last:pr-0">
+                <p class="font-display text-sm font-bold tracking-widest text-[#ff4d5d]">{value.num}</p>
                 <h3 class="mt-5 font-display text-lg font-bold tracking-tight text-white">{value.title}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-slate-400">{value.description}</p>
               </div>
@@ -128,43 +112,33 @@ const facts = [
 
       <!-- Founder -->
       <section class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
-        <Reveal>
           <div class="flex flex-col gap-6 border-y border-white/10 py-10 sm:flex-row sm:items-start sm:gap-8">
             <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] font-display text-xl font-bold text-white">
               MF
             </span>
             <div>
               <h3 class="font-display text-2xl font-bold tracking-tight text-white">Michael Fisher</h3>
-              <p class="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Founder & Developer</p>
+              <p class="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Founder & Developer</p>
               <p class="mt-4 max-w-2xl leading-relaxed text-slate-400">
                 I've spent years building everything from straightforward websites to SaaS products and more involved software builds.
                 Staticfish is positioned mainly around business websites, but SaaS MVP work is still a real specialism for me when the right project comes along.
               </p>
               <div class="mt-5 flex flex-wrap gap-2">
                 {expertise.map((skill) => (
-                  <span class="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-slate-300">
-                    {skill}
-                  </span>
+                  <Chip>{skill}</Chip>
                 ))}
               </div>
             </div>
           </div>
-        </Reveal>
         <div class="mt-16">
-          <Reveal>
             <span class="eyebrow-pill"><span class="eyebrow-dot"></span> The journey</span>
-          </Reveal>
-          <Reveal delay={90}>
             <h2 class="mb-10 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">So far.</h2>
-          </Reveal>
           <Steps items={milestones} />
         </div>
-        <Reveal delay={100}>
           <a href="/portfolio" class="group mt-12 inline-flex items-center gap-2 text-sm font-bold text-white">
             <span class="link-underline">See the proof in the work</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-        </Reveal>
       </section>
 
       <CtaPanel

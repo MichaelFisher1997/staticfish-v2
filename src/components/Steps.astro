@@ -1,5 +1,5 @@
 ---
-// Minimal editorial steps: ghost numerals, hairline dividers, no chunky cards.
+// Minimal editorial steps: ghost numerals, hairline dividers.
 interface StepItem {
   marker: string;
   title: string;
@@ -15,13 +15,9 @@ const { items } = Astro.props;
 ---
 
 <div class="border-b border-white/10">
-  {items.map((item, i) => (
-    <div
-      data-reveal
-      style={`--reveal-delay: ${i * 70}ms`}
-      class="group grid gap-3 border-t border-white/10 py-8 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start sm:gap-8 lg:py-9"
-    >
-      <span class="font-display text-4xl font-bold tracking-tight text-white/10 transition-colors duration-300 group-hover:text-[#ff4d6d]/60 lg:text-5xl">
+  {items.map((item) => (
+    <div class="grid gap-3 border-t border-white/10 py-8 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start sm:gap-8 lg:py-9">
+      <span class="font-display text-4xl font-bold tracking-tight text-white/10 lg:text-5xl">
         {item.marker}
       </span>
       <div>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  pad?: "md" | "lg";
+  class?: string;
+}
+
+const { pad = "md", class: className = "" } = Astro.props;
+const pads = {
+  md: "p-7 sm:p-8",
+  lg: "p-8 sm:p-10 lg:p-12",
+};
+---
+
+<div class={`rounded-2xl border border-white/10 bg-white/[0.03] ${pads[pad]} ${className}`}>
+  <slot />
+</div>

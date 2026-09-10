@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import SmoothScroll from '../components/effects/SmoothScroll';
 
 export interface Props {
   title: string;
@@ -40,29 +39,7 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
   </head>
   <body id="top">
     <slot />
-    <SmoothScroll client:load />
     <script>
-      import { initSeedBurst } from '../lib/seed-burst';
-      function initReveal() {
-        const els = document.querySelectorAll("[data-reveal]:not(.is-visible)");
-        if (!("IntersectionObserver" in window)) {
-          els.forEach((el) => el.classList.add("is-visible"));
-          return;
-        }
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-        );
-        els.forEach((el) => observer.observe(el));
-      }
-
       function initNavbar() {
         const bar = document.getElementById("site-nav");
         if (!bar) return;
@@ -125,13 +102,10 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        initReveal();
         initNavbar();
-        initSeedBurst();
         initCurrencyPricing();
       });
       document.addEventListener("astro:after-swap", () => {
-        initReveal();
         initNavbar();
       });
     </script>

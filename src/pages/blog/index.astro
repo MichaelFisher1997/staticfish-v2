@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaPanel from '../../components/CtaPanel.astro';
-import Reveal from '../../components/effects/Reveal.astro';
+import Chip from '../../components/ui/Chip.astro';
 import { sanityClient } from 'sanity:client';
 import { urlFor } from '../../lib/sanity';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
@@ -47,15 +47,12 @@ const recentPosts = posts.slice(1);
 
       <section class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
         {posts.length === 0 && (
-          <Reveal variant="scale">
             <div class="glass rounded-[2rem] py-24 text-center">
               <p class="text-lg text-slate-400">No posts yet. Check back soon!</p>
             </div>
-          </Reveal>
         )}
 
         {featuredPost && (
-          <Reveal variant="scale">
             <a
               href={`/blog/${featuredPost.slug.current}`}
               class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-2"
@@ -74,7 +71,7 @@ const recentPosts = posts.slice(1);
                 </div>
               ) : (
                 <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-white/[0.02]">
-                  <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Article</span>
+                  <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                 </div>
               )}
 
@@ -111,9 +108,7 @@ const recentPosts = posts.slice(1);
                 {featuredPost.categories && featuredPost.categories.length > 0 && (
                   <div class="mb-6 mt-5 flex flex-wrap gap-2">
                     {featuredPost.categories.map((cat: string) => (
-                      <span class="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-bold text-slate-300">
-                        {cat}
-                      </span>
+                      <Chip>{cat}</Chip>
                     ))}
                   </div>
                 )}
@@ -123,13 +118,12 @@ const recentPosts = posts.slice(1);
                 </div>
               </div>
             </a>
-          </Reveal>
         )}
 
         {recentPosts.length > 0 && (
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {recentPosts.map((post: any, i: number) => (
-              <div data-reveal style={`--reveal-delay: ${(i % 3) * 100}ms`}>
+              <div>
                 <a
                   href={`/blog/${post.slug.current}`}
                   class="card-lift group block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur"
@@ -144,12 +138,12 @@ const recentPosts = posts.slice(1);
                     </div>
                   ) : (
                     <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-white/[0.02]">
-                      <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Article</span>
+                      <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                     </div>
                   )}
 
                   <div class="p-6">
-                    <div class="mb-3 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                    <div class="mb-3 flex flex-wrap items-center gap-3 text-xs text-slate-400">
                       {post.publishedAt && (
                         <span class="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
@@ -177,9 +171,7 @@ const recentPosts = posts.slice(1);
                     {post.categories && post.categories.length > 0 && (
                       <div class="flex flex-wrap gap-2">
                         {post.categories.slice(0, 2).map((cat: string) => (
-                          <span class="rounded-full bg-white/[0.06] px-2.5 py-1 text-xs font-bold text-slate-400">
-                            {cat}
-                          </span>
+                          <Chip>{cat}</Chip>
                         ))}
                       </div>
                     )}

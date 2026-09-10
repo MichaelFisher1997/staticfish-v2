@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Button from '../components/ui/Button.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
-import Reveal from '../components/effects/Reveal.astro';
-import Spotlight from '../components/effects/Spotlight';
-import { ArrowUpRight, Clock, Mail } from 'lucide-react';
+import { Clock, Mail } from 'lucide-react';
 
 const includeSteps = [
   { num: "1", title: "Your Business", desc: "What do you do? Who are your customers?" },
@@ -27,11 +26,10 @@ const includeSteps = [
 
       <section class="mx-auto max-w-7xl px-6 pb-24 lg:pb-32">
         <div class="grid items-start gap-8 lg:grid-cols-2">
-          <Reveal variant="left">
             <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-14">
                 <div class="dot-pattern-light absolute inset-0 opacity-40" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);" aria-hidden="true"></div>
                 <div class="relative">
-                  <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl text-white shadow-2xl shadow-[#ff4d5d]/40" style="background: linear-gradient(135deg, #ff4d5d, #ff7a3d)">
+                  <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] text-white">
                     <Mail className="h-7 w-7" />
                   </span>
                   <h2 class="mt-6 font-display text-2xl font-bold tracking-tight text-white">Send an Email</h2>
@@ -46,22 +44,17 @@ const includeSteps = [
                     <Clock className="h-4 w-4 text-emerald-400" />
                     Typical response: Within 24 hours
                   </div>
-                  <a href="mailto:contact@staticfish.co.uk?subject=Project%20enquiry%20—%20Staticfish" class="btn-primary-glow group mt-8 inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-bold text-white">
-                    <span class="relative z-[2] flex items-center gap-2">Compose Email <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
-                  </a>
+                  <Button href="mailto:contact@staticfish.co.uk?subject=Project%20enquiry%20—%20Staticfish" size="lg" class="mt-8">Compose Email</Button>
                 </div>
               </div>
-            </Reveal>
-          </Reveal>
 
           <div>
-            <Reveal delay={110}>
-              <Spotlight client:load className="card-lift rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur lg:p-10">
+              <div class="card-lift rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur lg:p-10">
                 <h3 class="font-display text-xl font-bold tracking-tight text-white">What to include</h3>
                 <p class="mt-1.5 text-sm text-slate-400">Four quick things = a faster, sharper quote.</p>
                 <div class="mt-7 space-y-4">
                   {includeSteps.map((item, i) => (
-                    <div class="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
+                    <div class="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]">
                       <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.07] font-display text-sm font-bold text-white transition-all duration-300 group-hover:border-[#ff4d6d]/50">
                         {item.num}
                       </span>
@@ -78,8 +71,7 @@ const includeSteps = [
                     <strong class="text-white">Not sure which route fits?</strong> That's okay. Tell me about the business problem first and I'll help you decide whether you need a website or something more custom.
                   </p>
                 </div>
-              </Spotlight>
-            </Reveal>
+              </div>
           </div>
         </div>
       </section>

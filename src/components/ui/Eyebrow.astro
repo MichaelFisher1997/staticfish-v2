@@ -1,0 +1,13 @@
+---
+// Section eyebrow: plain caps label with an ember tick. No pill, no badge.
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<p class={`eyebrow-pill ${className}`}>
+  <span class="eyebrow-dot"></span>
+  <slot />
+</p>

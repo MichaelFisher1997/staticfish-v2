@@ -95,10 +95,10 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
           <div className="relative p-8">
             <a
               href="/contact"
-              className="btn-primary-glow flex w-full items-center justify-center gap-2 rounded-2xl px-8 py-4 font-bold text-white"
+              className="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#e11d48] px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-[#f43f52] active:scale-[0.98]"
               onClick={() => setIsOpen(false)}
             >
-              Get a Quote <ArrowRight className="relative z-[2] h-5 w-5" />
+              Get a Quote <ArrowRight className="h-4 w-4" />
             </a>
             <p className="mt-4 text-center text-sm text-slate-400">
               contact@staticfish.co.uk

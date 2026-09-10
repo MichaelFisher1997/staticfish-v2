@@ -34,8 +34,8 @@ const columns = [
 <footer class="bg-abyss noise-overlay relative overflow-hidden border-t border-white/[0.08]">
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#040410]/50 to-[#030309]" aria-hidden="true" />
   <div class="absolute left-1/2 top-0 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff4d6d]/40 to-transparent" aria-hidden="true" />
-  <div class="aurora-blob animate-blob-drift left-[10%] top-[-45%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,77,109,0.2), transparent 65%);" aria-hidden="true" />
-  <div class="aurora-blob animate-blob-drift-2 right-[8%] bottom-[-55%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,170,90,0.12), transparent 65%); animation-delay: -8s;" aria-hidden="true" />
+  <div class="aurora-blob left-[10%] top-[-45%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,77,109,0.2), transparent 65%);" aria-hidden="true" />
+  <div class="aurora-blob right-[8%] bottom-[-55%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,170,90,0.12), transparent 65%);" aria-hidden="true" />
 
   <div class="relative mx-auto max-w-7xl px-6 pb-10 pt-16 lg:pt-20">
     <div class="flex flex-col gap-12 pb-12 lg:flex-row lg:items-start lg:justify-between">
@@ -59,7 +59,7 @@ const columns = [
       <nav class="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-16 lg:gap-20" aria-label="Footer">
         {columns.map((col) => (
           <div>
-            <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">{col.title}</p>
+            <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{col.title}</p>
             <ul class="flex flex-col items-start gap-3">
               {col.links.map((item) => (
                 <li>
@@ -83,11 +83,11 @@ const columns = [
     </p>
 
     <div class="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-7 sm:flex-row">
-      <p class="text-xs text-slate-500">
+      <p class="text-xs text-slate-400">
         © {new Date().getFullYear()} Staticfish. All rights reserved.
       </p>
       <div class="flex items-center gap-5">
-        <p class="text-xs text-slate-500">
+        <p class="text-xs text-slate-400">
           UK based · working worldwide
         </p>
         <a href="#top" class="group inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-400 transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:text-white" aria-label="Back to top">

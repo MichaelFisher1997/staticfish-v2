@@ -1,33 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Card from '../components/ui/Card.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaPanel from '../components/CtaPanel.astro';
-import Reveal from '../components/effects/Reveal.astro';
 import Steps from '../components/Steps.astro';
-import { ArrowRight, Check, Compass, KeyRound, LayoutDashboard, Rocket, Users, Workflow, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 const softwareTypes = [
   {
-    title: 'SaaS MVPs',
+    num: '01', title: 'SaaS MVPs',
     description: 'The core offer here: turning a product idea into a real first version without wasting months building the wrong thing.',
-    icon: Rocket,
   },
   {
-    title: 'Founder Dashboards',
+    num: '02', title: 'Founder Dashboards',
     description: 'Admin areas, internal tools, and operational dashboards that help founders actually run the product from day one.',
-    icon: LayoutDashboard,
   },
   {
-    title: 'Client Portals',
+    num: '03', title: 'Client Portals',
     description: 'Private areas where users can log in, view information, submit data, and work through a service or workflow.',
-    icon: Users,
   },
   {
-    title: 'Product Workflows',
+    num: '04', title: 'Product Workflows',
     description: 'Onboarding flows, approvals, bookings, submissions, and other product logic that turns an idea into a working service.',
-    icon: Workflow,
   }
 ];
 
@@ -35,12 +33,10 @@ const deliveryModels = [
   {
     title: 'Build and handoff',
     description: 'I build the MVP, structure the repo properly, document the setup, and hand it over cleanly to you or your team.',
-    icon: KeyRound,
   },
   {
     title: 'Built and managed in-house',
     description: 'I build and continue handling the technical side so you can focus on customers, sales, and running the business.',
-    icon: Compass,
   }
 ];
 
@@ -91,41 +87,26 @@ const processSteps = [
         <span slot="title">Build the first <span class="gradient-text-bright">real version</span> of the product.</span>
         This is actually what I specialise in most: building SaaS MVPs and early product versions that get an idea into the real world quickly and properly.
         <span slot="extra">
-          <span data-reveal style="--reveal-delay: 260ms" class="mt-4 block max-w-2xl text-base text-slate-400">
+          <span class="mt-4 block max-w-2xl text-base text-slate-400">
             It is not the main service I market on Staticfish, but if you need a real product rather than a brochure site or loose prototype, this is the work I am strongest at.
           </span>
-          <span data-reveal style="--reveal-delay: 320ms" class="mt-8 flex flex-wrap gap-4">
-            <a href="/contact" class="btn-primary-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white">
-              <span class="relative z-[2] flex items-center gap-2">Talk About Your MVP <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></span>
-            </a>
-            <a href="/services" class="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur transition-all duration-300 hover:bg-white/10">
-              Just need a website?
-            </a>
+          <span class="mt-8 flex flex-wrap gap-4">
+            <Button href="/contact" size="lg">Talk About Your MVP</Button>
+            <Button href="/services" variant="secondary" size="lg" arrow={false}>Just need a website?</Button>
           </span>
         </span>
       </PageHero>
 
       <!-- What I build -->
       <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
-        <div class="mb-12 max-w-2xl">
-          <Reveal>
-            <span class="eyebrow-pill"><span class="eyebrow-dot"></span> What I build</span>
-          </Reveal>
-          <Reveal delay={90}>
-            <h2 class="mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">MVP-first <span class="serif-accent font-normal">product work.</span></h2>
-          </Reveal>
-          <Reveal delay={150}>
-            <p class="mt-4 leading-relaxed text-slate-400">
-              The goal is not to build everything at once. The goal is to build the first version that is strong enough to launch, test with real users, and improve from there.
-            </p>
-          </Reveal>
-        </div>
+        <SectionHeading eyebrow="What I build">
+          <span slot="title">MVP-first <span class="serif-accent font-normal">product work.</span></span>
+          The goal is not to build everything at once. The goal is to build the first version that is strong enough to launch, test with real users, and improve from there.
+        </SectionHeading>
         <div class="grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {softwareTypes.map((item, i) => (
-            <div data-reveal style={`--reveal-delay: ${i * 90}ms`} class="border-t border-white/10 pt-8">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
-                <item.icon className="h-[18px] w-[18px]" />
-              </span>
+            <div class="border-t border-white/10 pt-8">
+              <p class="font-display text-sm font-bold tracking-widest text-[#ff4d5d]">{item.num}</p>
               <h3 class="mt-5 font-display text-xl font-bold tracking-tight text-white">{item.title}</h3>
               <p class="mt-2 max-w-md text-sm leading-relaxed text-slate-400">{item.description}</p>
             </div>
@@ -136,28 +117,16 @@ const processSteps = [
       <!-- Delivery -->
       <section class="border-y border-white/[0.07] bg-white/[0.02] py-16 lg:py-24">
         <div class="mx-auto max-w-6xl px-6">
-          <div class="mb-12 max-w-2xl">
-            <Reveal>
-              <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Delivery model</span>
-            </Reveal>
-            <Reveal delay={90}>
-              <h2 class="mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">Two ways I can <span class="serif-accent font-normal">deliver it.</span></h2>
-            </Reveal>
-            <Reveal delay={150}>
-              <p class="mt-4 leading-relaxed text-slate-400">
-                Some founders want the repo handed over once the MVP is ready. Others want me to stay on the technical side while they focus on customers, growth, and running the business.
-              </p>
-            </Reveal>
-          </div>
+          <SectionHeading eyebrow="Delivery model">
+            <span slot="title">Two ways I can <span class="serif-accent font-normal">deliver it.</span></span>
+            Some founders want the repo handed over once the MVP is ready. Others want me to stay on the technical side while they focus on customers, growth, and running the business.
+          </SectionHeading>
           <div class="grid gap-6 lg:grid-cols-2">
             {deliveryModels.map((item, i) => (
-              <div data-reveal style={`--reveal-delay: ${i * 100}ms`} class="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur sm:p-10">
-                <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
-                  <item.icon className="h-[18px] w-[18px]" />
-                </span>
-                <h3 class="mt-5 font-display text-2xl font-bold tracking-tight text-white">{item.title}</h3>
+              <Card>
+                <h3 class="font-display text-2xl font-bold tracking-tight text-white">{item.title}</h3>
                 <p class="mt-2.5 leading-relaxed text-slate-400">{item.description}</p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -167,14 +136,10 @@ const processSteps = [
       <section class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
         <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <Reveal>
               <span class="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-300">
                 Good fit
               </span>
-            </Reveal>
-            <Reveal delay={80}>
               <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white">Good fit if...</h2>
-            </Reveal>
             <ul class="mt-6 divide-y divide-white/10 border-y border-white/10">
               {goodFit.map((item) => (
                 <li class="flex items-start gap-3 py-4">
@@ -185,18 +150,14 @@ const processSteps = [
             </ul>
           </div>
           <div>
-            <Reveal>
               <span class="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
                 Not typical
               </span>
-            </Reveal>
-            <Reveal delay={80}>
               <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white">Probably not the right fit if...</h2>
-            </Reveal>
             <ul class="mt-6 divide-y divide-white/10 border-y border-white/10">
               {notTypical.map((item) => (
                 <li class="flex items-start gap-3 py-4">
-                  <X className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" strokeWidth={3} />
+                  <X className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" strokeWidth={3} />
                   <span class="text-[15px] leading-relaxed text-slate-400">{item}</span>
                 </li>
               ))}
@@ -207,12 +168,8 @@ const processSteps = [
 
       <!-- Process -->
       <section class="mx-auto max-w-4xl px-6 pb-20 lg:pb-28">
-        <Reveal>
           <span class="eyebrow-pill"><span class="eyebrow-dot"></span> Process</span>
-        </Reveal>
-        <Reveal delay={90}>
           <h2 class="mb-10 mt-5 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">How SaaS MVP projects work.</h2>
-        </Reveal>
         <Steps items={processSteps} />
       </section>
 
