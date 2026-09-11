@@ -47,7 +47,7 @@ const projects = [
         <div class="space-y-20 lg:space-y-28">
           {projects.map((item, i) => (
             <article class="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-                <a href={item.url} target="_blank" rel="noopener noreferrer" class="group block overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
+                <a href={item.url} target="_blank" rel="noopener noreferrer" class="group block overflow-hidden rounded-[2rem] border border-bone/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -57,11 +57,11 @@ const projects = [
                 </a>
               <div class={i % 2 === 0 ? "lg:col-span-5" : "lg:col-span-5 lg:order-1"}>
                 <div>
-                  <p class="font-display text-5xl font-bold tracking-tight text-white/10">0{i + 1}</p>
+                  <p class="font-display text-5xl font-bold tracking-tight text-bone/10">0{i + 1}</p>
                 </div>
                 <div>
                   <p class="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{item.category} · {item.role} · {item.year}</p>
-                  <h2 class="mt-2 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  <h2 class="mt-2 font-display text-3xl font-bold tracking-tight text-bone sm:text-4xl">
                     {item.title}
                   </h2>
                   <p class="mt-4 leading-relaxed text-slate-400">
@@ -72,7 +72,7 @@ const projects = [
                       <Chip>{tag}</Chip>
                     ))}
                   </div>
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" class="group/link mt-7 inline-flex items-center gap-2 text-sm font-bold text-white">
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" class="group/link mt-7 inline-flex items-center gap-2 text-sm font-bold text-bone">
                     <span class="link-underline">View live site</span>
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
@@ -83,7 +83,7 @@ const projects = [
         </div>
 
           <Card class="mx-auto mt-24 max-w-xl text-center" pad="lg">
-            <h3 class="font-display text-2xl font-bold tracking-tight text-white">More coming soon</h3>
+            <h3 class="font-display text-2xl font-bold tracking-tight text-bone">More coming soon</h3>
             <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-400">
               As more client work is ready to share publicly, I'll add it here.
             </p>

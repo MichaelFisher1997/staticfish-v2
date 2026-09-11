@@ -132,8 +132,8 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
     <Header />
 
     <!-- Reading Progress Bar -->
-    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-white/10">
-      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #ff4d5d, #ff8a3d);"></div>
+    <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-bone/10">
+      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #2f2fe4, #2f2fe4);"></div>
     </div>
 
     <main class="flex-1">
@@ -141,11 +141,10 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 
         <!-- Hero Section -->
         <div class="bg-abyss noise-overlay pt-36 pb-12 lg:pb-16 relative overflow-hidden">
-          <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
           <Halftone />
           <div class="mx-auto max-w-4xl px-6 relative z-10">
             <div class="mb-8">
-              <a href="/blog" class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-slate-200 backdrop-blur transition-all duration-300 hover:bg-white/10">
+              <a href="/blog" class="inline-flex items-center gap-2 rounded-full border border-bone/15 bg-bone/5 px-5 py-2.5 text-sm font-bold text-slate-200 backdrop-blur transition-all duration-300 hover:bg-bone/10">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Blog
               </a>
@@ -154,14 +153,14 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div class="flex flex-wrap items-center gap-2 mb-6">
               {post.categories && post.categories.length > 0 && (
                 post.categories.map((cat: string) => (
-                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-slate-200">
+                  <span class="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-bone/15 bg-bone/5 text-slate-200">
                     {cat}
                   </span>
                 ))
               )}
             </div>
 
-            <h1 class="text-balance font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6 text-white">
+            <h1 class="text-balance font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.02] mb-6 text-bone">
               {post.title}
             </h1>
 
@@ -171,14 +170,14 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
               </p>
             )}
 
-            <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-white/10">
+            <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-bone/10">
               {post.authorName && (
                 <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #ff4d5d, #ff7a3d)">
+                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-bone font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #2f2fe4, #2f2fe4)">
                     {post.authorName.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
-                    <div class="font-semibold text-white">{post.authorName}</div>
+                    <div class="font-semibold text-bone">{post.authorName}</div>
                     <div class="text-sm text-slate-400">Author</div>
                   </div>
                 </div>
@@ -224,20 +223,20 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <Card class="max-w-3xl mx-auto" pad="lg">
               {(textBlocks.length > 0 || inlineImages.length > 0) && (
                 <div class="article-content prose prose-lg max-w-none
-                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-white
+                  prose-headings:font-display prose-headings:tracking-tight prose-headings:text-bone
                   prose-headings:scroll-mt-32
                   prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
-                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-[#ffb3a6]
+                  prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:text-sand
                   prose-p:text-slate-300 prose-p:leading-[1.85] prose-p:text-[1.1rem]
-                  prose-a:text-[#ff8a9d] prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
+                  prose-a:text-ember prose-a:font-semibold prose-a:no-underline prose-a:hover:underline
                   prose-img:rounded-2xl
                   prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-slate-100 prose-blockquote:rounded-r-2xl prose-blockquote:py-1
-                  prose-code:text-[#ffc9b0] prose-code:bg-white/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
-                  prose-pre:bg-black/40 prose-pre:text-slate-100 prose-pre:rounded-2xl prose-pre:border prose-pre:border-white/10
-                  prose-li:text-slate-300 prose-li:marker:text-[#ff4d5d]
-                  prose-strong:text-white prose-strong:font-semibold
+                  prose-code:text-sand prose-code:bg-bone/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-md prose-code:font-medium prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-black/40 prose-pre:text-slate-100 prose-pre:rounded-2xl prose-pre:border prose-pre:border-bone/10
+                  prose-li:text-slate-300 prose-li:marker:text-ember
+                  prose-strong:text-bone prose-strong:font-semibold
                   prose-ul:my-6 prose-ol:my-6
-                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-white/25 prose-hr:to-transparent prose-hr:my-12">
+                  prose-hr:border-0 prose-hr:h-px prose-hr:bg-gradient-to-r prose-hr:from-transparent prose-hr:via-bone/25 prose-hr:to-transparent prose-hr:my-12">
                   {textBlocks.map((block: any) => (
                     block._type === 'table'
                       ? <TableBlock rows={block.rows} />
@@ -247,7 +246,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   {inlineImages.map((img: any) => (
                     img?.asset?._ref && (
                     <figure class="my-14 not-prose">
-                      <div class="relative overflow-hidden rounded-3xl border border-white/10 shadow-lg">
+                      <div class="relative overflow-hidden rounded-3xl border border-bone/10 shadow-lg">
                         <img
                           src={`${buildImageUrl(img.asset._ref)}?w=900&q=85`}
                           alt={img.alt || ''}
@@ -258,9 +257,9 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                       {img.caption && (
                         <figcaption class="mt-4 text-center text-sm text-slate-400">
                           <span class="inline-flex items-center gap-2">
-                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-[#ff4d5d]/70"></span>
+                            <span class="w-8 h-px bg-gradient-to-r from-transparent to-accent/70"></span>
                             {img.caption}
-                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-[#ff4d5d]/70"></span>
+                            <span class="w-8 h-px bg-gradient-to-l from-transparent to-accent/70"></span>
                           </span>
                         </figcaption>
                       )}
@@ -279,14 +278,14 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <Card class="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div class="text-center sm:text-left">
                 <p class="text-sm text-slate-400 mb-1">Enjoyed this article?</p>
-                <p class="font-bold text-white">Share it with others</p>
+                <p class="font-bold text-bone">Share it with others</p>
               </div>
               <div class="flex items-center gap-3">
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#1DA1F2]"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-bone/10 text-bone transition-all duration-300 hover:bg-[#1DA1F2]"
                   aria-label="Share on Twitter"
                 >
                   <Twitter className="h-5 w-5" />
@@ -295,7 +294,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#0A66C2]"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-bone/10 text-bone transition-all duration-300 hover:bg-[#0A66C2]"
                   aria-label="Share on LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
@@ -304,14 +303,14 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:bg-[#1877F2]"
+                  class="flex h-11 w-11 items-center justify-center rounded-full bg-bone/10 text-bone transition-all duration-300 hover:bg-[#1877F2]"
                   aria-label="Share on Facebook"
                 >
                   <Facebook className="h-5 w-5" />
                 </a>
                 <button
-                  class="flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors duration-300 cursor-pointer"
-                  style="background: linear-gradient(135deg, #ff4d5d, #ff7a3d)"
+                  class="flex h-11 w-11 items-center justify-center rounded-full text-bone transition-colors duration-300 cursor-pointer"
+                  style="background: linear-gradient(135deg, #2f2fe4, #2f2fe4)"
                   onclick="navigator.clipboard.writeText(window.location.href)"
                   aria-label="Copy link"
                 >
@@ -326,7 +325,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
       <!-- Related Articles -->
       {relatedPosts.length > 0 && (
         <section class="py-20 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.03] to-transparent" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bone/[0.03] to-transparent" aria-hidden="true"></div>
           <div class="mx-auto max-w-7xl px-6 relative">
             <div class="flex items-end justify-between mb-12">
               <div>
@@ -342,7 +341,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
               {relatedPosts.map((relatedPost: any) => (
                 <a
                   href={`/blog/${relatedPost.slug.current}`}
-                  class="card-lift group block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur"
+                  class="card-lift group block overflow-hidden rounded-3xl border border-bone/10 bg-bone/[0.03] backdrop-blur"
                 >
                   {relatedPost.mainImage?.asset ? (
                     <div class="aspect-[16/10] relative overflow-hidden">
@@ -353,7 +352,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                       />
                     </div>
                   ) : (
-                    <div class="dot-pattern aspect-[16/10] relative overflow-hidden bg-white/[0.02]">
+                    <div class="dot-pattern aspect-[16/10] relative overflow-hidden bg-bone/[0.02]">
                       <div class="absolute inset-0 flex items-center justify-center">
                         <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                       </div>
@@ -366,10 +365,10 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                         {formatDate(relatedPost.publishedAt)}
                       </span>
                     )}
-                    <h3 class="text-lg font-bold font-display tracking-tight text-white group-hover:text-[#ffb3a6] transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                    <h3 class="text-lg font-bold font-display tracking-tight text-bone group-hover:text-sand transition-colors [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {relatedPost.title}
                     </h3>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-[#ff8a9d] mt-3 group-hover:gap-2.5 transition-all duration-200">
+                    <span class="inline-flex items-center gap-1.5 text-sm font-bold text-ember mt-3 group-hover:gap-2.5 transition-all duration-200">
                       Read <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>

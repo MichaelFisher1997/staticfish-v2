@@ -31,39 +31,34 @@ const columns = [
 ];
 ---
 
-<footer class="bg-abyss noise-overlay relative overflow-hidden border-t border-white/[0.08]">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#040410]/50 to-[#030309]" aria-hidden="true" />
-  <div class="absolute left-1/2 top-0 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ff4d6d]/40 to-transparent" aria-hidden="true" />
-  <div class="aurora-blob left-[10%] top-[-45%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,77,109,0.2), transparent 65%);" aria-hidden="true" />
-  <div class="aurora-blob right-[8%] bottom-[-55%] h-[20rem] w-[20rem]" style="background: radial-gradient(circle, rgba(255,170,90,0.12), transparent 65%);" aria-hidden="true" />
-
+<footer class="relative overflow-hidden border-t border-bone/[0.08] bg-abyss">
   <div class="relative mx-auto max-w-7xl px-6 pb-10 pt-16 lg:pt-20">
     <div class="flex flex-col gap-12 pb-12 lg:flex-row lg:items-start lg:justify-between">
       <div class="max-w-xs">
         <a href="/" aria-label="Staticfish home" class="inline-flex">
-          <BrandLockup textClassName="!text-white" />
+          <BrandLockup textClassName="!text-bone" />
         </a>
         <p class="mt-5 text-sm leading-relaxed text-slate-400">
           Clear business websites for small businesses, with optional editing and selected custom software when needed.
         </p>
         <p class="mt-6 flex items-center gap-2.5 text-sm">
-          <span class="live-badge inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
-          <span class="font-semibold text-slate-300">Available for new projects</span>
+          <span class="inline-block h-2 w-2 rounded-full bg-accent"></span>
+          <span class="font-medium text-slate-300">Available for new projects</span>
         </p>
-        <a href="mailto:contact@staticfish.co.uk" class="group mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-[0_0_28px_-6px_rgba(255,77,109,0.5)]">
+        <a href="mailto:contact@staticfish.co.uk" class="group mt-6 inline-flex items-center gap-2 rounded-full border border-bone/[0.14] px-5 py-2.5 text-sm font-semibold text-bone transition-colors duration-200 hover:border-bone/30 hover:bg-bone/[0.03]">
           contact@staticfish.co.uk
-          <ArrowUpRight className="h-4 w-4 text-slate-400 transition-all duration-300 group-hover:text-white" />
+          <ArrowUpRight className="h-4 w-4 text-slate-400 transition-all duration-300 group-hover:text-bone" />
         </a>
       </div>
 
       <nav class="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-16 lg:gap-20" aria-label="Footer">
         {columns.map((col) => (
           <div>
-            <p class="mb-5 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{col.title}</p>
+            <p class="mb-5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">{col.title}</p>
             <ul class="flex flex-col items-start gap-3">
               {col.links.map((item) => (
                 <li>
-                  <a href={item.href} class="link-underline text-sm text-slate-400 transition-colors hover:text-white">
+                  <a href={item.href} class="link-underline text-sm text-slate-400 transition-colors hover:text-bone">
                     {item.name}
                   </a>
                 </li>
@@ -75,14 +70,14 @@ const columns = [
     </div>
 
     <p
-      class="select-none overflow-hidden text-center font-display text-[16vw] font-bold leading-[0.9] tracking-tight text-white/[0.08] sm:text-[7rem] lg:text-[8.5rem]"
+      class="select-none overflow-hidden text-center font-display text-[16vw] font-bold leading-[0.9] tracking-tight text-bone/[0.08] sm:text-[7rem] lg:text-[8.5rem]"
       style="mask-image: linear-gradient(to bottom, black 55%, transparent 98%); -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 98%);"
       aria-hidden="true"
     >
       <Scramble client:visible text="staticfish" className="cursor-default" />
     </p>
 
-    <div class="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-7 sm:flex-row">
+    <div class="flex flex-col items-center justify-between gap-4 border-t border-bone/10 pt-7 sm:flex-row">
       <p class="text-xs text-slate-400">
         © {new Date().getFullYear()} Staticfish. All rights reserved.
       </p>
@@ -90,7 +85,7 @@ const columns = [
         <p class="text-xs text-slate-400">
           UK based · working worldwide
         </p>
-        <a href="#top" class="group inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-slate-400 transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:text-white" aria-label="Back to top">
+        <a href="#top" class="group inline-flex h-9 w-9 items-center justify-center rounded-full border border-bone/15 bg-bone/[0.04] text-slate-400 transition-all duration-300 hover:border-accent/50 hover:bg-bone/[0.08] hover:text-bone" aria-label="Back to top">
           <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
         </a>
       </div>

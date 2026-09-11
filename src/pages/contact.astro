@@ -29,18 +29,18 @@ const includeSteps = [
             <div class="dark-panel noise-overlay relative overflow-hidden rounded-[2rem] p-10 text-center lg:p-14">
                 <div class="dot-pattern-light absolute inset-0 opacity-40" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);" aria-hidden="true"></div>
                 <div class="relative">
-                  <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] text-white">
+                  <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl border border-bone/10 bg-bone/[0.06] text-bone">
                     <Mail className="h-7 w-7" />
                   </span>
-                  <h2 class="mt-6 font-display text-2xl font-bold tracking-tight text-white">Send an Email</h2>
+                  <h2 class="mt-6 font-display text-2xl font-bold tracking-tight text-bone">Send an Email</h2>
                   <p class="mt-1 text-sm text-slate-400">The best way to reach me</p>
                   <a
                     href="mailto:contact@staticfish.co.uk"
-                    class="mt-7 block break-all font-display text-2xl font-bold tracking-tight text-white transition-colors duration-300 hover:text-[#ff8a9d] sm:text-3xl"
+                    class="mt-7 block break-all font-display text-2xl font-bold tracking-tight text-bone transition-colors duration-300 hover:text-ember sm:text-3xl"
                   >
                     contact@staticfish.co.uk
                   </a>
-                  <div class="mx-auto mt-8 flex w-fit items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm text-slate-300 backdrop-blur">
+                  <div class="mx-auto mt-8 flex w-fit items-center gap-2.5 rounded-full border border-bone/15 bg-bone/5 px-5 py-2.5 text-sm text-slate-300 backdrop-blur">
                     <Clock className="h-4 w-4 text-emerald-400" />
                     Typical response: Within 24 hours
                   </div>
@@ -49,26 +49,26 @@ const includeSteps = [
               </div>
 
           <div>
-              <div class="card-lift rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 backdrop-blur lg:p-10">
-                <h3 class="font-display text-xl font-bold tracking-tight text-white">What to include</h3>
+              <div class="card-lift rounded-[2rem] border border-bone/10 bg-bone/[0.03] p-8 backdrop-blur lg:p-10">
+                <h3 class="font-display text-xl font-bold tracking-tight text-bone">What to include</h3>
                 <p class="mt-1.5 text-sm text-slate-400">Four quick things = a faster, sharper quote.</p>
                 <div class="mt-7 space-y-4">
                   {includeSteps.map((item, i) => (
-                    <div class="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.04]">
-                      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.07] font-display text-sm font-bold text-white transition-all duration-300 group-hover:border-[#ff4d6d]/50">
+                    <div class="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition-all duration-300 hover:border-bone/15 hover:bg-bone/[0.04]">
+                      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-bone/10 bg-bone/[0.07] font-display text-sm font-bold text-bone transition-all duration-300 group-hover:border-accent/50">
                         {item.num}
                       </span>
                       <div>
-                        <p class="font-bold text-white">{item.title}</p>
+                        <p class="font-bold text-bone">{item.title}</p>
                         <p class="mt-0.5 text-sm text-slate-400">{item.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div class="relative mt-7 overflow-hidden rounded-2xl border border-[#ff4d5d]/25 bg-[#ff4d5d]/[0.08] p-6">
+                <div class="relative mt-7 overflow-hidden rounded-2xl border border-accent/30 bg-accent/[0.08] p-6">
                   <div class="dot-pattern-light absolute inset-0 opacity-30" aria-hidden="true"></div>
-                  <p class="relative text-sm leading-relaxed text-[#ffe9e4]">
-                    <strong class="text-white">Not sure which route fits?</strong> That's okay. Tell me about the business problem first and I'll help you decide whether you need a website or something more custom.
+                  <p class="relative text-sm leading-relaxed text-bone">
+                    <strong class="text-bone">Not sure which route fits?</strong> That's okay. Tell me about the business problem first and I'll help you decide whether you need a website or something more custom.
                   </p>
                 </div>
               </div>

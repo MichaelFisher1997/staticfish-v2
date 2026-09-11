@@ -55,7 +55,7 @@ const recentPosts = posts.slice(1);
         {featuredPost && (
             <a
               href={`/blog/${featuredPost.slug.current}`}
-              class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur lg:grid-cols-2"
+              class="card-lift group mb-8 grid overflow-hidden rounded-[2rem] border border-bone/10 bg-bone/[0.03] backdrop-blur lg:grid-cols-2"
             >
               {featuredPost.mainImage?.asset ? (
                 <div class="relative min-h-[280px] overflow-hidden">
@@ -64,19 +64,19 @@ const recentPosts = posts.slice(1);
                     alt={featuredPost.mainImage.alt || featuredPost.title}
                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#050512]/50 via-transparent to-transparent"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#f7f8ff]/50 via-transparent to-transparent"></div>
                   <span class="glass absolute left-5 top-5 rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-200 lg:hidden">
                     Featured
                   </span>
                 </div>
               ) : (
-                <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-white/[0.02]">
+                <div class="dot-pattern relative flex min-h-[280px] items-center justify-center bg-bone/[0.02]">
                   <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                 </div>
               )}
 
               <div class="relative flex flex-col justify-center p-8 lg:p-12">
-                <span class="absolute right-8 top-8 hidden rounded-full bg-gradient-to-r from-[#ff4d5d] to-[#ff7a3d] px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-lg shadow-[#ff4d5d]/30 lg:block">
+                <span class="absolute right-8 top-8 hidden rounded-full bg-gradient-to-r from-accent to-accent px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-bone shadow-lg shadow-[#2f2fe4]/30 lg:block">
                   Featured
                 </span>
 
@@ -95,7 +95,7 @@ const recentPosts = posts.slice(1);
                   )}
                 </div>
 
-                <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white transition-colors group-hover:text-[#ffb3a6] lg:text-4xl">
+                <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-bone transition-colors group-hover:text-sand lg:text-4xl">
                   {featuredPost.title}
                 </h2>
 
@@ -113,7 +113,7 @@ const recentPosts = posts.slice(1);
                   </div>
                 )}
 
-                <div class="flex items-center gap-2 text-sm font-bold text-[#ff8a9d] transition-all duration-200 group-hover:gap-3">
+                <div class="flex items-center gap-2 text-sm font-bold text-ember transition-all duration-200 group-hover:gap-3">
                   Read article <ArrowRight className="h-4 w-4" />
                 </div>
               </div>
@@ -126,7 +126,7 @@ const recentPosts = posts.slice(1);
               <div>
                 <a
                   href={`/blog/${post.slug.current}`}
-                  class="card-lift group block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur"
+                  class="card-lift group block h-full overflow-hidden rounded-3xl border border-bone/10 bg-bone/[0.03] backdrop-blur"
                 >
                   {post.mainImage?.asset ? (
                     <div class="relative aspect-[16/10] overflow-hidden">
@@ -137,7 +137,7 @@ const recentPosts = posts.slice(1);
                       />
                     </div>
                   ) : (
-                    <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-white/[0.02]">
+                    <div class="dot-pattern relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-bone/[0.02]">
                       <span class="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">Article</span>
                     </div>
                   )}
@@ -158,7 +158,7 @@ const recentPosts = posts.slice(1);
                       )}
                     </div>
 
-                    <h3 class="font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-[#ffb3a6] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                    <h3 class="font-display text-xl font-bold tracking-tight text-bone transition-colors group-hover:text-sand [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
                       {post.title}
                     </h3>
 

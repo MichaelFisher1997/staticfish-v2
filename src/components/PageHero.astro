@@ -11,7 +11,6 @@ const centered = align === "center";
 ---
 
 <section class="bg-abyss relative overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24">
-  <div class="hero-grid-faint absolute inset-0" aria-hidden="true" />
   <Halftone />
   <div class={`relative z-10 mx-auto max-w-7xl px-6 ${centered ? "text-center" : ""}`}>
     <div class={centered ? "mx-auto max-w-3xl" : "max-w-3xl"}>
@@ -19,7 +18,7 @@ const centered = align === "center";
         <span class="eyebrow-dot"></span>
         {eyebrow}
       </p>
-      <h1 class="text-balance mt-7 font-display text-5xl font-bold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-7xl">
+      <h1 class="text-balance mt-7 font-display text-5xl font-bold leading-[1.03] tracking-tight text-bone sm:text-6xl lg:text-7xl">
         <slot name="title" />
       </h1>
       <div class="mt-6 text-lg leading-relaxed text-slate-300 sm:text-xl">

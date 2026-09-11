@@ -2,6 +2,7 @@
 import { BrandLockup } from "./BrandMark";
 import MobileMenu from "./MobileMenu";
 import Button from "./ui/Button.astro";
+import { Moon, Sun } from "lucide-react";
 
 const navigation = [
   { name: "Websites", href: "/services" },
@@ -17,15 +18,15 @@ const currentPath = Astro.url.pathname;
   <div class="nav-shell">
     <nav class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
       <a href="/" class="group flex shrink-0 items-center" aria-label="Staticfish home">
-        <BrandLockup markClassName="transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3" />
+        <BrandLockup markClassName="transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3" />
       </a>
 
       <div class="hidden items-center gap-1 md:flex">
         {navigation.map((item) => (
           <a
             href={item.href}
-            class={`nav-link rounded-lg px-4 py-2 text-[15px] font-semibold transition-all duration-300 ${
-              currentPath === item.href ? "active-link text-white" : ""
+            class={`nav-link rounded-full px-4 py-2 text-[15px] font-semibold transition-all duration-300 ${
+              currentPath === item.href ? "active-link text-bone" : ""
             }`}
           >
             {item.name}
@@ -34,6 +35,15 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <div class="flex items-center gap-3">
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-bone/[0.14] text-ash transition-colors duration-200 hover:border-bone/30 hover:text-bone"
+        >
+          <Sun className="theme-toggle-sun h-[18px] w-[18px]" />
+          <Moon className="theme-toggle-moon h-[18px] w-[18px]" />
+        </button>
         <div class="hidden md:block">
           <Button href="/contact" size="sm">Get a Quote</Button>
         </div>

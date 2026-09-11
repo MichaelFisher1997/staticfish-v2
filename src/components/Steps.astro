@@ -14,18 +14,18 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="border-b border-white/10">
+<div class="border-b border-bone/10">
   {items.map((item) => (
-    <div class="grid gap-3 border-t border-white/10 py-8 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start sm:gap-8 lg:py-9">
-      <span class="font-display text-4xl font-bold tracking-tight text-white/10 lg:text-5xl">
+    <div class="grid gap-3 border-t border-bone/10 py-8 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start sm:gap-8 lg:py-9">
+      <span class="font-display text-4xl font-bold tracking-tight text-bone/10 lg:text-5xl">
         {item.marker}
       </span>
       <div>
-        <h3 class="font-display text-xl font-bold tracking-tight text-white">{item.title}</h3>
+        <h3 class="font-display text-xl font-bold tracking-tight text-bone">{item.title}</h3>
         <p class="mt-2 max-w-2xl leading-relaxed text-slate-400">{item.description}</p>
       </div>
       {item.meta && (
-        <span class="w-fit rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-300">
+        <span class="w-fit rounded-full border border-bone/15 bg-bone/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-300">
           {item.meta}
         </span>
       )}
