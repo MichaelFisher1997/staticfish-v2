@@ -31,9 +31,6 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
     <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline>
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.documentElement.classList.add("has-motion");
-      }
       (() => {
         try {
           const stored = localStorage.getItem("staticfish-theme");

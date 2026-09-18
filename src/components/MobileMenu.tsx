@@ -87,7 +87,7 @@ export default function MobileMenu({ navigation, currentPath }: MobileMenuProps)
           <div className="relative border-t border-bone/[0.08] p-6">
             <a
               href="/contact"
-              className="flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-[#eef0fd] transition-colors hover:bg-[#4a4aea] active:scale-[0.99]"
+              className="flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 text-sm font-semibold text-accent-foreground transition-colors hover:brightness-110 active:scale-[0.99]"
               onClick={() => setIsOpen(false)}
             >
               Get a Quote <ArrowRight className="h-4 w-4" />

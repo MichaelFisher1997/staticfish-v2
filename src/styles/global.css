@@ -32,7 +32,7 @@
   --sf-deep: #e2e4fb;
   --sf-ink: #0d0c28;
   --sf-muted: #5c5fae;
-  --sf-faint: #7c7fc0;
+  --sf-faint: #5c5fae;
   --sf-soft: #43468c;
   --sf-border: #c8c9f4;
   --sf-glass: rgba(247, 248, 255, 0.85);
@@ -140,11 +140,11 @@
   --color-faint: var(--sf-faint);
   --color-sand: var(--sf-soft);
   --color-ember: var(--sf-accent-soft);
-  --color-ember-deep: #162e93;
+  --color-ember-deep: #0065f8;
   --color-amber: var(--sf-accent-soft);
 
   --color-glow-ember: var(--sf-accent-soft);
-  --color-glow-amber: #162e93;
+  --color-glow-amber: #0065f8;
   --color-glow-bone: var(--sf-ink);
 
   /* Theme-aware neutral scale so slate-* usages flip with the theme */
@@ -293,8 +293,8 @@
   }
 
   ::selection {
-    background: #2f2fe4;
-    color: #f0f0fd;
+    background: #4300ff;
+    color: #00ffde;
   }
 
   ::-webkit-scrollbar {
@@ -309,7 +309,7 @@
     border: 2px solid var(--sf-page);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2f2fe4;
+    background: #4300ff;
   }
 }
 
@@ -349,9 +349,10 @@
     gap: 0.55rem;
     padding: 0;
     font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--sf-muted);
   }
@@ -361,14 +362,15 @@
     width: 5px;
     height: 5px;
     border-radius: 999px;
-    background: #2f2fe4;
+    background: #4300ff;
   }
 
   .mono-label {
     font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--sf-muted);
   }
@@ -394,7 +396,7 @@
     transition: border-color 0.25s ease;
   }
   .card-lift:hover {
-    border-color: rgba(47, 47, 228, 0.45);
+    border-color: rgba(67, 0, 255, 0.45);
     transform: none;
     box-shadow: none;
   }
@@ -431,20 +433,20 @@
   /* ---------- Patterns ---------- */
   .grid-pattern {
     background-image:
-      linear-gradient(to right, rgba(47, 47, 228, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(47, 47, 228, 0.08) 1px, transparent 1px);
+      linear-gradient(to right, rgba(67, 0, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(67, 0, 255, 0.08) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 30%, transparent 75%);
   }
 
   .dot-pattern {
-    background-image: radial-gradient(circle, rgba(47, 47, 228, 0.2) 1.2px, transparent 1.2px);
+    background-image: radial-gradient(circle, rgba(67, 0, 255, 0.2) 1.2px, transparent 1.2px);
     background-size: 26px 26px;
   }
 
   .dot-pattern-light {
-    background-image: radial-gradient(circle, rgba(47, 47, 228, 0.24) 1.2px, transparent 1.2px);
+    background-image: radial-gradient(circle, rgba(67, 0, 255, 0.24) 1.2px, transparent 1.2px);
     background-size: 26px 26px;
   }
 
@@ -468,7 +470,7 @@
     width: 100%;
     transform-origin: left;
     transform: scaleX(0);
-    background: #2f2fe4;
+    background: #4300ff;
     z-index: 100;
     pointer-events: none;
   }
@@ -514,7 +516,7 @@
   /* ---------- Focus visibility ---------- */
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid #2f2fe4;
+    outline: 2px solid #4300ff;
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -532,7 +534,7 @@
     position: absolute;
     inset: -4px;
     border-radius: 999px;
-    border: 2px solid rgba(47, 47, 228, 0.5);
+    border: 2px solid rgba(67, 0, 255, 0.5);
     animation: pulse-ring 2.2s ease-out infinite;
   }
 
@@ -546,7 +548,7 @@
     bottom: -3px;
     height: 1px;
     width: 100%;
-    background: #2f2fe4;
+    background: #4300ff;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -567,7 +569,7 @@
   .halftone-field {
     background-image: radial-gradient(
       circle,
-      var(--ht-color, rgba(47, 47, 228, 0.25)) var(--ht-dot, 1.5px),
+      var(--ht-color, rgba(67, 0, 255, 0.25)) var(--ht-dot, 1.5px),
       transparent calc(var(--ht-dot, 1.5px) + 0.6px)
     );
     background-size: var(--ht-gap, 14px) var(--ht-gap, 14px);
@@ -619,7 +621,7 @@
     height: 4px;
     border-radius: 999px;
     transform: translateX(-50%);
-    background: #2f2fe4;
+    background: #4300ff;
   }
   #site-nav .brand-word {
     color: var(--sf-ink);

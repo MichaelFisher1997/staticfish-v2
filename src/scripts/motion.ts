@@ -43,32 +43,6 @@ export function initScrollMotion(): void {
           0.35,
         );
 
-      const hero = document.querySelector("[data-hero]");
-      if (hero) {
-        gsap.to("[data-hero-copy]", {
-          yPercent: -14,
-          opacity: 0.1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        gsap.to("[data-hero-cue]", {
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: "35% top",
-            scrub: true,
-          },
-        });
-      }
-
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
         gsap.fromTo(
           element,

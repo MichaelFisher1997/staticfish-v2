@@ -164,18 +164,18 @@ export default function TopographyBackground() {
     gl.uniform1f(uniforms.uThickness, 0.006);
     gl.uniform1f(uniforms.uScale, 1.6);
     gl.uniform1f(uniforms.uElevScale, 7.5);
-    gl.uniform1f(uniforms.uMouseStrength, 0.08);
+    gl.uniform1f(uniforms.uMouseStrength, 0.02);
 
     const applyTheme = (dark: boolean) => {
       if (dark) {
-        gl.uniform1f(uniforms.uOpacity, 0.16);
-        gl.uniform1f(uniforms.uGlow, 0.12);
+        gl.uniform1f(uniforms.uOpacity, 0.08);
+        gl.uniform1f(uniforms.uGlow, 0.04);
         gl.uniform1f(uniforms.uContrast, 3.4);
         gl.uniform3f(uniforms.uLow, 0.102, 0.098, 0.325);
         gl.uniform3f(uniforms.uMid, 0.086, 0.18, 0.576);
       } else {
-        gl.uniform1f(uniforms.uOpacity, 0.32);
-        gl.uniform1f(uniforms.uGlow, 0.1);
+        gl.uniform1f(uniforms.uOpacity, 0.1);
+        gl.uniform1f(uniforms.uGlow, 0.03);
         gl.uniform1f(uniforms.uContrast, 3.2);
         gl.uniform3f(uniforms.uLow, 0.784, 0.788, 0.957);
         gl.uniform3f(uniforms.uMid, 0.663, 0.671, 0.933);
@@ -216,7 +216,7 @@ export default function TopographyBackground() {
 
     const draw = (time: number) => {
       const morphAmount = 3;
-      const speed = 0.16;
+      const speed = 0.04;
       const morphSpeed = 0.05;
       for (let group = 0; group < 4; group += 1) {
         const data = ctrlData[group];

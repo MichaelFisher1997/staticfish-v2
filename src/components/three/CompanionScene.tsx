@@ -120,7 +120,7 @@ function Sparks({
   const material = useMemo(
     () =>
       new THREE.MeshBasicMaterial({
-        color: new THREE.Color("#2f2fe4"),
+        color: new THREE.Color("#a9abee"),
         transparent: true,
         opacity: 0.6,
         depthWrite: false,
@@ -266,54 +266,6 @@ function Shockwave({
   return <mesh ref={meshRef} geometry={geometry} material={material} visible={false} />;
 }
 
-interface Waypoint {
-  p: number;
-  x: number;
-  y: number;
-  z: number;
-  scale: number;
-  yaw: number;
-  pitch: number;
-}
-
-const WAYPOINTS: Waypoint[] = [
-  { p: 0.0, x: 1.7, y: 0.05, z: 0, scale: 1, yaw: -0.55, pitch: 0.06 },
-  { p: 0.13, x: 3.0, y: -2.75, z: -0.6, scale: 0.7, yaw: -0.1, pitch: -0.15 },
-  { p: 0.28, x: -3.0, y: -2.8, z: -0.6, scale: 0.7, yaw: 0.4, pitch: -0.15 },
-  { p: 0.44, x: 2.6, y: -2.75, z: -0.6, scale: 0.68, yaw: 0.9, pitch: -0.15 },
-  { p: 0.57, x: 2.8, y: -2.8, z: -0.6, scale: 0.65, yaw: 1.3, pitch: -0.2 },
-  { p: 0.68, x: 1.6, y: -3.0, z: -0.6, scale: 0.62, yaw: 1.6, pitch: -0.3 },
-  { p: 0.8, x: 0.8, y: -3.5, z: -0.6, scale: 0.58, yaw: 1.9, pitch: -0.4 },
-  { p: 0.9, x: 0.4, y: -3.8, z: -0.6, scale: 0.55, yaw: 2.1, pitch: -0.4 },
-  { p: 1.0, x: 0.2, y: -4.0, z: -0.6, scale: 0.52, yaw: 2.3, pitch: -0.35 },
-];
-
-function sampleWaypoints(progress: number): Waypoint {
-  if (progress <= WAYPOINTS[0].p) return WAYPOINTS[0];
-  const last = WAYPOINTS[WAYPOINTS.length - 1];
-  if (progress >= last.p) return last;
-
-  for (let i = 0; i < WAYPOINTS.length - 1; i += 1) {
-    const from = WAYPOINTS[i];
-    const to = WAYPOINTS[i + 1];
-    if (progress >= from.p && progress <= to.p) {
-      const span = Math.max(0.0001, to.p - from.p);
-      const t = THREE.MathUtils.smoothstep((progress - from.p) / span, 0, 1);
-      return {
-        p: progress,
-        x: THREE.MathUtils.lerp(from.x, to.x, t),
-        y: THREE.MathUtils.lerp(from.y, to.y, t),
-        z: THREE.MathUtils.lerp(from.z, to.z, t),
-        scale: THREE.MathUtils.lerp(from.scale, to.scale, t),
-        yaw: THREE.MathUtils.lerp(from.yaw, to.yaw, t),
-        pitch: THREE.MathUtils.lerp(from.pitch, to.pitch, t),
-      };
-    }
-  }
-
-  return last;
-}
-
 const MODEL_URL = "/models/fish.glb";
 const MODEL_YAW_OFFSET = Math.PI * 0.5;
 const MODEL_TARGET_SIZE = 3.3;
@@ -345,7 +297,6 @@ function measureBounds(root: THREE.Object3D): THREE.Box3 {
 function FishModel({ reduced }: { reduced: boolean }) {
   const gltf = useLoader(GLTFLoader, MODEL_URL);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
-
   const model = useMemo(() => {
     const scene = cloneSkinned(gltf.scene);
 
@@ -367,7 +318,7 @@ function FishModel({ reduced }: { reduced: boolean }) {
           }
           cloned.metalness = 0.1;
           cloned.roughness = 0.5;
-          cloned.emissive = new THREE.Color("#0a0a35");
+          cloned.emissive = new THREE.Color("#03122e");
           cloned.emissiveIntensity = 0.3;
           cloned.envMapIntensity = 0.6;
           cloned.transparent = false;
@@ -485,16 +436,19 @@ function Swimmer({
   );
 
   useEffect(() => {
-    window.addEventListener("pointerdown", handlePointerDown);
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    if (reduced) return;
+    const canvas = gl.domElement;
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove, { passive: true });
     return () => {
-      window.removeEventListener("pointerdown", handlePointerDown);
-      window.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerdown", handlePointerDown);
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.style.cursor = "";
     };
-  }, [handlePointerDown, handlePointerMove]);
+  }, [gl, reduced, handlePointerDown, handlePointerMove]);
 
   useFrame((state, delta) => {
-    const dt = Math.min(delta, 0.05);
+    const dt = reduced ? 1 : Math.min(delta, 0.05);
     const time = reduced ? 0 : state.clock.elapsedTime;
     const p = pointer.current;
 
@@ -517,68 +471,41 @@ function Swimmer({
     const pulse =
       1 + Math.sin(spinProgress * Math.PI) * 0.08 * (spinProgress < 1 ? 1 : 0);
 
-    const doc = document.documentElement;
-    const scrollMax = Math.max(1, doc.scrollHeight - window.innerHeight);
-    const progress = reduced
-      ? 0
-      : THREE.MathUtils.clamp(window.scrollY / scrollMax, 0, 1);
-    const waypoint = sampleWaypoints(progress);
-
-    const size = state.size;
-    const aspect = size.width / Math.max(1, size.height);
-    const compact = size.width < 768 || aspect < 1.15;
-    const mid = !compact && (size.width < 1200 || aspect < 1.3);
-    const fadeToEdge = compact
-      ? THREE.MathUtils.clamp(1 - (progress - 0.08) / 0.12, 0, 1)
-      : 1;
-
     const root = rootRef.current;
     if (root) {
-      let targetX: number;
-      let targetY: number;
-      let targetZ: number;
-      let targetScale: number;
+      const targetX = reduced ? 0 : p.x * 0.08;
+      const targetY = reduced ? 0 : Math.sin(time * 0.8) * 0.04;
+      const targetScale = Math.min(1.15, state.viewport.width / 4.2) * pulse;
 
-      if (compact) {
-        targetX = 0.72 + p.x * 0.12;
-        targetY = -2.4 + Math.sin(time * 0.8) * 0.04;
-        targetZ = -0.3;
-        targetScale = 0.44 * fadeToEdge * pulse;
-      } else if (mid) {
-        targetX = waypoint.x * 0.9 + p.x * 0.2;
-        targetY = waypoint.y + Math.sin(time * 0.8) * 0.05 + p.y * 0.12;
-        targetZ = waypoint.z;
-        targetScale = waypoint.scale * 0.62 * pulse;
+      if (reduced) {
+        root.position.set(0, 0, 0);
+        root.scale.setScalar(targetScale);
       } else {
-        targetX = waypoint.x + p.x * 0.32;
-        targetY = waypoint.y + Math.sin(time * 0.8) * 0.06 + p.y * 0.16;
-        targetZ = waypoint.z;
-        targetScale = waypoint.scale * pulse;
+        root.position.x = THREE.MathUtils.damp(root.position.x, targetX, 3.2, dt);
+        root.position.y = THREE.MathUtils.damp(root.position.y, targetY, 3.2, dt);
+        root.scale.setScalar(targetScale);
       }
-
-      root.position.x = THREE.MathUtils.damp(root.position.x, targetX, 3.2, dt);
-      root.position.y = THREE.MathUtils.damp(root.position.y, targetY, 3.2, dt);
-      root.position.z = THREE.MathUtils.damp(root.position.z, targetZ, 3.2, dt);
-      root.scale.setScalar(THREE.MathUtils.damp(root.scale.x, targetScale, 4, dt));
     }
 
     const aim = aimRef.current;
-    if (aim) {
+    if (aim && reduced) {
+      aim.rotation.set(0.06, -0.55, 0);
+    } else if (aim) {
       aim.rotation.y = THREE.MathUtils.damp(
         aim.rotation.y,
-        waypoint.yaw + Math.sin(time * 0.35) * 0.06 + p.x * 0.28,
+        -0.55 + Math.sin(time * 0.35) * 0.04 + p.x * 0.1,
         3.5,
         dt,
       );
       aim.rotation.x = THREE.MathUtils.damp(
         aim.rotation.x,
-        waypoint.pitch + Math.sin(time * 0.45) * 0.04 - p.y * 0.16,
+        0.06 + Math.sin(time * 0.45) * 0.02 - p.y * 0.06,
         3.5,
         dt,
       );
       aim.rotation.z = THREE.MathUtils.damp(
         aim.rotation.z,
-        Math.sin(time * 0.3) * 0.05 + p.x * 0.08,
+        Math.sin(time * 0.3) * 0.02,
         3.5,
         dt,
       );
@@ -631,14 +558,22 @@ export default function CompanionScene() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper || reduced) return;
     const onPointerMove = (event: PointerEvent) => {
-      const x = (event.clientX / window.innerWidth) * 2 - 1;
-      const y = -((event.clientY / window.innerHeight) * 2 - 1);
+      const rect = wrapper.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
       pointer.current.set(x, y);
     };
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onPointerMove);
-  }, []);
+    const onPointerLeave = () => pointer.current.set(0, 0);
+    wrapper.addEventListener("pointermove", onPointerMove, { passive: true });
+    wrapper.addEventListener("pointerleave", onPointerLeave);
+    return () => {
+      wrapper.removeEventListener("pointermove", onPointerMove);
+      wrapper.removeEventListener("pointerleave", onPointerLeave);
+    };
+  }, [reduced]);
 
   return (
     <div ref={wrapperRef} className="h-full w-full">

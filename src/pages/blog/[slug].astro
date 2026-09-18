@@ -133,7 +133,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
 
     <!-- Reading Progress Bar -->
     <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-bone/10">
-      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #2f2fe4, #2f2fe4);"></div>
+      <div id="reading-progress" class="h-full transition-all duration-150" style="width: 0%; background: linear-gradient(90deg, #4300ff, #4300ff);"></div>
     </div>
 
     <main class="flex-1">
@@ -173,7 +173,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
             <div class="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-bone/10">
               {post.authorName && (
                 <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-bone font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #2f2fe4, #2f2fe4)">
+                  <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-bone font-bold text-sm shadow-lg" style="background: linear-gradient(135deg, #4300ff, #4300ff)">
                     {post.authorName.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
@@ -310,7 +310,7 @@ const { processedBlocks: textBlocks, inlineImages } = processBodyBlocks(post.bod
                 </a>
                 <button
                   class="flex h-11 w-11 items-center justify-center rounded-full text-bone transition-colors duration-300 cursor-pointer"
-                  style="background: linear-gradient(135deg, #2f2fe4, #2f2fe4)"
+                  style="background: linear-gradient(135deg, #4300ff, #4300ff)"
                   onclick="navigator.clipboard.writeText(window.location.href)"
                   aria-label="Copy link"
                 >
