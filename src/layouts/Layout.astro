@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import TopographyBackground from '../components/backgrounds/TopographyBackground';
 
 export interface Props {
   title: string;
@@ -26,8 +27,23 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#eef0fd" />
     <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("staticfish-theme");
+          const dark = stored
+            ? stored === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+    <noscript><style>[data-reveal], [data-reveal-item], [data-hero-line] { opacity: 1 !important; } .marquee-track { animation: none; }</style></noscript>
     <title>{title}</title>
     <script
       src="https://chattybox.ai/widget.js"
@@ -36,9 +52,23 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
       async
     ></script>
   </head>
-  <body>
+  <body id="top">
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <TopographyBackground client:only="react" />
     <slot />
     <script>
+      import { initScrollMotion } from "../scripts/motion";
+
+      function initNavbar() {
+        const bar = document.getElementById("site-nav");
+        if (!bar) return;
+        const onScroll = () => {
+          bar.classList.toggle("is-scrolled", window.scrollY > 24);
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
       function initCurrencyPricing() {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -90,7 +120,54 @@ const chattyboxKey = import.meta.env.PUBLIC_CHATTYBOX_KEY;
         });
       }
 
-      document.addEventListener("DOMContentLoaded", initCurrencyPricing);
+      function initScrollProgress() {
+        const bar = document.getElementById("scroll-progress");
+        if (!bar) return;
+        let ticking = false;
+        const update = () => {
+          ticking = false;
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+          bar.style.transform = `scaleX(${progress})`;
+        };
+        const onScroll = () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll, { passive: true });
+        update();
+      }
+
+      function initThemeToggle() {
+        const button = document.getElementById("theme-toggle");
+        if (!button || button.dataset.themeReady) return;
+        button.dataset.themeReady = "1";
+        button.addEventListener("click", () => {
+          const dark = document.documentElement.classList.toggle("dark");
+          try {
+            localStorage.setItem("staticfish-theme", dark ? "dark" : "light");
+          } catch {
+            // ignore
+          }
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", dark ? "#080616" : "#eef0fd");
+          window.dispatchEvent(new CustomEvent("themechange", { detail: { dark } }));
+        });
+      }
+
+      function initSite() {
+        initNavbar();
+        initCurrencyPricing();
+        initScrollProgress();
+        initThemeToggle();
+        initScrollMotion();
+      }
+
+      document.addEventListener("DOMContentLoaded", initSite);
+      document.addEventListener("astro:after-swap", initSite);
     </script>
   </body>
 </html>

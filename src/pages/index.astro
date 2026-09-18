@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Button } from '../components/ui/button';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { SeigaihaBackground, WaveBands, JapaneseWaveCorner } from '../components/WaveArt';
-import { BrandMark } from '../components/BrandMark';
+import CompanionScene from '../components/three/CompanionScene';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import { ArrowRight, ArrowUpRight, ShieldCheck, UserRound } from 'lucide-react';
 
 const projects = [
   {
@@ -13,16 +13,18 @@ const projects = [
     category: "Community Website",
     image: "/portfolio-redot.png",
     url: "https://www.redotengine.org/",
-    role: "Structure + frontend",
+    role: "Website design and development",
     year: "2026",
+    blurb: "A large content-heavy site rebuilt for speed and clarity.",
   },
   {
     title: "Chattybox AI",
     category: "Custom Platform",
     image: "/portfolio-chattybox.png",
     url: "https://chattybox.ai/",
-    role: "SaaS product build",
+    role: "Custom software design and development",
     year: "2026",
+    blurb: "A custom AI chat platform, designed and built as a complete online product.",
   }
 ];
 
@@ -33,260 +35,259 @@ const offers = [
     price: "£599 upfront",
     desc: "A clear website for your services, pricing, FAQs, and contact details.",
     href: "/services",
+    points: ["Your essential pages", "Mobile-friendly design", "Search engine setup"],
   },
   {
     num: "02",
     title: "Editable Content Add-On",
     price: "From +£800",
-    desc: "Adds a CMS so you can edit pages, services, pricing, testimonials, and blog or news posts yourself.",
+    desc: "Update your pages, prices, photos, and news yourself, with an editing system and guidance on how to use it.",
     href: "/pricing#add-ons",
+    points: ["Simple editing tools", "Editable pages and posts", "Training included"],
   },
   {
     num: "03",
     title: "Custom Software",
     price: "Quoted separately",
-    desc: "For portals, dashboards, workflows, and bespoke tools when a standard site is not enough.",
+    desc: "For customer portals, dashboards, and tools that help you run your business when a standard website is not enough.",
     href: "/custom-software",
+    points: ["New online products", "Customer portals", "Business tools"],
   }
+];
+
+const whyPoints = [
+  { num: "01", title: "Fixed price for the agreed scope", desc: "You get a clear quote before work starts. If you want to add more later, I quote that separately." },
+  { num: "02", title: "Your business, your style", desc: "We start with your customers, your goals, and the way you want to come across. Your website should feel right for your business, not look like mine." },
+  { num: "03", title: "Clear guidance along the way", desc: "You do not need a technical brief to get started. I explain the options in plain language and help you decide what you actually need." },
 ];
 ---
 
 <Layout title="Staticfish | Business Websites for Small Businesses" description="Clear business websites for small businesses, with optional editing and selected custom software when needed.">
-  <div class="min-h-screen flex flex-col bg-background">
+  <div class="min-h-screen flex flex-col">
     <Header />
 
-    <main class="flex-1">
-      <section class="pt-32 pb-20 lg:pb-32 relative overflow-hidden">
-        <SeigaihaBackground opacity={0.15} fadeBottom />
-        <JapaneseWaveCorner position="bottom-right" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-12 gap-12 items-end">
-            <div class="lg:col-span-7">
-              <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
-                Business Websites
+    <main class="relative z-10 flex-1">
+      <!-- ============ HERO ============ -->
+      <section data-hero class="relative">
+        <div class="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-16 pt-32 lg:grid-cols-2 lg:gap-10 lg:pb-24 lg:pt-36">
+          <div data-hero-copy class="min-w-0 max-w-2xl">
+            <div data-hero-meta class="flex items-center gap-4">
+              <p class="mono-label flex items-center gap-2.5 text-ash">
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent"></span>Business websites — UK based
               </p>
-
-              <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground mb-8">
-                Websites that help
-                <span class="block">small businesses</span>
-                <span class="block text-accent">look credible.</span>
-              </h1>
-
-              <p class="text-lg text-muted-foreground max-w-xl leading-relaxed mb-10">
-                I build clear, fast websites that explain what you do, what it costs, and how people can get in touch.
-              </p>
-
-              <div class="flex flex-wrap items-center gap-6">
-                <Button className="rounded-none px-8 h-12 font-semibold">
-                  <a href="/pricing" class="flex items-center gap-2">
-                    See Pricing <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-                <a href="/custom-software" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Need Something More Custom?
-                </a>
-              </div>
+              <span class="h-px flex-1 bg-bone/[0.08]" aria-hidden="true"></span>
             </div>
 
-            <div class="lg:col-span-5">
-              <div class="spec-panel overflow-hidden">
-                <div class="flex items-center justify-between border-b border-border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-                  <span>Staticfish / 01</span>
-                  <span>Web Spec</span>
-                </div>
-                <div class="fine-grid relative p-6 lg:p-8">
-                  <div class="absolute right-5 top-5">
-                    <BrandMark markClassName="bg-background" />
-                  </div>
-                  <img
-                    src="/illustrations/hero-abstract.svg"
-                    alt="Abstract website illustration"
-                    class="w-full h-auto"
-                  />
-                </div>
-                <div class="grid grid-cols-3 divide-x divide-border border-t border-border text-center text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                  <span class="px-3 py-3">Fast</span>
-                  <span class="px-3 py-3">Clear</span>
-                  <span class="px-3 py-3">Fixed</span>
-                </div>
+            <h1 class="mt-8 text-balance text-5xl font-semibold leading-[1.02] tracking-tight text-bone sm:text-6xl">
+              <span class="block overflow-hidden pb-1"><span data-hero-line class="block">Your business,</span></span>
+              <span class="block overflow-hidden pb-1"><span data-hero-line class="block text-ember">clearer online.</span></span>
+            </h1>
+
+            <p data-hero-meta class="mt-7 max-w-xl text-lg leading-relaxed text-ash">
+              I build websites that help people understand what you offer and get in touch. Designed around your business, with clear pricing and guidance from start to finish.
+            </p>
+
+            <div data-hero-meta class="mt-9 flex flex-wrap items-center gap-3">
+              <Button href="/pricing" size="lg">See Pricing</Button>
+              <Button href="/contact" variant="secondary" size="lg" arrow={false}>Talk About Your Project</Button>
+            </div>
+
+            <div data-hero-meta class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-bone/[0.08] pt-6">
+              <div class="flex items-center gap-2 text-sm font-medium text-sand">
+                <UserRound className="h-4 w-4 text-ember" />
+                Work directly with me
               </div>
+              <div class="flex items-center gap-2 text-sm font-medium text-sand">
+                <ShieldCheck className="h-4 w-4 text-ember" />
+                Price agreed before we start
+              </div>
+            </div>
+          </div>
+
+          <div data-hero-meta class="min-w-0 w-full">
+            <div class="h-56 w-full sm:h-72 lg:h-96">
+              <CompanionScene client:only="react" />
             </div>
           </div>
         </div>
       </section>
 
-      <section class="border-y border-foreground bg-foreground text-background">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="grid grid-cols-1 md:grid-cols-3 divide-y divide-background/15 md:divide-x md:divide-y-0">
-            <div class="py-8 md:pr-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Starting Price</div>
-              <div class="text-5xl font-bold font-display tracking-tighter" data-price-gbp="599">£599</div>
-              <div class="text-sm text-background/60 mt-1">Upfront for agreed scope</div>
-            </div>
-            <div class="py-8 md:px-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Typical Build</div>
-              <div class="text-5xl font-bold font-display tracking-tighter">1-3 Weeks</div>
-              <div class="text-sm text-background/60 mt-1">From direction to launch</div>
-            </div>
-            <div class="py-8 md:pl-8">
-              <div class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Ongoing Care</div>
-              <div class="text-5xl font-bold font-display tracking-tighter" data-currency-gbp="25" data-currency-suffix="/mo">£25/mo</div>
-              <div class="text-sm text-background/60 mt-1">Hosting, backups, upkeep</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 border-t border-border">
-        <div class="container mx-auto max-w-7xl px-6">
-          <div class="max-w-3xl mb-16">
-            <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">What I Offer</span>
-            <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">One clear core offer.</h2>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Most businesses need a straightforward website first. Editing is optional, and custom software only comes into the picture when a normal website is not enough.
+      <!-- ============ WORK ============ -->
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div data-reveal class="mb-12 flex flex-wrap items-end justify-between gap-6">
+          <div class="max-w-xl">
+            <Eyebrow>Selected work</Eyebrow>
+            <h2 class="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-bone sm:text-5xl">
+              Recent work<span class="text-ember">.</span>
+            </h2>
+            <p class="mt-5 leading-relaxed text-ash">
+              A community website and a custom software platform, each built for a different audience. These are larger projects than the standard business website package.
             </p>
           </div>
-
-          <div class="border-t border-border">
-            {offers.map((offer) => (
-              <a
-                href={offer.href}
-                class="editorial-card group block border-b border-border py-10 hover:bg-secondary/20 transition-colors"
-              >
-                <div class="grid grid-cols-12 gap-6 items-start">
-                  <div class="col-span-12 sm:col-span-1">
-                    <span class="inline-flex h-8 w-8 items-center justify-center border border-border text-xs font-bold text-accent">{offer.num}</span>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <h3 class="text-2xl font-bold font-display">{offer.title}</h3>
-                  </div>
-                  <div class="col-span-12 sm:col-span-4">
-                    <p class="text-muted-foreground text-sm leading-relaxed">{offer.desc}</p>
-                  </div>
-                  <div class="col-span-12 sm:col-span-3 flex items-center justify-between">
-                    {offer.num === "01" && <span class="text-2xl font-bold font-display" data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
-                    {offer.num === "02" && <span class="text-2xl font-bold font-display" data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
-                    {offer.num === "03" && <span class="text-2xl font-bold font-display">{offer.price}</span>}
-                    <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
+          <a href="/portfolio" class="link-underline inline-flex items-center gap-2 text-sm font-semibold text-bone">
+            View All Projects <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
-      </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <WaveBands variant="teal" fadeTop fadeBottom />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="flex items-baseline justify-between mb-12">
-            <div>
-              <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Selected Work</span>
-              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter">Recent work.</h2>
-            </div>
-            <a href="/portfolio" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
-              View All Projects
-            </a>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-px bg-border">
-            {projects.map((project) => (
+        <div class="border-b border-bone/[0.12]" data-reveal-group>
+          {projects.map((project, index) => (
+            <article
+              data-reveal-item
+              class="grid items-center gap-8 border-t border-bone/[0.12] py-12 lg:grid-cols-12 lg:gap-14 lg:py-16"
+            >
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="editorial-card group block bg-background hover:bg-secondary/30 transition-colors"
+                class={`group block lg:col-span-7 ${index % 2 === 1 ? "lg:order-2" : ""}`}
               >
-                <div class="p-4 pb-0">
-                  <div class="browser-frame overflow-hidden">
-                    <div class="aspect-[16/10] overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="p-6 flex items-start justify-between">
-                  <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-accent">{project.category}</span>
-                    <h3 class="text-xl font-bold font-display mt-1">{project.title}</h3>
-                    <p class="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{project.role} / {project.year}</p>
-                  </div>
-                  <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <div class="overflow-hidden rounded-xl border border-bone/[0.1]">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    class="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
                 </div>
               </a>
+              <div class={`lg:col-span-5 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                <div class="flex items-center gap-4">
+                  <span class="font-mono text-xs font-medium tracking-[0.2em] text-ash">0{index + 1}</span>
+                  <span class="h-px w-8 bg-bone/20" aria-hidden="true"></span>
+                  <p class="mono-label">{project.category}</p>
+                </div>
+                <h3 class="mt-5 font-display text-3xl font-semibold leading-[1.05] tracking-tight text-bone sm:text-4xl lg:text-5xl">{project.title}</h3>
+                <p class="mt-4 max-w-md leading-relaxed text-ash">{project.blurb}</p>
+                <p class="mt-4 text-sm leading-relaxed text-ash">{project.role} · {project.year}</p>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group/link mt-7 inline-flex items-center gap-2 text-sm font-semibold text-bone"
+                >
+                  <span class="link-underline">View live site</span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ OFFERS ============ -->
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div data-reveal class="max-w-3xl">
+          <Eyebrow>What I offer</Eyebrow>
+          <h2 class="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-bone sm:text-5xl">
+            A website that fits<br class="hidden sm:block" /> what you need.
+          </h2>
+          <p class="mt-5 max-w-2xl leading-relaxed text-ash">
+            Start with the pages your customers need. Add the ability to make your own updates if that is useful, or talk to me about something more specialised.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <span class="mono-label flex items-center gap-2.5">
+              <span class="h-1 w-1 rounded-full bg-accent" aria-hidden="true"></span>
+              From <span class="text-bone" data-price-gbp="599">£599</span> upfront
+            </span>
+            <span class="mono-label flex items-center gap-2.5">
+              <span class="h-1 w-1 rounded-full bg-accent" aria-hidden="true"></span>
+              Typical build 1–3 weeks
+            </span>
+            <span class="mono-label flex items-center gap-2.5">
+              <span class="h-1 w-1 rounded-full bg-accent" aria-hidden="true"></span>
+              Care from <span class="text-bone" data-currency-gbp="25" data-currency-suffix="/mo">£25/mo</span>
+            </span>
+          </div>
+        </div>
+
+        <div data-reveal-group class="mt-14 grid gap-x-5 border-t border-bone/[0.12] sm:grid-cols-[3rem_1fr] sm:gap-x-8">
+          {offers.map((offer) => (
+            <a
+              href={offer.href}
+              data-reveal-item
+              class="group grid gap-x-5 border-b border-bone/[0.12] py-9 transition-colors duration-300 hover:bg-bone/[0.02] sm:col-span-2 sm:grid-cols-subgrid sm:px-4 lg:px-6"
+            >
+              <span class="font-mono text-xs font-medium tracking-[0.2em] text-ash transition-colors duration-300 group-hover:text-ember sm:pt-1.5">{offer.num}</span>
+              <div>
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+                  <h3 class="min-w-0 font-display text-2xl font-semibold tracking-tight text-bone transition-colors duration-300 group-hover:text-ember sm:text-3xl">{offer.title}</h3>
+                  <span class="hidden flex-1 border-b border-dotted border-bone/25 sm:block" aria-hidden="true"></span>
+                  <span class="shrink-0 font-mono text-sm text-ember">
+                    {offer.num === "01" && <span data-currency-gbp="599" data-currency-suffix=" upfront">{offer.price}</span>}
+                    {offer.num === "02" && <span data-currency-gbp="800" data-currency-prefix="From +">{offer.price}</span>}
+                    {offer.num === "03" && <span>{offer.price}</span>}
+                  </span>
+                  <span class="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-bone/[0.1] text-ash transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground sm:flex">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
+                <p class="mt-4 max-w-2xl text-sm leading-relaxed text-ash">{offer.desc}</p>
+                <p class="mt-3 text-sm leading-relaxed text-ash">
+                  {offer.points.join("   ·   ")}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ WHY ============ -->
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div class="grid items-start gap-14 lg:grid-cols-2 lg:gap-24">
+          <div data-reveal>
+            <Eyebrow>Why Staticfish</Eyebrow>
+            <h2 class="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight text-bone sm:text-5xl">
+              Built around<br />
+              <span class="text-ember">your business.</span>
+            </h2>
+            <p class="mt-6 max-w-lg leading-relaxed text-ash">
+              Whether you have a clear idea or are not sure where to start, we can work through it together. You speak directly with the person designing and building your site.
+            </p>
+            <Button href="/about" variant="secondary" class="mt-9">Meet the builder</Button>
+          </div>
+
+          <div class="hairline-list border-t border-bone/[0.12]" data-reveal-group>
+            {whyPoints.map((item) => (
+              <div data-reveal-item class="py-9 first:pt-0 last:pb-0">
+                <p class="font-mono text-xs font-medium tracking-[0.2em] text-ember">{item.num}</p>
+                <h3 class="mt-3 font-display text-xl font-semibold tracking-tight text-bone">{item.title}</h3>
+                <p class="mt-2 max-w-md text-sm leading-relaxed text-ash">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="py-20 border-t border-border bg-secondary/20 relative overflow-hidden">
-        <WaveBands variant="coral" fadeTop fadeBottom fadeColor="secondary" />
-
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="grid lg:grid-cols-2 gap-16">
-            <div>
-              <span class="eyebrow-rule text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">Why Staticfish</span>
-              <h2 class="text-4xl sm:text-5xl font-bold font-display tracking-tighter mb-6">
-                Clear scope.
-                <span class="block">Clear price.</span>
+      <!-- ============ CTA ============ -->
+      <section class="relative border-t border-bone/[0.08]">
+        <div class="mx-auto max-w-7xl px-6 py-20 lg:py-28">
+          <div data-reveal class="grid gap-12 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-7">
+              <p class="mono-label">Next step</p>
+              <h2 class="mt-7 font-display text-5xl leading-[1.02] tracking-tight text-bone sm:text-6xl lg:text-7xl">
+                Let's talk about<br class="hidden sm:block" /> <span class="text-ember">your business.</span>
               </h2>
-              <p class="text-lg text-muted-foreground leading-relaxed max-w-lg">
-                You work directly with me. The offer is simple, the scope is agreed up front, and there is no pressure to buy things you do not need.
-              </p>
             </div>
-
-            <div class="space-y-6">
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Fixed price for the agreed scope</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  You get a clear quote before work starts. If you want to add more later, I quote that separately.
-                </p>
-              </div>
-
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Built to explain the business clearly</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  The goal is simple: help people understand what you do, what it costs, and how to contact you.
-                </p>
-              </div>
-
-              <div class="border-l-2 border-accent pl-8">
-                <h3 class="text-xl font-bold text-foreground mb-2">Optional editing when you need it</h3>
-                <p class="text-muted-foreground leading-relaxed">
-                  If your content changes regularly, I can add a simple editing setup without turning the whole site into something bloated.
-                </p>
+            <div class="lg:col-span-5 lg:pb-2">
+              <p class="max-w-md leading-relaxed text-ash">
+                Tell me what you do and what you would like your website to help with. I will suggest a practical next step and explain the costs before you decide.
+              </p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <Button href="/contact" size="lg">Get a Quote</Button>
+                <Button href="/custom-software" variant="secondary" size="lg" arrow={false}>Custom Software</Button>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="py-20 border-t border-border relative overflow-hidden">
-        <JapaneseWaveCorner position="top-left" />
-        <div class="container mx-auto max-w-7xl px-6 relative z-10">
-          <div class="bg-foreground text-background p-12 lg:p-20 relative corner-bracket overflow-hidden">
-            <div class="deco-dots absolute inset-0 opacity-40"></div>
-            <div class="relative z-10 grid lg:grid-cols-[1fr_auto] gap-12 items-end">
-              <div class="max-w-3xl">
-                <p class="text-sm font-medium text-background/50 uppercase tracking-widest mb-6">Next Step</p>
-              <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tighter mb-6">
-                Need a website that explains the business properly?
-              </h2>
-              <p class="text-lg text-background/70 mb-6 max-w-xl">
-                Get in touch for a clear quote and an honest recommendation on whether you need a straightforward website, an editing add-on, or something more bespoke.
-              </p>
-              <p class="text-sm text-background/60 mb-10">
-                For more bespoke work, see <a href="/custom-software" class="underline underline-offset-4 text-background">Custom Software</a>.
-              </p>
-              </div>
-              <Button className="rounded-none px-10 h-12 font-semibold bg-accent hover:bg-accent/90 text-white">
-                <a href="/contact">Get a Quote</a>
-              </Button>
-            </div>
+          <div data-reveal class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-bone/[0.12] pt-7">
+            <a
+              href="mailto:contact@staticfish.co.uk"
+              class="group inline-flex items-center gap-3 font-display text-xl tracking-tight text-bone transition-colors duration-300 hover:text-ember sm:text-2xl"
+            >
+              contact@staticfish.co.uk
+              <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <p class="mono-label">Typical response within 24 hours</p>
           </div>
         </div>
       </section>
