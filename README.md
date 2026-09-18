@@ -14,6 +14,16 @@ bun run dev
 
 ### Production
 
+#### Cloudflare Pages
+
+Local development uses Bun (`bun.lock`), while Cloudflare Pages uses npm
+(`package-lock.json`) with `npm ci` and `npm run build`. Keep both lockfiles
+in sync whenever dependencies change. The build script selects
+`astro.prod.config.mjs` for either package manager.
+
+React and React DOM are pinned to the same compatible version because the
+current React Three Fiber release does not support React 19.3.
+
 #### Environment Variables
 Copy `.env.example` to `.env` and configure:
 ```bash
